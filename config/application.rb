@@ -24,9 +24,12 @@ module Vet4pet
     config.active_record.raise_in_transactional_callbacks = true
     # generators
     config.generators do |g|
+      g.stylesheets = false
+      g.javascripts = false
+      g.test_framework  :rspec, fixture: false
       g.template_engine :haml
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
       # you can also specify a different test framework or ORM here
-      g.test_framework  :rspec
       # g.orm             :mongoid
     end
   end
