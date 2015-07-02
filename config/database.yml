@@ -3,6 +3,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  username: vet4pet
+  password: s3lam4razA2r@z4
+  host: localhost
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -10,20 +13,6 @@ default: &default
 development:
   <<: *default
   database: vet4pet_development
-
-  # The specified database role being used to connect to postgres.
-  # To create additional roles in postgres see `$ createuser --help`.
-  # When left blank, postgres will use the default role. This is
-  # the same name as the operating system user that initialized the database.
-  username: vet4pet
-
-  # The password associated with the postgres role (username).
-  password: renx08
-
-  # Connect on a TCP socket. Omitted by default since the client uses a
-  # domain socket that doesn't need configuration. Windows does not have
-  # domain sockets, so uncomment these lines.
-  host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
