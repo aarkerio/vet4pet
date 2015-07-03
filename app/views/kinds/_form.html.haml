@@ -1,0 +1,16 @@
+= form_for @kind do |f|
+  - if @kind.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@kind.errors.count, "error")} prohibited this kind from being saved:"
+      %ul
+        - @kind.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :image
+    = f.text_field :image
+  .actions
+    = f.submit 'Save'

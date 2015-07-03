@@ -1,0 +1,23 @@
+%h1 Listing kinds
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Image
+      %th
+      %th
+      %th
+
+  %tbody
+    - @kinds.each do |kind|
+      %tr
+        %td= kind.name
+        %td= kind.image
+        %td= link_to 'Show', kind
+        %td= link_to 'Edit', edit_kind_path(kind)
+        %td= link_to 'Destroy', kind, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Kind', new_kind_path

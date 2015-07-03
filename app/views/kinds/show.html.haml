@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @kind.name
+%p
+  %b Image:
+  = @kind.image
+
+= link_to 'Edit', edit_kind_path(@kind)
+\|
+= link_to 'Back', kinds_path
