@@ -1,0 +1,10 @@
+
+
+
+CREATE ROLE vet4pet WITH CREATEDB CREATEROLE NOINHERIT LOGIN PASSWORD 'ay!caramba!';
+
+localhost:5432:vet4pet_development:vet4pet:ay!caramba!
+localhost:5432:vet4pet_test:vet4pet:ay!caramba!
+
+
+
