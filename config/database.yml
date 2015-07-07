@@ -4,7 +4,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: vet4pet
-  password: s3lam4razA2r@z4
+  password: ay!caramba!
   host: localhost
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
