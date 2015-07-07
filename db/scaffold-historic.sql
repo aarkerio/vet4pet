@@ -21,35 +21,10 @@ CREATE TABLE users (
     "created" timestamp(0) with time zone DEFAULT now() NOT NULL
 );
 
--- News themes
--- rails g scaffold Theme theme:string description:string img:string
-CREATE TABLE themes (
-   id serial PRIMARY KEY,
-   theme varchar(40) NOT NULL,
-   description varchar(400) NOT NULL,
-   img varchar(80) NOT NULL
-);
 
--- News on index
--- rails g scaffold Notice title:string body:text created:timestamp theme:references user:references votes:integer comments:boolean status:boolean url:string
-CREATE TABLE notices (
-   "id" serial PRIMARY KEY,
-   "title" varchar(250) NOT NULL,
-   "url" varchar(250) NOT NULL,
-   "body" text NOT NULL,
-   "created" timestamp(0) with time zone DEFAULT now() NOT NULL,
-   "reference" varchar(350), -- can be null
-   "theme_id" int NOT NULL REFERENCES themes(id) ON DELETE CASCADE,
-   "status" int NOT NULL,   -- 0 = draft, 1 = publicado
-   "user_id" int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-   "votes" int NOT NULL DEFAULT 0,
-   "comments" int NOT NULL DEFAULT 0  -- are the conment actived?
-);
+-- rails g scaffold Appointment scheduled_time:datetime pet:references reminder:boolean reason_for_visit: string doctor_id:integer
 
--- Discutions on news
--- rails g scaffold CommentNotice comment:text username:string website:string email:string user:references notice:references
-
-CREATE TABLE comment_news (  --discutions on news
+CREATE TABLE comments (  --discutions on news
  	"id" serial PRIMARY KEY,
  	"notice_id" int NOT NULL REFERENCES notices(id) ON DELETE CASCADE,
  	"name" varchar(100),

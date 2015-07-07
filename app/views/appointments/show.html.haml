@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Scheduled time:
+  = @appointment.scheduled_time
+%p
+  %b Pet:
+  = @appointment.pet
+%p
+  %b Reminder:
+  = @appointment.reminder
+%p
+  %b Reason for visit:
+  = @appointment.reason_for_visit
+%p
+  %b Doctor:
+  = @appointment.doctor_id
+
+= link_to 'Edit', edit_appointment_path(@appointment)
+\|
+= link_to 'Back', appointments_path
