@@ -1,5 +1,11 @@
 /****  CSS STYLES **/
 
+#header {
+    border: 1px solid orange;
+    margin: 4px;
+    padding: 4pt;
+    }
+
 #footer {
     clear: both;
     border: 1px solid orange;
@@ -14,6 +20,10 @@
     margin: 0 auto;
     border: 1px solid gray;
     min-height: 20em;
+}
+
+.loginform {
+    float: right;
 }
 
 /*  SECTIONS  */
@@ -58,6 +68,4 @@
 @media only screen and (max-width: 480px) {
     .span_2_of_2, .span_1_of_2 { width: 80%; }
 }
-
-
 
