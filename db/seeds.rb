@@ -6,7 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-u = User.new(username: 'admin', email: 'admin@example.com', :password: 'password', password_confirmation: 'password', role: 'admin')
+groups = %w(admin owners doctors staff)
+
+groups.each do |group|
+  Group.create! name: group, description: group
+end
+ 
+u = User.new(username: 'admin', email: 'admin@example.com', :password: 'password', password_confirmation: 'password', group_id: 1)
 u.build_profile
 u.profile.name = "Owner"
 u.save
