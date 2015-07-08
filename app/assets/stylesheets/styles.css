@@ -1,0 +1,63 @@
+/****  CSS STYLES **/
+
+#footer {
+    clear: both;
+    border: 1px solid orange;
+    margin: 6px;
+    padding: 6pt;
+    }
+
+.copy { border: 1px solid gray; }
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid gray;
+    min-height: 20em;
+}
+
+/*  SECTIONS  */
+.section {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+    display: block;
+    float:left;
+    margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF TWO  */
+.span_2_of_2 {
+    width: 76%;
+    border:1px dotted green;
+}
+
+.span_1_of_2 {
+    width: 20%;
+    border:1px dotted purple; 
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+    .col {
+        margin: 1% 0 1% 0%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .span_2_of_2, .span_1_of_2 { width: 80%; }
+}
+
+
+

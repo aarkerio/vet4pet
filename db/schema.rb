@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703000610) do
+ActiveRecord::Schema.define(version: 20150707183728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "scheduled_time"
+    t.integer  "pet_id"
+    t.boolean  "reminder"
+    t.string   "reason_for_visit"
+    t.integer  "doctor_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "appointments", ["pet_id"], name: "index_appointments_on_pet_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -71,6 +83,7 @@ ActiveRecord::Schema.define(version: 20150703000610) do
 
   add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree
 
+  add_foreign_key "appointments", "pets"
   add_foreign_key "images", "users"
   add_foreign_key "kinds", "images"
   add_foreign_key "pets", "images"

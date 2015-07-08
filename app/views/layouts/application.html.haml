@@ -2,9 +2,24 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Vet4pet
+    %title ::Vet4pet::
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body
-    = yield
+%body
+  %div.container
+    %div.section.group
+      #header
+        %a{ href: 'asdasd'} Home
+        %a{ href: 'asdasd'} Read more
+        =render partial: 'site/loginbar'
+      %div.col.span_1_of_2
+        This is column 1
+      %div.col.span_1_of_2
+        =yield
+      #footer
+        %br
+        %span.copy Copyright
+        %a{ href: 'asdasd'} Read more
+
+
