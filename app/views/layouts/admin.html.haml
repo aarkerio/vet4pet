@@ -1,0 +1,194 @@
+!!! XML
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    = favicon_link_tag 'favicon.ico'
+    %title Marafiki :: Admin
+    = stylesheet_link_tag 'admin_styles'
+    = javascript_include_tag 'jquery/jquery.min', 'application', 'angular/angular.min', 'angular-resource/angular-resource.min', 'bootstrap/dist/js/bootstrap.min'
+    = csrf_meta_tags
+  %body
+    - flash.each do |k, v|
+      %div{:id => k}= v
+
+    %nav{ class: 'navbar navbar-inverse', role: 'navigation' }
+      .container
+        -# <!-- Brand and toggle get grouped for better mobile display -->
+        .navbar-header
+          %span.sr-only Toggle navigation
+          %i.icon-cog
+
+          = link_to 'Base Admin 3.0', './index.html', class: 'navbar-brand'
+
+        - # <!-- Collect the nav links, forms, and other content for toggling -->
+      %div{ class: "collapse navbar-collapse navbar-ex1-collapse"}
+        %ul{ class: "nav navbar-nav navbar-right"}
+          .li.dropdown
+            %a{ class: 'dropdown-toggle', href: "javscript:;", 'data-toggle'=>"dropdown"}
+            %i.icon-cog
+            'Settings'
+            %b.caret
+      %ul.dropdown-menu
+        %li
+          %a{href: "./account.html"} Account Settings
+        %li
+          %a{href: "./account.html"} Account Settings 33
+        %li.divider
+        %li
+          %a{href: "./account.html"} Account Settings
+
+      %li.dropdown
+        a.dropdown-toggle{ :href=>"javscript:;"  'data-toggle'=>"dropdown" }
+        %i.icon-user
+        Rod Howard
+        %b.caret
+
+        %ul.dropdown-menu
+        %li
+          %a{href: "./account.html"} Account Settings
+        %li
+          %a{href: "./account.html"} Account Settings
+        %li.divider
+        %li
+          %a{href: "./account.html"} log out
+
+    %form{ :class=>"navbar-form navbar-right", :role=>"search"}
+      %div.form-group
+        %input.form-control.input-sm.search-query{placeholder: "Search", type: "text"}/
+
+    -# </div><!-- /.navbar-collapse -->
+    -# </div> <!-- /.container -->
+    -# </nav> <!-- /.nav -->
+
+  %div.subnavbar
+    %div.subnavbar-inner
+    %div.container
+      %a.subnav-toggle{ href: "javascript:;",  'data-toggle': "collapse", 'data-target': ".subnav-collapse"}
+        %span.sr-only Toggle navigation
+        %i.icon-reorder
+
+      %div.collapse.subnav-collapse
+        %ul.mainnav
+          %li.active
+            %a{:href => "./index.html"}
+              %i.icon-home
+              %span Home
+
+          %li.dropdown
+            %a.dropdown-toggle{ href: "javascript:;", 'data-toggle': "dropdown" }
+              %i.icon-th
+              %span Components
+              %b.caret
+
+            %ul.dropdown-menu
+              %li
+              %a{:href => "./index.html"}
+              %li
+                %a{:href => "./index.html"}
+          %li.dropdown
+            %a{ href: "javascript:;", class: "dropdown-toggle", 'data-toggle': "dropdown"}
+              %i.icon-copy
+              %span Sample Pages
+              %b.caret
+
+            %ul.dropdown-menu
+              %li
+              %a{:href => "./index.html"} dsfdsafd
+              %li
+                %a{:href => "./index.html"} dssdsafdas
+                %li
+                  %a{:href => "./index.html"} sadasd
+
+          %li.dropdown
+            %a{ href: "javascript:;", class: "dropdown-toggle", 'data-toggle': "dropdown"}
+              %i.icon-external-link
+              %span Extra Pages
+              %b.caret
+                %ul.dropdown-menu
+                %li
+                  %a{:href => "./index.html"} sadasd
+                  %li
+                    %a{:href => "./index.html"}sadsadsa
+
+                %ul.dropdown-submenu
+                  %li
+                    %a{ :tabindex=>"-1", :href=>"#"} More options
+                    %ul.dropdown-menu
+                      %li
+                        %a{ tabindex: "-1", href: "#"} More options
+
+  -# </div> <!-- /.subnav-collapse -->
+  -# </div> <!-- /container -->
+  -# </div> <!-- /subnavbar-inner -->
+  -# </div> <!-- /subnavbar -->
+
+  %div.main
+    %div.container
+      %div.row
+        %div.col-md-6.col-xs-12
+      %div.widget.stacked.widget-table.action-table
+        %div.widget-header
+        %i.icon-th-list
+          %h3 Table
+          -# </div> <!-- /widget-header -->
+      %div.widget-content
+        %table.table.table-striped.table-bordered
+          %thead
+          %tr
+            %th Engine
+          %th Browser
+          %th.td-actions
+        %tbody
+          %tr
+          %td Trident
+          %td Internet Explorer 4.0
+          %td.td-actions
+            %a.btn.btn-xs.btn-primary{ href: "javascript:;"}
+              %i.btn-icon-only.icon-ok
+          %tr
+          %td
+            Trident
+          %td
+            Internet Explorer 5.0
+            %td.td-actions
+              %a.btn.btn-xs.btn-primary{ href: "javascript:;"}
+              %i.btn-icon-only.icon-ok
+          %tr
+            %td Trident
+            %td Internet Explorer 5.5
+            %td.td-actions
+              %a.btn.btn-xs.btn-primary{ href: "javascript:;"}
+              %i.btn-icon-only.icon-ok
+          %tr
+            %td Trident
+            %td Internet Explorer 5.5
+            %td.td-actions
+            %a.btn.btn-xs.btn-primary{ href: "javascript:;"}
+              %i.btn-icon-only.icon-ok
+          %tr
+            %td Trident
+            %td Internet Explorer 5.5
+            %td.td-actions
+              %a.btn.btn-xs.btn-primary{ href: "javascript:;"}
+                %i.btn-icon-only.icon-ok
+          %tr
+            %td Trident
+            %td Internet Explorer 5.5
+            %td.td-actions
+              %a.btn.btn-xs.btn-primary{ href: "javascript:;"}
+              %i.btn-icon-only.icon-ok
+    -#    </div> <!-- /widget-content -->
+    -#  </div> <!-- /widget -->
+    -#  </div> <!-- /span6 -->
+    -# </div> <!-- /row -->
+    -# </div> <!-- /container -->
+    -#  </div> <!-- /main -->
+  %div.footer
+  %div.container
+    %div.row
+      %div.col-md-6{ id: "footer-copyright"}
+        " &copy; 2013-2014 ."
+    %div.col-md-6{ :id=>"footer-terms"}
+      Theme by <a href: "http://jumpstartui.com" target="_blank">Jumpstart UI</a>
+
