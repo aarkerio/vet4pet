@@ -16,13 +16,13 @@ class User < ActiveRecord::Base
 
   #accepts_nested_attributes_for :profile
 
-  validates_presence_of :username
-  validates_uniqueness_of :username, :email, :allow_blank => true
+  #validates_presence_of :username
+  #validates_uniqueness_of :username, :email, :allow_blank => true
   #validates_format_of :username, with: /^[-\w\._@]+$/i, allow_blank: true, message: "should only contain letters, numbers, or .-_@"
-  validates_format_of :email, with: /[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i
-  validates_presence_of :password, on: :create
-  validates_confirmation_of :password
-  validates_length_of :password, minimum: 4, allow_blank: true
+  #validates_format_of :email, with: /[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i
+  #validates_presence_of :password, on: :create
+  #validates_confirmation_of :password
+  #validates_length_of :password, minimum: 4, allow_blank: true
 
   # login can be either username or email address
   def self.authenticate(login, pass)

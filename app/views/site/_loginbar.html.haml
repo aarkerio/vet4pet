@@ -1,5 +1,9 @@
-.loginform
-  = form_tag 'user_path', method: :post do
-    = text_field_tag "email", ""
-    = password_field_tag "password", ""
-    = submit_tag "Submit"
+-if current_user.blank?
+  .loginform
+    = form_tag user_session_path, method: :post do
+      = text_field_tag "email", ""
+      = password_field_tag "password", ""
+      = submit_tag "Submit"
+-else
+  = link_to 'Edit profile', edit_user_registration_path 
+  = link_to 'Logout', destroy_user_session_path, method: :delete

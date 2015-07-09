@@ -7,11 +7,19 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 %body
+  - if flash[:notice]
+    .alert-message.warning
+      %p
+        = flash[:notice]
+  - if flash[:error]
+    .alert-message.error
+      %p
+        = flash[:error]
   %div.container
     %div.section.group
       #header
-        %a{ href: 'asdasd'} Home
-        %a{ href: 'asdasd'} Read more
+        %a{ href: '/'} Home
+        %a{ href: '/about'} Read more
         =render partial: 'site/loginbar'
       %div.col.span_1_of_2
         This is column 1
