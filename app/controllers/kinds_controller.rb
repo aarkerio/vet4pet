@@ -7,12 +7,16 @@ class KindsController < ApplicationController
     @kinds = Kind.all
   end
 
-  # GET /kinds/welcome
- 
+  # GET /kinds/welcome 
   def welcome
     
   end
-  
+
+  # GET /kinds/welcome 
+  def admin
+    
+  end
+
   # GET /kinds/1
   # GET /kinds/1.json
   def show
