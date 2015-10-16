@@ -107,9 +107,9 @@ CREATE TABLE pages (   -- estatic pages
    editor int NOT NULL DEFAULT 1
 );
 
--- Discutions on static pages 
+-- Discutions on static pages
 -- rails g scaffold Discution title:string comment:text page:references  section:references
-CREATE TABLE discutions (    --discutions on 
+CREATE TABLE discutions (    --discutions on
      id serial PRIMARY KEY,
      comment text,
      level int NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE entries (
    user_id int NOT NULL REFERENCES users(id),
    discution int NOT NULL DEFAULT 1,   -- Discution on entry, Actived/Desactived   1/0
    tags varchar(100),  -- in Profile model
-   visits int NOT NULL DEFAULT 0 
+   visits int NOT NULL DEFAULT 0
 );
 
 -- Discutions on blogs entries
