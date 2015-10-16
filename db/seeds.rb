@@ -12,9 +12,9 @@ groups.each do |group|
   Group.create! name: group, description: group
 end
 
-u = User.new(username: 'admin', email: 'admin@example.com', :password: 'password', password_confirmation: 'password', group_id: 1)
-u.build_profile
-u.profile.name = "Owner"
+u = User.new(username: 'admin', email: 'admin@example.com', password: 'password', password_confirmation: 'password', group_id: 1)
+#u.build_profile
+#u.profile.name = "Owner"
 u.save
 
 
