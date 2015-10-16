@@ -1,8 +1,8 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
-  
+
   before_action :check_admin, except: [:index, :welcome]
-  
+
   # GET /pets
   # GET /pets.json
   def index
