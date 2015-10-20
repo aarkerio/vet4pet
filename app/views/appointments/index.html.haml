@@ -16,7 +16,7 @@
     - @appointments.each do |appointment|
       %tr
         %td= appointment.scheduled_time
-        %td= appointment.pet
+        %td= appointment.pet.name
         %td= appointment.reminder
         %td= appointment.reason_for_visit
         %td= appointment.doctor_id
@@ -27,3 +27,6 @@
 %br
 
 = link_to 'New Appointment', new_appointment_path
+
+= react_component 'Records', { data: @appointments }
+

@@ -19,6 +19,8 @@
           %li= link_to 'Pets', 'fsddsfdsf'
           %li= link_to 'Customers', 'fsddsfdsf'
           %li= link_to 'Archives', 'fsddsfdsf'
+          %li= link_to 'Profile', destroy_user_session_path
+          %li= link_to 'Log out', edit_user_password_path
       %div{id: 'main'}
         =yield
       %div{id: 'sidebar'}

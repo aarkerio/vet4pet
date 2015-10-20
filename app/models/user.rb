@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   def role?(role_to_test)
     role == role_to_test.to_s
   end
-  
+
   def name
     profile && profile.name ? profile.name : "Unknown"
   end
