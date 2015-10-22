@@ -6,6 +6,8 @@ class CreateAppointments < ActiveRecord::Migration
       t.boolean :reminder
       t.string :reason_for_visit
       t.integer :doctor_id
+      t.integer :owner_id
+      t.boolean :active
 
       t.timestamps null: false
     end

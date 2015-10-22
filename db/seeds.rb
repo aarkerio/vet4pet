@@ -21,18 +21,32 @@ end
 kind = Kind.find_by_name 'dog'
 
 admin  = User.create! username: 'admin', email: 'admin@example.com', password: 'password', fname: 'admin', lname: 'admin', group_id: admin.id
-doctor = User.create! username: 'doctor', email: 'adoc@example.com', password: 'password', fname: 'doctor', lname: 'doc', group_id: doctors.id
-owner  = User.create! username: 'owner', email: 'owner@example.com', password: 'password', fname: 'owner', lname: 'owner', group_id: owners.id
+doctor = User.create! username: 'doctor', email: 'adoc@example.com', password: 'password', fname: 'Ric doctor', lname: 'Grimms', group_id: doctors.id
+owner  = User.create! username: 'owner', email: 'owner@example.com', password: 'password', fname: 'Carl owner', lname: 'Grimms', group_id: owners.id
 
 pet  = Pet.create! name: 'Babby', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner.id
+pet  = Pet.create! name: 'Totopo', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner.id
 
-appo = {
+appo1 = {
   scheduled_time: 2.days.from_now.change(hour: 7),
   pet_id: pet.id,
   reminder:  true,
+  active:  true,
   reason_for_visit: 'Vaccines',
-  doctor_id: doctor.id
+  doctor_id: doctor.id,
+  owner_id: owner.id
 }
 
-u = Appointment.create! appo
+u1 = Appointment.create! appo1
 
+appo2 = {
+  scheduled_time: 10.days.from_now.change(hour: 7),
+  pet_id: pet.id,
+  reminder:  true,
+  active:  true,
+  reason_for_visit: 'Vaccines',
+  doctor_id: doctor.id,
+  owner_id: owner.id
+}
+
+u2 = Appointment.create! appo2

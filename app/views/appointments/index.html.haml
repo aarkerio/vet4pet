@@ -1,32 +1,6 @@
 %h1 Listing appointments
 
-%table
-  %thead
-    %tr
-      %th Scheduled time
-      %th Pet
-      %th Reminder
-      %th Reason for visit
-      %th Doctor
-      %th
-      %th
-      %th
-
-  %tbody
-    - @appointments.each do |appointment|
-      %tr
-        %td= appointment.scheduled_time
-        %td= appointment.pet.name
-        %td= appointment.reminder
-        %td= appointment.reason_for_visit
-        %td= appointment.doctor_id
-        %td= link_to 'Show', appointment
-        %td= link_to 'Edit', edit_appointment_path(appointment)
-        %td= link_to 'Destroy', appointment, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
 %br
 
-= link_to 'New Appointment', new_appointment_path
-
-= react_component 'Appointments', { data: @appointments }
+= react_component 'Appointments', { data: @appos }
 
