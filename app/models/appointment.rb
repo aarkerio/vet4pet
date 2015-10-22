@@ -18,7 +18,7 @@ class Appointment < ActiveRecord::Base
   private
 
   def self.to_react
-    appos = self.where(active:true).order('scheduled_time DESC')
+    appos = self.where(active:true).order('scheduled_time ASC')
     react = appos.map do |appo|
       {id: appo.id, petname: appo.pet.name, owner: appo.owner.lname, docname: appo.doctor.lname, date: appo.scheduled_time.strftime('%Y-%m-%d %H-%M-%S'), reason: appo.reason_for_visit, reminder: appo.reminder  }
     end
