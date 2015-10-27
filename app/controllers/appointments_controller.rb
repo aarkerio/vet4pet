@@ -9,8 +9,12 @@ class AppointmentsController < ApplicationController
 
   # POST /appointments/get_data
   def get_data
-    Rails.logger "########################>>>> #{params.to_json} "
-    return { owner: 'dd' }
+    owner = params[:ovalue]
+    names = User.where("lname ~* '#{owner}' AND group_id=2").select(:id, :fname, :lname)
+    logger.debug "########################>>>> #{params.to_json} "
+    lname = 'Montoya'
+    fname = 'Max'
+    return render json: { value: 3, name: "#{lname} #{fname}" }
   end
 
   # GET /appointments/1

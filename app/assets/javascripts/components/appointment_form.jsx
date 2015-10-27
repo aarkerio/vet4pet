@@ -6,7 +6,7 @@ this.AppointmentForm = React.createClass({
       owner_id: '',
       doctor_id: '',
       reminder: '',
-      owners: '',
+      owners: [],
       url: '/appointments/get_data'
     };
   },
@@ -34,21 +34,36 @@ this.AppointmentForm = React.createClass({
       };
     })(this), 'JSON');
   },
-  getData: function(prueba) {
-    console.log(prueba);
-    link = {url: this.state.url, iir: this.state.owner_id};
+  getData: function(e) {
+    e.preventDefault();
+    ovalue = e.target.value
+    console.log(ovalue);
+    link = {url: this.state.url, ovalue: ovalue};
+
     $.ajax({
       type: 'POST',
+      data: link,
       url: this.state.url,
-      headers: {'X-CSRFToken': $.cookie('csrf-token')},
+      headers: {'X-CSRFToken': Cookies.get('csrf-token')},
       cache: false,
       success: function(data) {
-        this.setState({data: data});
+        this.setOptions(data);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
       }.bind(this)
     });
+  },
+  setOptions: function(data) {
+    console.log(data);
+    // assuming data is an array of {name: "foo", value: "bar"}
+    for (var i = 0; i < data.length; i++) {
+      var option = data[i];
+      this.state.owners.push(
+                <option key={i} value={option.value}>{option.name}</option>
+      );
+    }
+    this.forceUpdate();
   },
   render: function() {
     return React.DOM.form({
@@ -61,18 +76,19 @@ this.AppointmentForm = React.createClass({
         placeholder: 'Owner',
         name: 'owner_id',
         list: 'myOwners',
-        value: this.state.owner_id,
         onChange: this.getData
-      }), React.DOM.datalist({
-        id: 'myOwners',
-        value: this.state.owners
-      }), React.DOM.input({
+      }),
+        React.DOM.datalist({
+          id: 'myOwners',
+          value: this.state.owners
+        }),
+    React.DOM.input({
         type: 'text',
         className: 'form-control',
         placeholder: 'Date',
         name: 'date',
         value: this.state.date,
-      onChange: this.handleChange
+        onChange: this.handleChange
     }), React.DOM.input({
       type: 'text',
       className: 'form-control',
@@ -97,7 +113,7 @@ this.AppointmentForm = React.createClass({
     }), React.DOM.button({
       type: 'submit',
       className: 'btn btn-primary',
-      disabled: !this.valid()
+      //disabled: !this.valid()
     }, 'Create appointment'));
   }
 });
