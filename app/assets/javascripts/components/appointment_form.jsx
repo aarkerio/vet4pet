@@ -1,12 +1,12 @@
 this.AppointmentForm = React.createClass({
   getInitialState: function() {
     return {
-      date: '',
+      date: '',  // form input element
       pet_id: '',
       owner_id: '',
       doctor_id: '',
       reminder: '',
-      owners: [],
+      owners: {key: 'type', value: 'type a name'}, //  options can be updated
       url: '/appointments/get_data'
     };
   },
@@ -46,8 +46,12 @@ this.AppointmentForm = React.createClass({
       url: this.state.url,
       headers: {'X-CSRFToken': Cookies.get('csrf-token')},
       cache: false,
+      dataType: 'json',
       success: function(data) {
-        this.setOptions(data);
+        if (data != undefined) {
+          console.log( data.length);
+          this.setOptions(data);
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
@@ -55,15 +59,25 @@ this.AppointmentForm = React.createClass({
     });
   },
   setOptions: function(data) {
-    console.log(data);
+    // console.log(data);
     // assuming data is an array of {name: "foo", value: "bar"}
+    // console.log( ">>>>>>>>>>>>>"+data.length);
+    var tmp = []
     for (var i = 0; i < data.length; i++) {
       var option = data[i];
-      this.state.owners.push(
-                <option key={i} value={option.value}>{option.name}</option>
+      tmp.push(
+          <option key={i} value={option.value}>{option.name}</option>
       );
     }
-    this.forceUpdate();
+    //console.log(this.state.owners);
+    this.state.owners = tmp;
+    console.log( ">>>>>>>>>>>>>"+JSON.stringify(tmp));
+    //this.setState({owners: tmp})
+    return (
+      <datalist id={"myOwners"} key={'mexDataList'}>
+        {tmp}
+      </datalist>
+    )
   },
   render: function() {
     return React.DOM.form({
@@ -78,39 +92,45 @@ this.AppointmentForm = React.createClass({
         list: 'myOwners',
         onChange: this.getData
       }),
-        React.DOM.datalist({
+      React.createElement('datalist',{
+          key: 'mexDataList',
           id: 'myOwners',
-          value: this.state.owners
-        }),
-    React.DOM.input({
+          //options: React.createElement('option', {key: 'apple', value: 'apple'}),
+          //value: React.createElement('option', {key: 'apple', value: 'apple'})
+        }, React.createElement('option', this.state.owners)),
+      React.DOM.input({
         type: 'text',
         className: 'form-control',
         placeholder: 'Date',
         name: 'date',
         value: this.state.date,
         onChange: this.handleChange
-    }), React.DOM.input({
+    }),
+    React.DOM.input({
       type: 'text',
       className: 'form-control',
       placeholder: 'Pet name',
       name: 'pet_id',
       value: this.state.pet_id,
       onChange: this.handleChange
-    }), React.DOM.input({
+    }),
+    React.DOM.input({
       type: 'text',
       className: 'form-control',
       placeholder: 'Doctor',
       name: 'doctor_id',
       value: this.state.doctor_id,
       onChange: this.handleChange
-    }), React.DOM.span(null, "Reminder: "), React.DOM.input({
+    }),
+    React.DOM.span(null, "Reminder: "), React.DOM.input({
       type: 'checkbox',
       className: 'form-control',
       placeholder: 'Reminder',
       name: 'reminder',
       value: this.state.reminder,
       onChange: this.handleChange
-    }), React.DOM.button({
+    }),
+    React.DOM.button({
       type: 'submit',
       className: 'btn btn-primary',
       //disabled: !this.valid()

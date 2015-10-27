@@ -14,7 +14,7 @@ class AppointmentsController < ApplicationController
     logger.debug "########################>>>> #{params.to_json} "
     lname = 'Montoya'
     fname = 'Max'
-    return render json: { value: 3, name: "#{lname} #{fname}" }
+    return render json: [{value: 3, name: "#{lname} #{fname}" }]
   end
 
   # GET /appointments/1
