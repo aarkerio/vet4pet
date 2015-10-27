@@ -7,6 +7,12 @@ class AppointmentsController < ApplicationController
     @appos = Appointment.to_react
   end
 
+  # POST /appointments/get_data
+  def get_data
+    Rails.logger "########################>>>> #{params.to_json} "
+    return { owner: 'dd' }
+  end
+
   # GET /appointments/1
   # GET /appointments/1.json
   def show

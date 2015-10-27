@@ -9,6 +9,32 @@ var Appointments = React.createClass({
       appointments: []
     };
   },
+  getggData: function(url) {
+    link = {url: '/appointments/get_data', iir: this.state.owner_id};
+
+    $.ajax({
+      type: 'GET',
+      url: '/appointments/get_data/',
+      data: link,
+      headers: {'X-CSRFToken': $.cookie('csrftoken')},
+      success: function(data) {
+        var data = this.state.data;
+        //I do this so the new added link will be on top of the array
+        var newLinks = [data].concat(links);
+        // this.setState({data: newLinks});
+        this.setState({owners: newLinks});
+      }.bind(this)
+    });
+  },
+  addAppointment: function(record) {
+    var records;
+    records = React.addons.update(this.state.records, {
+      $push: [record]
+    });
+    return this.setState({
+      records: records
+    });
+  },
   render: function() {
       var todos = [];
       var trNodes = this.props.data.map(function (appointment) {
@@ -19,7 +45,7 @@ var Appointments = React.createClass({
         ;
         todos.push(row);
       });
-      console.log(todos);
+      // console.log(todos);
       var appoNodes = <table className="myTable" key="myta"><tr key="myt1">
       <td key="myt1.1"> Scheduled date </td>
       <td>Pet</td>
@@ -27,13 +53,69 @@ var Appointments = React.createClass({
           { todos }
         </table>
       ;
+    var form = React.createElement(AppointmentForm, {handleNewAppointment: this.addAppointment } );
     return (
-      React.createElement(AppointmentForm, {handleNewAppointment: this.addAppointment } )
-
       <div className="appoList" key="dfdsf">
+      <div className="appoDivForm">{ form }</div><br />
         {appoNodes}
       </div>
     );
   }
 });
 
+var MyParent = React.createClass({
+    getInitialState: function() {
+        return {
+            childSelectValue: undefined
+        }
+    },
+    changeHandler: function(e) {
+        this.setState({
+            childSelectValue: e.target.value
+        })
+    },
+    render: function() {
+        return (
+            <div>
+                <MySelect
+                    url="/appointments/get_data"
+                    value={this.state.childSelectValue}
+                    onChange={this.changeHandler}
+                />
+            </div>
+        )
+    }
+});
+
+var MySelect = React.createClass({
+    propTypes: {
+        url: React.PropTypes.string.isRequired
+    },
+    getInitialState: function() {
+        return {
+            options: []
+        }
+    },
+    componentDidMount: function() {
+        // get your data
+        $.ajax({
+            url: this.props.url,
+            success: this.successHandler
+        })
+    },
+    successHandler: function(data) {
+        // assuming data is an array of {name: "foo", value: "bar"}
+        for (var i = 0; i < data.length; i++) {
+            var option = data[i];
+            this.state.options.push(
+                <option key={i} value={option.value}>{option.name}</option>
+            );
+        }
+        this.forceUpdate();
+    },
+    render: function() {
+        return (
+            <select>{this.props}</select>
+        )
+    }
+});

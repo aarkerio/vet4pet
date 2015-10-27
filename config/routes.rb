@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users
   resources :groups
 
+  post '/appointments/get_data/' => 'appointments#get_data'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

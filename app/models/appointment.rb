@@ -17,10 +17,15 @@ class Appointment < ActiveRecord::Base
 
   private
 
-  def self.to_react
-    appos = self.where(active:true).order('scheduled_time ASC')
+  def self.to_react(appo_id=nil)
+    appos = appo_id.nil? ? self.where(active:true).order('scheduled_time ASC') : self.where(active:true, id: appo_id)
+
     react = appos.map do |appo|
-      {id: appo.id, petname: appo.pet.name, owner: appo.owner.lname, docname: appo.doctor.lname, date: appo.scheduled_time.strftime('%Y-%m-%d %H-%M-%S'), reason: appo.reason_for_visit, reminder: appo.reminder  }
+      react_order(appo)
     end
+  end
+
+  def self.react_order(appo)
+    {id: appo.id, petname: appo.pet.name, owner: appo.owner.lname, docname: appo.doctor.lname, date: appo.scheduled_time.strftime('%Y-%m-%d %H-%M-%S'), reason: appo.reason_for_visit, reminder: appo.reminder }
   end
 end

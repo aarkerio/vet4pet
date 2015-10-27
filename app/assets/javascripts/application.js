@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require js.cookie
 //= require components
 //= require_tree .

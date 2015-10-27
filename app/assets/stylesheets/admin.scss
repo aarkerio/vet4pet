@@ -33,7 +33,7 @@
   }
   #main {
     float:left;
-    width:480px;
+    width:75%;
     padding:10px;
   }
   h2 {
@@ -41,7 +41,7 @@
   }
   #sidebar {
     float:right;
-    width:230px;
+    width: 20%;
     padding:10px;
     border-left: 1px dotted gray;
   }
@@ -56,6 +56,12 @@
   * html #footer {
     height:1px;
   }
+
+
+#appoList { width: 100%; border: 1px dotted green; }
+
+#myTable {margin-top:10px;}
+#appoDivForm {margin:10px 3px;}
 
 /*
   Cusco Sky table styles
