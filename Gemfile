@@ -51,4 +51,3 @@ group :development, :test do
   # Use Capistrano for deployment
   gem 'capistrano-rails'
 end
-
