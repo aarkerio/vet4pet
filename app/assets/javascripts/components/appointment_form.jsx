@@ -91,35 +91,35 @@ this.AppointmentForm = React.createClass({
         name: 'date',
         value: this.state.date,
         onChange: this.handleChange
-    }),
-    React.DOM.input({
-      type: 'text',
-      className: 'form-control',
-      placeholder: 'Pet name',
-      name: 'pet_id',
-      value: this.state.pet_id,
-      onChange: this.handleChange
-    }),
-    React.DOM.input({
-      type: 'text',
-      className: 'form-control',
-      placeholder: 'Doctor',
-      name: 'doctor_id',
-      value: this.state.doctor_id,
-      onChange: this.handleChange
-    }),
-    React.DOM.span(null, "Reminder: "), React.DOM.input({
-      type: 'checkbox',
-      className: 'form-control',
-      placeholder: 'Reminder',
-      name: 'reminder',
-      value: this.state.reminder,
-      onChange: this.handleChange
-    }),
-    React.DOM.button({
-      type: 'submit',
-      className: 'btn btn-primary',
-      //disabled: !this.valid()
+      }),
+      React.DOM.input({
+        type: 'text',
+        className: 'form-control',
+        placeholder: 'Pet name',
+        name: 'pet_id',
+        value: this.state.pet_id,
+        onChange: this.handleChange
+      }),
+      React.DOM.input({
+        type: 'text',
+        className: 'form-control',
+        placeholder: 'Doctor',
+        name: 'doctor_id',
+        value: this.state.doctor_id,
+        onChange: this.handleChange
+      }),
+      React.DOM.span(null, "Reminder: "), React.DOM.input({
+        type: 'checkbox',
+        className: 'form-control',
+        placeholder: 'Reminder',
+        name: 'reminder',
+        value: this.state.reminder,
+        onChange: this.handleChange
+      }),
+      React.DOM.button({
+        type: 'submit',
+        className: 'btn btn-primary',
+        //disabled: !this.valid()
     }, 'Create appointment'));
   }
 });
@@ -132,16 +132,16 @@ var MyParent = React.createClass({
     },
     changeHandler: function(e) {
         this.setState({
-            childSelectValue: e.target.value
+            childSelectValue: 'e.target.value'
         })
     },
     render: function() {
         return (
             <div>
-            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
+              <input type="text" className="form-control" onBlur={this.handleInputBlur.bind(this)} onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
               <MySelect
                 url='/appointments/get_data'
-                value={this.state.childSelectValue}
+                // value={this.state.childSelectValue}
               />
             </div>
         )

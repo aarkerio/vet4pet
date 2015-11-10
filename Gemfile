@@ -33,6 +33,10 @@ gem 'unicorn'
 gem 'react-rails', '~> 1.0'
 gem 'typescript-rails'
 gem 'js_cookie_rails'
+gem 'redis-rails'
+gem 'browserify-rails'
+gem 'react_on_rails'
+gem 'therubyracer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,4 +54,8 @@ group :development, :test do
   gem 'spring'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
+  gem 'mutant-rspec'
 end
+
+gem 'bootstrap-sass'# For Heroku deployment
+gem 'rails_12factor', group: :production
