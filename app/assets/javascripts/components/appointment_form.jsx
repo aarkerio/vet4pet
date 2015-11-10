@@ -1,3 +1,6 @@
+
+<%= react_component("HelloWorldApp", @some_props) %>
+
 this.AppointmentForm = React.createClass({
   getInitialState: function() {
     return {
