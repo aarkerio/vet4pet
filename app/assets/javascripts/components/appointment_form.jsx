@@ -1,6 +1,3 @@
-
-<%= react_component("HelloWorldApp", @some_props) %>
-
 this.AppointmentForm = React.createClass({
   getInitialState: function() {
     return {
@@ -86,7 +83,7 @@ this.AppointmentForm = React.createClass({
       className: 'form-inline',
       onSubmit: this.handleSubmit
     },
-      <MyParent />,
+      //<MyParent />,
       React.DOM.input({
         type: 'text',
         className: 'form-control',
@@ -127,26 +124,28 @@ this.AppointmentForm = React.createClass({
   }
 });
 
+var ReactDatalist = require('./react-datalist');  
+
 var MyParent = React.createClass({
     getInitialState: function() {
         return {
-            childSelectValue: undefined
+            childSelectValue: undefined,
+            options: ['apple','orange','pear','pineapple','melon']
         }
     },
     changeHandler: function(e) {
         this.setState({
-            childSelectValue: 'e.target.value'
+            childSelectValue: e.target.value
         })
     },
     render: function() {
         return (
-            <div>
-              <input type="text" className="form-control" onBlur={this.handleInputBlur.bind(this)} onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
-              <MySelect
-                url='/appointments/get_data'
-                // value={this.state.childSelectValue}
-              />
-            </div>
+              <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
+              //<ReactDatalist list="slist" options={this.state.options} />
+              // <MySelect
+              //  url='/appointments/get_data'
+              //  value={this.state.childSelectValue}
+              // />
         )
     }
 });

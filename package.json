@@ -1,31 +1,18 @@
 {
-  "name": "vet4rails",
-  "version": "0.1",
-  "description": "Built using the react_on_rails generator. Allows you to run npm install from root.",
-  "main": "server.js",
+  "name": "rails4vet",
+  "description": "Vet Clinic",
+  "author": "Manuel Montoya <mmontoya@gmail.com> GPLv3",
+  "dependencies": {
+    "browserify": "~> 10.2.6",
+    "browserify-incremental": "^3.0.1",
+    "react-datalist": "asbjornenge/react-datalist.git"
+  },
+  "license": "GPLv3",
   "engines": {
-    "node": "4.2.0",
-    "npm": "3.3.6"
+    "node": ">= 0.10"
   },
-  "scripts": {
-    "postinstall": "cd client && npm install",
-    "test": "rspec && (cd client && npm run lint)"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shakacode/react-webpack-rails-tutorial.git"
-  },
-  "keywords": [
-    "react",
-    "tutorial",
-    "comment",
-    "example"
-  ],
-  "author": "justin808",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shakacode/react-webpack-rails-tutorial/issues"
-  },
-  "homepage": "https://github.com/shakacode/react-webpack-rails-tutorial",
-  "dependencies": {}
+  "devDependencies": {
+    "browserify": "^10.2.6",
+    "watchify": "^3.6.0"
+  }
 }
