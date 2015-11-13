@@ -41,7 +41,6 @@ module Vet4pet
     # vendor stuff is normally not made for browserification and may stop
     # working.
     #config.browserify_rails.paths << /vendor\/assets\/javascripts\/module\.js/
-
     # Environments, in which to generate source maps
     #
     # The default is none

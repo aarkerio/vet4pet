@@ -83,7 +83,7 @@ this.AppointmentForm = React.createClass({
       className: 'form-inline',
       onSubmit: this.handleSubmit
     },
-      //<MyParent />,
+      <MyParent />,
       React.DOM.input({
         type: 'text',
         className: 'form-control',
@@ -124,7 +124,9 @@ this.AppointmentForm = React.createClass({
   }
 });
 
-var ReactDatalist = require('./react-datalist');  
+//var ReactDatalist = require('react-datalist');
+
+//console.log(ReactDatalist);
 
 var MyParent = React.createClass({
     getInitialState: function() {
@@ -140,12 +142,10 @@ var MyParent = React.createClass({
     },
     render: function() {
         return (
-              <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
-              //<ReactDatalist list="slist" options={this.state.options} />
-              // <MySelect
-              //  url='/appointments/get_data'
-              //  value={this.state.childSelectValue}
-              // />
+          <div>
+            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
+            <ReactDatalist list="slist" options={this.state.options} />
+          </div>
         )
     }
 });
