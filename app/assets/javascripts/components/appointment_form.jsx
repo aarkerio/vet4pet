@@ -124,14 +124,11 @@ this.AppointmentForm = React.createClass({
   }
 });
 
-//var ReactDatalist = require('react-datalist');
-
-//console.log(ReactDatalist);
-
 var MyParent = React.createClass({
     getInitialState: function() {
         return {
             childSelectValue: undefined,
+            owner: '',
             options: ['apple','orange','pear','pineapple','melon']
         }
     },
@@ -143,8 +140,8 @@ var MyParent = React.createClass({
     render: function() {
         return (
           <div>
-            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
-            <ReactDatalist list="slist" options={this.state.options} />
+            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id"} />
+            <MySelect url='foo/' />
           </div>
         )
     }
@@ -166,7 +163,6 @@ var MySelect = React.createClass({
           )
         return true;
         data = {name: 'foo', value: 'bar'};
-        // assuming data is an array of {name: "foo", value: "bar"}
         for (var i = 0; i < data.length; i++) {
             var option = data[i];
             this.state.options.push(
@@ -176,7 +172,9 @@ var MySelect = React.createClass({
     },
     render: function() {
               return (
-                <datalist id="slist">{this.state.options}</datalist>
+                <datalist id="slist" selected={this.state.selected}>{this.state.options}</datalist>
               )
             }
 });
+
+

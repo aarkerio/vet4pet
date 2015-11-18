@@ -32,7 +32,7 @@ module Vet4pet
       # you can also specify a different test framework or ORM here
       # g.orm             :mongoid
     end
-
+    config.react.addons = true # defaults to false
     # Paths, that should be browserified. We browserify everything, that
     # matches (===) one of the paths. So you will most likely put lambdas
     # regexes in here.
