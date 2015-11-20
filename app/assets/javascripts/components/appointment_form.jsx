@@ -6,8 +6,6 @@ this.AppointmentForm = React.createClass({
       owner_id: '',
       doctor_id: '',
       reminder: ''
-      //owners: {key: 'init', value: 'Type a name'}, //  owners can be updated
-      //url: '/appointments/get_data'
     };
   },
   valid: function() {
@@ -34,50 +32,6 @@ this.AppointmentForm = React.createClass({
       };
     })(this), 'JSON');
   },
-  // getData: function(e) {
-  //   e.preventDefault();
-  //   ovalue = e.target.value
-  //   console.log(ovalue);
-  //   link = {url: this.state.url, ovalue: ovalue};
-
-  //   $.ajax({
-  //     type: 'POST',
-  //     data: link,
-  //     url: this.state.url,
-  //     headers: {'X-CSRFToken': Cookies.get('csrf-token')},
-  //     cache: false,
-  //     dataType: 'json',
-  //     success: function(data) {
-  //       if (data != undefined) {
-  //         console.log( data.length);
-  //         this.setOptions(data);
-  //       }
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       console.error(this.state.url, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
-  // setOptions: function(data) {
-  //   if (data == null) {
-  //     return React.createElement('option', this.state.owners, 'Type a name')
-  //   }
-  //   // console.log(data);
-  //   console.log( ">>>>>> data >>>>>>>"+data);
-  //   var tmp = [];
-  //   for (var i = 0; i < data.length; i++) {
-  //     var option = data[i];
-  //     tmp.push(
-  //             <option key={i} value={option.value}>{option.name}</option>
-  //             );
-  //   }
-  //   return tmp;
-  //   //console.log(this.state.owners);
-  //   // this.state.owners = tmp;
-  //   // console.log( ">>>>> owners >>>>>>>>"+JSON.stringify(tmp));
-  //   //this.setState({mexDataList: [React.createElement('option', {value: option.value}, option.name)] })
-  //   //this.forceUpdate();
-  // },
   render: function() {
     return React.DOM.form({
       className: 'form-inline',
@@ -128,53 +82,59 @@ var MyParent = React.createClass({
     getInitialState: function() {
         return {
             childSelectValue: undefined,
-            owner: '',
-            options: ['apple','orange','pear','pineapple','melon']
+            getOptions: [],
+            url: '/appointments/get_data',
+            options: [<option key={'taste'} value={'zeitwert'}>{'Name'}</option>]
         }
     },
     changeHandler: function(e) {
-        this.setState({
-            childSelectValue: e.target.value
-        })
+        console.log('In changeHandler');
+        tmp = this.getData;
+        this.setState({options: this.state.getOptions});
     },
+    getData: function(e) {
+      e.preventDefault();
+      ovalue = e.target.value
+      console.log(ovalue);
+      link = {url: this.state.url, ovalue: ovalue};
+
+      $.ajax({
+        type: 'POST',
+        data: link,
+        url: this.state.url,
+        headers: {'X-CSRFToken': Cookies.get('csrf-token')},
+        cache: false,
+        dataType: 'json',
+        success: function(data) {
+          if (data != undefined) {
+            console.log( data.length);
+            this.setOptions(data);
+          }
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.state.url, status, err.toString());
+        }.bind(this)
+      });
+  },
+  setOptions: function(data) {
+    if (data == null) {
+      return React.createElement('option', this.state.options, 'Type a name')
+    }
+    console.log( ">>>>>> data >>>>>>>"+data);
+    for (var i = 0; i < data.length; i++) {
+      var option = data[i];
+      this.state.getOptions.push(
+              <option key={i} value={option.value}>{option.name}</option>
+              );
+    }
+  },
+
     render: function() {
         return (
           <div>
-            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id"} />
-            <MySelect url='foo/' />
+            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
+            <datalist id="slist">{this.state.options}</datalist>
           </div>
         )
     }
 });
-
-var MySelect = React.createClass({
-    propTypes: {
-        url: React.PropTypes.string.isRequired
-    },
-    getInitialState: function() {
-        return {
-            options: [<option key={'hhh'} value={'value'}>{'Name'}</option>]
-        }
-    },
-    successHandler: function(data) {
-        console.log('In successHandler');
-        this.state.options.push(
-          <option key={'hhhgg'} value={'Manuel'}>{'Manuel'}</option>
-          )
-        return true;
-        data = {name: 'foo', value: 'bar'};
-        for (var i = 0; i < data.length; i++) {
-            var option = data[i];
-            this.state.options.push(
-                <option key={i} value={option.value}>{option.name}</option>
-            );
-        }
-    },
-    render: function() {
-              return (
-                <datalist id="slist" selected={this.state.selected}>{this.state.options}</datalist>
-              )
-            }
-});
-
-
