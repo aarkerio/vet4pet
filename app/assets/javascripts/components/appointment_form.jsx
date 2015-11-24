@@ -90,6 +90,7 @@ var MyList = React.createClass({
     changeHandler: function(e) {
         console.log('In changeHandler');
         var tmp = this.getData(e);
+        this.forceUpdate();
     },
     getData: function(e) {
       e.preventDefault();
@@ -118,17 +119,16 @@ var MyList = React.createClass({
       var tempo = [];
       for (var i = 0; i < data.length; i++) {
         var option = data[i];
-        var tmp = <option key={i} value={option.value} id={option.value}>{option.name}</option>;
+        var tmp = <option key={i} value={option.name} id={option.value}>{option.name}</option>;
         tempo.push(tmp);
      }
      console.log( ">>>>>> 127 data >>>>>>>"+JSON.stringify(tempo));
-     this.setState({options: tempo, selected: false, hide: false});
-      if (typeof this.props.onInputChange === 'function') this.props.onInputChange(event);
+     this.setState({options: tempo});
     },
     render: function() {
         return (
           <span>
-            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" id="asdfdsfds" />
+            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner" id="asdfdsfds" />
             <datalist id="slist">{this.state.options}</datalist>
           </span>
         )
