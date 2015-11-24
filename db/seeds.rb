@@ -22,31 +22,35 @@ kind = Kind.find_by_name 'dog'
 
 admin  = User.create! username: 'admin', email: 'admin@example.com', password: 'password', fname: 'admin', lname: 'admin', group_id: admin.id
 doctor = User.create! username: 'doctor', email: 'adoc@example.com', password: 'password', fname: 'Ric doctor', lname: 'Grimms', group_id: doctors.id
-owner  = User.create! username: 'owner', email: 'owner@example.com', password: 'password', fname: 'Carl owner', lname: 'Grimms', group_id: owners.id
+owner_1  = User.create! username: 'Manuel', email: 'owner@example.com', password: 'password', fname: 'Manuel', lname: 'Grimms', group_id: owners.id
+owner_2  = User.create! username: 'Mario', email: 'owggh@example.com', password: 'password', fname: 'Mario', lname: 'Soto', group_id: owners.id
 
-pet  = Pet.create! name: 'Babby', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner.id
-pet  = Pet.create! name: 'Totopo', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner.id
+pet_1  = Pet.create! name: 'Babby', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id
+pet_2  = Pet.create! name: 'Totopo', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id
+pet_3  = Pet.create! name: 'Max', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id
+pet_4  = Pet.create! name: 'Sally', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id
+
 
 appo1 = {
   scheduled_time: 2.days.from_now.change(hour: 7),
-  pet_id: pet.id,
+  pet_id: pet_1.id,
   reminder:  true,
   active:  true,
   reason_for_visit: 'Vaccines',
   doctor_id: doctor.id,
-  owner_id: owner.id
+  owner_id: owner_1.id
 }
 
 u1 = Appointment.create! appo1
 
 appo2 = {
   scheduled_time: 10.days.from_now.change(hour: 7),
-  pet_id: pet.id,
+  pet_id: pet_2.id,
   reminder:  true,
   active:  true,
   reason_for_visit: 'Vaccines',
   doctor_id: doctor.id,
-  owner_id: owner.id
+  owner_id: owner_1.id
 }
 
 u2 = Appointment.create! appo2

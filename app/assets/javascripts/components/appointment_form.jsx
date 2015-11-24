@@ -37,7 +37,7 @@ this.AppointmentForm = React.createClass({
       className: 'form-inline',
       onSubmit: this.handleSubmit
     },
-      <MyParent />,
+      <MyList />,
       React.DOM.input({
         type: 'text',
         className: 'form-control',
@@ -78,7 +78,7 @@ this.AppointmentForm = React.createClass({
   }
 });
 
-var MyParent = React.createClass({
+var MyList = React.createClass({
     getInitialState: function() {
         return {
             childSelectValue: undefined,
@@ -89,15 +89,13 @@ var MyParent = React.createClass({
     },
     changeHandler: function(e) {
         console.log('In changeHandler');
-        tmp = this.getData;
-        this.setState({options: this.state.getOptions});
+        var tmp = this.getData(e);
     },
     getData: function(e) {
       e.preventDefault();
       ovalue = e.target.value
       console.log(ovalue);
       link = {url: this.state.url, ovalue: ovalue};
-
       $.ajax({
         type: 'POST',
         data: link,
@@ -107,7 +105,7 @@ var MyParent = React.createClass({
         dataType: 'json',
         success: function(data) {
           if (data != undefined) {
-            console.log( data.length);
+            console.log( ">>>>>> 108 data >>>>>>>"+JSON.stringify(data));
             this.setOptions(data);
           }
         }.bind(this),
@@ -115,26 +113,24 @@ var MyParent = React.createClass({
           console.error(this.state.url, status, err.toString());
         }.bind(this)
       });
-  },
-  setOptions: function(data) {
-    if (data == null) {
-      return React.createElement('option', this.state.options, 'Type a name')
-    }
-    console.log( ">>>>>> data >>>>>>>"+data);
-    for (var i = 0; i < data.length; i++) {
-      var option = data[i];
-      this.state.getOptions.push(
-              <option key={i} value={option.value}>{option.name}</option>
-              );
-    }
-  },
-
+    },
+    setOptions: function(data) {
+      var tempo = [];
+      for (var i = 0; i < data.length; i++) {
+        var option = data[i];
+        var tmp = <option key={i} value={option.value} id={option.value}>{option.name}</option>;
+        tempo.push(tmp);
+     }
+     console.log( ">>>>>> 127 data >>>>>>>"+JSON.stringify(tempo));
+     this.setState({options: tempo, selected: false, hide: false});
+      if (typeof this.props.onInputChange === 'function') this.props.onInputChange(event);
+    },
     render: function() {
         return (
-          <div>
-            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" />
+          <span>
+            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner_id" id="asdfdsfds" />
             <datalist id="slist">{this.state.options}</datalist>
-          </div>
+          </span>
         )
     }
 });
