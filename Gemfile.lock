@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     abstract_type (0.0.7)
+    actioncable (0.0.0)
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
       actionview (= 4.2.3)
@@ -339,6 +340,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actioncable
   autoprefixer-rails
   better_errors
   bootstrap-sass
