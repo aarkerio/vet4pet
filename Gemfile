@@ -6,6 +6,9 @@ gem 'rails', '4.2.3'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass'  # For Heroku deployment
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -55,5 +58,4 @@ group :development, :test do
   gem 'mutant-rspec'
 end
 
-gem 'bootstrap-sass'# For Heroku deployment
 gem 'rails_12factor', group: :production

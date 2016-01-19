@@ -10,8 +10,6 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- 
- 
  */
 // DO NOT REQUIRE TREE! It will interfere with load order!
 
@@ -25,12 +23,12 @@ $rails: true;
 // The _pre-bootstrap.scss file is located under
 // client/assets/stylesheets, which has been added to the Rails asset
 // pipeline search path. See config/application.rb.
-@import 'pre-bootstrap';
+// @import 'pre-bootstrap';
 
 // These scss files are located under client/assets/stylesheets
 // (which has been added to the Rails asset pipeline search path in config/application.rb).
 @import 'bootstrap-custom';
 
 // This must come after all the boostrap styles are loaded so that these styles can override those.
-@import 'post-bootstrap';
+// @import 'post-bootstrap';
 
