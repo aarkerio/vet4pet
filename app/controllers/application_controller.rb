@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:index, :welcome]
 
   before_filter :layout_by_action
-  
+
   before_filter :check_admin
-  
+
   @@actions = %w(new edit create destroy update index start show angular neu)
 
   FILE_EXTENSIONS = ['wav','mp3','gsm','pdf', 'doc', 'docx', 'pptx', 'xls', 'xlsx', 'zip']   # Allowed file extensions
@@ -17,18 +17,18 @@ class ApplicationController < ActionController::Base
   MIME_TYPES = ['image/jpeg', 'image/gif','image/png','image/bmp', 'application/pdf']         # Allowed upload file types
 
   FILE_MAXIMUM_SIZE_FOR_FILE=1048576    #Maximum Size (1MB) define in bytes
-  
+
   private
-  
+
   def check_admin
     if  @current_user && @current_user.group.id != 1
-      redirect_to root_path, notice: 'User not authorized'      
+      redirect_to root_path, notice: 'User not authorized'
     end
   end
 
   # Layout for action
   def layout_by_action
-    action = 
+    action =
     #raise action_name
     if @@actions.include? params[:action]
       self.class.layout 'admin'
@@ -36,5 +36,5 @@ class ApplicationController < ActionController::Base
       self.class.layout 'application'
     end
   end
-  
+
 end

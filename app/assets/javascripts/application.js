@@ -18,4 +18,5 @@
 //= require react_ujs
 //= require components
 //= require js.cookie
+//= require date-picker
 //= require_tree .

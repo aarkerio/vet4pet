@@ -1,7 +1,7 @@
 {
   "name": "rails4vet",
   "description": "Vet Clinic",
-  "author": "Manuel Montoya <mmontoya@gmail.com> GPLv3",
+  "author": "Manuel Montoya <mmontoya@gmail.com> GPLv3 2015-2016",
   "dependencies": {
     "browserify": "~> 10.2.6",
     "browserify-incremental": "^3.0.1",

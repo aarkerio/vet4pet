@@ -16,6 +16,9 @@ module Vet4pet
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    # bower loaded JS libs, check APP/.bowerrc file
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
@@ -40,7 +43,7 @@ module Vet4pet
     # By default only files in /app and /node_modules are browserified,
     # vendor stuff is normally not made for browserification and may stop
     # working.
-    #config.browserify_rails.paths << /vendor\/assets\/javascripts\/module\.js/
+    # config.browserify_rails.paths << /vendor\/assets\/javascripts\/module\.js/
     # Environments, in which to generate source maps
     #
     # The default is none
