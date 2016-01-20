@@ -1,8 +1,22 @@
+GIT
+  remote: git://github.com/rails/actioncable.git
+  revision: 92adbc2fab09445cd29022e1ac19bd65e66e9760
+  branch: archive
+  specs:
+    actioncable (0.0.3)
+      actionpack (>= 4.2.0)
+      activesupport (>= 4.2.0)
+      celluloid (~> 0.16.0)
+      coffee-rails
+      em-hiredis (~> 0.3.0)
+      faye-websocket (~> 0.10.0)
+      redis (~> 3.0)
+      websocket-driver (~> 0.6.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
     abstract_type (0.0.7)
-    actioncable (0.0.0)
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
       actionview (= 4.2.3)
@@ -87,6 +101,8 @@ GEM
     cells (4.0.4)
       tilt (>= 1.4, < 3)
       uber (~> 0.0.9)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
     coderay (1.1.0)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -109,14 +125,21 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    em-hiredis (0.3.0)
+      eventmachine (~> 1.0)
+      hiredis (~> 0.5.0)
     equalizer (0.0.11)
     erubis (2.7.0)
+    eventmachine (1.0.9.1)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    faye-websocket (0.10.2)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffaker (2.1.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -128,6 +151,8 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    hiredis (0.5.2)
+    hitimes (1.2.3)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -302,6 +327,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    timers (4.0.4)
+      hitimes
     turbolinks (2.5.3)
       coffee-rails
     typescript-node (1.6.2)
@@ -336,12 +363,15 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket-driver (0.6.3)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  actioncable
+  actioncable!
   autoprefixer-rails
   better_errors
   bootstrap-sass
