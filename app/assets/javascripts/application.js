@@ -16,7 +16,8 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
-//= require components
+//= require moment
+//= require bootstrap-sprockets
+//= require bootstrap-datetimepicker
 //= require js.cookie
-//= require date-picker
 //= require_tree .

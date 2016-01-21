@@ -10,7 +10,7 @@ gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'  # For Heroku deployment
-gem "twitter-bootstrap-rails"
+gem 'twitter-bootstrap-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -18,10 +18,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
 source 'https://rails-assets.org' do
   #gem 'rails-assets-leaflet'
-  gem 'rails-assets-react-date-picker'
+  #gem 'rails-assets-react-date-picker'
 end
 
 #cells
@@ -47,6 +46,9 @@ gem 'js_cookie_rails'
 gem 'redis-rails'
 gem 'browserify-rails'
 gem 'newrelic_rpm'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

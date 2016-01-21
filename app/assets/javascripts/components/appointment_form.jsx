@@ -42,6 +42,7 @@ this.AppointmentForm = React.createClass({
         type: 'text',
         className: 'form-control',
         placeholder: 'Date',
+        id: 'datepicker1',
         name: 'date',
         value: this.state.date,
         onChange: this.handleChange
