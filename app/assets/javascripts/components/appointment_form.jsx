@@ -38,14 +38,15 @@ this.AppointmentForm = React.createClass({
       onSubmit: this.handleSubmit
     },
       <MyList />,
+      <DateTimePicker />,
       React.DOM.input({
         type: 'text',
         className: 'form-control',
         placeholder: 'Date',
-        id: 'datepicker1',
-        name: 'date',
-        value: this.state.date,
-        onChange: this.handleChange
+        id: 'datepicker',
+        name: 'datepicker',
+        // value: this.state.date,
+        // onChange: this.handleChange
       }),
       React.DOM.input({
         type: 'text',
@@ -78,6 +79,8 @@ this.AppointmentForm = React.createClass({
     }, 'Create appointment'));
   }
 });
+
+var DateTimePicker = require('react-widgets/lib/DateTimePicker');
 
 var MyList = React.createClass({
     getInitialState: function() {

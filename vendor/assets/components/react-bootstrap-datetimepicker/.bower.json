@@ -1,0 +1,23 @@
+{
+  "name": "react-bootstrap-datetimepicker",
+  "version": "0.0.22",
+  "main": [
+    "./dist/react-bootstrap-datetimepicker.min.js"
+  ],
+  "dependencies": {
+    "react": ">=0.14",
+    "moment": "^2.8.2",
+    "react-bootstrap": "^0.16.1"
+  },
+  "homepage": "https://github.com/quri/react-bootstrap-datetimepicker",
+  "_release": "0.0.22",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.22",
+    "commit": "17fdec83b6f4c038faca04ee1368d23a405fa4ca"
+  },
+  "_source": "git://github.com/quri/react-bootstrap-datetimepicker.git",
+  "_target": "~0.0.22",
+  "_originalSource": "react-bootstrap-datetimepicker",
+  "_direct": true
+}

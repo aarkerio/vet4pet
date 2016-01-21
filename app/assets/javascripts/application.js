@@ -15,9 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require react
-//= require react_ujs
-//= require moment
-//= require bootstrap-sprockets
-//= require bootstrap-datetimepicker
+//= require react-widgets
 //= require js.cookie
 //= require_tree .
+
