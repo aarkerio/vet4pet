@@ -1,0 +1,23 @@
+{
+  "name": "rails4vet",
+  "description": "Vet Clinic",
+  "main": "",
+  "authors": [
+    "Manuel Montoya <mmontoya@gmail.com> GPLv3"
+  ],
+  "license": "GPLv3",
+  "homepage": "https://github.com/aarkerio/vet4pet",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "globalize": "~1.1.0",
+    "react-widgets": "~3.1.7",
+    "moment": "~2.11.1"
+  }
+}

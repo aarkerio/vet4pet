@@ -1,3 +1,5 @@
+var DateTimePicker = ReactWidgets.DateTimePicker;
+
 this.AppointmentForm = React.createClass({
   getInitialState: function() {
     return {
@@ -38,13 +40,12 @@ this.AppointmentForm = React.createClass({
       onSubmit: this.handleSubmit
     },
       <MyList />,
+      <DateTimePicker format='mmm YYY' />,
       React.DOM.input({
-        type: 'text',
-        className: 'form-control',
-        placeholder: 'Date',
-        name: 'date',
-        value: this.state.date,
-        onChange: this.handleChange
+        type: 'datetime',
+        name: 'appodate',
+        id: 'appodate'
+        // value: this.state.date,
       }),
       React.DOM.input({
         type: 'text',
