@@ -42,12 +42,6 @@ this.AppointmentForm = React.createClass({
       <MyList />,
       <DateTimePicker format='mmm YYY' />,
       React.DOM.input({
-        type: 'datetime',
-        name: 'appodate',
-        id: 'appodate'
-        // value: this.state.date,
-      }),
-      React.DOM.input({
         type: 'text',
         className: 'form-control',
         placeholder: 'Pet name',

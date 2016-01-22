@@ -9,7 +9,7 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
+ *= require react-widgets/dist/css/react-widgets.css
  */
 // DO NOT REQUIRE TREE! It will interfere with load order!
 
@@ -31,4 +31,5 @@ $rails: true;
 
 // This must come after all the boostrap styles are loaded so that these styles can override those.
 // @import 'post-bootstrap';
+@import "react-widgets/dist/css/react-widgets.css";
 
