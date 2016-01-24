@@ -40,7 +40,7 @@ this.AppointmentForm = React.createClass({
       onSubmit: this.handleSubmit
     },
       <MyList />,
-      <DateTimePicker format='mmm YYY' />,
+      <DateTimePicker />,
       React.DOM.input({
         type: 'text',
         className: 'form-control',

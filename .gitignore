@@ -19,3 +19,4 @@ node_modules
 
 # Generated js bundles
 /app/assets/javascripts/generated/*
+/vendor/assets/bower_components/*
