@@ -7,11 +7,12 @@ this.AppointmentForm = React.createClass({
       pet_id: '',
       owner_id: '',
       doctor_id: '',
-      reminder: ''
+      reminder: '',
+      url: '/appointments'
     };
   },
   valid: function() {
-    return this.state.pet_id && this.state.date && this.state.owner_id;
+    return this.state.pet_id && this.state.owner_id;
   },
   handleChange: function(e) {
     var name, obj;
@@ -24,15 +25,18 @@ this.AppointmentForm = React.createClass({
     ));
   },
   handleSubmit: function(e) {
-    e.preventDefault();
-    return $.post('', {
-      record: this.state
-    }, (function(_this) {
-      return function(data) {
-        _this.props.handleNewRecord(data);
-        return _this.setState(_this.getInitialState());
-      };
-    })(this), 'JSON');
+   $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: e,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   },
   render: function() {
     return React.DOM.form({
@@ -68,7 +72,7 @@ this.AppointmentForm = React.createClass({
       React.DOM.button({
         type: 'submit',
         className: 'btn btn-primary',
-        //disabled: !this.valid()
+        // disabled: !this.valid()
     }, 'Create appointment'));
   }
 });

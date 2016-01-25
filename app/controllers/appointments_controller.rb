@@ -11,7 +11,7 @@ class AppointmentsController < ApplicationController
   def get_data
     owner = params[:ovalue]
     results = User.where("lname ~ '#{owner}' AND group_id=2").select(:id, :fname, :lname)
-    logger.debug "########################>>>> #{params.to_json} "
+    logger.debug "### get_data in appointments #####################>>>> #{params.to_json} "
     users = results.map do |r|
       {value: r.id, name: "#{r.lname} #{r.fname}" }
     end
@@ -36,15 +36,12 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
-
-    respond_to do |format|
-      if @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
-        format.json { render :show, status: :created, location: @appointment }
-      else
-        format.html { render :new }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
-      end
+    logger.debug "### get_data in appointments #####################>>>> #{appointment_params.to_json} "
+    if @appointment.save
+      appos = Appointment.to_react
+      format.json { render :show, status: :created, location: @appointment }
+    else
+      format.json { render json: @appointment.errors, status: :unprocessable_entity }
     end
   end
 

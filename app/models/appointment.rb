@@ -17,6 +17,11 @@ class Appointment < ActiveRecord::Base
 
   private
 
+  # Private: Returns all appointments.
+  #
+  # appo_id - The Integer number of appointemnt id.
+  #
+  # Returns hash object or nil.
   def self.to_react(appo_id=nil)
     appos = appo_id.nil? ? self.where(active:true).order('scheduled_time ASC') : self.where(active:true, id: appo_id)
 
@@ -25,6 +30,11 @@ class Appointment < ActiveRecord::Base
     end
   end
 
+  # Private: Reorder to send to React.js view.
+  #
+  # appo - Active record object.
+  #
+  # Returns hash.
   def self.react_order(appo)
     {id: appo.id, petname: appo.pet.name, owner: appo.owner.lname, docname: appo.doctor.lname, date: appo.scheduled_time.strftime('%Y-%m-%d %H-%M-%S'), reason: appo.reason_for_visit, reminder: appo.reminder }
   end
