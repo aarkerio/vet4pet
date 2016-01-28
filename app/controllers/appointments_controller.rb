@@ -35,8 +35,8 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    @appointment = Appointment.new(appointment_params)
     logger.debug "### get_data in appointments #####################>>>> #{appointment_params.to_json} "
+    @appointment = Appointment.new(appointment_params)
     if @appointment.save
       appos = Appointment.to_react
       format.json { render :show, status: :created, location: @appointment }

@@ -25,11 +25,15 @@ this.AppointmentForm = React.createClass({
     ));
   },
   handleSubmit: function(e) {
+  console.log( ">>>>>> 28 data >>>>>>>"+JSON.stringify(e));
+   data_r = {url: this.state.url, ovalue: ovalue};
    $.ajax({
-      url: this.props.url,
+      url: this.state.url,
       dataType: 'json',
       type: 'POST',
-      data: e,
+      headers: {'X-CSRFToken': Cookies.get('csrf-token')},
+      cache: false,
+      data: data_r,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -40,14 +44,13 @@ this.AppointmentForm = React.createClass({
   },
   render: function() {
     return React.DOM.form({
-      className: 'form-inline',
       onSubmit: this.handleSubmit
     },
       <MyList />,
       <DateTimePicker />,
       React.DOM.input({
         type: 'text',
-        className: 'form-control',
+        className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Pet name',
         name: 'pet_id',
         value: this.state.pet_id,
@@ -55,7 +58,7 @@ this.AppointmentForm = React.createClass({
       }),
       React.DOM.input({
         type: 'text',
-        className: 'form-control',
+        className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Doctor',
         name: 'doctor_id',
         value: this.state.doctor_id,
@@ -63,7 +66,7 @@ this.AppointmentForm = React.createClass({
       }),
       React.DOM.span(null, "Reminder: "), React.DOM.input({
         type: 'checkbox',
-        className: 'form-control',
+        className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Reminder',
         name: 'reminder',
         value: this.state.reminder,
@@ -127,7 +130,7 @@ var MyList = React.createClass({
     render: function() {
         return (
           <span>
-            <input type="text" className="form-control" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner" id="asdfdsfds" />
+            <input className="rw-datetimepicker rw-widget rw-has-both" type="text" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner" id="asdfdsfds" />
             <datalist id="slist">{this.state.options}</datalist>
           </span>
         )
