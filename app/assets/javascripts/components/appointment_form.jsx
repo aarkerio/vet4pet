@@ -25,9 +25,10 @@ this.AppointmentForm = React.createClass({
     ));
   },
   handleSubmit: function(e) {
-  console.log( ">>>>>> 28 data >>>>>>>"+JSON.stringify(e));
-   data_r = {url: this.state.url, ovalue: ovalue};
-   $.ajax({
+    e.preventDefault();
+    console.log( ">>>>>> Sending data >>>>>>>"+JSON.stringify(e));
+    data_r = {url: this.state.url, ovalue: ovalue};
+    $.ajax({
       url: this.state.url,
       dataType: 'json',
       type: 'POST',
@@ -97,7 +98,6 @@ var MyList = React.createClass({
     getData: function(e) {
       e.preventDefault();
       ovalue = e.target.value
-      console.log(ovalue);
       link = {url: this.state.url, ovalue: ovalue};
       $.ajax({
         type: 'POST',

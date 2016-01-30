@@ -9,23 +9,6 @@ var Appointments = React.createClass({
       appointments: []
     };
   },
-  getggData: function(url) {
-    link = {url: '/appointments/get_data', iir: this.state.owner_id};
-
-    $.ajax({
-      type: 'GET',
-      url: '/appointments/get_data/',
-      data: link,
-      headers: {'X-CSRFToken': $.cookie('csrftoken')},
-      success: function(data) {
-        var data = this.state.data;
-        //I do this so the new added link will be on top of the array
-        var newLinks = [data].concat(links);
-        // this.setState({data: newLinks});
-        this.setState({owners: newLinks});
-      }.bind(this)
-    });
-  },
   addAppointment: function(record) {
     var records;
     records = React.addons.update(this.state.records, {
