@@ -1,12 +1,12 @@
 var DateTimePicker = ReactWidgets.DateTimePicker;
 
-this.AppointmentForm = React.createClass({
+var AppointmentForm = React.createClass({
   getInitialState: function() {
     return {
       date: '',  // form input element
-      pet_id: '',
-      owner_id: '',
-      doctor_id: '',
+      pet: '',
+      owner: '',
+      doctor: '',
       reminder: '',
       url: '/appointments'
     };
@@ -14,20 +14,31 @@ this.AppointmentForm = React.createClass({
   valid: function() {
     return this.state.pet_id && this.state.owner_id;
   },
-  handleChange: function(e) {
-    var name, obj;
-    name = e.target.name;
-    console.log(name);
-    return this.setState((
-      obj = {},
-      obj["" + name] = e.target.value,
-      obj
-    ));
+  handlePetChange: function(e) {
+    pet = e.target.value;
+    console.log("Changed name field >>>>>>>>>>>>>>>>>>>>>>>>>  " + name);
+    this.setState({pet: e.target.value});
   },
+  handleOwnerChange: function(e) {
+    this.setState({owner: e});
+  },
+  handleDateChange: function(e) {
+    console.log( ">>>>>> Sending date >>>>>>> " + e);
+    this.setState({date: e});
+  },
+  handleDoctorChange: function(e) {
+    this.setState({doctor: e});
+  },
+
   handleSubmit: function(e) {
     e.preventDefault();
-    console.log( ">>>>>> Sending data >>>>>>>"+JSON.stringify(e));
-    data_r = {url: this.state.url, ovalue: ovalue};
+    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(e));
+    cpet      = this.state.pet;
+    cdoctor   = this.state.doctor;
+    cdate     = this.state.date;
+    creminder = this.state.reminder;
+    owid      = this.state.owner;
+    data_r = {url: this.state.url, date: cdate, reminder: creminder, owner: owid, pet: cpet, doctor: cdoctor};
     $.ajax({
       url: this.state.url,
       dataType: 'json',
@@ -45,32 +56,31 @@ this.AppointmentForm = React.createClass({
   },
   render: function() {
     return React.DOM.form({
-      onSubmit: this.handleSubmit
-    },
-      <MyList />,
-      <DateTimePicker />,
+        onSubmit: this.handleSubmit
+      },
+      <MyList value={this.state.owner} onChange={this.handleOwnerChange} />,
+      <DateTimePicker onChange={this.handleDateChange} />,
       React.DOM.input({
         type: 'text',
         className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Pet name',
         name: 'pet_id',
-        value: this.state.pet_id,
-        onChange: this.handleChange
+        // value: this.state.pet_id,
+        onChange: this.handlePetChange
       }),
       React.DOM.input({
         type: 'text',
         className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Doctor',
         name: 'doctor_id',
-        value: this.state.doctor_id,
-        onChange: this.handleChange
+        onChange: this.handleDoctorChange
       }),
       React.DOM.span(null, "Reminder: "), React.DOM.input({
         type: 'checkbox',
         className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Reminder',
         name: 'reminder',
-        value: this.state.reminder,
+        // value: this.state.reminder,
         onChange: this.handleChange
       }),
       React.DOM.button({
@@ -89,6 +99,10 @@ var MyList = React.createClass({
             url: '/appointments/get_data',
             options: [<option key={'taste'} value={'zeitwert'}>{'Name'}</option>]
         }
+    },
+    propTypes: {
+        value:      React.PropTypes.string,
+        onChange:   React.PropTypes.func
     },
     changeHandler: function(e) {
         console.log('In changeHandler');
@@ -127,12 +141,23 @@ var MyList = React.createClass({
      console.log( ">>>>>> 127 data >>>>>>>"+JSON.stringify(tempo));
      this.setState({options: tempo});
     },
+    getDefaultProps: function() {
+        return {
+            value: ''
+        };
+    },
+    changeHandler: function(e) {
+        if (typeof this.props.onChange === 'function') {
+            this.props.onChange(e.target.value);
+        }
+    },
     render: function() {
         return (
           <span>
-            <input className="rw-datetimepicker rw-widget rw-has-both" type="text" onChange={this.changeHandler} placeholder="Owner" list="slist" name="owner" id="asdfdsfds" />
+            <input className="rw-datetimepicker rw-widget rw-has-both" type="text" value={this.props.value} onChange={this.changeHandler} list="slist" name="owner" />
             <datalist id="slist">{this.state.options}</datalist>
           </span>
         )
     }
 });
+
