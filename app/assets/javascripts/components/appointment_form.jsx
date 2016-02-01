@@ -7,38 +7,56 @@ var AppointmentForm = React.createClass({
       pet: '',
       owner: '',
       doctor: '',
+      reason: '',
       reminder: '',
       url: '/appointments'
     };
+  },
+  _validate: function () {
+    var errors = {}
+    if(this.state.username == "") {
+      errors.username = "Username is required";
+    }
+    if(this.state.email == "") {
+      errors.email = "Email is required";
+    }
+    if(this.state.password == "") {
+      errors.password = "Password is required";
+    }
+    return errors;
   },
   valid: function() {
     return this.state.pet_id && this.state.owner_id;
   },
   handlePetChange: function(e) {
-    pet = e.target.value;
-    console.log("Changed name field >>>>>>>>>>>>>>>>>>>>>>>>>  " + name);
     this.setState({pet: e.target.value});
   },
   handleOwnerChange: function(e) {
     this.setState({owner: e});
   },
   handleDateChange: function(e) {
-    console.log( ">>>>>> Sending date >>>>>>> " + e);
     this.setState({date: e});
   },
   handleDoctorChange: function(e) {
-    this.setState({doctor: e});
+    this.setState({doctor: e.target.value});
+  },
+  handleReasonChange: function(e) {
+    this.setState({reason: e.target.value});
   },
 
+  handleReminderChange: function(e) {
+    this.setState({reminder: e.target.value});
+  },
   handleSubmit: function(e) {
     e.preventDefault();
-    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(e));
-    cpet      = this.state.pet;
-    cdoctor   = this.state.doctor;
     cdate     = this.state.date;
+    cpet      = this.state.pet;
+    cowner    = this.state.owner;
+    cdoctor   = this.state.doctor;
     creminder = this.state.reminder;
-    owid      = this.state.owner;
-    data_r = {url: this.state.url, date: cdate, reminder: creminder, owner: owid, pet: cpet, doctor: cdoctor};
+    creason   = this.state.reason;
+    data_r    = { date: cdate, reminder: creminder, owner: cowner, pet: cpet, doctor: cdoctor, reason: creason };
+    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
     $.ajax({
       url: this.state.url,
       dataType: 'json',
@@ -65,7 +83,6 @@ var AppointmentForm = React.createClass({
         className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Pet name',
         name: 'pet_id',
-        // value: this.state.pet_id,
         onChange: this.handlePetChange
       }),
       React.DOM.input({
@@ -75,13 +92,21 @@ var AppointmentForm = React.createClass({
         name: 'doctor_id',
         onChange: this.handleDoctorChange
       }),
+      React.DOM.input({
+        type: 'text',
+        className: 'rw-datetimepicker rw-widget rw-has-both',
+        placeholder: 'Reason',
+        name: 'reason',
+        onChange: this.handleReasonChange
+      }),
+
       React.DOM.span(null, "Reminder: "), React.DOM.input({
         type: 'checkbox',
         className: 'rw-datetimepicker rw-widget rw-has-both',
         placeholder: 'Reminder',
         name: 'reminder',
         // value: this.state.reminder,
-        onChange: this.handleChange
+        onChange: this.handleReminderChange
       }),
       React.DOM.button({
         type: 'submit',
@@ -101,8 +126,8 @@ var MyList = React.createClass({
         }
     },
     propTypes: {
-        value:      React.PropTypes.string,
-        onChange:   React.PropTypes.func
+      value:      React.PropTypes.string,
+      onChange:   React.PropTypes.func
     },
     changeHandler: function(e) {
         console.log('In changeHandler');

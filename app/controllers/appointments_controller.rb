@@ -36,13 +36,13 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     logger.debug "### Data in create#appointments #####################>>>> #{params.to_json} "
-    return render json: {name: 'Goooddd'}.to_json
-    @appointment = Appointment.new(params)
-    if @appointment.save
+    #return render json: {name: 'Goooddd'}.to_json
+    result = Appointment.save_appointment(params)
+    if result
       appos = Appointment.to_react
-      format.json { render :show, status: :created, location: @appointment }
+      format.json { render :show, status: :created, location: appointment }
     else
-      format.json { render json: @appointment.errors, status: :unprocessable_entity }
+      format.json { render json: appointment.errors, status: :unprocessable_entity }
     end
   end
 

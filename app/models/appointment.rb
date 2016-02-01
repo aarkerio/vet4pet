@@ -22,6 +22,31 @@ class Appointment < ActiveRecord::Base
   # appo_id - The Integer number of appointemnt id.
   #
   # Returns hash object or nil.
+  def self.save_appointment(params)
+    owner    = get_row(params[:owner])
+    doctor   = get_row(params[:doctor])
+    pet      = User.where('LOWER(title) ILIKE ?', "#{params[:pet]}%").first
+    new_appo = {scheduled_time: params[:date],
+                pet_id: pet.id,
+                reminder: params[:reminder],
+                reason_for_visit: params[:reason],
+                doctor_id: doctor.id,
+                owner_id: owner.id,
+                active: true
+                }
+    create!(new_appo)
+  end
+
+  def get_row(name)
+    words = name.split(" ")
+    user  = User.where('LOWER(fname) ILIKE ? AND LOWER(lname) ILIKE ?', "#{words[0]}%", "#{words[1]}%").first
+  end
+
+  # Private: Returns all appointments.
+  #
+  # appo_id - The Integer number of appointemnt id.
+  #
+  # Returns hash object or nil.
   def self.to_react(appo_id=nil)
     appos = appo_id.nil? ? self.where(active:true).order('scheduled_time ASC') : self.where(active:true, id: appo_id)
 
