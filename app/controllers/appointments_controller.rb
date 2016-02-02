@@ -10,7 +10,7 @@ class AppointmentsController < ApplicationController
   # POST /appointments/get_data
   def get_data
     owner = params[:ovalue]
-    results = User.where("lname ~ '#{owner}' AND group_id=2").select(:id, :fname, :lname)
+    results = User.where("(fname ~ '#{owner}' OR lname ~ '#{owner}') AND group_id=2").select(:id, :fname, :lname)
     logger.debug "### get_data in appointments #####################>>>> #{params.to_json} "
     users = results.map do |r|
       {value: r.id, name: "#{r.lname} #{r.fname}" }

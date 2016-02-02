@@ -51,7 +51,7 @@ var AppointmentForm = React.createClass({
     e.preventDefault();
     cdate     = this.state.date;
     cpet      = this.state.pet;
-    cowner    = this.state.owner;
+    cowner    = this.refs.fieldDate.state.owner;
     cdoctor   = this.state.doctor;
     creminder = this.state.reminder;
     creason   = this.state.reason;
@@ -66,6 +66,7 @@ var AppointmentForm = React.createClass({
       data: data_r,
       success: function(data) {
         this.setState({data: data});
+        // this.refs.fieldDate.clearInput();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -76,7 +77,8 @@ var AppointmentForm = React.createClass({
     return React.DOM.form({
         onSubmit: this.handleSubmit
       },
-      <MyList value={this.state.owner} onChange={this.handleOwnerChange} />,
+      <MyList ref="fieldDate" />,
+      // <MyList value={this.state.owner} onChange={this.handleOwnerChange} />,
       <DateTimePicker onChange={this.handleDateChange} />,
       React.DOM.input({
         type: 'text',
@@ -118,25 +120,27 @@ var AppointmentForm = React.createClass({
 
 var MyList = React.createClass({
     getInitialState: function() {
-        return {
-            childSelectValue: undefined,
-            getOptions: [],
-            url: '/appointments/get_data',
-            options: [<option key={'taste'} value={'zeitwert'}>{'Name'}</option>]
-        }
+      return {
+          childSelectValue: undefined,
+          getOptions: [],
+          url: '/appointments/get_data',
+          owner: '',
+          options: [<option key={'taste'} value={'zeitwert'}>{'Name'}</option>]
+      }
     },
     propTypes: {
       value:      React.PropTypes.string,
       onChange:   React.PropTypes.func
     },
-    changeHandler: function(e) {
-        console.log('In changeHandler');
-        var tmp = this.getData(e);
-        this.forceUpdate();
+    changeList: function(e) {
+      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>In changeList');
+      var tmp = this.getData(e);
+      this.forceUpdate();
     },
     getData: function(e) {
       e.preventDefault();
       ovalue = e.target.value
+      this.setState({owner: ovalue});
       link = {url: this.state.url, ovalue: ovalue};
       $.ajax({
         type: 'POST',
@@ -147,7 +151,7 @@ var MyList = React.createClass({
         dataType: 'json',
         success: function(data) {
           if (data != undefined) {
-            console.log( ">>>>>> 108 data >>>>>>>"+JSON.stringify(data));
+            console.log( ">>>>>> 154 data >>>>>>>"+JSON.stringify(data));
             this.setOptions(data);
           }
         }.bind(this),
@@ -163,7 +167,7 @@ var MyList = React.createClass({
         var tmp = <option key={i} value={option.name} id={option.value}>{option.name}</option>;
         tempo.push(tmp);
      }
-     console.log( ">>>>>> 127 data >>>>>>>"+JSON.stringify(tempo));
+     console.log( ">>>>>> 170 data >>>>>>>"+JSON.stringify(tempo));
      this.setState({options: tempo});
     },
     getDefaultProps: function() {
@@ -179,7 +183,7 @@ var MyList = React.createClass({
     render: function() {
         return (
           <span>
-            <input className="rw-datetimepicker rw-widget rw-has-both" type="text" value={this.props.value} onChange={this.changeHandler} list="slist" name="owner" />
+            <input className="rw-datetimepicker rw-widget rw-has-both" type="text" onChange={this.changeList} list="slist" />
             <datalist id="slist">{this.state.options}</datalist>
           </span>
         )
