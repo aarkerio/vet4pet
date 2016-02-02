@@ -1,13 +1,34 @@
+
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 var Appointments = React.createClass({
   getInitialState: function() {
     return {
-      appointments: this.props.data
+      appointments: this.props.data,
+      message: 'No message'
     };
   },
   getDefaultProps: function() {
     return {
       appointments: []
     };
+  },
+  sendDataToRails: function(url) {
+    link = {url: '/appointments/get_data', iir: this.state.owner_id};
+
+    $.ajax({
+      type: 'GET',
+      url: '/appointments/get_data/',
+      data: link,
+      headers: {'X-CSRFToken': $.cookie('csrftoken')},
+      success: function(data) {
+        var data = this.state.data;
+        //I do this so the new added link will be on top of the array
+        var newLinks = [data].concat(links);
+        // this.setState({data: newLinks});
+        this.setState({owners: newLinks});
+      }.bind(this)
+    });
   },
   addAppointment: function(record) {
     var records;
@@ -51,7 +72,10 @@ var Appointments = React.createClass({
     var form = React.createElement(AppointmentForm, {handleNewAppointment: this.addAppointment } );
     return (
       <div className="appoList" key="dfdsf">
-      <div className="appoDivForm">{ form }</div><br />
+        <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+          {this.state.message}
+        </ReactCSSTransitionGroup>
+        <div className="appoDivForm">{ form }</div><br />
         {appoNodes}
       </div>
     );

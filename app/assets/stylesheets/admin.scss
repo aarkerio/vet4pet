@@ -121,3 +121,11 @@ table a:hover {
 tfoot th, tfoot td {
   font-size: 85%;
 }
+
+#content_msg {
+  display: none;
+  top: 20px;
+  float:center;
+  background: #fff;
+  border: 1px dotted orange;
+}

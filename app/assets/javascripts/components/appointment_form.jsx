@@ -65,6 +65,7 @@ var AppointmentForm = React.createClass({
       cache: false,
       data: data_r,
       success: function(data) {
+        console.log( ">>>>>> getting data >>>>>>> " + JSON.stringify(data));
         this.setState({data: data});
         // this.refs.fieldDate.clearInput();
       }.bind(this),
@@ -78,7 +79,6 @@ var AppointmentForm = React.createClass({
         onSubmit: this.handleSubmit
       },
       <MyList ref="fieldDate" />,
-      // <MyList value={this.state.owner} onChange={this.handleOwnerChange} />,
       <DateTimePicker onChange={this.handleDateChange} />,
       React.DOM.input({
         type: 'text',
@@ -167,7 +167,7 @@ var MyList = React.createClass({
         var tmp = <option key={i} value={option.name} id={option.value}>{option.name}</option>;
         tempo.push(tmp);
      }
-     console.log( ">>>>>> 170 data >>>>>>>"+JSON.stringify(tempo));
+     console.log( ">>>>>> 170 TEMPO data >>>>>>>"+JSON.stringify(tempo.props));
      this.setState({options: tempo});
     },
     getDefaultProps: function() {
@@ -183,7 +183,7 @@ var MyList = React.createClass({
     render: function() {
         return (
           <span>
-            <input className="rw-datetimepicker rw-widget rw-has-both" type="text" onChange={this.changeList} list="slist" />
+            <input type="text" onChange={this.changeList} list="slist" id="owner_id" name="owner_id" />
             <datalist id="slist">{this.state.options}</datalist>
           </span>
         )

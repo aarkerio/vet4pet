@@ -1,3 +1,4 @@
+#Chipotle Software (c) 2015-2016
 class Appointment < ActiveRecord::Base
   belongs_to :pet
   belongs_to :doctor, class_name:  User
@@ -15,17 +16,22 @@ class Appointment < ActiveRecord::Base
     end
   end
 
-  private
-
-  # Private: Returns all appointments.
+  # Public: Sabe a new appointment.
   #
   # appo_id - The Integer number of appointemnt id.
   #
   # Returns hash object or nil.
-  def self.save_appointment(params)
-    owner    = get_row(params[:owner])
-    doctor   = get_row(params[:doctor])
-    pet      = User.where('LOWER(title) ILIKE ?', "#{params[:pet]}%").first
+  def save_appointment(params)
+    owner    = get_user(params[:owner])
+    doctor   = get_user(params[:doctor])
+    if owner.nil? || doctor.nil?
+      self.errors.add(:base, "Owner or Doctor no valid")
+      #self.errors[:base] << "Owner or Doctor no valid"
+      return false
+    else
+      pet = get_user(params[:name], owner.id.to_s)
+    end
+
     new_appo = {scheduled_time: params[:date],
                 pet_id: pet.id,
                 reminder: params[:reminder],
@@ -37,9 +43,24 @@ class Appointment < ActiveRecord::Base
     create!(new_appo)
   end
 
-  def get_row(name)
+  private
+
+  # Private: Returns all appointments.
+  #
+  # appo_id - The Integer number of appointemnt id.
+  #
+  # Returns hash object or nil.
+  def get_user(name)
     words = name.split(" ")
-    user  = User.where('LOWER(fname) ILIKE ? AND LOWER(lname) ILIKE ?', "#{words[0]}%", "#{words[1]}%").first
+    User.where('LOWER(fname) ILIKE ? AND LOWER(lname) ILIKE ?', "#{words[0]}%", "#{words[1]}%").first
+  end
+  # Private: Returns all appointments.
+  #
+  # appo_id - The Integer number of appointemnt id.
+  #
+  # Returns hash object or nil.
+  def get_pet(name, owner_id)
+    Pet.where("LOWER(name) ILIKE ? AND user_id= ?", name.downcase, owner_id).first
   end
 
   # Private: Returns all appointments.
