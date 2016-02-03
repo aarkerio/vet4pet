@@ -14,7 +14,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require turbolinks
-//= require react
+//= require react/react-with-addons
 //= require react_ujs
 //= require moment/moment
 //= require globalize/dist/globalize

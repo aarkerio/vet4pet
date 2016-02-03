@@ -2,14 +2,21 @@
   "name": "rails4vet",
   "description": "Vet Clinic",
   "author": "Manuel Montoya <mmontoya@gmail.com> GPLv3",
+  "license": "GPLv3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aarkerio/rails4vet.git"
+  },
   "dependencies": {
     "browserify": "~> 10.2.6",
     "browserify-incremental": "^3.0.1",
-    "react-datalist": "asbjornenge/react-datalist.git",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-addons-transition-group": "^0.14.7",
+    "react-addons-css-transition-group": "^0.14.7",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4"
   },
-  "license": "GPLv3",
   "engines": {
     "node": ">= 0.10"
   },

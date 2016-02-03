@@ -1,5 +1,5 @@
 
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var Appointments = React.createClass({
   getInitialState: function() {
