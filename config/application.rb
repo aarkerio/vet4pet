@@ -19,7 +19,6 @@ module Vet4pet
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
     config.assets.paths << Rails.root.join('node_modules')
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
@@ -34,7 +33,6 @@ module Vet4pet
       # you can also specify a different test framework or ORM here
       # g.orm             :mongoid
     end
-    config.react.addons = true # defaults to false
     # Paths, that should be browserified. We browserify everything, that
     # matches (===) one of the paths. So you will most likely put lambdas
     # regexes in here.

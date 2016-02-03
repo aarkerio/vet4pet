@@ -2,5 +2,12 @@
 
 %br
 
-= react_component 'Appointments', { data: @appos }
+#items
+
+:plain
+  <script type="text/babel">
+    ReactDOM.render(
+    <Appointments/>,
+    document.getElementById('items')
+  </script>
 
