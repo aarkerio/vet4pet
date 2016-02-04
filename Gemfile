@@ -40,7 +40,7 @@ gem 'typescript-rails'
 gem 'js_cookie_rails'
 gem 'redis-rails'
 gem 'newrelic_rpm'
-#gem 'react-rails'
+gem 'react-rails'
 gem 'webpack-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

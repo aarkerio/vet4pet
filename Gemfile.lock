@@ -64,6 +64,10 @@ GEM
     autoprefixer-rails (6.3.1)
       execjs
       json
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -109,6 +113,7 @@ GEM
       adamantium (~> 0.2.0)
       equalizer (~> 0.0.9)
     concurrent-ruby (1.0.0)
+    connection_pool (2.2.0)
     debug_inspector (0.0.2)
     devise (3.5.6)
       bcrypt (~> 3.0)
@@ -253,6 +258,13 @@ GEM
     rake (10.5.0)
     rdoc (4.2.1)
       json (~> 1.4)
+    react-rails (1.5.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      rails (>= 3.2)
+      tilt
     redis (3.2.2)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
@@ -394,6 +406,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.3)
   rails_12factor
+  react-rails
   redis-rails
   rspec
   rspec-rails

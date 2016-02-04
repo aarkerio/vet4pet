@@ -1,7 +1,7 @@
 
-var DateTimePicker = ReactWidgets.DateTimePicker;
-//var DateTimePicker = require('./react-widgets/lib/date-time-picker');
-//import DateTimePicker from './react-widgets/lib/DateTimePicker';
+// var DateTimePicker = ReactWidgets.DateTimePicker;
+//var DateTimePicker = require('react-widgets/lib/DateTimePicker');
+
 var AppointmentForm = React.createClass({
   getInitialState: function() {
     return {

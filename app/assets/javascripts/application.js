@@ -14,14 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bundle
-//= require react
-//= require react_ujs
-//= require components
-//= require moment/moment
-//= require globalize/dist/globalize
-//= require react-widgets/dist/react-widgets
-//= require react-widgets/dist/react-widgets-globalize
-//= require react-widgets/dist/react-widgets-moment
-//= require react-addons-css-transition-group
 //= require js.cookie
 //= require_tree .
