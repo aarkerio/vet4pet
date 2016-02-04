@@ -1,9 +1,6 @@
+ReactDOM.unmountComponentAtNode(domContainerNode)
 
-// import React from 'react';
-
-// var React = require('react');
-
-//var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var AppointmentForm = require('./appointment_form');
 
 var Appointments = React.createClass({
   getInitialState: function() {

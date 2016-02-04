@@ -29,7 +29,7 @@ config.resolve = {
 config.module = {
     loaders:  [
                 {test: require.resolve('react'), loader: 'expose?React'},
-                {test: /\.jsx?$/, loader: 'babel'},
+                {test: /\.jsx?$/, loaders: ['react-hot', 'babel']},
                 { test: /\.js$/, loader: 'babel'}
               ]
   }
