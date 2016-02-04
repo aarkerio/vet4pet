@@ -2,12 +2,4 @@
 
 %br
 
-#items
-
-:plain
-  <script type="text/babel">
-    ReactDOM.render(
-    <Appointments/>,
-    document.getElementById('items')
-  </script>
-
+= react_component 'Appointments', { data: @appos }

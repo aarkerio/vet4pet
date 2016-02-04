@@ -1,5 +1,7 @@
-var DateTimePicker = ReactWidgets.DateTimePicker;
 
+var DateTimePicker = ReactWidgets.DateTimePicker;
+//var DateTimePicker = require('./react-widgets/lib/date-time-picker');
+//import DateTimePicker from './react-widgets/lib/DateTimePicker';
 var AppointmentForm = React.createClass({
   getInitialState: function() {
     return {
@@ -79,7 +81,7 @@ var AppointmentForm = React.createClass({
         onSubmit: this.handleSubmit
       },
       <MyList ref="fieldDate" />,
-      <DateTimePicker onChange={this.handleDateChange} />,
+      // <DateTimePicker onChange={this.handleDateChange} />,
       React.DOM.input({
         type: 'text',
         className: 'rw-datetimepicker rw-widget rw-has-both',

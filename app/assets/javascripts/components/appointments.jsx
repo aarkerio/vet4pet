@@ -1,6 +1,5 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
+//var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var Appointments = React.createClass({
   getInitialState: function() {
@@ -73,10 +72,7 @@ var Appointments = React.createClass({
     var form = React.createElement(AppointmentForm, {handleNewAppointment: this.addAppointment } );
     return (
       <div className="appoList" key="dfdsf">
-        <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          {this.state.message}
-        </ReactCSSTransitionGroup>
-        <div className="appoDivForm">{ form }</div><br />
+         <div className="appoDivForm">{ form }</div><br />
         {appoNodes}
       </div>
     );

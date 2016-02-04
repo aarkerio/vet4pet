@@ -9,23 +9,30 @@
   },
   "dependencies": {
     "babel": "^6.3.26",
+    "babel-core": "^6.4.5",
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
-    "browserify": "~> 10.2.6",
-    "browserify-incremental": "^3.0.1",
     "cldr-data": "^28.0.3",
+    "commonjs": "0.0.1",
     "globalize": "^1.1.0",
     "moment": "^2.11.1",
     "react": "^0.14.7",
     "react-addons-css-transition-group": "^0.14.7",
     "react-addons-transition-group": "^0.14.7",
     "react-dom": "^0.14.7",
-    "react-redux": "^4.0.0",
+    "react-router": "^2.0.0-rc5",
     "react-widgets": "^3.1.7",
-    "redux": "^3.0.4"
+    "reactify": "^1.1.1",
+    "webpack": "^1.12.12"
   },
   "engines": {
     "node": ">= 0.10"
+  },
+  "preprocessors": {
+    "node_modules/react/react.js": [
+      "babel",
+      "commonjs"
+    ]
   },
   "devDependencies": {
     "browserify": "^10.2.6",
