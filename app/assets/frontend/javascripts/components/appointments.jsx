@@ -1,6 +1,8 @@
-ReactDOM.unmountComponentAtNode(domContainerNode)
 
-var AppointmentForm = require('./appointment_form');
+import React from 'react';
+import ReactDOM from 'react-dom';
+// import AppointmentForm from './appointment_form.jsx';
+
 
 var Appointments = React.createClass({
   getInitialState: function() {
@@ -70,10 +72,10 @@ var Appointments = React.createClass({
       </tbody>
       </table>
       ;
-    var form = React.createElement(AppointmentForm, {handleNewAppointment: this.addAppointment } );
+    //var form = React.createElement(AppointmentForm, {handleNewAppointment: this.addAppointment } );
     return (
       <div className="appoList" key="dfdsf">
-         <div className="appoDivForm">{ form }</div><br />
+         <div className="appoDivForm"></div><br />
         {appoNodes}
       </div>
     );

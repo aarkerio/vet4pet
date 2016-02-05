@@ -17,4 +17,4 @@ Rails.application.config.assets.paths << Rails.root.join('client', 'assets', 'st
 Rails.application.config.assets.paths << Rails.root.join('client', 'assets', 'images')
 Rails.application.config.assets.paths << Rails.root.join('client', 'assets', 'fonts')
 
-Rails.application.config.assets.precompile += %w( generated/server-bundle.js )
+Rails.application.config.assets.precompile += %w(bundle.js)
