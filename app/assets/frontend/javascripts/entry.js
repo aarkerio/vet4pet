@@ -1,15 +1,16 @@
+//var React = require('react');
+//var ReactDOM = require('react-dom');
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import ReactWidgets from 'react-widgets';
+// import Appointments from './components/appointments';
+import CoBox from './components/test';
+// var CommentBox = require('./components/test');
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactWidgets from 'react-widgets';
-import Appointments from './components/appointments.jsx';
+//ReactDOM.render(<Appointments />, document.getElementById('divaa'));
+
+//ReactDOM.render(<CommentBox />, document.getElementById('divaa'));
 
 console.log("Webpack works GGGGGGGGGGGGGGGGGGGGGe!");
-
-main();
-
-function main() {
-  ReactDOM.render(<Appointments />, document.getElementById('divaa'));
-}
 
 console.log("Webpack works so nice!");

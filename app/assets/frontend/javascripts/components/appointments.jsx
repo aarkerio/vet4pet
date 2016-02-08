@@ -1,13 +1,9 @@
-
-import React from 'react';
-import ReactDOM from 'react-dom';
 // import AppointmentForm from './appointment_form.jsx';
-
 
 var Appointments = React.createClass({
   getInitialState: function() {
     return {
-      appointments: this.props.data,
+      appointments: {},   //,this.props.data,
       message: 'No message'
     };
   },

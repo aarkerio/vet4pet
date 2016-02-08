@@ -18,3 +18,6 @@ Rails.application.config.assets.paths << Rails.root.join('client', 'assets', 'im
 Rails.application.config.assets.paths << Rails.root.join('client', 'assets', 'fonts')
 
 Rails.application.config.assets.precompile += %w(bundle.js)
+
+Rails.application.config.assets.debug = true
+

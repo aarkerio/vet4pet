@@ -13,6 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bundle
 //= require js.cookie
-//= require_tree .
