@@ -1,10 +1,6 @@
-//import React from 'react';
-//var React = require('react');
-// var React = require('react');
-//var ReactDOM = require('react-dom');
 
-//console.log('>>>> in test.jsx file');
-Component = React.createClass({
+console.log('>>>> in test.jsx file');
+var CommentBox = React.createClass({
   render: function() {
     return (
       <div className="commentBox">
@@ -13,5 +9,3 @@ Component = React.createClass({
     );
   }
 });
-
-// ReactDOM.render(<CommentBox />, document.getElementById('testdiv'));
