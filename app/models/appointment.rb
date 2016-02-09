@@ -69,7 +69,7 @@ class Appointment < ActiveRecord::Base
   #
   # Returns hash object or nil.
   def self.to_react(appo_id=nil)
-    appos = appo_id.nil? ? self.where(active:true).order('scheduled_time ASC') : self.where(active:true, id: appo_id)
+    appos = appo_id.nil? ? self.where(active:true).order('scheduled_time ASC').limit(20) : self.where(active:true, id: appo_id).limit(20)
 
     react = appos.map do |appo|
       react_order(appo)

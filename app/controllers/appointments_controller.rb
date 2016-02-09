@@ -2,9 +2,13 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
 
   # GET /appointments
-  # GET /appointments.json
   def index
-    @appos = Appointment.to_react
+  end
+
+  # GET /appointments
+  def get_appos
+    appos = Appointment.to_react
+    return render json: appos
   end
 
   # POST /appointments/get_data

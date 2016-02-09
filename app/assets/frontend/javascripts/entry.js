@@ -15,5 +15,4 @@ ReactDOM.render(<CommentBox />, document.getElementById('divaa'));
 
 
 
-
 console.log("Webpack worked so nice!");

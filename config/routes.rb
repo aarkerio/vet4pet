@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :users
   resources :groups
 
-  post '/appointments/get_data/' => 'appointments#get_data'
+  post '/appointments/get_data/'  => 'appointments#get_data'
+  get '/appointments/get_appos/'  => 'appointments#get_appos'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

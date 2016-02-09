@@ -2,21 +2,41 @@
 
 class Appointments extends React.Component {
   constructor(props) {
-     super(props);
-    //this.state = {  appointments: {}, message: 'No message' };
+    super(props);
+    this.getApposFromRails();
+  }
+
+ /*
+  *  Get data to get the autofill field
+  */
+  getApposFromRails() {
+    var link = {url: '/appointments/'};
+    $.ajax({
+      type: 'GET',
+      url: link['url'],
+      data: link,
+      dataType: 'json',
+      headers: {'X-CSRFToken': Cookies.get('csrftoken')},
+      success: function(data) {
+        //I do this so the new added link will be on top of the array
+        console.log('DATA getApposFromRails >>>>>>' + JSON.stringify(data));
+        //var newLinks = [data].concat(links);
+        // this.setState({data: newLinks});
+        //this.setState({appo_array_prop: newLinks});
+      }.bind(this)
+    });
   }
 
   /*
-   *  Sen data to get the autofill field
+   *  Send data to get the autofill field
    */
   sendDataToRails(url) {
     link = {url: '/appointments/get_data'};
-
     $.ajax({
       type: 'GET',
       url: '/appointments/get_data/',
       data: link,
-      headers: {'X-CSRFToken': $.cookie('csrftoken')},
+      headers: {'X-CSRFToken': Cookies.get('csrftoken')},
       success: function(data) {
         var data = this.state.data;
         //I do this so the new added link will be on top of the array
@@ -37,7 +57,8 @@ class Appointments extends React.Component {
   }
   render() {
       var todos = [];
-      var trNodes = this.props.data.map(function (appointment) {
+      console.log("59 appo_array_prop" + JSON.stringify(this.props.appo_array_prop));
+      var trNodes = this.props.appo_array_prop.map(function (appointment) {
         var row = <tr key={appointment.id}>
           <td>{appointment.date}</td>
           <td>{appointment.petname}</td>
@@ -82,8 +103,7 @@ Appointments.propTypes = {
     docnameStringProp: React.PropTypes.string,
     reasonStringProp:  React.PropTypes.string,
     dateStringProp:    React.PropTypes.string,
-    ownersArrayProp:   React.PropTypes.array,
-    data:              React.PropTypes.array.isRequired
+    appo_array_prop: React.PropTypes.array
 };
 
 Appointments.defaultProps = {
@@ -93,8 +113,7 @@ Appointments.defaultProps = {
     docnameStringProp: '',
     dateDateProp:      '',
     reasonStringProp:  '',
-    ownersArrayProp:   [],
-    data:              []
+    appo_array_prop: []
  };
 
  export default Appointments;
