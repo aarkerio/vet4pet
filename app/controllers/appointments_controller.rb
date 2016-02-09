@@ -5,7 +5,7 @@ class AppointmentsController < ApplicationController
   def index
   end
 
-  # GET /appointments
+  # GET /appointments/get_appos
   def get_appos
     appos = Appointment.to_react
     return render json: appos

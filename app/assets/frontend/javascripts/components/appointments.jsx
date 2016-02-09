@@ -3,14 +3,20 @@
 class Appointments extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      appos: ''
+    };
+    console.log('In constructor');
+    this.getApposFromRails = this.getApposFromRails.bind(this);
     this.getApposFromRails();
   }
 
- /*
-  *  Get data to get the autofill field
-  */
+  /*
+   *  Get data to get the autofill field
+   */
   getApposFromRails() {
-    var link = {url: '/appointments/'};
+    var link = {url: '/appointments/get_appos/'};
+    console.log('DATA>>> link' + link);
     $.ajax({
       type: 'GET',
       url: link['url'],
@@ -20,10 +26,11 @@ class Appointments extends React.Component {
       success: function(data) {
         //I do this so the new added link will be on top of the array
         console.log('DATA getApposFromRails >>>>>>' + JSON.stringify(data));
-        //var newLinks = [data].concat(links);
+        //var tempo = [data].concat(links);
         // this.setState({data: newLinks});
+        // this.setState({appos: appos});
         //this.setState({appo_array_prop: newLinks});
-      }.bind(this)
+      }
     });
   }
 
@@ -31,6 +38,7 @@ class Appointments extends React.Component {
    *  Send data to get the autofill field
    */
   sendDataToRails(url) {
+    return;
     link = {url: '/appointments/get_data'};
     $.ajax({
       type: 'GET',
@@ -46,7 +54,12 @@ class Appointments extends React.Component {
       }.bind(this)
     });
   }
-  addAppointment(record) {
+
+  /*
+   *  Send data to get the autofill field
+   *  Private
+   */
+  _addAppointment(record) {
     var records;
     records = React.addons.update(this.state.records, {
       $push: [record]
@@ -56,23 +69,22 @@ class Appointments extends React.Component {
     });
   }
   render() {
-      var todos = [];
-      console.log("59 appo_array_prop" + JSON.stringify(this.props.appo_array_prop));
-      var trNodes = this.props.appo_array_prop.map(function (appointment) {
-        var row = <tr key={appointment.id}>
-          <td>{appointment.date}</td>
-          <td>{appointment.petname}</td>
-          <td>{appointment.owner}</td>
-          <td>{appointment.reason}</td>
-          <td>{appointment.docname}</td>
-          <td>Delete {appointment.id}</td>
-          <td>Edit {appointment.id}</td>
-          </tr>
-        ;
+    var todos = [];
+    console.log("59 appo_array_prop >>>" + JSON.stringify(this.props.appo_array_prop));
+    var trNodes = this.props.appo_array_prop.map(function (appointment) {
+      var row = <tr key={appointment.id}>
+        <td>{appointment.date}</td>
+        <td>{appointment.petname}</td>
+        <td>{appointment.owner}</td>
+        <td>{appointment.reason}</td>
+        <td>{appointment.docname}</td>
+        <td>Delete {appointment.id}</td>
+        <td>Edit {appointment.id}</td>
+        </tr>;
         todos.push(row);
-      });
-      // console.log(todos);
-      var appoNodes = <table className="myTable" key="myta"><thead><tr key="myt1">
+    });
+    // console.log(todos);
+    var appoNodes = <table className="myTable" key="myta"><thead><tr key="myt1">
       <td key="myt1.1"> Scheduled date </td>
       <td>Pet</td>
       <td>Owner</td>
@@ -85,8 +97,8 @@ class Appointments extends React.Component {
         { todos }
       </tbody>
       </table>
-      ;
-    //var form = React.createElement(AppointmentForm, {handleNewAppointment: this.addAppointment } );
+    ;
+    //var form = React.createElement(AppointmentForm, {handleNewAppointment: this._addAppointment } );
     return (
       <div className="appoList" key="dfdsf">
          <div className="appoDivForm"></div><br />
