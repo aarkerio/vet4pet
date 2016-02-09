@@ -1,19 +1,16 @@
 // import AppointmentForm from './appointment_form.jsx';
 
-var Appointments = React.createClass({
-  getInitialState: function() {
-    return {
-      appointments: {},   //,this.props.data,
-      message: 'No message'
-    };
-  },
-  getDefaultProps: function() {
-    return {
-      appointments: []
-    };
-  },
-  sendDataToRails: function(url) {
-    link = {url: '/appointments/get_data', iir: this.state.owner_id};
+class Appointments extends React.Component {
+  constructor(props) {
+     super(props);
+    //this.state = {  appointments: {}, message: 'No message' };
+  }
+
+  /*
+   *  Sen data to get the autofill field
+   */
+  sendDataToRails(url) {
+    link = {url: '/appointments/get_data'};
 
     $.ajax({
       type: 'GET',
@@ -28,8 +25,8 @@ var Appointments = React.createClass({
         this.setState({owners: newLinks});
       }.bind(this)
     });
-  },
-  addAppointment: function(record) {
+  }
+  addAppointment(record) {
     var records;
     records = React.addons.update(this.state.records, {
       $push: [record]
@@ -37,8 +34,8 @@ var Appointments = React.createClass({
     return this.setState({
       records: records
     });
-  },
-  render: function() {
+  }
+  render() {
       var todos = [];
       var trNodes = this.props.data.map(function (appointment) {
         var row = <tr key={appointment.id}>
@@ -76,5 +73,28 @@ var Appointments = React.createClass({
       </div>
     );
   }
-});
+}
 
+Appointments.propTypes = {
+    aStringProp:       React.PropTypes.string.isRequired,
+    ownerStringProp:   React.PropTypes.string,
+    petnameStringProp: React.PropTypes.string,
+    docnameStringProp: React.PropTypes.string,
+    reasonStringProp:  React.PropTypes.string,
+    dateStringProp:    React.PropTypes.string,
+    ownersArrayProp:   React.PropTypes.array,
+    data:              React.PropTypes.array.isRequired
+};
+
+Appointments.defaultProps = {
+    aStringProp:       '',
+    ownerStringProp:   '',
+    petnameStringProp: '',
+    docnameStringProp: '',
+    dateDateProp:      '',
+    reasonStringProp:  '',
+    ownersArrayProp:   [],
+    data:              []
+ };
+
+ export default Appointments;
