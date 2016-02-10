@@ -36,6 +36,12 @@ class AppointmentsController < ApplicationController
   def edit
   end
 
+  # GET /appointments/appo_delete/1
+  def appo_delete
+    appos = Appointment.to_react
+    return render json: appos
+  end
+
   # POST /appointments
   # POST /appointments.json
   def create

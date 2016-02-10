@@ -3,7 +3,7 @@
 class Appointments extends React.Component {
   constructor(props) {
     super(props);
-    this.delAppointment =  this.delAppointment.bind(this);
+    // this._delAppointment =  this._delAppointment.bind(this);
     this.state = {
       appos: [],
       isHovering: false,
@@ -38,11 +38,10 @@ class Appointments extends React.Component {
    *  Send data to get the autofill field
    */
   sendDataToRails(url) {
-    return;
     link = {url: '/appointments/get_data'};
     $.ajax({
       type: 'GET',
-      url: '/appointments/get_data/',
+      url: link['url'],
       data: link,
       headers: {'X-CSRFToken': Cookies.get('csrftoken')},
       success: function(data) {
@@ -73,8 +72,17 @@ class Appointments extends React.Component {
    *  Delete appointment
    *  Private
    */
-  delAppointment(id) {
-     return true;
+  _delAppointment(id) {
+      var link = {url: '/appointments/appo_delete', data: id};
+      $.ajax({
+      type: 'GET',
+      url: link['url'],
+      data: link,
+      headers: {'X-CSRFToken': Cookies.get('csrftoken')},
+      success: function(data) {
+        this.setState({appos: data});
+      }.bind(this)
+    });
   }
 
   render() {
@@ -82,25 +90,28 @@ class Appointments extends React.Component {
     console.log("59 appo_array_prop >>>" + JSON.stringify(this.props.appo_array_prop));
     var trNodes = this.state.appos.map(function (appointment) {
       var row = <tr key={appointment.id}>
-        <td><button onClick={this.delAppointment(appointment.id)}>Edit</button></td>
+        <td><button onClick={this._delAppointment(appointment.id)}>Edit</button></td>
+        <td>{appointment.owner}</td>
         <td>{appointment.date}</td>
         <td>{appointment.petname}</td>
-        <td>{appointment.owner}</td>
         <td>{appointment.reason}</td>
         <td>{appointment.docname}</td>
         <td><button>Delete</button></td>
         </tr>;
         todos.push(row);
-    });
+    }.bind(this));
     // console.log(todos);
-    var appoNodes = <table className="myTable" key="myta"><thead><tr key="myt1">
-      <td key="myt1.1"> Scheduled date </td>
-      <td>Pet</td>
-      <td>Owner</td>
-      <td>Reason</td>
-      <td>Doctor</td>
-      <td>Delete</td>
-      <td>Edit</td></tr>
+    var appoNodes = <table className="myTable" key="myta">
+      <thead>
+        <tr>
+          <td>Edit</td>
+          <td>Owner</td>
+          <td>Scheduled date</td>
+          <td>Pet</td>
+          <td>Reason</td>
+          <td>Doctor</td>
+          <td>Delete</td>
+        </tr>
       </thead>
       <tbody>
         { todos }
@@ -109,7 +120,7 @@ class Appointments extends React.Component {
     ;
     //var form = React.createElement(AppointmentForm, {handleNewAppointment: this._addAppointment } );
     return (
-      <div className="appoList" key="dfdsf">
+      <div className="appoList">
          <div className="appoDivForm"></div><br />
         {appoNodes}
       </div>
