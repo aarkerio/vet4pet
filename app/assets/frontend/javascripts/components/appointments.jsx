@@ -80,14 +80,14 @@ class Appointments extends React.Component {
       data: link,
       headers: {'X-CSRFToken': Cookies.get('csrftoken')},
       success: function(data) {
-        this.setState({appos: data});
+        // this.setState({appos: data});
       }.bind(this)
     });
   }
 
   render() {
     var todos = [];
-    console.log("59 appo_array_prop >>>" + JSON.stringify(this.props.appo_array_prop));
+    // console.log("59 appo_array_prop >>>" + JSON.stringify(this.props.appo_array_prop));
     var trNodes = this.state.appos.map(function (appointment) {
       var row = <tr key={appointment.id}>
         <td><button onClick={this._delAppointment(appointment.id)}>Edit</button></td>
