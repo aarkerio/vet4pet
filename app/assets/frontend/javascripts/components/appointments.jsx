@@ -3,10 +3,13 @@
 class Appointments extends React.Component {
   constructor(props) {
     super(props);
+    this.delAppointment =  this.delAppointment.bind(this);
     this.state = {
-      appos: ''
+      appos: [],
+      isHovering: false,
     };
-    console.log('In constructor');
+    console.log('I am in constructor');
+    // this.delAppointment = () => this.delAppointment(); // bind with class
     this.getApposFromRails = this.getApposFromRails.bind(this);
     this.getApposFromRails();
   }
@@ -26,11 +29,8 @@ class Appointments extends React.Component {
       success: function(data) {
         //I do this so the new added link will be on top of the array
         console.log('DATA getApposFromRails >>>>>>' + JSON.stringify(data));
-        //var tempo = [data].concat(links);
-        // this.setState({data: newLinks});
-        // this.setState({appos: appos});
-        //this.setState({appo_array_prop: newLinks});
-      }
+        this.setState({appos: data});
+      }.bind(this)
     });
   }
 
@@ -56,7 +56,7 @@ class Appointments extends React.Component {
   }
 
   /*
-   *  Send data to get the autofill field
+   *  Add appointment
    *  Private
    */
   _addAppointment(record) {
@@ -68,18 +68,27 @@ class Appointments extends React.Component {
       records: records
     });
   }
+
+  /*
+   *  Delete appointment
+   *  Private
+   */
+  delAppointment(id) {
+     return true;
+  }
+
   render() {
     var todos = [];
     console.log("59 appo_array_prop >>>" + JSON.stringify(this.props.appo_array_prop));
-    var trNodes = this.props.appo_array_prop.map(function (appointment) {
+    var trNodes = this.state.appos.map(function (appointment) {
       var row = <tr key={appointment.id}>
+        <td><button onClick={this.delAppointment(appointment.id)}>Edit</button></td>
         <td>{appointment.date}</td>
         <td>{appointment.petname}</td>
         <td>{appointment.owner}</td>
         <td>{appointment.reason}</td>
         <td>{appointment.docname}</td>
-        <td>Delete {appointment.id}</td>
-        <td>Edit {appointment.id}</td>
+        <td><button>Delete</button></td>
         </tr>;
         todos.push(row);
     });
@@ -115,7 +124,7 @@ Appointments.propTypes = {
     docnameStringProp: React.PropTypes.string,
     reasonStringProp:  React.PropTypes.string,
     dateStringProp:    React.PropTypes.string,
-    appo_array_prop: React.PropTypes.array
+    appo_array_prop:   React.PropTypes.array
 };
 
 Appointments.defaultProps = {
@@ -125,7 +134,7 @@ Appointments.defaultProps = {
     docnameStringProp: '',
     dateDateProp:      '',
     reasonStringProp:  '',
-    appo_array_prop: []
+    appo_array_prop:   []
  };
 
  export default Appointments;
