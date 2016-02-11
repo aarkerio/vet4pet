@@ -1,5 +1,13 @@
 
+/*
+ * action types
+ */
 import * as types from '../constants/ActionTypes';
+
+
+/*
+ * action creators
+ */
 
 export function addAppo(name) {
     return {

@@ -90,7 +90,7 @@ class Appointments extends React.Component {
     // console.log("59 appo_array_prop >>>" + JSON.stringify(this.props.appo_array_prop));
     var trNodes = this.state.appos.map(function (appointment) {
       var row = <tr key={appointment.id}>
-        <td><button onClick={this._delAppointment(appointment.id)}>Edit</button></td>
+        <td><button onClick={this._delAppointment(appointment.id).bb b ind(this)}>Edit</button></td>
         <td>{appointment.owner}</td>
         <td>{appointment.date}</td>
         <td>{appointment.petname}</td>
