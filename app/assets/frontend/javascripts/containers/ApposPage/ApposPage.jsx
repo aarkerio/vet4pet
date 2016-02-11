@@ -8,7 +8,7 @@ import { Button } from 'react-bootstrap';
 require('bootstrap');
 require('bootstrap-webpack');
 
-class Appointments extends React.Component {
+class ApposPage extends React.Component {
   constructor(props) {
     super(props);
     // this.props.isExecuting = false;
