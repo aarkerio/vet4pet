@@ -1,16 +1,30 @@
 // import AppointmentForm from './appointment_form.jsx';
 
+import React, { PropTypes } from 'react';
+import { ReactDom } from 'react-dom';
+import InlineConfirmButton from "react-inline-confirm";
+import { Button } from 'react-bootstrap';
+
+require('bootstrap');
+
 class Appointments extends React.Component {
   constructor(props) {
     super(props);
-    // this._delAppointment =  this._delAppointment.bind(this);
+    // this.props.isExecuting = false;
+
+    const order = {
+      textValues: ["Delete", "Are you sure?", "Deleting..."]
+    };
+
     this.state = {
       appos: [],
       isHovering: false,
+      isExecuting: false,
+      textValues: ["Delete", "Are you sure?", "Deleting..."]
     };
     console.log('I am in constructor');
-    // this.delAppointment = () => this.delAppointment(); // bind with class
-    this.getApposFromRails = this.getApposFromRails.bind(this);
+
+    this.getApposFromRails = this.getApposFromRails.bind(this); // binding
     this.getApposFromRails();
   }
 
@@ -69,11 +83,29 @@ class Appointments extends React.Component {
   }
 
   /*
+   *  Add appointment
+   *  Private
+   */
+  _editAppointment(record) {
+    console.log('I am in _editAppointment');
+    $.ajax({
+      type: 'GET',
+      url: link['url'],
+      data: link,
+      headers: {'X-CSRFToken': Cookies.get('csrftoken')},
+      success: function(data) {
+        // this.setState({appos: data});
+      }.bind(this)
+    });
+  }
+
+  /*
    *  Delete appointment
    *  Private
    */
-  _delAppointment(id) {
+  _deleteAppointment(id) {
       var link = {url: '/appointments/appo_delete', data: id};
+      console.log('I am in _delAppointment');
       $.ajax({
       type: 'GET',
       url: link['url'],
@@ -87,16 +119,23 @@ class Appointments extends React.Component {
 
   render() {
     var todos = [];
-    // console.log("59 appo_array_prop >>>" + JSON.stringify(this.props.appo_array_prop));
     var trNodes = this.state.appos.map(function (appointment) {
       var row = <tr key={appointment.id}>
-        <td><button onClick={this._delAppointment(appointment.id).bb b ind(this)}>Edit</button></td>
+        <td>
+          <button onClick={this._editAppointment.bind(this, appointment.id)}>Edit</button>
+        </td>
         <td>{appointment.owner}</td>
         <td>{appointment.date}</td>
         <td>{appointment.petname}</td>
         <td>{appointment.reason}</td>
         <td>{appointment.docname}</td>
-        <td><button>Delete</button></td>
+        <td>
+          <div className="clearfix">
+            <InlineConfirmButton className="btn btn-default" isExecuting={false} textValues={this.state.textValues} showTimer={true} onClick={this._deleteAppointment.bind(this, appointment.id)}>
+              <i className="fa fa-trash"></i>
+            </InlineConfirmButton>
+          </div>
+        </td>
         </tr>;
         todos.push(row);
     }.bind(this));
@@ -132,10 +171,10 @@ Appointments.propTypes = {
     aStringProp:       React.PropTypes.string.isRequired,
     ownerStringProp:   React.PropTypes.string,
     petnameStringProp: React.PropTypes.string,
+    appo_array_prop:   React.PropTypes.array,
     docnameStringProp: React.PropTypes.string,
     reasonStringProp:  React.PropTypes.string,
     dateStringProp:    React.PropTypes.string,
-    appo_array_prop:   React.PropTypes.array
 };
 
 Appointments.defaultProps = {

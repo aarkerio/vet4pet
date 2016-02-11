@@ -2,10 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  "name": "my-project",
-  "version": "0.0.0",
+  "name": "vet4pet",
+  "version": "0.0.1",
   "author": "Chipotle Software (c) 2016",
-  "license": "GPLv3",
+  "license": "MIT License",
   // the base path which will be used to resolve entry points
   context: __dirname,
   devtool: 'eval-source-map',
@@ -25,10 +25,10 @@ module.exports = {
   resolve: {
     // tell webpack which extensions to auto search when it resolves modules. With this,
     // you'll be able to do `require('./utils')` instead of `require('./utils.js')`
-    extensions: ['', '.js', '.jsx', '.less'],
+    extensions: ['', '.js', '.jsx', '.less',  '.css', '.scss'],
     // by default, webpack will search in `web_modules` and `node_modules`. Because we're using
     // Bower, we want it to look in there too
-    modulesDirectories: ['node_modules'],
+    // modulesDirectories: ['node_modules'],
     // avoids npm link loads react twice
     //alias: {
     //  'React': './node_modules/react/dist/react.min.js',
@@ -40,12 +40,15 @@ module.exports = {
                 // {test: require.resolve('react'), loader: 'expose?React', exclude: /node_modules/ },
                 {test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/,  query: {
                                  cacheDirectory: true,
-                                 presets: ['react', 'es2015', 'survivejs-kanban']
+                                 presets: ['react', 'es2015', 'stage-0', 'survivejs-kanban']
+                                }, include: path.app
                 },
-  include: path.app
-
-                 },
-                { test: /\.js$/, loader: 'babel', exclude: /node_modules/}
+                { test: /\.css$/, loader: 'style-loader!css-loader'},
+                { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
+                { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
+                { test: /\.js$/, loader: 'babel', exclude: /node_modules/},
+                { test: /\.less$/, loader: 'style!css!less' },
+                { test: /\.scss$/, loader: 'style!css!sass' }
               ]
   },
   //externals: {
@@ -55,10 +58,10 @@ module.exports = {
   //      "react": "React",
    //     "react-dom": "ReactDOM"
   // },
-  plugins: [
-     new webpack.ProvidePlugin({
-       React: "react",
-       ReactDOM: "react-dom"
-     })
-   ]
+  // plugins: [
+  //   new webpack.ProvidePlugin({
+  //     React: "react",
+  //     ReactDOM: "react-dom"
+  //   })
+  // ]
 }

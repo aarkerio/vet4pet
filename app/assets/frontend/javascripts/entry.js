@@ -1,6 +1,8 @@
 //var React = require('react');
 //var ReactDOM = require('react-dom');
 // import React from 'react';
+import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 // import { combineReducers } from 'redux';
 // import getNewsMiddleware from './middlewares/getNewsMiddleware';
 import Appointments from './components/appointments';
