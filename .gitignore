@@ -20,3 +20,10 @@ node_modules
 # Generated js bundles
 /app/assets/javascripts/generated/*
 /vendor/assets/bower_components/*
+
+app/assets/javascripts/*.woff2
+app/assets/javascripts/*.svg
+app/assets/javascripts/*.ttf
+app/assets/javascripts/*.eot
+app/assets/javascripts/*.woff
+

@@ -2,10 +2,11 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  "name": "vet4pet",
-  "version": "0.0.1",
-  "author": "Chipotle Software (c) 2016",
-  "license": "MIT License",
+  name: 'vet4pet',
+  target: 'web',
+  version: "0.0.1",
+  author: "Chipotle Software (c) 2016",
+  license: 'MIT License',
   // the base path which will be used to resolve entry points
   context: __dirname,
   devtool: 'eval-source-map',
@@ -44,11 +45,13 @@ module.exports = {
                                 }, include: path.app
                 },
                 { test: /\.css$/, loader: 'style-loader!css-loader'},
+                { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
                 { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
                 { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
                 { test: /\.js$/, loader: 'babel', exclude: /node_modules/},
                 { test: /\.less$/, loader: 'style!css!less' },
-                { test: /\.scss$/, loader: 'style!css!sass' }
+                { test: /\.scss$/, loader: 'style!css!sass' },
+                { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" }
               ]
   },
   //externals: {

@@ -6,6 +6,7 @@ import InlineConfirmButton from "react-inline-confirm";
 import { Button } from 'react-bootstrap';
 
 require('bootstrap');
+require("bootstrap-webpack");
 
 class Appointments extends React.Component {
   constructor(props) {
