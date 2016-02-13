@@ -1,23 +1,19 @@
-//var React = require('react');
-//var ReactDOM = require('react-dom');
-// import React from 'react';
-import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React, { PropTypes } from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import appointmentsApp from './reducers'
+import App from './components/App'
 
 let store = createStore(appointmentsApp)
 
+console.log("Webpack works GGGGGGGGGGGGGGGGGGGGGreat!")
 
-// import { combineReducers } from 'redux';
-// import getNewsMiddleware from './middlewares/getNewsMiddleware';
-import Appointments from './components/appointments';
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('reactroot')
+)
 
-
-console.log("Webpack works GGGGGGGGGGGGGGGGGGGGGreat!");
-
-
-ReactDOM.render(<Appointments />, document.getElementById('reactroot'));
-
-
-console.log("Webpack worked so nice!");
+console.log("Webpack worked so nice!")
