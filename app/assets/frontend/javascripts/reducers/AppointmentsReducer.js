@@ -22,6 +22,7 @@ const initialState = {
 };
 
 export default function appointments(state = initialState, action) {
+
   switch (action.type) {
 
     case types.ADD_APPO:
