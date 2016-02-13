@@ -1,7 +1,7 @@
-import * as types from '../constants/ActionTypes';
-import omit from 'lodash/object/omit';
-import assign from 'lodash/object/assign';
-import mapValues from 'lodash/object/mapValues';
+import { combineReducers } from 'redux'
+// import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from './actions'
+import * as types from '../constants/ActionTypes'
+const { SHOW_ALL } = VisibilityFilters
 
 const initialState = {
   appointments: [1, 2, 3],
@@ -21,17 +21,17 @@ const initialState = {
   }
 };
 
-export default function appointments(state = initialState, action) {
+export default function appointmentsApp(state = initialState, action) {
 
   switch (action.type) {
 
     case types.ADD_APPO:
       const newId = state.appointments[state.appointments.length-1] + 1;
-      return {
-        ...state,
+      return Object.assign({}, state, {
+        visibilityFilter: action.filter,
         appointments: state.appointments.concat(newId),
         appointmentsById: {
-          ...state.appointmentsById,
+          state.appointmentsById,
           [newId]: {
             id: newId,
             name: action.name
@@ -40,15 +40,22 @@ export default function appointments(state = initialState, action) {
       }
 
     case types.DELETE_APPO:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         appointments: state.appointments.filter(id => id !== action.id),
         appointmentsById: omit(state.appointmentsById, action.id)
       }
 
     case types.STAR_APPOS:
-      return {
-        ...state,
+      return Object.assign({}, state, {
+        appointmentsById: mapValues(state.appointmentsById, (friend) => {
+          return friend.id === action.id ?
+            assign({}, friend, { starred: !friend.starred }) :
+            friend
+        })
+      }
+
+    case types.SHOW_OWNER_LIST:
+      return Object.assign({}, state, {
         appointmentsById: mapValues(state.appointmentsById, (friend) => {
           return friend.id === action.id ?
             assign({}, friend, { starred: !friend.starred }) :
@@ -57,6 +64,6 @@ export default function appointments(state = initialState, action) {
       }
 
     default:
-      return state;
+      return state
   }
 }

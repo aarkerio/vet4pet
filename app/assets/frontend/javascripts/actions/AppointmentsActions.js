@@ -28,3 +28,10 @@ export function starAppos(id) {
         id
     };
 }
+
+export function showOwnerAppo(owner_id) {
+    return {
+        type: types.SHOW_OWNER_LIST,
+        owner_id
+    };
+}
