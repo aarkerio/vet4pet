@@ -7,7 +7,7 @@ const App = () => (
   <div>
     <AddTodo />
     <VisibleTodoList />
-    // <Footer />
+    <Footer />
   </div>
 )
 
