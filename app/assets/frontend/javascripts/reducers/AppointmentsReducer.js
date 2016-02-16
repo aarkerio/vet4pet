@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-// import * as types from '../constants/ActionTypes'
+import * as types from '../constants/ActionTypes'
 
 const initialState = {
   appointments: [1, 2, 3],
