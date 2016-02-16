@@ -1,2 +1,13 @@
+import { combineReducers } from 'redux'
+import todos from './todos'
+import visibilityFilter from './visibilityFilter'
+import appointmentsApp from './AppointmentsReducer'
 
-// export { default as friendlist } from './friendlist';
+
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter,
+  appointmentsApp
+})
+
+export default todoApp
