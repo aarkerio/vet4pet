@@ -168,7 +168,7 @@ class ApposPage extends React.Component {
   }
 }
 
-Appointments.propTypes = {
+ApposPage.propTypes = {
     aStringProp:       React.PropTypes.string.isRequired,
     ownerStringProp:   React.PropTypes.string,
     petnameStringProp: React.PropTypes.string,
@@ -178,7 +178,7 @@ Appointments.propTypes = {
     dateStringProp:    React.PropTypes.string,
 };
 
-Appointments.defaultProps = {
+ApposPage.defaultProps = {
     aStringProp:       '',
     ownerStringProp:   '',
     petnameStringProp: '',
@@ -188,4 +188,4 @@ Appointments.defaultProps = {
     appo_array_prop:   []
  };
 
- export default Appointments;
+ export default ApposPage;
