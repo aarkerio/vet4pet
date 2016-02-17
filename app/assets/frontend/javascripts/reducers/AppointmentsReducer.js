@@ -52,14 +52,14 @@ const appointmentsApp = (state = initialState, action) => {
         })
       })
 
-    // case types.SHOW_OWNER_LIST:
-    //   return Object.assign({}, state, {
-    //     appointmentsById: mapValues(state.appointmentsById, (friend) => {
-    //       return friend.id === action.id ?
-    //         assign({}, friend, { starred: !friend.starred }) :
-    //         friend
-    //     })
-    //   })
+    case types.SHOW_OWNER_LIST:
+       return Object.assign({}, state, {
+         appointmentsById: mapValues(state.appointmentsById, (friend) => {
+           return friend.id === action.id ?
+             assign({}, friend, { starred: !friend.starred }) :
+             friend
+         })
+       })
 
     default:
       return state

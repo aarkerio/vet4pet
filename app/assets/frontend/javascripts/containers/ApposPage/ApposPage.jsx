@@ -1,12 +1,12 @@
-// import AppointmentForm from './appointment_form.jsx';
+// import AppointmentForm from './ApposPageForm'
 
-import React, { PropTypes } from 'react';
-import { ReactDom } from 'react-dom';
-import InlineConfirmButton from "react-inline-confirm";
-import { Button } from 'react-bootstrap';
+import React, { PropTypes } from 'react'
+import { ReactDom } from 'react-dom'
+import InlineConfirmButton from "react-inline-confirm"
+import { Button } from 'react-bootstrap'
 
-require('bootstrap');
-require('bootstrap-webpack');
+require('bootstrap')
+require('bootstrap-webpack')
 
 class ApposPage extends React.Component {
   constructor(props) {
@@ -123,7 +123,7 @@ class ApposPage extends React.Component {
     var trNodes = this.state.appos.map(function (appointment) {
       var row = <tr key={appointment.id}>
         <td>
-          <button onClick={this._editAppointment.bind(this, appointment.id)}>Edit</button>
+          <button  className="btn btn-default" onClick={this._editAppointment.bind(this, appointment.id)}>Edit</button>
         </td>
         <td>{appointment.owner}</td>
         <td>{appointment.date}</td>
@@ -168,7 +168,7 @@ class ApposPage extends React.Component {
   }
 }
 
-Appointments.propTypes = {
+ApposPage.propTypes = {
     aStringProp:       React.PropTypes.string.isRequired,
     ownerStringProp:   React.PropTypes.string,
     petnameStringProp: React.PropTypes.string,
@@ -178,7 +178,7 @@ Appointments.propTypes = {
     dateStringProp:    React.PropTypes.string,
 };
 
-Appointments.defaultProps = {
+ApposPage.defaultProps = {
     aStringProp:       '',
     ownerStringProp:   '',
     petnameStringProp: '',
@@ -188,4 +188,4 @@ Appointments.defaultProps = {
     appo_array_prop:   []
  };
 
- export default Appointments;
+ export default ApposPage;
