@@ -2,11 +2,11 @@ import React from 'react'
 import FilterLink from '../containers/FilterLink'
 
 const Footer = () => (
-  <p>
+  <p>Component footer <br />
     Show:
     {" "}
     <FilterLink filter="SHOW_ALL">
-      All
+      Sämtlich
     </FilterLink>
     {", "}
     <FilterLink filter="SHOW_ACTIVE">
@@ -14,7 +14,7 @@ const Footer = () => (
     </FilterLink>
     {", "}
     <FilterLink filter="SHOW_COMPLETED">
-      Completed
+      Vollendet
     </FilterLink>jhjhkjhkj
   </p>
 )

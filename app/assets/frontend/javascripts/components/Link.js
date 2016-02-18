@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 const Link = ({ active, children, onClick }) => {
+  // already completed
   if (active) {
     return <span>{children}</span>
   }

@@ -3,6 +3,7 @@ import { setVisibilityFilter } from '../actions'
 import Link from '../components/Link'
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('state.visibilityFilter FilterLink.js: ' + state.visibilityFilter)
   return {
     active: ownProps.filter === state.visibilityFilter
   }
@@ -16,9 +17,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
+// Container binding with representational component
 const FilterLink = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps,       // pass "state" value
+  mapDispatchToProps     // call the reducer
 )(Link)
 
 export default FilterLink

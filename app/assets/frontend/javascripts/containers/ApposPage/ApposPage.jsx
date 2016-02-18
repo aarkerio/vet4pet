@@ -144,13 +144,13 @@ class ApposPage extends React.Component {
     var appoNodes = <table className="myTable" key="myta">
       <thead>
         <tr>
-          <td>Edit</td>
-          <td>Owner</td>
-          <td>Scheduled date</td>
-          <td>Pet</td>
-          <td>Reason</td>
-          <td>Doctor</td>
-          <td>Delete</td>
+          <th>Edit</th>
+          <th>Owner</th>
+          <th>Scheduled date</th>
+          <th>Pet</th>
+          <th>Reason</th>
+          <th>Doctor</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>

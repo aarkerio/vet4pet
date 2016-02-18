@@ -6,7 +6,7 @@ let AddTodo = ({ dispatch }) => {
   let input
 
   return (
-    <div>
+    <div>container addTodo <br />
       <input ref={node => {
         input = node
       }} />

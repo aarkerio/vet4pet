@@ -14,6 +14,7 @@ let unsubscribe = my_store.subscribe(() =>
   console.log(my_store.getState())
 )
 
+// binding reducers with the store
 render(
   <Provider store={my_store}>
     <App />
