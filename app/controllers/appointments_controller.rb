@@ -1,4 +1,6 @@
+# Chipotle Software (c) 2015-2016 MIT License
 class AppointmentsController < ApplicationController
+
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
 
   # GET /appointments
