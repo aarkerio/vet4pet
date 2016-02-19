@@ -46,6 +46,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'haml-rails'
+  gem 'pry-byebug'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl'
@@ -54,6 +55,8 @@ group :development, :test do
   gem 'better_errors'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
   gem 'mutant-rspec'

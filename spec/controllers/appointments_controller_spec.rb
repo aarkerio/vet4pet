@@ -28,9 +28,10 @@ describe AppointmentsController, type: :controller do
 
   describe "POST #get_data" do
     it "assigns the requested appointment as @appointment" do
-      post :get_data, {ovalue: 'M'}, valid_session
-
-      expect(assigns(:appointment)).to eq('appointment')
+      post :get_data, {ovalue: 'M'}
+      aappointment = assigns(:appointment)
+      parsed_body = JSON.parse(response.body)
+      expect(parsed_body.last['name']).to eq('Soto Mario')
     end
   end
 
