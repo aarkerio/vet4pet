@@ -3,8 +3,8 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 // My App
-import todoApp from './reducers/index' //load the root reducer
-import App from './components/App'     //load the root container
+import todoApp from './reducers'
+import App from './components/App'
 
 let my_store = createStore(todoApp)
 
@@ -14,10 +14,10 @@ let unsubscribe = my_store.subscribe(() =>
   console.log(my_store.getState())
 )
 
-// binding root container with the store
+// binding reducers with the store
 render(
   <Provider store={my_store}>
-    <App />  // the root container
+    <App />
   </Provider>,
   document.getElementById('reactroot')
 )

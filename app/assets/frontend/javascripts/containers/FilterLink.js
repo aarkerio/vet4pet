@@ -3,7 +3,6 @@ import { setVisibilityFilter } from '../actions/index'
 import Link from '../components/Link'
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('state.visibilityFilter FilterLink.js: ' + state.visibilityFilter)
   return {
     active: ownProps.filter === state.visibilityFilter
   }
@@ -12,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
-      dispatch(setVisibilityFilter(ownProps.filter))  //dispatch action to the store
+      dispatch(setVisibilityFilter(ownProps.filter)) // dispatch action
     }
   }
 }
@@ -20,7 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 // Container binding with representational component
 const FilterLink = connect(
   mapStateToProps,       // pass "state" value
-  mapDispatchToProps     // call the reducer
+  mapDispatchToProps     // call the action
 )(Link)
 
 export default FilterLink
