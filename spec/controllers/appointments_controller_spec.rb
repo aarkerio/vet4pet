@@ -5,14 +5,13 @@ require 'spec_helper'
 describe AppointmentsController, type: :controller do
 
   login_user
+  before do
+    @user = FactoryGirl.create(:user)
+  end
 
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) { FactoryGirl.build(:appointment) }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) { FactoryGirl.build(:invalid_appointment)  }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -27,11 +26,11 @@ describe AppointmentsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
+  describe "POST #get_data" do
     it "assigns the requested appointment as @appointment" do
-      appointment = Appointment.create! valid_attributes
-      get :show, {:id => appointment.to_param}, valid_session
-      expect(assigns(:appointment)).to eq(appointment)
+      post :get_data, {ovalue: 'M'}, valid_session
+
+      expect(assigns(:appointment)).to eq('appointment')
     end
   end
 

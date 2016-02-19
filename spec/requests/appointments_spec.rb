@@ -1,9 +1,15 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe "Appointments", type: :request do
-  describe "GET /appointments" do
-    it "works! (now write some real specs)" do
-      get appointments_path
+
+  before :each do
+    @user = FactoryGirl.create :user
+  end
+
+  describe "POST /appointments/get_data" do
+    it "returns a json response" do
+      params = {ovalue: 'M'}
+      post '/appointments/get_data', params
       expect(response).to have_http_status(200)
     end
   end
