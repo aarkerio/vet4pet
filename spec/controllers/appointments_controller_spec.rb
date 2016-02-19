@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe AppointmentsController, type: :controller do
 
-  login_admin
+  login_user
 
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
