@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { toggleTodo } from '../actions'
-import TodoList from '../components/TodoList'
+import { toggleTodo } from '../actions/index'
+import TodoList from '../components/TodoList' // representational
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
@@ -13,6 +13,7 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
+// binding to React TodoList component
 const mapStateToProps = (state) => {
   return {
     todos: getVisibleTodos(state.todos, state.visibilityFilter)
@@ -27,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+// Binding Redux with the representational React component TodoList
 const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps

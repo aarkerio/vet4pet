@@ -6,7 +6,7 @@ const TodoList = ({ todos, onTodoClick }) => (
     {todos.map(todo =>
       <Todo
         key={todo.id}
-        {...todo}
+        {...todo} // pass the properties of the object onto the component's props. Spread the array to arguments
         onClick={() => onTodoClick(todo.id)}
       />
     )}

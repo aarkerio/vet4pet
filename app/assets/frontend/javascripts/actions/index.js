@@ -4,6 +4,9 @@
 
 let nextTodoId = 0
 
+/*
+ * action creators
+ */
 export const addTodo = (text) => {
   return {
     type: 'ADD_TODO',
