@@ -12,7 +12,7 @@ const getVisibleTodos = (todos, filter) => {
       return todos.filter(t => !t.completed)
   }
 }
-
+// Props to the representational component
 const mapStateToProps = (state) => {
   return {
     todos: getVisibleTodos(state.todos, state.visibilityFilter)

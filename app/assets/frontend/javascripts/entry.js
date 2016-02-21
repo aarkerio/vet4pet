@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 // My App
 import todoApp from './reducers'
-import App from './components/App'
+import App from './containers/App'  // root container
 
 let my_store = createStore(todoApp)
 
