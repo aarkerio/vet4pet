@@ -1,7 +1,6 @@
 import React from 'react'
 import FilterLink from '../containers/FilterLink_Ctnr'
 
-
 const Footer = () => (
   <p>Component footer <br />
     Show:

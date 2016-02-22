@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import todos from './todos_Rdcer'
+import todos_Rdcr from './todos_Rdcer'
 import visibilityFilter from './visibilityFilter_Rdcer'
 import appointmentsApp from './appointments_Rdcer'
 
@@ -13,7 +13,7 @@ import appointmentsApp from './appointments_Rdcer'
 
 export default function allReducersApp(state = {}, action) {
   return {
-    todos: todos(state.todos, action),
+    todos: todos_Rdcr(state.todos, action),
     visibilityFilter: visibilityFilter(state.visibilityFilter, action),
     appointmentsApp: appointmentsApp(state.appointmentsApp, action)
   }

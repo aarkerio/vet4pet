@@ -12,11 +12,11 @@ let AddTodo = ({ dispatch }) => {
         dispatch(addTodo(input.value))
         input.value = ''
       }}>
-        Add Todo
+        Aufgabe hinzufügen
       </button>
     </div>
   )
 }
-AddTodo = connect()(AddTodo)
+AddTodo = connect()(AddTodo) // connect react with redux
 
 export default AddTodo
