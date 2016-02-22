@@ -6,10 +6,8 @@ let AddTodo = ({ dispatch }) => {
   let input
 
   return (
-    <div>container addTodo <br />
-      <input ref={node => {
-        input = node
-      }} />
+    <div>in container addTodo <br />
+      <input ref={node => { input = node }} />
       <button onClick={() => {
         dispatch(addTodo(input.value))
         input.value = ''

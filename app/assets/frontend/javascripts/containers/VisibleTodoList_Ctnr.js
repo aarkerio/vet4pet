@@ -22,11 +22,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
-      dispatch(toggleTodo(id))
+      dispatch(toggleTodo(id))  // dispacth = setState
     }
   }
 }
-
+// Container linking redux with react component
 const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps

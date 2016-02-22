@@ -15,6 +15,7 @@ let unsubscribe = my_store.subscribe(() =>
 )
 
 // binding reducers with the store
+// Provider make the store available to all container components in the application without passing it explicitly
 render(
   <Provider store={my_store}>
     <App />
