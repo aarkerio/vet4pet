@@ -22,7 +22,7 @@ const todo = (state, action) => {
   }
 }
 
-// parse all todos, id est,the list
+// parse all todos, id est, the whole list
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
