@@ -16,7 +16,7 @@ const Footer = () => (
     {", "}
     <FilterLink filter="SHOW_COMPLETED">
       Vollendet
-    </FilterLink>jhjhkjhkj
+    </FilterLink>
   </p>
 )
 

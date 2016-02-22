@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 const Link = ({ active, children, onClick }) => {
   // already completed
   if (active) {
-    return <span>{children} Link component</span>
+    return <span>{children}</span>
   }
 
   return (
@@ -12,7 +12,7 @@ const Link = ({ active, children, onClick }) => {
          e.preventDefault()
          onClick()
        }}
-    > Link component
+    >
       {children}
     </a>
   )
