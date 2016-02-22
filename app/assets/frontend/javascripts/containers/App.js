@@ -6,10 +6,10 @@ import ApposPage from './ApposPage/ApposPage'
 
 const App = () => (
   <div>
-    <AddTodo />           // container
-    <VisibleTodoList />   // container
-    <Footer />            // representational
-    <ApposPage />         // container
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+    <ApposPage />
   </div>
 )
 

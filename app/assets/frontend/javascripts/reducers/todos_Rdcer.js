@@ -1,10 +1,12 @@
+
+// single todo, id est, each todo
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return {
         id: action.id,
         text: action.text,
-        completed: false
+        completed: false  // by default
       }
     case 'TOGGLE_TODO':
       if (state.id !== action.id) {
@@ -20,6 +22,7 @@ const todo = (state, action) => {
   }
 }
 
+// parse all todos, id est,the list
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
