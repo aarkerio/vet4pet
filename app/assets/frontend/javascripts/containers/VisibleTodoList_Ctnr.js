@@ -15,7 +15,7 @@ const getVisibleTodos = (todos, filter) => {
 // Props to the representational component
 const mapStateToProps = (state) => {
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)  // "todos" declared in TodoList component
   }
 }
 

@@ -17,6 +17,7 @@ let AddTodo = ({ dispatch }) => {
     </div>
   )
 }
+
 AddTodo = connect()(AddTodo) // connect react with redux
 
 export default AddTodo
