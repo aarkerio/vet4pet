@@ -4,9 +4,9 @@ import React, { PropTypes } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-
 // My App
-import App from './containers/App'  // root container
+//import App from './containers/App'  // root container
+import App from './containers/AsyncApp'
 
 import configureStore from './configureStore'
 

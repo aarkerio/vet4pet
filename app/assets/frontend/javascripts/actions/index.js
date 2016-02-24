@@ -37,63 +37,63 @@ export const toggleTodo = (id) => {
 
 export const REQUEST_POSTS = 'REQUEST_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT'
-export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT'
+export const SELECT_REDDIT = 'SELECT_REDDIT'
+export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
 
-export function selectSubreddit(subreddit) {
+export function selectReddit(reddit) {
   return {
-    type: SELECT_SUBREDDIT,
-    subreddit
+    type: SELECT_REDDIT,
+    reddit
   }
 }
 
-export function invalidateSubreddit(subreddit) {
+export function invalidateReddit(reddit) {
   return {
-    type: INVALIDATE_SUBREDDIT,
-    subreddit
+    type: INVALIDATE_REDDIT,
+    reddit
   }
 }
 
-function requestPosts(subreddit) {
+function requestPosts(reddit) {
   return {
     type: REQUEST_POSTS,
-    subreddit
+    reddit
   }
 }
 
-function receivePosts(subreddit, json) {
+function receivePosts(reddit, json) {
   return {
     type: RECEIVE_POSTS,
-    subreddit,
+    reddit: reddit,
     posts: json.data.children.map(child => child.data),
     receivedAt: Date.now()
   }
 }
 
-function fetchPosts(subreddit) {
+function fetchPosts(reddit) {
   return dispatch => {
-    dispatch(requestPosts(subreddit))
-    return fetch(`http://www.reddit.com/r/${subreddit}.json`)
-      .then(req => req.json())
-      .then(json => dispatch(receivePosts(subreddit, json)))
+    dispatch(requestPosts(reddit))
+    return fetch(`https://www.reddit.com/r/${reddit}.json`)
+      .then(response => response.json())
+      .then(json => dispatch(receivePosts(reddit, json)))
   }
 }
 
-function shouldFetchPosts(state, subreddit) {
-  const posts = state.postsBySubreddit[subreddit]
+function shouldFetchPosts(state, reddit) {
+  const posts = state.postsByReddit[reddit]
   if (!posts) {
     return true
-  } else if (posts.isFetching) {
-    return false
-  } else {
-    return posts.didInvalidate
   }
+  if (posts.isFetching) {
+    return false
+  }
+  return posts.didInvalidate
 }
 
-export function fetchPostsIfNeeded(subreddit) {
+export function fetchPostsIfNeeded(reddit) {
   return (dispatch, getState) => {
-    if (shouldFetchPosts(getState(), subreddit)) {
-      return dispatch(fetchPosts(subreddit))
+    if (shouldFetchPosts(getState(), reddit)) {
+      return dispatch(fetchPosts(reddit))
     }
   }
 }

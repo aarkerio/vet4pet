@@ -10,23 +10,23 @@ require('bootstrap-webpack')
 
 class ApposPage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     // this.props.isExecuting = false;
 
     const order = {
       textValues: ["Delete", "Are you sure?", "Deleting..."]
-    };
+    }
 
     this.state = {
       appos: [],
       isHovering: false,
       isExecuting: false,
       textValues: ["Delete", "Are you sure?", "Deleting..."]
-    };
-    console.log('I am in constructor');
+    }
+    console.log('I am in constructor')
 
-    this.getApposFromRails = this.getApposFromRails.bind(this); // binding
-    this.getApposFromRails();
+    this.getApposFromRails = this.getApposFromRails.bind(this) // binding
+    this.getApposFromRails()
   }
 
   /*
@@ -34,7 +34,7 @@ class ApposPage extends React.Component {
    */
   getApposFromRails() {
     var link = {url: '/appointments/get_appos/'};
-    console.log('DATA>>> link' + link);
+    console.log('DATA>>> link' + link)
     $.ajax({
       type: 'GET',
       url: link['url'],
@@ -46,14 +46,14 @@ class ApposPage extends React.Component {
         console.log('DATA getApposFromRails >>>>>>' + JSON.stringify(data));
         this.setState({appos: data});
       }.bind(this)
-    });
+    })
   }
 
   /*
    *  Send data to get the autofill field
    */
   sendDataToRails(url) {
-    link = {url: '/appointments/get_data'};
+    link = {url: '/appointments/get_data'}
     $.ajax({
       type: 'GET',
       url: link['url'],
@@ -66,7 +66,7 @@ class ApposPage extends React.Component {
         // this.setState({data: newLinks});
         this.setState({owners: newLinks});
       }.bind(this)
-    });
+    })
   }
 
   /*
@@ -77,10 +77,10 @@ class ApposPage extends React.Component {
     var records;
     records = React.addons.update(this.state.records, {
       $push: [record]
-    });
+    })
     return this.setState({
       records: records
-    });
+    })
   }
 
   /*
@@ -88,7 +88,7 @@ class ApposPage extends React.Component {
    *  Private
    */
   _editAppointment(record) {
-    console.log('I am in _editAppointment');
+    console.log('I am in _editAppointment')
     $.ajax({
       type: 'GET',
       url: link['url'],
@@ -97,7 +97,7 @@ class ApposPage extends React.Component {
       success: function(data) {
         // this.setState({appos: data});
       }.bind(this)
-    });
+    })
   }
 
   /*
@@ -105,8 +105,8 @@ class ApposPage extends React.Component {
    *  Private
    */
   _deleteAppointment(id) {
-      var link = {url: '/appointments/appo_delete', data: id};
-      console.log('I am in _delAppointment');
+      var link = {url: '/appointments/appo_delete', data: id}
+      console.log('I am in _delAppointment')
       $.ajax({
       type: 'GET',
       url: link['url'],
@@ -115,7 +115,7 @@ class ApposPage extends React.Component {
       success: function(data) {
         // this.setState({appos: data});
       }.bind(this)
-    });
+    })
   }
 
   render() {
@@ -139,7 +139,7 @@ class ApposPage extends React.Component {
         </td>
         </tr>;
         todos.push(row);
-    }.bind(this));
+    }.bind(this))
     // console.log(todos);
     var appoNodes = <table className="myTable" key="myta">
       <thead>
