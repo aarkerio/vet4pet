@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 // My App
 //import App from './containers/App'  // root container
-import App from './containers/AsyncApp'
+import App from './containers/App'
 
 import configureStore from './configureStore'
 

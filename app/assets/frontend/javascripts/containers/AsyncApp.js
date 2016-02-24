@@ -4,7 +4,7 @@ import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions'
 import Picker from '../components/Picker'
 import Posts from '../components/Posts'
 
-class App extends Component {
+class MyApp extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
@@ -68,7 +68,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+MyApp.propTypes = {
   selectedReddit: PropTypes.string.isRequired,
   posts: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
@@ -95,4 +95,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App)
+const AsyncApp = connect(mapStateToProps)(MyApp)
+
+export default AsyncApp
