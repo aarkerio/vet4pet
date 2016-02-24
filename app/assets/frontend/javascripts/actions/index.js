@@ -1,3 +1,4 @@
+import { CALL_API, Schemas } from '../middleware/ApiCalls'
 import fetch from 'isomorphic-fetch'
 
 /*
