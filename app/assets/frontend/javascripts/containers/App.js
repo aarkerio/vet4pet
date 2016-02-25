@@ -7,12 +7,14 @@ import AsyncApp from './AsyncApp'
 
 const App = () => (
   <div>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
     <ApposPage />
-    <AsyncApp />
   </div>
 )
 
 export default App
+
+
+    // <AddTodo />
+    // <VisibleTodoList />
+    // <Footer />
+    // <AsyncApp />

@@ -100,6 +100,69 @@ export function fetchPostsIfNeeded(reddit) {
   }
 }
 
+/******  Appos  *********/
+
+export const REQUEST_APPOS   = 'REQUEST_APPOS'
+export const RECEIVE_APPOS   = 'RECEIVE_APPOS'
+export const SELECT_APPO     = 'SELECT_APPO'
+export const INVALIDATE_APPO = 'INVALIDATE_APPO'
+
+function receiveAppos(appos, json) {
+  return {
+    type: RECEIVE_POSTS,
+    reddit: reddit,
+    posts: json.data.children.map(child => child.data),
+    receivedAt: Date.now()
+  }
+}
+
+function requestAppos(owner) {
+  return {
+    type: REQUEST_APPOS,
+    owner: owner
+  }
+}
+
+function fetchAppos(owner) {
+  let data = {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: 'foo',
+        pass: 'bar'
+      })
+    }
+  return dispatch => {
+    dispatch(requestAppos(owner))
+    return fetch('/appointments/get_data', data)
+      .then(response => response.json())
+      .then(json => dispatch(receiveAppos(owner, json)))
+  }
+}
+
+function shouldFetchAppos(state, owner) {
+  const posts = state.postsByReddit[reddit]
+  if (!posts) {
+    return true
+  }
+  if (posts.isFetching) {
+    return false
+  }
+  return posts.didInvalidate
+}
+
+export function fetchApposIfNeeded(owner) {
+  return (dispatch, getState) => {
+    if (shouldFetchAppos(getState(), owner)) {
+      return dispatch(fetchPosts(owner))
+    }
+  }
+}
+
 export const USER_REQUEST = 'USER_REQUEST'
 export const USER_SUCCESS = 'USER_SUCCESS'
 export const USER_FAILURE = 'USER_FAILURE'

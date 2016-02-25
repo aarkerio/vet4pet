@@ -1,12 +1,15 @@
-// import AppointmentForm from './ApposPageForm'
-
 import React, { PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
 import InlineConfirmButton from "react-inline-confirm"
 import { Button } from 'react-bootstrap'
 
+// import AppointmentForm from './ApposPageForm'
+
+
 require('bootstrap')
 require('bootstrap-webpack')
+
+
 
 class ApposPage extends React.Component {
   constructor(props) {
@@ -23,7 +26,6 @@ class ApposPage extends React.Component {
       isExecuting: false,
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
-    console.log('I am in constructor')
 
     this.getApposFromRails = this.getApposFromRails.bind(this) // binding
     this.getApposFromRails()
@@ -32,21 +34,9 @@ class ApposPage extends React.Component {
   /*
    *  Get data to get the autofill field
    */
-  getApposFromRails() {
-    var link = {url: '/appointments/get_appos/'};
-    console.log('DATA>>> link' + link)
-    $.ajax({
-      type: 'GET',
-      url: link['url'],
-      data: link,
-      dataType: 'json',
-      headers: {'X-CSRFToken': Cookies.get('csrftoken')},
-      success: function(data) {
-        //I do this so the new added link will be on top of the array
-        console.log('DATA getApposFromRails >>>>>>' + JSON.stringify(data));
-        this.setState({appos: data});
-      }.bind(this)
-    })
+  getApposFromRails(owner='') {
+    console.log('ApposPage >>> getApposFromRails')
+    dispatch(fetchApposIfNeeded(owner))
   }
 
   /*

@@ -16,12 +16,12 @@ class MyApp extends Component {
     dispatch(fetchPostsIfNeeded(selectedReddit))
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedReddit !== this.props.selectedReddit) {
-      const { dispatch, selectedReddit } = nextProps
-      dispatch(fetchPostsIfNeeded(selectedReddit))
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.selectedReddit !== this.props.selectedReddit) {
+  //     const { dispatch, selectedReddit } = nextProps
+  //     dispatch(fetchPostsIfNeeded(selectedReddit))
+  //   }
+  // }
 
   handleChange(nextReddit) {
     this.props.dispatch(selectReddit(nextReddit))
