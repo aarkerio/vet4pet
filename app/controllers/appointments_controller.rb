@@ -10,6 +10,7 @@ class AppointmentsController < ApplicationController
   # GET /appointments/get_appos
   def get_appos
     appos = Appointment.to_react
+    logger.debug "### get_appos in appointments ##################>>>> #{params.to_json} "
     return render json: appos
   end
 

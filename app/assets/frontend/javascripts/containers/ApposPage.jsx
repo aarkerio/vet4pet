@@ -27,8 +27,8 @@ class ApposPage extends React.Component {
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
 
-    //this.getApposFromRails = this.getApposFromRails.bind(this) // binding
-    //this.getApposFromRails()
+    this.getApposFromRails = this.getApposFromRails.bind(this) // binding
+    this.getApposFromRails()
     //this.props.dispatch(fetchAppos(this.props.appoIdIntProp))
   }
 
@@ -37,7 +37,7 @@ class ApposPage extends React.Component {
    */
   getApposFromRails(owner_id='') {
     console.log('ApposPage >>> getApposFromRails')
-    this.props.dispatch(actions.fetchAppos(this.props.appoIdIntProp))
+    this.props.dispatch(this.actions.fetchAppos(this.props.appoIdIntProp))
   }
 
   /*
@@ -175,32 +175,12 @@ ApposPage.defaultProps = {
     apposArrayProp:   []
 }
 
-// function mapStateToProps(state) {
-//   const { selectedReddit, postsByReddit } = state
-//   const {
-//     isFetching,
-//     lastUpdated,
-//     items: posts
-//   } = postsByReddit[selectedReddit] || {
-//     isFetching: true,
-//     items: []
-//   }
-
-//   return {
-//     selectedReddit,
-//     appos,
-//     isFetching,
-//     lastUpdated
-//   }
-// }
-
 const mapStateToProps = (state) => {
   return {
       // active: ownProps.filter === state.visibilityFilter
       apposArrayProp: state.apposArrayProp
   }
 }
-
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
@@ -209,7 +189,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const Appos = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ApposPage)
 
 export default Appos

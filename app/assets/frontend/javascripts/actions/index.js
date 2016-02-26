@@ -128,7 +128,7 @@ function receiveAppos(appos, json) {
 function requestAppos(appo_id) {
   return {
     type: REQUEST_APPOS,
-    owner: owner
+    appo_id: appo_id
   }
 }
 
@@ -145,9 +145,10 @@ function fetchAppos(appo_id) {
         pass: 'bar'
       })
     }
+  console.log('in fetchAppos 148')
   return dispatch => {
-    dispatch(requestAppos(owner))
-    return fetch('/appointments/get_data', data)
+    //dispatch(requestAppos(owner))
+    return fetch('/appointments/get_appos', data)
            .then(response => response.json())
            .then(json => dispatch(receiveAppos(owner, json)))
   }
