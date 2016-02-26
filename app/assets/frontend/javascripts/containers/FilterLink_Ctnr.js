@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { setVisibilityFilter } from '../actions/index'
 import Link from '../components/Link'
 
-// Binding State with Reducer with react props
+// Binding State (Store?) with Reducer with react props
 const mapStateToProps = (state, ownProps) => {
   return {
     active: ownProps.filter === state.visibilityFilter // this came from "Provider -> store"

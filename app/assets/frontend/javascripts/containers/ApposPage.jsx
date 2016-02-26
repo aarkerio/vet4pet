@@ -1,16 +1,17 @@
 import React, { PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
+import { connect } from 'react-redux'
+import { fetchAppos, fetchApposIfNeeded, invalidateAppo } from '../actions/index'
 import InlineConfirmButton from "react-inline-confirm"
 import { Button } from 'react-bootstrap'
 
 // import AppointmentForm from './ApposPageForm'
 
-
 require('bootstrap')
 require('bootstrap-webpack')
 
-
-
+//const ApposPage = ({ onClick, completed, text }) => (
+//TodoList = ({ todos, onTodoClick }) => (
 class ApposPage extends React.Component {
   constructor(props) {
     super(props)
@@ -34,9 +35,9 @@ class ApposPage extends React.Component {
   /*
    *  Get data to get the autofill field
    */
-  getApposFromRails(owner='') {
+  getApposFromRails(owner_id='') {
     console.log('ApposPage >>> getApposFromRails')
-    dispatch(fetchApposIfNeeded(owner))
+    this.props.dispatch(fetchAppos(owner_id))
   }
 
   /*
@@ -50,11 +51,11 @@ class ApposPage extends React.Component {
       data: link,
       headers: {'X-CSRFToken': Cookies.get('csrftoken')},
       success: function(data) {
-        var data = this.state.data;
+        var data = this.state.data
         //I do this so the new added link will be on top of the array
-        var newLinks = [data].concat(links);
+        var newLinks = [data].concat(links)
         // this.setState({data: newLinks});
-        this.setState({owners: newLinks});
+        this.setState({owners: newLinks})
       }.bind(this)
     })
   }
@@ -64,7 +65,7 @@ class ApposPage extends React.Component {
    *  Private
    */
   _addAppointment(record) {
-    var records;
+    var records
     records = React.addons.update(this.state.records, {
       $push: [record]
     })
@@ -147,35 +148,68 @@ class ApposPage extends React.Component {
         { todos }
       </tbody>
       </table>
-    ;
+
     //var form = React.createElement(AppointmentForm, {handleNewAppointment: this._addAppointment } );
     return (
       <div className="appoList">
          <div className="appoDivForm"></div><br />
-        {appoNodes}
+         {appoNodes}
       </div>
-    );
+    )
   }
 }
 
 ApposPage.propTypes = {
-    aStringProp:       React.PropTypes.string.isRequired,
-    ownerStringProp:   React.PropTypes.string,
-    petnameStringProp: React.PropTypes.string,
-    appo_array_prop:   React.PropTypes.array,
-    docnameStringProp: React.PropTypes.string,
-    reasonStringProp:  React.PropTypes.string,
-    dateStringProp:    React.PropTypes.string,
-};
+    apposArrayProp:   React.PropTypes.array.isRequired,
+    ownerStringProp:  React.PropTypes.string.isRequired
+}
 
 ApposPage.defaultProps = {
-    aStringProp:       '',
+    //     aStringProp:       '',
     ownerStringProp:   '',
-    petnameStringProp: '',
-    docnameStringProp: '',
-    dateDateProp:      '',
-    reasonStringProp:  '',
-    appo_array_prop:   []
- };
+    //     petnameStringProp: '',
+    //     docnameStringProp: '',
+    //     dateDateProp:      '',
+    //     reasonStringProp:  '',
+    apposArrayProp:   []
+}
 
- export default ApposPage;
+// function mapStateToProps(state) {
+//   const { selectedReddit, postsByReddit } = state
+//   const {
+//     isFetching,
+//     lastUpdated,
+//     items: posts
+//   } = postsByReddit[selectedReddit] || {
+//     isFetching: true,
+//     items: []
+//   }
+
+//   return {
+//     selectedReddit,
+//     appos,
+//     isFetching,
+//     lastUpdated
+//   }
+// }
+
+const mapStateToProps = (state) => {
+  return {
+    // active: ownProps.filter === state.visibilityFilter
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTodoClick: (owner_id) => {
+      dispatch(fetchAppos(owner_id))
+    }
+  }
+}
+
+const Appos = connect(
+  mapStateToProps
+)(ApposPage)
+
+export default Appos
+

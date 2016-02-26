@@ -100,12 +100,20 @@ export function fetchPostsIfNeeded(reddit) {
   }
 }
 
-/******  Appos  *********/
+/******  Appos API *********/
 
 export const REQUEST_APPOS   = 'REQUEST_APPOS'
+export const ADD_APPO        = 'ADD_APPO'
 export const RECEIVE_APPOS   = 'RECEIVE_APPOS'
 export const SELECT_APPO     = 'SELECT_APPO'
 export const INVALIDATE_APPO = 'INVALIDATE_APPO'
+
+export function invalidateAppo(appo) {
+  return {
+    type: INVALIDATE_APPO,
+    appo
+  }
+}
 
 function receiveAppos(appos, json) {
   return {
@@ -116,14 +124,14 @@ function receiveAppos(appos, json) {
   }
 }
 
-function requestAppos(owner) {
+function requestAppos(appo_id) {
   return {
     type: REQUEST_APPOS,
     owner: owner
   }
 }
 
-function fetchAppos(owner) {
+function fetchAppos(appo_id='') {
   let data = {
       method: 'POST',
       headers: {
@@ -139,12 +147,12 @@ function fetchAppos(owner) {
   return dispatch => {
     dispatch(requestAppos(owner))
     return fetch('/appointments/get_data', data)
-      .then(response => response.json())
-      .then(json => dispatch(receiveAppos(owner, json)))
+           .then(response => response.json())
+           .then(json => dispatch(receiveAppos(owner, json)))
   }
 }
 
-function shouldFetchAppos(state, owner) {
+function shouldFetchAppos(state, appo) {
   const posts = state.postsByReddit[reddit]
   if (!posts) {
     return true
@@ -155,9 +163,9 @@ function shouldFetchAppos(state, owner) {
   return posts.didInvalidate
 }
 
-export function fetchApposIfNeeded(owner) {
+export function fetchApposIfNeeded(owner_id) {
   return (dispatch, getState) => {
-    if (shouldFetchAppos(getState(), owner)) {
+    if (shouldFetchAppos(getState(), owner_id)) {
       return dispatch(fetchPosts(owner))
     }
   }

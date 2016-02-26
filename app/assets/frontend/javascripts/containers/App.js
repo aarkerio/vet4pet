@@ -1,13 +1,13 @@
 import React from 'react'
-import AddTodo from './AddTodo_Ctnr'
-import VisibleTodoList from './VisibleTodoList_Ctnr'
-import Footer from '../components/Footer'
-import ApposPage from './ApposPage/ApposPage'
-import AsyncApp from './AsyncApp'
+// import AddTodo from './AddTodo_Ctnr'
+// import VisibleTodoList from './VisibleTodoList_Ctnr'
+// import Footer from '../components/Footer'
+import Appos from './ApposPage/ApposPage'
+//import AsyncApp from './AsyncApp'
 
 const App = () => (
   <div>
-    <ApposPage />
+    <Appos />
   </div>
 )
 
