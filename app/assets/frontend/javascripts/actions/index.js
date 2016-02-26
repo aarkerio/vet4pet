@@ -1,3 +1,4 @@
+/* ChipotleSoftware (c) 2015-2016 MIT License*/
 import { CALL_API, Schemas } from '../middleware/ApiCalls'
 import fetch from 'isomorphic-fetch'
 
@@ -131,7 +132,7 @@ function requestAppos(appo_id) {
   }
 }
 
-function fetchAppos(appo_id='') {
+function fetchAppos(appo_id) {
   let data = {
       method: 'POST',
       headers: {

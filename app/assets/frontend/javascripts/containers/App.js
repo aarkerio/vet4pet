@@ -2,7 +2,7 @@ import React from 'react'
 // import AddTodo from './AddTodo_Ctnr'
 // import VisibleTodoList from './VisibleTodoList_Ctnr'
 // import Footer from '../components/Footer'
-import Appos from './ApposPage/ApposPage'
+import Appos from './ApposPage'
 //import AsyncApp from './AsyncApp'
 
 const App = () => (

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { fetchAppos, fetchApposIfNeeded, invalidateAppo } from '../actions/index'
 import InlineConfirmButton from "react-inline-confirm"
 import { Button } from 'react-bootstrap'
@@ -10,8 +11,6 @@ import { Button } from 'react-bootstrap'
 require('bootstrap')
 require('bootstrap-webpack')
 
-//const ApposPage = ({ onClick, completed, text }) => (
-//TodoList = ({ todos, onTodoClick }) => (
 class ApposPage extends React.Component {
   constructor(props) {
     super(props)
@@ -28,8 +27,9 @@ class ApposPage extends React.Component {
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
 
-    this.getApposFromRails = this.getApposFromRails.bind(this) // binding
-    this.getApposFromRails()
+    //this.getApposFromRails = this.getApposFromRails.bind(this) // binding
+    //this.getApposFromRails()
+    //this.props.dispatch(fetchAppos(this.props.appoIdIntProp))
   }
 
   /*
@@ -37,7 +37,7 @@ class ApposPage extends React.Component {
    */
   getApposFromRails(owner_id='') {
     console.log('ApposPage >>> getApposFromRails')
-    this.props.dispatch(fetchAppos(owner_id))
+    this.props.dispatch(actions.fetchAppos(this.props.appoIdIntProp))
   }
 
   /*
@@ -79,7 +79,7 @@ class ApposPage extends React.Component {
    *  Private
    */
   _editAppointment(record) {
-    console.log('I am in _editAppointment')
+    console.log('I am in _editAppointment action ')
     $.ajax({
       type: 'GET',
       url: link['url'],
@@ -161,11 +161,12 @@ class ApposPage extends React.Component {
 
 ApposPage.propTypes = {
     apposArrayProp:   React.PropTypes.array.isRequired,
-    ownerStringProp:  React.PropTypes.string.isRequired
+    ownerStringProp:  React.PropTypes.string.isRequired,
+    appoIdIntProp:    React.PropTypes.number.isRequired
 }
 
 ApposPage.defaultProps = {
-    //     aStringProp:       '',
+    appoIdIntProp:     0,
     ownerStringProp:   '',
     //     petnameStringProp: '',
     //     docnameStringProp: '',
@@ -195,21 +196,20 @@ ApposPage.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    // active: ownProps.filter === state.visibilityFilter
+      // active: ownProps.filter === state.visibilityFilter
+      apposArrayProp: state.apposArrayProp
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onTodoClick: (owner_id) => {
-      dispatch(fetchAppos(owner_id))
-    }
+    actions: bindActionCreators({fetchAppos, fetchApposIfNeeded, invalidateAppo}, dispatch)
   }
 }
 
 const Appos = connect(
-  mapStateToProps
+    mapStateToProps
 )(ApposPage)
 
 export default Appos
-
