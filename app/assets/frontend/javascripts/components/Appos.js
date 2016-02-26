@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
 import InlineConfirmButton from "react-inline-confirm"
+import { fetchAppos, fetchApposIfNeeded, invalidateAppo } from '../actions/index'
 import { Button } from 'react-bootstrap'
 
 // import AppointmentForm from './ApposPageForm'
@@ -9,6 +10,32 @@ require('bootstrap')
 require('bootstrap-webpack')
 
 class ApposComponent extends Component {
+ constructor(props) {
+    super(props)
+    // this.props.isExecuting = false;
+
+    const order = {
+      textValues: ["Delete", "Are you sure?", "Deleting..."]
+    }
+
+    this.state = {
+      appos: [],
+      isHovering: false,
+      isExecuting: false,
+      textValues: ["Delete", "Are you sure?", "Deleting..."]
+    }
+
+    this.getApposFromRails = this.getApposFromRails.bind(this) // binding
+    this.getApposFromRails()
+  }
+
+  /*
+   *  Get data to get the autofill field
+   */
+  getApposFromRails(owner_id='') {
+    console.log('ApposPage >>> getApposFromRails')
+    this.props.dispatch(fetchAppos(this.props.appoIdIntProp))
+  }
 
   render() {
     var todos = [];

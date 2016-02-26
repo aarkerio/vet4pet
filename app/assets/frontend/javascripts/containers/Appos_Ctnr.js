@@ -2,37 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchAppos, fetchApposIfNeeded, invalidateAppo } from '../actions/index'
 import ApposComponent from '../components/Appos'
 
 class MyApp extends Component {
-  constructor(props) {
-    super(props)
-    // this.props.isExecuting = false;
-
-    const order = {
-      textValues: ["Delete", "Are you sure?", "Deleting..."]
-    }
-
-    this.state = {
-      appos: [],
-      isHovering: false,
-      isExecuting: false,
-      textValues: ["Delete", "Are you sure?", "Deleting..."]
-    }
-
-    this.getApposFromRails = this.getApposFromRails.bind(this) // binding
-    this.getApposFromRails()
-  }
-
-  /*
-   *  Get data to get the autofill field
-   */
-  getApposFromRails(owner_id='') {
-    console.log('ApposPage >>> getApposFromRails')
-    this.props.dispatch(actions.fetchAppos(this.props.appoIdIntProp))
-  }
-
   /*
    *  Send data to get the autofill field
    */
@@ -92,14 +64,9 @@ class MyApp extends Component {
     return
   }
   render() {
-    const { apposArrayProp, ownerStringProp, appoIdIntProp } = this.props
     return (
       <div>
-        <ApposComponent
-            apposArrayProp  = { apposArrayProp  }
-            ownerStringProp = { ownerStringProp }
-            appoIdIntProp   = { appoIdIntProp   }
-        />
+        <ApposComponent />
       </div>
     )
   }
@@ -119,8 +86,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const Appos_Ctnr = connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(ApposComponent)
 
 export default Appos_Ctnr

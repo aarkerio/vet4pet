@@ -104,6 +104,7 @@ export function fetchPostsIfNeeded(reddit) {
 /******  Appos API *********/
 
 export const REQUEST_APPOS   = 'REQUEST_APPOS'
+export const FETCH_APPOS     = 'FETCH_APPOS'
 export const ADD_APPO        = 'ADD_APPO'
 export const RECEIVE_APPOS   = 'RECEIVE_APPOS'
 export const SELECT_APPO     = 'SELECT_APPO'
@@ -132,7 +133,8 @@ function requestAppos(appo_id) {
   }
 }
 
-function fetchAppos(appo_id) {
+export const fetchAppos = (appo_id) => {
+  let apposArrayProp = []
   let data = {
       method: 'POST',
       headers: {
@@ -146,12 +148,16 @@ function fetchAppos(appo_id) {
       })
     }
   console.log('in fetchAppos 148')
-  return dispatch => {
-    //dispatch(requestAppos(owner))
-    return fetch('/appointments/get_appos', data)
-           .then(response => response.json())
-           .then(json => dispatch(receiveAppos(owner, json)))
+  return {
+    type: FETCH_APPOS,
+    apposArrayProp
   }
+  // return dispatch => {
+  //   //dispatch(requestAppos(owner))
+  //   return fetch('/appointments/get_appos', data)
+  //          .then(response => response.json())
+  //          .then(json => dispatch(receiveAppos(owner, json)))
+  // }
 }
 
 function shouldFetchAppos(state, appo) {
