@@ -17,9 +17,10 @@ class ApposComponent extends Component {
     const order = {
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
-
+    this.props = {
+      apposArrayProp: []
+    }
     this.state = {
-      appos: [],
       isHovering: false,
       isExecuting: false,
       textValues: ["Delete", "Are you sure?", "Deleting..."]
@@ -38,9 +39,9 @@ class ApposComponent extends Component {
   }
 
   render() {
-    var todos = [];
+    var todos   = []
     var trNodes = this.props.apposArrayProp.map(function (appointment) {
-      var row = <tr key={appointment.id}>
+      var row   = <tr key={appointment.id}>
         <td>
           <button  className="btn btn-default" onClick={this._editAppointment.bind(this, appointment.id)}>Edit</button>
         </td>
@@ -56,7 +57,7 @@ class ApposComponent extends Component {
             </InlineConfirmButton>
           </div>
         </td>
-        </tr>;
+        </tr>
         todos.push(row);
     }.bind(this))
     // console.log(todos);
@@ -87,16 +88,22 @@ class ApposComponent extends Component {
   }
 }
 
+
 ApposComponent.propTypes = {
-    apposArrayProp:   React.PropTypes.array,
-    ownerStringProp:  React.PropTypes.string,
-    appoIdIntProp:    React.PropTypes.number
+  apposArrayProp: PropTypes.arrayOf(PropTypes.shape({
+    id:       PropTypes.number.isRequired,
+    owner:    PropTypes.string.isRequired,
+    date:     PropTypes.date.isRequired,
+    reason:   PropTypes.string.isRequired,
+    petname:  PropTypes.string.isRequired,
+    docname:  PropTypes.string.isRequired
+  }).isRequired).isRequired
 }
 
-ApposComponent.defaultProps = {
-    apposArrayProp:   [],
-    ownerStringProp:   '',
-    appoIdIntProp:     0,
-}
+// ApposComponent.defaultProps = {
+//     apposArrayProp:   [],
+//     ownerStringProp:   '',
+//     appoIdIntProp:     0,
+// }
 
 export default ApposComponent

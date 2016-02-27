@@ -2,11 +2,6 @@
 import { CALL_API, Schemas } from '../middleware/ApiCalls'
 import fetch from 'isomorphic-fetch'
 
-/*
- *  Index actions ToDos
- *  Action Creators
- */
-
 let nextTodoId = 0
 
 /*
@@ -33,7 +28,6 @@ export const toggleTodo = (id) => {
     id: id
   }
 }
-
 
 /** Asyncronus App **/
 
@@ -100,15 +94,20 @@ export function fetchPostsIfNeeded(reddit) {
     }
   }
 }
-
 /******  Appos API *********/
-
 export const REQUEST_APPOS   = 'REQUEST_APPOS'
-export const FETCH_APPOS     = 'FETCH_APPOS'
+export const SHOW_APPOS      = 'SHOW_APPOS'
 export const ADD_APPO        = 'ADD_APPO'
 export const RECEIVE_APPOS   = 'RECEIVE_APPOS'
 export const SELECT_APPO     = 'SELECT_APPO'
 export const INVALIDATE_APPO = 'INVALIDATE_APPO'
+
+export const showAppos = () => {
+  return {
+    type: SHOW_APPOS,
+    apposArrayProp: []
+  }
+}
 
 export function invalidateAppo(appo) {
   return {
@@ -118,10 +117,10 @@ export function invalidateAppo(appo) {
 }
 
 function receiveAppos(appos, json) {
+  console.log('JJJJJJJJJJJJJJJJJJJJJ>>>>>' + JSON.stringify(json))
   return {
-    type: RECEIVE_POSTS,
-    reddit: reddit,
-    posts: json.data.children.map(child => child.data),
+    type:  RECEIVE_APPOS,
+    apposArrayProp: json,
     receivedAt: Date.now()
   }
 }
@@ -134,30 +133,21 @@ function requestAppos(appo_id) {
 }
 
 export const fetchAppos = (appo_id) => {
-  let apposArrayProp = []
+  let appos = []
   let data = {
-      method: 'POST',
+      method: 'GET',
+      credentials: 'same-origin',
       headers: {
-        'X-CSRFToken': Cookies.get('csrftoken'),
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: 'foo',
-        pass: 'bar'
-      })
+        'X-CSRFToken': Cookies.get('csrftoken')
+      }
     }
   console.log('in fetchAppos 148')
-  return {
-    type: FETCH_APPOS,
-    apposArrayProp
+  return dispatch => {
+    // dispatch(requestAppos(appos))
+    return fetch('/appointments/get_appos', data)
+           .then(response => response.json())
+           .then(json => dispatch(receiveAppos(appos, json)))
   }
-  // return dispatch => {
-  //   //dispatch(requestAppos(owner))
-  //   return fetch('/appointments/get_appos', data)
-  //          .then(response => response.json())
-  //          .then(json => dispatch(receiveAppos(owner, json)))
-  // }
 }
 
 function shouldFetchAppos(state, appo) {
