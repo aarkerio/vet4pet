@@ -117,11 +117,10 @@ export function invalidateAppo(appo) {
 }
 
 function receiveAppos(appos, json) {
-  console.log('JJJJJJJJJJJJJJJJJJJJJ>>>>>' + JSON.stringify(json))
+  console.log(' receiveAppos Action JJJ>>>>>' + JSON.stringify(json))
   return {
     type:  RECEIVE_APPOS,
-    apposArrayProp: json,
-    receivedAt: Date.now()
+    apposArrayProp: json
   }
 }
 

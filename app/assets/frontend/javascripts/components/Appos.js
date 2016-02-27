@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
 import InlineConfirmButton from "react-inline-confirm"
-import { fetchAppos, fetchApposIfNeeded, invalidateAppo } from '../actions/index'
 import { Button } from 'react-bootstrap'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as AppoActionCreators from '../actions/appos'
 
 // import AppointmentForm from './ApposPageForm'
 
@@ -12,30 +15,24 @@ require('bootstrap-webpack')
 class ApposComponent extends Component {
  constructor(props) {
     super(props)
-    // this.props.isExecuting = false;
 
     const order = {
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
-    this.props = {
-      apposArrayProp: []
-    }
+
     this.state = {
       isHovering: false,
       isExecuting: false,
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
 
-    this.getApposFromRails = this.getApposFromRails.bind(this) // binding
-    this.getApposFromRails()
+    //this.getApposFromRails = this.getApposFromRails.bind(this) // binding
+    //this.getApposFromRails()
   }
-
-  /*
-   *  Get data to get the autofill field
-   */
-  getApposFromRails(owner_id='') {
-    console.log('ApposPage >>> getApposFromRails')
-    this.props.dispatch(fetchAppos(this.props.appoIdIntProp))
+   componentDidMount() {
+    console.log(' POOO' + JSON.stringify(this.actions))
+    //const { dispatch } = this.props
+    this.props.dispatch(fetchAppos('0'))
   }
 
   render() {
@@ -88,22 +85,39 @@ class ApposComponent extends Component {
   }
 }
 
-
 ApposComponent.propTypes = {
   apposArrayProp: PropTypes.arrayOf(PropTypes.shape({
     id:       PropTypes.number.isRequired,
     owner:    PropTypes.string.isRequired,
-    date:     PropTypes.date.isRequired,
+    date:     PropTypes.string.isRequired,
     reason:   PropTypes.string.isRequired,
     petname:  PropTypes.string.isRequired,
     docname:  PropTypes.string.isRequired
-  }).isRequired).isRequired
+  }).isRequired).isRequired,
+  appoIdIntProp: PropTypes.number.isRequired
+  //dispatch: PropTypes.func.isRequired
 }
 
-// ApposComponent.defaultProps = {
-//     apposArrayProp:   [],
-//     ownerStringProp:   '',
-//     appoIdIntProp:     0,
-// }
+ApposComponent.defaultProps = {
+     apposArrayProp:  [],
+     appoIdIntProp:   0
+ }
 
-export default ApposComponent
+//export default ApposComponent
+
+const mapStateToProps = (state) => {
+  return {
+          apposArrayProp: state.apposArrayProp
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return bindActionCreators({ AppoActionCreators }, dispatch);
+}
+
+const Appos_Ctnr = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ApposComponent)
+
+export default Appos_Ctnr
