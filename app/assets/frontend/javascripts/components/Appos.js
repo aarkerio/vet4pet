@@ -3,10 +3,6 @@ import { ReactDom } from 'react-dom'
 import InlineConfirmButton from "react-inline-confirm"
 import { Button } from 'react-bootstrap'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as AppoActionCreators from '../actions/appos'
-
 // import AppointmentForm from './ApposPageForm'
 
 require('bootstrap')
@@ -103,21 +99,4 @@ ApposComponent.defaultProps = {
      appoIdIntProp:   0
  }
 
-//export default ApposComponent
-
-const mapStateToProps = (state) => {
-  return {
-          apposArrayProp: state.apposArrayProp
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({ AppoActionCreators }, dispatch);
-}
-
-const Appos_Ctnr = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ApposComponent)
-
-export default Appos_Ctnr
+export default ApposComponent
