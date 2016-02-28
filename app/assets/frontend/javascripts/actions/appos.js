@@ -3,44 +3,16 @@
 import fetch from 'isomorphic-fetch'
 
 /******  Appos API *********/
-export const REQUEST_APPOS   = 'REQUEST_APPOS'
-export const SHOW_APPOS      = 'SHOW_APPOS'
-export const ADD_APPO        = 'ADD_APPO'
+// export const REQUEST_APPOS   = 'REQUEST_APPOS'
+// export const SHOW_APPOS      = 'SHOW_APPOS'
+// export const ADD_APPO        = 'ADD_APPO'
 export const RECEIVE_APPOS   = 'RECEIVE_APPOS'
-export const SELECT_APPO     = 'SELECT_APPO'
-export const INVALIDATE_APPO = 'INVALIDATE_APPO'
+// export const SELECT_APPO     = 'SELECT_APPO'
+// export const INVALIDATE_APPO = 'INVALIDATE_APPO'
 
-export const showAppos = () => {
-  return {
-    type: SHOW_APPOS,
-    apposArrayProp: []
-  }
-}
+export function fetchAppos(appo_id) {
 
-export function invalidateAppo(appo) {
-  return {
-    type: INVALIDATE_APPO,
-    appo
-  }
-}
-
-function receiveAppos(appos, json) {
-  console.log(' receiveAppos Action JJJ>>>>>' + JSON.stringify(json))
-  return {
-    type:  RECEIVE_APPOS,
-    apposArrayProp: json
-  }
-}
-
-function requestAppos(appo_id) {
-  return {
-    type: REQUEST_APPOS,
-    appo_id: appo_id
-  }
-}
-
-export const fetchAppos = (appo_id) => {
-  let appos = []
+  let apposArrayProp = []
   let data = {
       method: 'GET',
       credentials: 'same-origin',
@@ -50,45 +22,57 @@ export const fetchAppos = (appo_id) => {
     }
   console.log('in fetchAppos 148')
   return dispatch => {
-    // dispatch(requestAppos(appos))
+    // dispatch(requestAppos(apposArrayProp))
     return fetch('/appointments/get_appos', data)
            .then(response => response.json())
-           .then(json => dispatch(receiveAppos(appos, json)))
+           .then(json => dispatch(receiveAppos(apposArrayProp, json)))
   }
 }
 
-function shouldFetchAppos(state, appo) {
-  const posts = state.postsByReddit[reddit]
-  if (!posts) {
-    return true
-  }
-  if (posts.isFetching) {
-    return false
-  }
-  return posts.didInvalidate
-}
-
-export function fetchApposIfNeeded(owner_id) {
-  return (dispatch, getState) => {
-    if (shouldFetchAppos(getState(), owner_id)) {
-      return dispatch(fetchPosts(owner))
-    }
-  }
-}
-
-export const USER_REQUEST = 'USER_REQUEST'
-export const USER_SUCCESS = 'USER_SUCCESS'
-export const USER_FAILURE = 'USER_FAILURE'
-
-// Fetches a single user from Github API.
-// Relies on the custom API middleware defined in ../middleware/api.js.
-function fetchUser(login) {
+function receiveAppos(appos, apposArrayProp) {
+  console.log(' receiveAppos Action JJJ>>>>>' + JSON.stringify(apposArrayProp))
   return {
-    [CALL_API]: {
-      types: [ USER_REQUEST, USER_SUCCESS, USER_FAILURE ],
-      endpoint: `users/${login}`,
-      schema: Schemas.USER
-    }
+    type:  RECEIVE_APPOS,
+    apposArrayProp
   }
 }
 
+// export const showAppos = () => {
+//   return {
+//     type: SHOW_APPOS,
+//     apposArrayProp: []
+//   }
+// }
+
+// export function invalidateAppo(appo) {
+//   return {
+//     type: INVALIDATE_APPO,
+//     appo
+//   }
+// }
+
+// function requestAppos(appo_id) {
+//   return {
+//     type: REQUEST_APPOS,
+//     appo_id: appo_id
+//   }
+// }
+
+// function shouldFetchAppos(state, appo) {
+//   const posts = state.postsByReddit[reddit]
+//   if (!posts) {
+//     return true
+//   }
+//   if (posts.isFetching) {
+//     return false
+//   }
+//   return posts.didInvalidate
+// }
+
+// export function fetchApposIfNeeded(appo_id) {
+//   return (dispatch, getState) => {
+//     if (shouldFetchAppos(getState(), appo_id)) {
+//       return dispatch(fetchPosts(owner))
+//     }
+//   }
+// }

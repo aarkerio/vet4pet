@@ -1,20 +1,10 @@
 import React from 'react'
-// import AddTodo from './AddTodo_Ctnr'
-// import VisibleTodoList from './VisibleTodoList_Ctnr'
-// import Footer from '../components/Footer'
-import Appos_Ctnr from './Appos_Ctnr'
-//import AsyncApp from './AsyncApp'
+import ApposComponent from './Appos_Ctnr'
 
 const App = () => (
   <div>
-    <Appos_Ctnr />
+    <ApposComponent />
   </div>
 )
 
 export default App
-
-
-    // <AddTodo />
-    // <VisibleTodoList />
-    // <Footer />
-    // <AsyncApp />
