@@ -7,22 +7,26 @@ import AppoRow from '../components/AppoRow'
 class ApposComponent extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isHovering: false,
-      isExecuting: false,
-      textValues: ["Delete", "Are you sure?", "Deleting..."]
-    }
+    this.editAppointment = this.editAppointment.bind(this)
   }
   componentDidMount() {
     console.log(' In componentDidMount ' + JSON.stringify(this.props))
     let action = ApposActionCreators.fetchAppos()
     let vall = this.props.dispatch(action)
   }
-  //onClick={() => onTodoClick(appo.id)}
+
+  /*
+   *  Add appointment
+   *  Private
+   */
+  editAppointment(appo_id) {
+    return true;
+  }
+
   render() {
     var rows = [];
     this.props.apposArrayProp.forEach(function (appo) {
-      rows.push(<AppoRow appointment={appo} key={appo.id} />);
+      rows.push(<AppoRow appointment={appo} onClick={this.editAppointment(appo.id)} key={appo.id} />);
     });
     return (
       <div className="appoList">
@@ -48,6 +52,7 @@ class ApposComponent extends Component {
 }
 
 ApposComponent.propTypes = {
+  editAppointment: PropTypes.func.isRequired,
   apposArrayProp: PropTypes.array
 }
 
