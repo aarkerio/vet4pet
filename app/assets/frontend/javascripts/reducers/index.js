@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import appointments_rdcer from './appointments_Rdcer'
 
 export default function rootReducer(state = {}, action) {

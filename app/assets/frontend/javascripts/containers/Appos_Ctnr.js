@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import * as ApposActionCreators from '../actions/appos'
 import React, { Component, PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
+import AppoRow from '../components/AppoRow'
 
 class ApposComponent extends Component {
   constructor(props) {
@@ -17,10 +18,12 @@ class ApposComponent extends Component {
     let action = ApposActionCreators.fetchAppos()
     let vall = this.props.dispatch(action)
   }
+  //onClick={() => onTodoClick(appo.id)}
   render() {
-    var trNodes = this.props.apposArrayProp.forEach(function (appo) {
-      <AppoRow appointment={appo} onClick={() => onTodoClick(todo.id)}  />
-    })
+    var rows = [];
+    this.props.apposArrayProp.forEach(function (appo) {
+      rows.push(<AppoRow appointment={appo} key={appo.id} />);
+    });
     return (
       <div className="appoList">
         <table className="myTable" key="myta">
@@ -36,7 +39,7 @@ class ApposComponent extends Component {
             </tr>
           </thead>
           <tbody>
-            { trNodes }
+            {rows}
           </tbody>
         </table>
       </div>
