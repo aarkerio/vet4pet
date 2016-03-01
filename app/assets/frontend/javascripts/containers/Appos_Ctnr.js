@@ -1,55 +1,61 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import * as ApposActionCreators from '../actions/appos'
 import React, { Component, PropTypes } from 'react'
 import { ReactDom } from 'react-dom'
-import * as ApposActionCreators from '../actions/appos'
-//import { fetchAppos } from '../actions/appos'
-// console.log(ApposActionCreators)
-
-// import AppointmentForm from './ApposPageForm'
-
-require('bootstrap')
-require('bootstrap-webpack')
 
 class ApposComponent extends Component {
- constructor(props) {
+  constructor(props) {
     super(props)
+    this.state = {
+      isHovering: false,
+      isExecuting: false,
+      textValues: ["Delete", "Are you sure?", "Deleting..."]
+    }
   }
   componentDidMount() {
-    console.log(' componentDidMount ' + JSON.stringify(this.props))
+    console.log(' In componentDidMount ' + JSON.stringify(this.props))
     let action = ApposActionCreators.fetchAppos()
-    this.props.dispatch(action)
+    let vall = this.props.dispatch(action)
   }
   render() {
-    var trNodes = this.props.apposArrayProp.map(function (appointment) {
-      console.log('trNodes ##########################')
+    var trNodes = this.props.apposArrayProp.forEach(function (appo) {
+      <AppoRow appointment={appo} onClick={() => onTodoClick(todo.id)}  />
     })
     return (
-      <div className="appoList">hggjhgjh
-         <div className="appoDivForm"></div><br />
+      <div className="appoList">
+        <table className="myTable" key="myta">
+          <thead>
+            <tr>
+              <th>Edit</th>
+              <th>Owner</th>
+              <th>Scheduled date</th>
+              <th>Pet</th>
+              <th>Reason</th>
+              <th>Doctor</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            { trNodes }
+          </tbody>
+        </table>
       </div>
     )
   }
 }
 
 ApposComponent.propTypes = {
-  apposArrayProp: PropTypes.array.isRequired
+  apposArrayProp: PropTypes.array
 }
 
-ApposComponent.defaultProps = {
-     apposArrayProp:  []
+ ApposComponent.defaultProps = {
+      apposArrayProp:  []
  }
 
 const mapStateToProps = (state) => {
   return {
-    apposArrayProp: state.apposArrayProp
+    apposArrayProp: state.appointments_rdcer.apposArrayProp
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(Object.assign({}, ApposActionCreators), dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ApposComponent)
+export default connect(mapStateToProps)(ApposComponent)
