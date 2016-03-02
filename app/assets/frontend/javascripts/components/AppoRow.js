@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react'
-import { ReactDom } from 'react-dom'
-import InlineConfirmButton from "react-inline-confirm"
-import { Button } from 'react-bootstrap'
+import { Router, Route, Link } from 'react-router'
+//import InlineConfirmButton from "react-inline-confirm"
+//import { Button } from 'react-bootstrap'
 
-require('bootstrap')
-require('bootstrap-webpack')
+// require('bootstrap')
+// require('bootstrap-webpack')
 
 class AppoRow extends Component {
   constructor(props) {
@@ -17,13 +17,16 @@ class AppoRow extends Component {
     }
     this.editAppointment = this.editAppointment.bind(this);
   }
+
  /*
   *  Add appointment
   *  Private
   */
-  editAppointment(appo) {
+  editAppointment(e, appo) {
+    e.preventDefault();
     return appo;
   }
+
  /*
   *  Add appointment
   *  Private
@@ -33,11 +36,11 @@ class AppoRow extends Component {
   }
 
   render() {
-    const { appointment } = this.props;
+    const { appointment, key } = this.props;
     return (
-      <tr>
+      <tr key={key}>
         <td>
-          <button className="btn btn-default" onClick={this.editAppointment.bind(this, appointment)}>Edit</button>
+          <Link to={'/appo/${appointment.id}'}>Edit</Link>
         </td>
         <td> {appointment.owner}   </td>
         <td> {appointment.date}    </td>
@@ -45,11 +48,7 @@ class AppoRow extends Component {
         <td> {appointment.reason}  </td>
         <td> {appointment.docname} </td>
         <td>
-          <div className="clearfix">
-              <InlineConfirmButton className="btn btn-default" isExecuting={false} textValues={this.state.textValues} showTimer={true} onClick={this.deleteAppointment.bind(this, appointment.id)}>
-              <i className="fa fa-trash"></i>
-            </InlineConfirmButton>
-          </div>
+          <a href="#" onClick={this.deleteAppointment.bind(this, appointment.id)}>Owner</a>
         </td>
       </tr>
     )
@@ -58,6 +57,7 @@ class AppoRow extends Component {
 
 AppoRow.propTypes = {
   appointment: PropTypes.object.isRequired,
+  keyRow: PropTypes.number.isRequired,
   onClick: PropTypes.func
 }
 
