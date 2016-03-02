@@ -15,6 +15,21 @@ class AppoRow extends Component {
       isExecuting: false,
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
+    this.editAppointment = this.editAppointment.bind(this);
+  }
+ /*
+  *  Add appointment
+  *  Private
+  */
+  editAppointment(appo) {
+    return appo;
+  }
+ /*
+  *  Add appointment
+  *  Private
+  */
+  deleteAppointment(appo_id) {
+    return appo_id;
   }
 
   render() {
@@ -22,7 +37,7 @@ class AppoRow extends Component {
     return (
       <tr>
         <td>
-          <button className="btn btn-default" onClick={onClick}>Edit</button>
+          <button className="btn btn-default" onClick={this.editAppointment.bind(this, appointment)}>Edit</button>
         </td>
         <td> {appointment.owner}   </td>
         <td> {appointment.date}    </td>
@@ -31,7 +46,7 @@ class AppoRow extends Component {
         <td> {appointment.docname} </td>
         <td>
           <div className="clearfix">
-            <InlineConfirmButton className="btn btn-default" isExecuting={false} textValues={this.state.textValues} showTimer={true} onClick={onClick}>
+              <InlineConfirmButton className="btn btn-default" isExecuting={false} textValues={this.state.textValues} showTimer={true} onClick={this.deleteAppointment.bind(this, appointment.id)}>
               <i className="fa fa-trash"></i>
             </InlineConfirmButton>
           </div>
@@ -42,8 +57,8 @@ class AppoRow extends Component {
 }
 
 AppoRow.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  appointment: PropTypes.object.isRequired
+  appointment: PropTypes.object.isRequired,
+  onClick: PropTypes.func
 }
 
 export default AppoRow

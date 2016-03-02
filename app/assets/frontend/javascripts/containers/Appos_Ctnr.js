@@ -7,26 +7,17 @@ import AppoRow from '../components/AppoRow'
 class ApposComponent extends Component {
   constructor(props) {
     super(props)
-    this.editAppointment = this.editAppointment.bind(this)
   }
   componentDidMount() {
     console.log(' In componentDidMount ' + JSON.stringify(this.props))
     let action = ApposActionCreators.fetchAppos()
-    let vall = this.props.dispatch(action)
-  }
-
-  /*
-   *  Add appointment
-   *  Private
-   */
-  editAppointment(appo_id) {
-    return true;
+    this.props.dispatch(action)
   }
 
   render() {
     var rows = [];
     this.props.apposArrayProp.forEach(function (appo) {
-      rows.push(<AppoRow appointment={appo} onClick={this.editAppointment(appo.id)} key={appo.id} />);
+      rows.push(<AppoRow appointment={appo} key={appo.id} />);
     });
     return (
       <div className="appoList">
@@ -52,8 +43,8 @@ class ApposComponent extends Component {
 }
 
 ApposComponent.propTypes = {
-  editAppointment: PropTypes.func.isRequired,
-  apposArrayProp: PropTypes.array
+  apposArrayProp: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
  ApposComponent.defaultProps = {
