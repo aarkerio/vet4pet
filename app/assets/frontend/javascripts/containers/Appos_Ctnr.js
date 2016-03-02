@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
+import { render } from 'react-dom'
 import * as ApposActionCreators from '../actions/appos'
 import React, { Component, PropTypes } from 'react'
-import { Router, Route, Link, DefaultRoute, RouteHandler } from 'react-router'
 import AppoRow from '../components/AppoRow'
 class ApposComponent extends Component {
   constructor(props) {
@@ -37,7 +37,6 @@ class ApposComponent extends Component {
           {rows}
         </tbody>
       </table>
-      <RouteHandler/>
     )
   }
 }
@@ -50,19 +49,6 @@ ApposComponent.propTypes = {
  ApposComponent.defaultProps = {
       apposArrayProp:  []
  }
-
-let routes = (
-  <Route path="/" component={ApposComponent}>
-    <Route path="appos" component={AppoRow}>
-        <Route path="/appo/:userId" component={AppoModal}/>
-    </Route>
-    <Route path="*" component={NoMatch}/>
-  </Route>
-);
-
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.body);
-});
 
 const mapStateToProps = (state) => {
   return {
