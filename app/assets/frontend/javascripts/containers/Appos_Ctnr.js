@@ -1,8 +1,10 @@
-import { connect } from 'react-redux'
-import { render } from 'react-dom'
-import * as ApposActionCreators from '../actions/appos'
-import React, { Component, PropTypes } from 'react'
-import AppoRow from '../components/AppoRow'
+'use strict';
+
+import { connect } from 'react-redux';
+import { render } from 'react-dom';
+import * as ApposActionCreators from '../actions/appos';
+import React, { Component, PropTypes } from 'react';
+import AppoRow from '../components/AppoRow';
 class ApposComponent extends Component {
   constructor(props) {
     super(props)

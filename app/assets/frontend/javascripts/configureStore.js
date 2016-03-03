@@ -1,9 +1,11 @@
+'use strict';
+
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from './reducers/index';
 import DevTools from './containers/DevTools';
-import { routerMiddleware, push, browserHistory, routerReducer } from 'react-router-redux';
+import { routerMiddleware, browserHistory, routerReducer } from 'react-router-redux';
 
 export default function configureStore(initialState) {
   const routemiddleware = routerMiddleware(browserHistory);
@@ -17,15 +19,15 @@ export default function configureStore(initialState) {
       applyMiddleware(thunkMiddleware, routemiddleware, createLogger()),
       DevTools.instrument()
     )
-  )
+  );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').default
-      store.replaceReducer(nextRootReducer)
-    })
+      const nextRootReducer = require('../reducers').default;
+      store.replaceReducer(nextRootReducer);
+    });
   }
 
-  return store
+  return store;
 }
