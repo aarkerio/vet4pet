@@ -15,7 +15,7 @@ class ApposComponent extends Component {
     this.props.dispatch(action)
   }
   orderList(field, order) {
-
+    return field;
   }
   render() {
     var rows = [];
@@ -54,7 +54,7 @@ ApposComponent.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    apposArrayProp: state.appointments_rdcer.apposArrayProp
+    apposArrayProp: state.rootReducer.appointments_rdcer.apposArrayProp
   }
 }
 
