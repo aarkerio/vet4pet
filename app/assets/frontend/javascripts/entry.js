@@ -25,11 +25,11 @@ render(
     { /* Tell the Router to use our enhanced history */ }
     <Router history={history}>
       <Route path="/" component={App}>
-        <Route path="/appointments" component={App}/>
+        <Route path="/appointments" component={ApposComponent}/>
       </Route>
     </Router>
   </Provider>,
-  document.getElementById('content')
+  document.getElementById('reactroot')
 )
 // binding reducers with the store
 // Provider make the store available to all container components in the application without passing it explicitly
