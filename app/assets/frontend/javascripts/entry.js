@@ -23,7 +23,7 @@ render(
   <Provider store={my_store}>
     { /* Tell the Router to use our enhanced history */ }
     <Router history={synchistory}>
-      <Route path="/" component={App}>
+      <Route path="/" handler={App} component={App}>
         <Route path="/appointments" component={ApposComponent}/>
         <Route path="/appointments/:appoId" component={AppoModal}/>
       </Route>

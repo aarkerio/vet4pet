@@ -10,7 +10,6 @@ class AppoRow extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      appos: [],
       isHovering: false,
       isExecuting: false,
       textValues: ["Delete", "Are you sure?", "Deleting..."]
@@ -48,7 +47,7 @@ class AppoRow extends Component {
         <td> {appointment.reason}  </td>
         <td> {appointment.docname} </td>
         <td>
-          <a href="#" onClick={this.deleteAppointment.bind(this, appointment.id)}>Owner</a>
+          <a href="#" onClick={this.deleteAppointment.bind(this, appointment.id)}>Delete</a>
         </td>
       </tr>
     )

@@ -12,5 +12,6 @@
   "curly": true,
   "maxparams":3,
   "module": true,
-  "node": true
+  "node": true,
+  "quotmark": false
 }

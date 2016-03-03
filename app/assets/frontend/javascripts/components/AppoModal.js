@@ -1,9 +1,37 @@
-import React, { PropTypes, Component } from 'react'
+'use strict';
+
+import React, { PropTypes, Component } from 'react';
 import Modal from 'react-modal';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 class AppoModal extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    console.log('MODALLEEEEE!!!!!!!!!!!!');
+    this.state = {
+      isHovering: false,
+      isExecuting: false,
+      textValues: ["Delete", "Are you sure?", "Deleting..."],
+      modalIsOpen: false
+    };
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
   }
 
   handleChange(evt) {
@@ -31,16 +59,37 @@ class AppoModal extends Component {
 
   validationTest() {
     var length = this.state.test.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) {
+    if (length > 10) {
+      return 'success';
+    } else if (length > 5) {
+      return 'warning';
+    } else if (length > 0) {
       return 'error';
     }
   }
 
   render() {
     return (
-      <Modal {...this.props} className="testModal" bsStyle="primary" title='Edit Details' animation={false}>
+      <div>
+        <button onClick={this.openModal}>Open Modal</button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+        >
+
+          <h2>Hello</h2>
+          <button onClick={this.closeModal}>close</button>
+          <div>I am a modal</div>
+          <form>
+            <input />
+            <button>tab navigation</button>
+            <button>stays</button>
+            <button>inside</button>
+            <button>the modal</button>
+          </form>
+        </Modal>
+      </div>
      //    <form className="testModal" onSubmit={this.handleSubmit} >
      //      <div className="modal-body">
      //        <p><Input type="text" defaultValue={this.state.title} ref="title" className="form-control" required/></p>
@@ -61,7 +110,7 @@ class AppoModal extends Component {
 }
 
 AppoModal.propTypes = {
-    // data: PropTypes.string.isRequired,
+    appoId: PropTypes.number
     // Will be called with the new value for the cell
     // onChange: React.PropTypes.func.isRequired
 }
