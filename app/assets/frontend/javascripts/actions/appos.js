@@ -10,11 +10,11 @@ export function fetchAppos() {
          'X-CSRFToken': Cookies.get('csrftoken')
       }
     };
-  return dispatch => {
-    return fetch('/appointments/get_appos', data)
-           .then(response => response.json())
-           .then(json => dispatch(receiveAppos(json)))
-  }
+  // return dispatch => {
+  //   return fetch('/appointments/get_appos', data)
+  //          .then(response => response.json())
+  //          .then(json => dispatch(receiveAppos(json)))
+  //  }
 }
 
 function receiveAppos(apposArrayProp) {
