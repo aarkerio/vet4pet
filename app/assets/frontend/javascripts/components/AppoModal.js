@@ -2,6 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import Modal from 'react-modal';
+import { connect } from 'react-redux';
 
 const customStyles = {
   content : {
@@ -17,7 +18,7 @@ const customStyles = {
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    console.log('MODALLEEEEE!!!!!!!!!!!!');
+    console.log('MODALLEEEEE!!!!!!!!!!!!' + JSON.stringify(this.props));
     this.state = {
       isHovering: false,
       isExecuting: false,
@@ -115,4 +116,12 @@ AppoModal.propTypes = {
     // onChange: React.PropTypes.func.isRequired
 }
 
-export default AppoModal
+
+function mapStateToProps(state, ownProps) {
+  return {
+    id: ownProps.params.appoId
+    // filter: ownProps.location.query.filter
+  };
+}
+
+export default connect(mapStateToProps)(AppoModal)

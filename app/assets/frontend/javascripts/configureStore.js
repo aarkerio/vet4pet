@@ -17,7 +17,7 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(thunkMiddleware, routemiddleware, createLogger()),
-      DevTools.instrument()
+      window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
 
