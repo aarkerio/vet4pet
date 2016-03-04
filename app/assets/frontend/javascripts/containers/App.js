@@ -1,5 +1,5 @@
 'use strict';
-adsfdsfdsfasdasdas
+
 import React from 'react';
 import ApposComponent from './Appos_Ctnr';
 import AppoModal from '../components/AppoModal';
