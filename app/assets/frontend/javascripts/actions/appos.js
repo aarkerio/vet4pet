@@ -6,10 +6,14 @@ export function fetchAppos() {
   let data = {
       method: 'GET',
       credentials: 'same-origin',
-      headers: {
-         'X-CSRFToken': Cookies.get('csrftoken')
-      }
-    };
+      // headers: {
+      //    'X-CSRFToken': Cookies.get('csrftoken')
+      // }
+  };
+    let json = [{petname: 'Barry', docname: 'R White', reason: 'vaccines', date: 'some date', owner: 'Negro'},
+                {petname: 'Maclo', docname: 'R Lewis', reason: 'little limping', date: 'some date', owner: 'Leo'},
+               ];
+    dispatch(receiveAppos(json));
   // return dispatch => {
   //   return fetch('/appointments/get_appos', data)
   //          .then(response => response.json())

@@ -7,7 +7,7 @@ import DevTools from './DevTools';
 const App = () => (
   <div>
     <ApposComponent />
-  </Div>
+  </div>
 );
 
 export default App;
