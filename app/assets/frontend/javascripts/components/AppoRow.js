@@ -1,7 +1,8 @@
-import React, { PropTypes, Component } from 'react'
-import { Router, Route, Link } from 'react-router'
+'use strict';
+import React, { PropTypes, Component } from 'react';
+import { Router, Route, Link } from 'react-router';
 //import InlineConfirmButton from "react-inline-confirm"
-//import { Button } from 'react-bootstrap'
+//import { Button } from 'react-bootstrap';
 
 // require('bootstrap')
 // require('bootstrap-webpack')

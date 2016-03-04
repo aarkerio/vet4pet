@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import { render } from 'react-dom';
 import * as ApposActionCreators from '../actions/appos';
 import React, { Component, PropTypes } from 'react';
+import { Link, browserHistory } from 'react-router';
 import AppoRow from '../components/AppoRow';
 class ApposComponent extends Component {
   constructor(props) {
     super(props)
   }
   componentDidMount() {
-    console.log(' In componentDidMount ' + JSON.stringify(this.props))
-    let action = ApposActionCreators.fetchAppos()
-    this.props.dispatch(action)
+    console.log(' In componentDidMount ApposComponent' + JSON.stringify(this.props));
+    let action = ApposActionCreators.fetchAppos();
+    this.props.dispatch(action);
   }
   orderList(field, order) {
     return field;

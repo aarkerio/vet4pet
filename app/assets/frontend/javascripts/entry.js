@@ -20,7 +20,8 @@ const my_store = configureStore();
 const synchistory = syncHistoryWithStore(browserHistory, my_store);
 
 render(
-  <Provider store={my_store}>
+    <Provider store={my_store}>
+    <div>
     { /* Tell the Router to use our enhanced history */ }
     <Router history={synchistory}>
       <Route name="app" path="/" handler={App} component={App}>
@@ -28,7 +29,8 @@ render(
           <Route path="/appointments/" component={ApposComponent}/>
           <Route path="/appointment/:appoId" component={AppoModal}/>
       </Route>
-    </Router>
+        </Router>
+        </div>
   </Provider>,
   document.getElementById('reactroot')
 );

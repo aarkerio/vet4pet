@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
+import { Link, browserHistory } from 'react-router';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 
