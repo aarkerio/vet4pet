@@ -1,10 +1,13 @@
-import React from 'react'
-import ApposComponent from './Appos_Ctnr'
-// import DevTools from './DevTools'
+'use strict';
+
+import React from 'react';
+import ApposComponent from './Appos_Ctnr';
+import AppoModal from '../components/AppoModal';
+import DevTools from './DevTools';
 const App = () => (
   <div>
-    <ApposComponent />
-  </div>
-)
+    <ApposComponent />c
+  </Div>
+);
 
-export default App
+export default App;

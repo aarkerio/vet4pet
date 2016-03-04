@@ -11,8 +11,8 @@ module.exports = {
   context: __dirname,
   devtool: 'eval-source-map',
   // the main entry point for our application's frontend JS
-  entry: ['./app/assets/frontend/javascripts/entry.js'],
-
+  //entry: ['./app/assets/frontend/javascripts/entry.js'],
+  entry: ['./entry.js'],
   output: {
     // this is our app/assets/javascripts directory, which is part of the Sprockets pipeline
     path: path.join(__dirname, 'app', 'assets', 'javascripts'),
