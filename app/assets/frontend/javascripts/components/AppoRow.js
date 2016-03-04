@@ -39,7 +39,7 @@ class AppoRow extends Component {
     return (
       <tr key={key}>
         <td>
-          <Link to={"/appointments/"+appointment.id}>Edit</Link>
+          <Link to={"/appointment/"+appointment.id}>Edit</Link>
         </td>
         <td> {appointment.owner}   </td>
         <td> {appointment.date}    </td>

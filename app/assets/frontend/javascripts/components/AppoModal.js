@@ -64,7 +64,8 @@ class AppoModal extends Component {
       return 'success';
     } else if (length > 5) {
       return 'warning';
-    } else if (length > 0) {
+    } else if (length > 0)
+      {
       return 'error';
     }
   }

@@ -3,17 +3,20 @@ import fetch from 'isomorphic-fetch'
 export const RECEIVE_APPOS   = 'RECEIVE_APPOS'
 
 export function fetchAppos() {
-  let data = {
+  return function (dispatch) {
+    let data = {
       method: 'GET',
       credentials: 'same-origin',
-      // headers: {
+      // headers: { return function (dispatch) {
       //    'X-CSRFToken': Cookies.get('csrftoken')
       // }
-  };
-    let json = [{petname: 'Barry', docname: 'R White', reason: 'vaccines', date: 'some date', owner: 'Negro'},
-                {petname: 'Maclo', docname: 'R Lewis', reason: 'little limping', date: 'some date', owner: 'Leo'},
+    };
+      let json = [{id: 14, petname: 'Barry', docname: 'R White', reason: 'vaccines', date: 'some date', owner: 'Negro'},
+                {id: 17, petname: 'Maclo', docname: 'R Lewis', reason: 'little limping', date: 'some date', owner: 'Leo'},
                ];
-    dispatch(receiveAppos(json));
+    
+      dispatch(receiveAppos(json));
+  } 
   // return dispatch => {
   //   return fetch('/appointments/get_appos', data)
   //          .then(response => response.json())
