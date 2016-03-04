@@ -25,7 +25,7 @@ render(
     <Router history={synchistory}>
       <Route name="app" path="/" handler={App} component={App}>
         <Route path="/appointments" component={ApposComponent}/>
-        <Route path="/appointments/:appoId" component={AppoModal}/>
+        <Route path="/appointment/:appoId" component={AppoModal}/>
       </Route>
     </Router>
   </Provider>,

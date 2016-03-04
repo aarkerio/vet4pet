@@ -119,7 +119,7 @@ AppoModal.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    id: ownProps.params.appoId
+    appoId: ownProps.params.appoId
     // filter: ownProps.location.query.filter
   };
 }
