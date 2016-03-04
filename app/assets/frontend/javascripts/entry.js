@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerReducer, reduxRouteComponent } from 'react-router-redux';
 
 import App from './containers/App';
@@ -24,8 +24,9 @@ render(
     { /* Tell the Router to use our enhanced history */ }
     <Router history={synchistory}>
       <Route name="app" path="/" handler={App} component={App}>
-        <Route path="/appointments" component={ApposComponent}/>
-        <Route path="/appointment/:appoId" component={AppoModal}/>
+          <IndexRoute component={App}/>
+          <Route path="/appointments/" component={ApposComponent}/>
+          <Route path="/appointment/:appoId" component={AppoModal}/>
       </Route>
     </Router>
   </Provider>,
