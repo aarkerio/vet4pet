@@ -1,6 +1,8 @@
-import { connect } from 'react-redux'
-import { setVisibilityFilter } from '../actions/index'
-import Link from '../components/Link'
+'use strict';
+
+import { connect } from 'react-redux';
+import { setVisibilityFilter } from '../actions/index';
+import Link from '../components/Link';
 
 // Binding State (Store?) with Reducer with react props
 const mapStateToProps = (state, ownProps) => {

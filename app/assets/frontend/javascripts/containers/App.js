@@ -6,7 +6,7 @@ import AppoModal from '../components/AppoModal';
 import DevTools from './DevTools';
 const App = () => (
   <div>
-    <ApposComponent />c
+    <ApposComponent />
   </Div>
 );
 
