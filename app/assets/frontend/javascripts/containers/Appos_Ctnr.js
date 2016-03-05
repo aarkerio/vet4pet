@@ -8,7 +8,8 @@ import { Link, browserHistory } from 'react-router';
 import AppoRow from '../components/AppoRow';
 class ApposComponent extends Component {
   constructor(props) {
-    super(props)
+      super(props);
+      console.log(' In ApposComponent constructor ####################');
   }
   componentDidMount() {
     console.log(' In componentDidMount ApposComponent' + JSON.stringify(this.props));

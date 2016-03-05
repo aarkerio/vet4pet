@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
+'use strict';
 
-import { fetchAppos, RECEIVE_APPOS } from '../actions/appos'
+import { fetchAppos, RECEIVE_APPOS } from '../actions/appos';
 
 const initialState = {
   apposArrayProp: []
@@ -14,7 +14,7 @@ const appointments_rdcer = (state = initialState, action) => {
             })
 
     default:
-      return state
+      return state;
   }
 }
 

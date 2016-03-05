@@ -4,18 +4,19 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from './reducers/index';
-import DevTools from './containers/DevTools';
-import { syncHistoryWithStore, browserHistory, routerMiddleware, routerReducer, reduxRouteComponent } from 'react-router-redux';
+// import DevTools from './containers/DevTools';
+import { routerReducer } from 'react-router-redux';
 export default function configureStore(initialState) {
-  const routemiddleware = routerMiddleware(browserHistory);
+//  const routemiddleware = routerMiddleware(browserHistory);
   const store = createStore(
-    combineReducers({
-      rootReducer,
-      routing: routerReducer
+      combineReducers({
+        rootReducer,
+        routing: routerReducer
+        //appointments_rdcer
      }),
     initialState,
     compose(
-      applyMiddleware(thunkMiddleware, routemiddleware, createLogger()),
+      applyMiddleware(thunkMiddleware, createLogger()),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
