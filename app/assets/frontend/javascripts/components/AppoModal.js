@@ -40,8 +40,6 @@ class AppoModal extends Component {
     // var rank = this.refs.rank.getValue().trim().toUpperCase();
     // var year = this.refs.year.getValue().trim().toUpperCase();
 
-    // var title_json= JSON.stringify({title: title});
-    // var rank_json= JSON.stringify({rank: rank});
     // var year_json= JSON.stringify({year: year});
     // //alert(title_json);
     // //alert(rank_json);
@@ -67,7 +65,7 @@ class AppoModal extends Component {
       return (
           <div>
         <Modal
-          isOpen={this.state.modalIsOpen}
+          isOpen={this.props.ModalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
         >
@@ -89,9 +87,9 @@ class AppoModal extends Component {
 
 AppoModal.propTypes = {
     id: PropTypes.string.isRequired,
-    isOpen: this.bool.isRequired,
-    ModalIsOpen: this.bool.isRequired,
-    onRequestClose: this.bool.isRequired 
+    isOpen: PropTypes.bool.isRequired,
+    ModalIsOpen: PropTypes.bool.isRequired,
+    onRequestClose: PropTypes.bool.isRequired 
     // Will be called with the new value for the cell
     // onChange: React.PropTypes.func.isRequired
 }
