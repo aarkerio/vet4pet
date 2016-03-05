@@ -5,14 +5,13 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from './reducers/index';
 import DevTools from './containers/DevTools';
-import { routerStateReducer,routerMiddleware, browserHistory, routerReducer } from 'react-router-redux';
-
+import { syncHistoryWithStore, browserHistory, routerMiddleware, routerReducer, reduxRouteComponent } from 'react-router-redux';
 export default function configureStore(initialState) {
   const routemiddleware = routerMiddleware(browserHistory);
   const store = createStore(
     combineReducers({
       rootReducer,
-      routing: routerReducer // , router: routerStateReducer
+      routing: routerReducer
      }),
     initialState,
     compose(

@@ -15,8 +15,7 @@ import AppoModal from './components/AppoModal';
 
 import configureStore from './configureStore';
 
-const my_store = configureStore();
-
+const my_store = configureStore(browserHistory);
 const synchistory = syncHistoryWithStore(browserHistory, my_store);
 
 //  <Route path="/appointment/:appoId" component={AppoModal} />
@@ -26,8 +25,7 @@ render(
     <div>
       { /* Tell the Router to use our enhanced history */ }
       <Router history={synchistory}>
-        <Route name="app" path="/" handler={App} component={App}>
-          <IndexRoute component={App}/>
+        <Route name="app" path="/" handler={App} component={App} >
           <Route path="/appointments/" component={ApposComponent} />
         </Route>
       </Router>
