@@ -39,19 +39,16 @@ class AppoRow extends Component {
   render() {
     const { appointment, key } = this.props;
     return (
-      <tr key={key}>
-        <td>
-          <Link to={"/appointment/"+appointment.id}>Edit</Link>
-        </td>
-        <td> {appointment.owner}   </td>
-        <td> {appointment.date}    </td>
-        <td> {appointment.petname} </td>
-        <td> {appointment.reason}  </td>
-        <td> {appointment.docname} </td>
-        <td>
-          <a href="#" onClick={this.deleteAppointment.bind(this, appointment.id)}>Delete</a>
-        </td>
-      </tr>
+      <div key={key}>
+        <div> <Link to={"/appointment/"+appointment.id+"/"}>Edit</Link></div>
+        <div> {appointment.owner}   </div>
+        <div> {appointment.date}    </div>
+        <div> {appointment.petname} </div>
+        <div> {appointment.reason}  </div>
+        <div> {appointment.docname} </div>
+        <div> <a href="#" onClick={this.deleteAppointment.bind(this, appointment.id)}>Delete</a></div>
+      </div>
+  
     )
   }
 }

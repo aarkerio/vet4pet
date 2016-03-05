@@ -25,22 +25,19 @@ class ApposComponent extends Component {
       rows.push(<AppoRow appointment={appo} key={appo.id} keyRow={appo.id}/>);
     });
     return (
-      <table className="myTable" key="myta">
-        <thead>
-          <tr>
-            <th>Edit</th>
-            <th><a href="#" onClick={this.orderList.bind(this, 'owner', 'asc')}>Owner</a></th>
-            <th><a href="#" onClick={this.orderList.bind(this, 'date', 'asc')}>Scheduled date</a></th>
-            <th>Pet</th>
-            <th>Reason</th>
-            <th><a href="#" onClick={this.orderList.bind(this, 'doctor', 'asc')}>Doctor</a></th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="myTable" key="myta">
+        <div>
+            <div>Edit</div>
+            <div><a href="#" onClick={this.orderList.bind(this, 'owner', 'asc')}>Owner</a></div>
+            <div><a href="#" onClick={this.orderList.bind(this, 'date', 'asc')}>Scheduled date</a></div>
+            <div>Pet</div>
+            <div>Reason</div>
+            <div><a href="#" onClick={this.orderList.bind(this, 'doctor', 'asc')}>Doctor</a></div>
+            <div>Delete</div>
+        </div>
           {rows}
-        </tbody>
-      </table>
+          {this.props.children}
+      </div>
     )
   }
 }

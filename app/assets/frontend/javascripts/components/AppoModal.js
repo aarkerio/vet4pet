@@ -19,13 +19,7 @@ const customStyles = {
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    console.log('MODALLEEEEE!!!!!!!!!!!!' + JSON.stringify(this.props));
-    this.state = {
-      isHovering: false,
-      isExecuting: false,
-      textValues: ["Delete", "Are you sure?", "Deleting..."],
-      modalIsOpen: false
-    };
+      console.log('MODALEEEE!!!!!!!!!!!!' + JSON.stringify(this.props));
   }
 
   openModal() {
@@ -42,7 +36,6 @@ class AppoModal extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
     // var title = this.refs.title.getValue().trim().toUpperCase();
     // var rank = this.refs.rank.getValue().trim().toUpperCase();
     // var year = this.refs.year.getValue().trim().toUpperCase();
@@ -55,7 +48,6 @@ class AppoModal extends Component {
     // //alert(year_json);
     // this.props.onCommentSubmit(title_json,rank_json,year_json);
     // this.props.onRequestHide;
-
     return;
   }
 
@@ -72,15 +64,13 @@ class AppoModal extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <button onClick={this.openModal}>Open Modal</button>
+      return (
+          <div>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-
           <h2>Hello</h2>
           <button onClick={this.closeModal}>close</button>
           <div>I am a modal</div>
@@ -91,37 +81,30 @@ class AppoModal extends Component {
             <button>inside</button>
             <button>the modal</button>
           </form>
-        </Modal>
-      </div>
-     //    <form className="testModal" onSubmit={this.handleSubmit} >
-     //      <div className="modal-body">
-     //        <p><Input type="text" defaultValue={this.state.title} ref="title" className="form-control" required/></p>
-     //        <p><Input type="text" defaultValue={this.state.rank} ref="rank" className="form-control" required/></p>
-     //        <p><Input type="text" defaultValue={this.state.year} ref="year" className="form-control" required/></p>
-     //      </div>
-     //      <div className="modal-footer">
-     //        <ButtonGroup>
-     //          <Button className="btn btn-default" onClick={this.props.onRequestHide} data-dismiss="modal" active>Close</Button>
-     //          <Button bsStyle="primary" className="btn btn-default" type="submit" disabled={this.state.isSubmitting}>Save</Button>
-     //        </ButtonGroup>
-     //      </div>
-     //    </form>
-     // </Modal>
-    );
-
+         </Modal>
+          </div>
+    )
   }
 }
 
 AppoModal.propTypes = {
-    appoId: PropTypes.number
+    id: PropTypes.string.isRequired,
+    isOpen: this.bool.isRequired,
+    ModalIsOpen: this.bool.isRequired,
+    onRequestClose: this.bool.isRequired 
     // Will be called with the new value for the cell
     // onChange: React.PropTypes.func.isRequired
 }
 
+AppoModal.defaultProps = {
+    isOpen: true,
+    ModalIsOpen: true,
+    onRequestClose: true
+ }
 
 function mapStateToProps(state, ownProps) {
   return {
-    appoId: ownProps.params.appoId
+      id: ownProps.params.id
     // filter: ownProps.location.query.filter
   };
 }

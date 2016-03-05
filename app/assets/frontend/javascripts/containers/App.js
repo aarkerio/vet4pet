@@ -14,7 +14,8 @@ class App extends Component {
        <h1>Anwendung</h1>
        <p><Link to="/">Zuhause.</Link></p>
        <p><Link to="/appointments">Edit Ernennungs.</Link></p>
-       <div><button onClick={() => browserHistory.push('/appointments')}>Zu Ernennungs</button></div>
+            <div><button onClick={() => browserHistory.push('/appointments')}>Zu Ernennungs</button></div>
+            <p><Link to="/appointment/14">Bearbeitung</Link></p>
        <p><Link to="/about">About</Link></p>
        <p><Link to="/users">Users</Link></p>
        {this.props.children}
