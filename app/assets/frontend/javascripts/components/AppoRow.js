@@ -1,4 +1,5 @@
 'use strict';
+
 import React, { PropTypes, Component } from 'react';
 import { Router, Route, Link } from 'react-router';
 //import InlineConfirmButton from "react-inline-confirm"

@@ -19,18 +19,19 @@ const my_store = configureStore();
 
 const synchistory = syncHistoryWithStore(browserHistory, my_store);
 
+//  <Route path="/appointment/:appoId" component={AppoModal} />
+//   </Route>
 render(
     <Provider store={my_store}>
     <div>
-    { /* Tell the Router to use our enhanced history */ }
-    <Router history={synchistory}>
-      <Route name="app" path="/" handler={App} component={App}>
+      { /* Tell the Router to use our enhanced history */ }
+      <Router history={synchistory}>
+        <Route name="app" path="/" handler={App} component={App}>
           <IndexRoute component={App}/>
-          <Route path="/appointments/" component={ApposComponent}/>
-          <Route path="/appointment/:appoId" component={AppoModal}/>
-      </Route>
-        </Router>
-        </div>
+          <Route path="/appointments/" component={ApposComponent} />
+        </Route>
+      </Router>
+    </div>
   </Provider>,
   document.getElementById('reactroot')
-);
+)
