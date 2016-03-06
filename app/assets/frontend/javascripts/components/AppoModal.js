@@ -63,13 +63,17 @@ class AppoModal extends Component {
 
   render() {
       return (
-          <div>
-        <Modal
-          isOpen={this.props.ModalIsOpen}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-        >
-          <h2>Hello</h2>
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <Modal
+                    isOpen={this.props.ModalIsOpen}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                  >
+                 <h2>Hello</h2>
           <button onClick={this.closeModal}>close</button>
           <div>I am a modal</div>
           <form>
@@ -80,7 +84,9 @@ class AppoModal extends Component {
             <button>the modal</button>
           </form>
          </Modal>
-          </div>
+              </div>
+              </div>
+       </div>
     )
   }
 }
