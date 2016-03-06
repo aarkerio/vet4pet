@@ -5,9 +5,6 @@ import { Router, Route, Link } from 'react-router';
 //import InlineConfirmButton from "react-inline-confirm"
 //import { Button } from 'react-bootstrap';
 
-// require('bootstrap')
-// require('bootstrap-webpack')
-
 class AppoRow extends Component {
   constructor(props) {
     super(props)

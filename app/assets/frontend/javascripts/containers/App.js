@@ -3,6 +3,9 @@
 import React, { PropTypes, Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 
+require('bootstrap');
+require('bootstrap-webpack');
+
 class App extends Component {
   constructor(props) {
       super(props);

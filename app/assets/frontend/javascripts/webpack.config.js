@@ -60,7 +60,13 @@ module.exports = {
         // "node/npm module name": "name of exported library variable"
   //      "react": "React",
    //     "react-dom": "ReactDOM"
-  // },
+    // },
+     plugins: [
+        new webpack.ProvidePlugin({
+            '$': "jquery",
+            'jQuery': "jquery"
+        })
+    ]
   // plugins: [
   //   new webpack.ProvidePlugin({
   //     React: "react",

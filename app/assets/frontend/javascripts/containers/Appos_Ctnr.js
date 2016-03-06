@@ -6,11 +6,16 @@ import * as ApposActionCreators from '../actions/appos';
 import React, { Component, PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
 import AppoRow from '../components/AppoRow';
+
 class ApposComponent extends Component {
   constructor(props) {
       super(props);
       console.log(' In ApposComponent constructor ####################');
   }
+    
+  /**
+   * Load default appointment
+   **/
   componentDidMount() {
     console.log(' In componentDidMount ApposComponent' + JSON.stringify(this.props));
     let action = ApposActionCreators.fetchAppos();
