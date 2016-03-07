@@ -1,4 +1,4 @@
-jest.dontMock('../scripts/testComponent');
+jest.dontMock('./scripts/testComponent');
 
 var React = require('react');
 var ReactDOM = require('react-dom');

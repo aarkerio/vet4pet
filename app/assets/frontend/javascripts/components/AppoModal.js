@@ -33,11 +33,6 @@ class AppoModal extends Component {
     // var title = this.refs.title.getValue().trim().toUpperCase();
     // var rank = this.refs.rank.getValue().trim().toUpperCase();
     // var year = this.refs.year.getValue().trim().toUpperCase();
-
-    // var year_json= JSON.stringify({year: year});
-    // //alert(title_json);
-    // //alert(rank_json);
-    // //alert(year_json);
     // this.props.onCommentSubmit(title_json,rank_json,year_json);
     // this.props.onRequestHide;
     return;
@@ -87,7 +82,7 @@ const dialogStyle = function() {
     padding: 20
   };
 };
-      return (
+  return (
         <div className='modal-example'>
           <Modal aria-labelledby='modal-label'
             style={modalStyle}
@@ -95,11 +90,11 @@ const dialogStyle = function() {
             show={true}
             onHide={this.handleChange}
           >
-              <Modal.Header>
+          <Modal.Header>
                 <Modal.Title>Modal Überschrift</Modal.Title>
-              </Modal.Header>
+          </Modal.Header>
 
-              <Modal.Body>
+          <Modal.Body>
               <form>
               <label for="usr">Owner:</label>
               <input className="form-control" id="for_owner" />
@@ -108,15 +103,14 @@ const dialogStyle = function() {
               <label for="usr">Date:</label>
               <input className="form-control" id="for_petname" />
               </form>
-              </Modal.Body>
+          </Modal.Body>
 
-              <Modal.Footer>
+          <Modal.Footer>
               <Button>Close</Button>
               <Button bsStyle="primary">Änderungen speichern</Button>
-              </Modal.Footer>
-
-          </Modal>
-        </div>
+          </Modal.Footer>
+        </Modal>
+      </div>
       );
   }
 }

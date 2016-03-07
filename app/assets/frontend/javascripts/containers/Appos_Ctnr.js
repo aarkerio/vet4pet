@@ -25,23 +25,28 @@ class ApposComponent extends Component {
     return field;
   }
   render() {
-    var rows = [];
-    this.props.apposArrayProp.forEach(function (appo) {
-      rows.push(<AppoRow appointment={appo} key={appo.id} keyRow={appo.id}/>);
-    });
     return (
-      <div className="myTable" key="myta">
-        <div>
-            <div>Edit</div>
-            <div><a href="#" onClick={this.orderList.bind(this, 'owner', 'asc')}>Owner</a></div>
-            <div><a href="#" onClick={this.orderList.bind(this, 'date', 'asc')}>Scheduled date</a></div>
-            <div>Pet</div>
-            <div>Reason</div>
-            <div><a href="#" onClick={this.orderList.bind(this, 'doctor', 'asc')}>Doctor</a></div>
-            <div>Delete</div>
-        </div>
-          {rows}
-          {this.props.children}
+      <table className="MyClassName">
+        <thead>
+          <tr>
+             <th key='kedit'>Edit</th>
+             <th key='kowner'><a href="#" onClick={this.orderList.bind(this, 'owner', 'asc')}>Owner</a></th>
+             <th key='kdate'><a href="#" onClick={this.orderList.bind(this, 'date', 'asc')}>Scheduled date</a></th>
+             <th key='kpetname'>Pet</th>
+             <th key='kreason'>Reason</th>
+             <th key='kdoctor'><a href="#" onClick={this.orderList.bind(this, 'doctor', 'asc')}>Doctor</a></th>
+             <th key='kdel'>Delete</th>
+           </tr>
+         </thead>
+         <tbody>
+            {
+              this.props.apposArrayProp.forEach(function(appo) {
+                <AppoRow appointment={appo} key={appo.id} keyRow={appo.id} />
+              })
+              this.props.children
+            }
+          </tbody>
+        </table>
       </div>
     )
   }
