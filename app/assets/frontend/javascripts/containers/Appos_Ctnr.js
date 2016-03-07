@@ -25,7 +25,13 @@ class ApposComponent extends Component {
     return field;
   }
   render() {
-    return (
+    let rows = [];
+    this.props.apposArrayProp.forEach(function(appo) {
+        rows.push(<AppoRow appointment={appo} key={appo.id} keyRow={appo.id} />);
+    });
+        
+      return (
+      <div>
       <table className="MyClassName">
         <thead>
           <tr>
@@ -39,14 +45,10 @@ class ApposComponent extends Component {
            </tr>
          </thead>
          <tbody>
-            {
-              this.props.apposArrayProp.forEach(function(appo) {
-                <AppoRow appointment={appo} key={appo.id} keyRow={appo.id} />
-              })
-              this.props.children
-            }
+            { rows }
           </tbody>
-        </table>
+          </table>
+          { this.props.children }
       </div>
     )
   }

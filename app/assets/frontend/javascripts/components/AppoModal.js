@@ -8,19 +8,15 @@ import { Button, Modal } from 'react-bootstrap';
 
 class AppoModal extends Component {
   constructor(props) {
-    super(props);
-      console.log('MODALEEEE!!!!!!!!!!!!' + JSON.stringify(this.props));
-  }
-
-  openModal() {
-     return;
-    //dispatch(closeModal);    
-    //this.setState({modalIsOpen: true});
+      super(props);
+      console.log('MO22222 222222E!!!!!!!' + JSON.stringify(this.state));
+      this.closeModal = this.closeModal.bind(this);
+      this.state = { showModal: true };
   }
 
   closeModal() {
-        return;
-    //this.setState({modalIsOpen: false});
+    this.setState({showModal: false});
+    console.log('closeModal function state:'+ JSON.stringify(this.state));
   }
 
   handleChange(evt) {
@@ -30,9 +26,6 @@ class AppoModal extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // var title = this.refs.title.getValue().trim().toUpperCase();
-    // var rank = this.refs.rank.getValue().trim().toUpperCase();
-    // var year = this.refs.year.getValue().trim().toUpperCase();
     // this.props.onCommentSubmit(title_json,rank_json,year_json);
     // this.props.onRequestHide;
     return;
@@ -49,6 +42,7 @@ class AppoModal extends Component {
       return 'error';
     }
   }
+    
   render() {
     let rand = ()=> (Math.floor(Math.random() * 20) - 10);
 
@@ -82,32 +76,33 @@ const dialogStyle = function() {
     padding: 20
   };
 };
-  return (
-        <div className='modal-example'>
+ return (
+        <div id="responsive" className="modal hide fade" tabIndex="-1" >
           <Modal aria-labelledby='modal-label'
             style={modalStyle}
             backdropStyle={backdropStyle}
-            show={true}
-            onHide={this.handleChange}
+            show={this.state.showModal}
+            onHide={this.closeModal}
+            onRequestHide={this.closeModal}
           >
           <Modal.Header>
-                <Modal.Title>Modal Überschrift</Modal.Title>
+             <Modal.Title>Modal Überschrift Rot</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-              <form>
-              <label for="usr">Owner:</label>
+            <form>
+              <label htmlFor="for_owner">Owner:</label>
               <input className="form-control" id="for_owner" />
-              <label for="usr">Pet Name:</label>
-              <input className="form-control" id="for_petname" />
-              <label for="usr">Date:</label>
-              <input className="form-control" id="for_petname" />
-              </form>
+                <label htmlFor="for_petname">Pet Name:</label>
+                <input className="form-control" id="for_petname" />
+                <label htmlFor="for_date">Date:</label>
+                <input className="form-control" id="for_date" />
+            </form>
           </Modal.Body>
 
           <Modal.Footer>
-              <Button>Close</Button>
-              <Button bsStyle="primary">Änderungen speichern</Button>
+             <Button onClick={this.closeModal}>Close</Button>
+             <Button bsStyle="primary">Änderungen speichern</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -116,24 +111,12 @@ const dialogStyle = function() {
 }
 
 AppoModal.propTypes = {
-    id: PropTypes.string.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-    ModalIsOpen: PropTypes.bool.isRequired,
-    onRequestClose: PropTypes.bool.isRequired 
-    // Will be called with the new value for the cell
-    // onChange: React.PropTypes.func.isRequired
+    id: PropTypes.string.isRequired
 }
-
-AppoModal.defaultProps = {
-    isOpen: true,
-    ModalIsOpen: true,
-    onRequestClose: true
- }
 
 function mapStateToProps(state, ownProps) {
   return {
       id: ownProps.params.id
-    // filter: ownProps.location.query.filter
   };
 }
 
