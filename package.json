@@ -44,8 +44,19 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14"
   },
+    "scripts": {
+  "test": "jest"
+ },
+ "jest": {
+   "rootDir": ".",
+   "testDirectoryName": "tests",
+   "scriptPreprocessor": "./node_modules/babel-jest",
+   "unmockedModulePathPatterns": [
+     "react"
+   ]
+  },
   "engines": {
-    "node": ">= 0.10"
+      "node": ">= 0.10"
   },
   "preprocessors": {
     "node_modules/react/react.js": [
@@ -71,6 +82,7 @@
     "globalize": "^1.1.0",
     "imports-loader": "~0.6.3",
     "jest": "^0.1.40",
+    "jest-webpack": "^0.2.1",
     "jshint": "^2.9.1",
     "moment": "^2.11.1",
     "react": "^0.14.7",

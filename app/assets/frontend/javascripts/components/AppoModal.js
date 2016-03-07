@@ -24,6 +24,7 @@ class AppoModal extends Component {
   }
 
   handleChange(evt) {
+    return;
     this.props.onChange(evt.target.value);
   }
 
@@ -53,28 +54,69 @@ class AppoModal extends Component {
       return 'error';
     }
   }
+  render() {
+    let rand = ()=> (Math.floor(Math.random() * 20) - 10);
 
-    render() {
+    const modalStyle = {
+      position: 'fixed',
+      zIndex: 1040,
+      top: 0, bottom: 0, left: 0, right: 0
+};
+
+const backdropStyle = {
+  ...modalStyle,
+  zIndex: 'auto',
+  backgroundColor: '#000',
+  opacity: 0.5
+};
+
+const dialogStyle = function() {
+  // we use some psuedo random coords so modals
+  // don't sit right on top of each other.
+  let top = 50 + rand();
+  let left = 50 + rand();
+
+  return {
+    position: 'absolute',
+    width: 400,
+    top: top + '%', left: left + '%',
+    transform: `translate(-${top}%, -${left}%)`,
+    border: '1px solid #e5e5e5',
+    backgroundColor: 'white',
+    boxShadow: '0 5px 15px rgba(0,0,0,.5)',
+    padding: 20
+  };
+};
       return (
-            <div className="static-modal">
-    <Modal.Dialog>
-      <Modal.Header>
-              <Modal.Title>Modal Überschrift</Modal.Title>
-      </Modal.Header>
+        <div className='modal-example'>
+          <Modal aria-labelledby='modal-label'
+            style={modalStyle}
+            backdropStyle={backdropStyle}
+            show={true}
+            onHide={this.handleChange}
+          >
+              <Modal.Header>
+                <Modal.Title>Modal Überschrift</Modal.Title>
+              </Modal.Header>
 
-      <Modal.Body>
+              <Modal.Body>
               <form>
-              <input />
+              <label for="usr">Owner:</label>
+              <input className="form-control" id="for_owner" />
+              <label for="usr">Pet Name:</label>
+              <input className="form-control" id="for_petname" />
+              <label for="usr">Date:</label>
+              <input className="form-control" id="for_petname" />
               </form>
-      </Modal.Body>
+              </Modal.Body>
 
-      <Modal.Footer>
-        <Button>Close</Button>
-        <Button bsStyle="primary">Änderungen speichern</Button>
-      </Modal.Footer>
+              <Modal.Footer>
+              <Button>Close</Button>
+              <Button bsStyle="primary">Änderungen speichern</Button>
+              </Modal.Footer>
 
-    </Modal.Dialog>
-  </div>
+          </Modal>
+        </div>
       );
   }
 }
