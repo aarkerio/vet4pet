@@ -2,19 +2,9 @@
 
 import React, { PropTypes, Component } from 'react';
 import { Link, browserHistory } from 'react-router';
-import Modal from 'react-modal';
 import { connect } from 'react-redux';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
+import { Button, Modal } from 'react-bootstrap';
 
 class AppoModal extends Component {
   constructor(props) {
@@ -23,11 +13,14 @@ class AppoModal extends Component {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+     return;
+    //dispatch(closeModal);    
+    //this.setState({modalIsOpen: true});
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+        return;
+    //this.setState({modalIsOpen: false});
   }
 
   handleChange(evt) {
@@ -61,33 +54,28 @@ class AppoModal extends Component {
     }
   }
 
-  render() {
+    render() {
       return (
-        <div id="myModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <Modal
-                    isOpen={this.props.ModalIsOpen}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                  >
-                 <h2>Hello</h2>
-          <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
-         </Modal>
-              </div>
-              </div>
-       </div>
-    )
+            <div className="static-modal">
+    <Modal.Dialog>
+      <Modal.Header>
+              <Modal.Title>Modal Überschrift</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+              <form>
+              <input />
+              </form>
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button>Close</Button>
+        <Button bsStyle="primary">Änderungen speichern</Button>
+      </Modal.Footer>
+
+    </Modal.Dialog>
+  </div>
+      );
   }
 }
 
