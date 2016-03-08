@@ -1,0 +1,10 @@
+# config/cable.yml
+production:
+  url: redis://localhost:6379
+
+local: &local
+  url: redis://localhost:6379
+
+development: *local
+test: *local
+

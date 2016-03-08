@@ -15,6 +15,7 @@
     "bootstrap": "^3.3.6",
     "bootstrap-webpack": "0.0.5",
     "cldr-data": "^28.0.3",
+    "cookie": "^0.2.3",
     "cookies": "^0.5.1",
     "css-loader": "^0.23.1",
     "es6-promise": "^3.1.2",
@@ -31,6 +32,7 @@
     "normalizr": "^2.0.0",
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.3",
+    "react-cookie": "^0.4.5",
     "react-dom": "^0.14.7",
     "react-inline-confirm": "^2.0.0",
     "react-modal": "^0.6.1",
@@ -44,19 +46,19 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14"
   },
-    "scripts": {
-  "test": "jest"
- },
- "jest": {
-   "rootDir": ".",
-   "testDirectoryName": "tests",
-   "scriptPreprocessor": "./node_modules/babel-jest",
-   "unmockedModulePathPatterns": [
-     "react"
-   ]
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "rootDir": ".",
+    "testDirectoryName": "tests",
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "react"
+    ]
   },
   "engines": {
-      "node": ">= 0.10"
+    "node": ">= 0.10"
   },
   "preprocessors": {
     "node_modules/react/react.js": [
