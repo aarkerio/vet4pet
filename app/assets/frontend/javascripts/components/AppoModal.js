@@ -83,8 +83,6 @@ class AppoModal extends Component {
             style={modalStyle}
             backdropStyle={backdropStyle}
             show={this.state.showModal}
-            // onHide={this.closeModal}
-            // onRequestHide={this.closeModal}
           >
           <Modal.Header>
              <Modal.Title>Modal Überschrift Rot</Modal.Title>
