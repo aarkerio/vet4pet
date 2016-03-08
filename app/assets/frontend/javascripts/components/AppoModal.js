@@ -90,17 +90,17 @@ class AppoModal extends Component {
 
           <Modal.Body>
             <form>
-              <label htmlFor="for_owner">Owner:</label>
-              <input className="form-control" id="for_owner" />
-                <label htmlFor="for_petname">Pet Name:</label>
+              <label htmlFor="for_owner">Eigentümer:</label>
+                <input className="form-control" id="for_owner" />
+                <label htmlFor="for_petname">Kosename (haustier):</label>
                 <input className="form-control" id="for_petname" />
-                <label htmlFor="for_date">Date:</label>
+                <label htmlFor="for_date">Datum:</label>
                 <input className="form-control" id="for_date" />
             </form>
           </Modal.Body>
 
           <Modal.Footer>
-             <Button onClick={this.closeModal}>Close</Button>
+             <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
              <Button bsStyle="primary">Änderungen speichern</Button>
           </Modal.Footer>
         </Modal>
