@@ -35,13 +35,14 @@ gem 'haml'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 # Use Unicorn as the app server
-gem 'unicorn'
+# gem 'unicorn'
 gem 'typescript-rails'
 gem 'js_cookie_rails'
 gem 'redis-rails'
+gem 'foreman'
 gem 'newrelic_rpm'
 gem 'react-rails'
-gem 'webpack-rails'
+#gem 'webpack-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

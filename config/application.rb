@@ -33,6 +33,8 @@ module Vet4pet
       # you can also specify a different test framework or ORM here
       # g.orm             :mongoid
     end
-    config.react.addons = true # defaults to false
+    #config.react.addons = true # defaults to false
+    # config.action_cable.allowed_request_origins = ['http://localhost.com:3000', /http:\/\/ruby.*/]
+    #config.action_cable.disable_request_forgery_protection = true
   end
 end

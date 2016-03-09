@@ -1,5 +1,6 @@
-# Chipotle Software 2015 (c) GPLv3
+# Chipotle Software 2015-2016 (c) MIT License
 class ApplicationController < ActionController::Base
+  
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   #protect_from_forgery with: :exception

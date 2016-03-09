@@ -1,3 +1,5 @@
+# Chipotle Software (c) 2015-2016 MIT License
+
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
