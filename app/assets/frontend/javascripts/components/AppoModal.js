@@ -13,9 +13,7 @@ class AppoModal extends Component {
       this.state = { showModal: true };
       console.log('MO22222 222222E!!!!!!!' + JSON.stringify(this.state));
   }
-  statics() {
-        console.log('I am static');
-  }
+
   closeModal() {
     this.setState({showModal: false});
     console.log('closeModal function state:'+ JSON.stringify(this.state));

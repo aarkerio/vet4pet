@@ -6,7 +6,12 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   def index
   end
-
+  
+  def broadcast
+    appos = Appointment.to_react
+    ActionCable.server.broadcast 'snippets', appos: appos
+  end
+  
   # GET /appointments/get_appos
   def get_appos
     appos = Appointment.to_react

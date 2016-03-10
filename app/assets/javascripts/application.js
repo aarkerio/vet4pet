@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require js.cookie
+//= require channels
+//= require_tree .

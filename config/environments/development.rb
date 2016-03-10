@@ -40,4 +40,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # ActionCable
+  # config.action_cable.url = "ws://localhost:3000/cable"
+  # config.cache_classes=false
+  # config.allow_concurrency=true
+  # config.middleware.delete Rack::Lock
 end
