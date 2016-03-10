@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 #gem 'rails', '4.2.3'
 gem 'rails', '5.0.0.beta3'
 gem 'puma'
+gem 'devise', :github => 'plataformatec/devise', :branch => 'master'
 #gem 'actioncable', github: 'rails/actioncable', branch: 'archive'
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -41,7 +42,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'devise'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'typescript-rails'
