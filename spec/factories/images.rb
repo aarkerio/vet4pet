@@ -3,5 +3,4 @@ FactoryGirl.define do
     file "MyString"
     user nil
   end
-
 end

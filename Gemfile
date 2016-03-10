@@ -34,8 +34,8 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 #gem 'jbuilder', '~> 2.0'
 
-#ActiveModel::Serializer implementation and Rails hooks 
-gem 'active_model_serializers'
+#ActiveModel::Serializer implementation and Rails hooks
+gem 'active_model_serializers', '~> 0.10.0.rc1'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
