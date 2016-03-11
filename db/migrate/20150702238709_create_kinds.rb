@@ -1,4 +1,4 @@
-class CreateKinds < ActiveRecord::Migration[5.0]
+class CreateKinds < ActiveRecord::Migration
   def change
     create_table :kinds do |t|
       t.string :name

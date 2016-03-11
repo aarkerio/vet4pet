@@ -40,20 +40,16 @@ ActiveRecord::Schema.define(version: 20150708225237) do
   create_table "images", force: :cascade do |t|
     t.string   "file"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "images", ["user_id"], name: "index_images_on_user_id", using: :btree
 
   create_table "kinds", force: :cascade do |t|
     t.string   "name"
     t.integer  "image_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "kinds", ["image_id"], name: "index_kinds_on_image_id", using: :btree
 
   create_table "pets", force: :cascade do |t|
     t.string   "name"
