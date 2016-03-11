@@ -18,7 +18,6 @@ module.exports = {
     path: path.join(__dirname,  'app/assets/javascripts/'),
     // the filename of the compiled bundle, e.g.
     filename: 'bundle.js',
-    // filename: 'bundle.js',
     // if the webpack code-splitting feature is enabled, this is the path it'll use to download bundles
     publicPath: '/assets',
     devtoolModuleFilenameTemplate: '[resourcePath]',
