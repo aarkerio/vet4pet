@@ -3,18 +3,23 @@ import cookie from 'react-cookie';
 
 export const RECEIVE_APPOS   = 'RECEIVE_APPOS'
 
-export function fetchAppos() {
-  return function (dispatch) {
+export function fetchAppos(appo_id=0) {
+   return function (dispatch) {        
     let data = {
-      method: 'GET',
+      method: 'POST',
       credentials: 'same-origin',
+      mode: 'same-origin',
+      body: JSON.stringify({
+        appoid: appo_id
+      }),
       headers: {
-        'X-CSRFToken': cookie.load('csrftoken')
+        'Accept':       'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken':  cookie.load('csrftoken')
       }
     }
-
     return fetch('/appointments/get_appos', data)
-            .then(response => response.json())
+            .then(response => response.json())  // promise
             .then(json => dispatch(receiveAppos(json)))
   }
 }

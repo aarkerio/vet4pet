@@ -3,7 +3,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-
+import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
 class AppoModal extends Component {
@@ -11,9 +11,17 @@ class AppoModal extends Component {
       super(props);
       this.closeModal = this.closeModal.bind(this);
       this.state = { showModal: true };
-      console.log('MO22222 222222E!!!!!!!' + JSON.stringify(this.state));
+      console.log('MO222#####33333 222222E!!!!!!!' + JSON.stringify(this.props));
   }
-
+  
+  /**
+   * Load default appointment
+   **/
+  componentDidMount() {
+    console.log(' In componentDidMount ApposModal' + JSON.stringify(this.props));
+    let action = ApposActionCreators.fetchAppo(this.props.id);
+    this.props.dispatch(action);
+  }
   closeModal() {
     this.setState({showModal: false});
     console.log('closeModal function state:'+ JSON.stringify(this.state));

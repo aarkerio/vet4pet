@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   #protect_from_forgery with: :exception
   protect_from_forgery except: [:index, :get_appos]
-  before_action :authenticate_user!, except: [:welcome]
+  #before_action :authenticate_user!, except: [:welcome]
 
   before_filter :layout_by_action
 
