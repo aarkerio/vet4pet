@@ -1,1 +1,0 @@
-/home/manuel/entwicklung/rails/chipotle/vet4pet/.eslintrc.js
