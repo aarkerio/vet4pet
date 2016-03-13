@@ -8,10 +8,10 @@ import { Button, Modal } from 'react-bootstrap';
 
 class AppoModal extends Component {
   constructor(props) {
-      super(props);
-      this.closeModal = this.closeModal.bind(this);
-      this.state = { showModal: true };
-      console.log('MO222#####33333 222222E!!!!!!!' + JSON.stringify(this.props));
+    super(props);
+    this.closeModal = this.closeModal.bind(this);
+    this.state = { showModal: true };
+    console.log('MO222#####33333 222222E!!!!!!!' + JSON.stringify(this.props));
   }
   
   /**
@@ -34,8 +34,9 @@ class AppoModal extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.props.onRequestHide;
-    return;
+    let action = ApposActionCreators.fetchAppos(this.props.id)
+    this.props.dispatch();
+    browserHistory.push('/appointments');
   }
 
   validationTest() {
@@ -95,13 +96,13 @@ class AppoModal extends Component {
           </Modal.Header>
 
           <Modal.Body>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <label htmlFor="for_owner">Eigentümer:</label>
                 <input className="form-control" id="for_owner" />
                 <label htmlFor="for_petname">Kosename (haustier):</label>
                 <input className="form-control" id="for_petname" />
                 <label htmlFor="for_date">Datum:</label>
-                <input className="form-control" id="for_date" />
+                <input className="form-control" id="for_date" value={this.state.date} />
             </form>
           </Modal.Body>
 
@@ -116,14 +117,33 @@ class AppoModal extends Component {
 }
 
 AppoModal.propTypes = {
-    id: PropTypes.string.isRequired
+    id:      PropTypes.string.isRequired,
+    owner:   PropTypes.string.isRequired,
+    date:    PropTypes.string.isRequired,
+    petname: PropTypes.string.isRequired,
+    reason:  PropTypes.string.isRequired,
+    docname: PropTypes.string.isRequired
 }
+
+AppoModal.defaultProps = {
+    owner:   '',
+    date:    '',
+    petname: '',
+    reason:  '',
+    docname: ''
+ }
 
 function mapStateToProps(state, ownProps) {
   return {
-      id: ownProps.params.id,
-      showModal: ownProps.showModal
+    id:        ownProps.params.id,
+    owner:     ownProps.owner,
+    date:      ownProps.date,
+    petname:   ownProps.petname,
+    reason:    ownProps.reason,
+    docname:   ownProps.docname,
+    showModal: ownProps.showModal
   }
 }
 
+// binding React-Redux
 export default connect(mapStateToProps)(AppoModal)

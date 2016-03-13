@@ -68,8 +68,8 @@ class Appointment < ActiveRecord::Base
   # appo_id - The Integer number of appointemnt id.
   #
   # Returns hash object or nil.
-  def self.to_react(appo_id=nil)
-    appos = appo_id.nil? ? self.where(active:true).order('scheduled_time ASC').limit(20) : self.where(active:true, id: appo_id).limit(20)
+  def self.to_react(appo_id)
+    appos = appo_id == 0 ? self.where(active:true).order('scheduled_time ASC').limit(20) : self.where(active:true, id: appo_id).limit(20)
 
     react = appos.map do |appo|
       react_order(appo)
