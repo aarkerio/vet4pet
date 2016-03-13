@@ -69,14 +69,19 @@ class Appointment < ActiveRecord::Base
   #
   # Returns hash object or nil.
   def self.to_react(appo_id)
-    appos = appo_id == 0 ? self.where(active:true).order('scheduled_time ASC').limit(20) : self.where(active:true, id: appo_id).limit(20)
+    logger.debug "### appo_id ##############>>>> #{appo_id} "
+    conditions = {active: true}
+    
+    conditions[:id] = appo_id  unless appo_id == 0
+    
+    appos = self.where(conditions).order('scheduled_time ASC').limit(20)
 
     react = appos.map do |appo|
       react_order(appo)
     end
   end
 
-  # Private: Reorder to send to React.js view.
+  # Private: Reorder to send the JSON to React.js view.
   #
   # appo - Active record object.
   #
