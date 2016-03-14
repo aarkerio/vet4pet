@@ -9,7 +9,6 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    this.closeModal = this.closeModal.bind(this);
     this.state = { showModal: true };
     console.log('MO222#####33333 222222E!!!!!!!' + JSON.stringify(this.props));
   }
@@ -17,26 +16,19 @@ class AppoModal extends Component {
   /**
    * Load default appointment
    **/
-  componentDidMount() {
+  componentDidMount() {  
     console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props.routeParams.id));
     let action = ApposActionCreators.fetchAppos(this.props.routeParams.id);
     this.props.dispatch(action);
-    console.log('Passed!!');
-  }
-    
-  closeModal() {
-    this.setState({showModal: false});
-    console.log('closeModal function state:'+ JSON.stringify(this.state));
   }
 
-  handleChange(evt) {
-    return;
-    this.props.onChange(evt.target.value);
-  }
-
+/**
+  * Send data to new appointment
+  **/
   handleSubmit(e) {
     e.preventDefault();
-    this.props.dispatch(ApposActionCreators.sendAppo(this.props.routeParams.id));
+    let action = ApposActionCreators.sendAppo(this.props.routeParams.id);
+    this.props.dispatch(action);
     browserHistory.push('/appointments');
   }
 
@@ -99,15 +91,15 @@ class AppoModal extends Component {
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="for_owner">Eigentümer:</label>
-              <input className="form-control" id="for_owner" name="owner" value={this.state.owner} />
+              <input className="form-control" id="for_owner" name="owner" defaultValue={this.props.owner} />
               <label htmlFor="for_petname">Kosename (haustier):</label>
-              <input className="form-control" id="for_petname" value={this.state.petname} />
+              <input className="form-control" id="for_petname" defaultValue={this.state.petname} />
               <label htmlFor="for_petname">Doc:</label>
-              <input className="form-control" id="for_petname" value={this.state.docname} />
+              <input className="form-control" id="for_petname" defaultValue={this.state.docname} />
               <label htmlFor="for_petname">Vernunft:</label>
-              <input className="form-control" id="for_petname" value={this.state.reason} />
+              <input className="form-control" id="for_petname" defaultValue={this.state.reason} />
               <label htmlFor="for_date">Datum:</label>
-              <input className="form-control" id="for_date" name="date" value={this.state.date} />
+              <input className="form-control" id="for_date" name="date" defaultValue={this.state.date} />
               <label htmlFor="for_reminder">Erinner:</label>
               <input type="checkbox" name="reminder" checked={this.state.reminder} />
             </form>
@@ -121,38 +113,32 @@ class AppoModal extends Component {
       </div>
       );
   }
-}
+};
 
 AppoModal.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    id:       PropTypes.number.isRequired,
-    owner:    PropTypes.string.isRequired,
-    date:     PropTypes.string.isRequired,
-    petname:  PropTypes.string.isRequired,
-    reason:   PropTypes.string.isRequired,
-    docname:  PropTypes.string.isRequired,
-    reminder: PropTypes.bool.isRequired
-}
+    owner: PropTypes.string.isRequired
+};
 
 AppoModal.defaultProps = {
-    id:      0,
-    owner:   'zxczxc',
-    date:    'fgdfgdf',
-    petname: 'dfgdfg',
-    reason:  'fdgdfsg',
-    docname: 'dfsgdfg',
-    reminder: false
- }
+  owner:   'incorrect starting props owner',
+  date:    'props date no real',
+  petname: 'props petname no real',
+  reason:  'props reason no real',
+  docname: 'props docname no real',
+  reminder: false
+};
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
+    console.log('In mapStateToProps::::>>' + JSON.stringify(state));
+    console.log('In mapStateToProps OWNER::::>>' + state.rootReducer.appointments_rdcer.owner);
   return {
-    owner:     ownProps.owner,
-    date:      ownProps.date,
-    petname:   ownProps.petname,
-    reason:    ownProps.reason,
-    docname:   ownProps.docname,
-    reminder:  ownProps.reminder,
-    showModal: ownProps.showModal
+      owner:     state.rootReducer.appointments_rdcer.owner
+    // date:      state.rootReducer.appointments_rdcer.date,
+    // petname:   state.rootReducer.appointments_rdcer.petname,
+    // reason:    state.rootReducer.appointments_rdcer.reason,
+    // docname:   state.rootReducer.appointments_rdcer.docname,
+    // reminder:  state.rootReducer.appointments_rdcer.reminder
   }
 }
 

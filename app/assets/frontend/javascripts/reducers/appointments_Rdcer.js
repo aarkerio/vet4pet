@@ -12,15 +12,15 @@ const appointments_rdcer = (state = initialState, action) => {
       return Object.assign({}, state, {
                 apposArrayProp: action.apposArrayProp
       });
+      
     case RECEIVE_ONE_APPO:
-      console.log('RECEIVE_ONE_APPO reducer >>>' + JSON.stringify(action.appoArrayProp));
+      console.log('RECEIVE_ONE_APPO reducer >>>' + JSON.stringify(action.appoArrayProp.owner));
       return Object.assign({}, state, {
-            id:      action.appoArrayProp.id,
-            owner:   action.appoArrayProp.owner,
-            date:    action.appoArrayProp.date,
-            petname: action.appoArrayProp.petname,
-            reason:  action.appoArrayProp.reason,
-            docname: action.appoArrayProp.docname
+        owner:  action.appoArrayProp.owner
+        //date:    action.appoArrayProp.date,
+        // petname: action.appoArrayProp.petname,
+        // reason:  action.appoArrayProp.reason,
+        // docname: action.appoArrayProp.docname
       });
 
     default:

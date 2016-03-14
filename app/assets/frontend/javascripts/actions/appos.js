@@ -38,27 +38,10 @@ function receiveAppo(appoArrayProp) {
   // console.log(' receiveAppos Action JJJ>>>>>' + JSON.stringify(apposArrayProp))
   return {
     type:  RECEIVE_ONE_APPO,
-    appoArrayProp: appoArrayProp.shift() 
+    appoArrayProp: appoArrayProp.shift()
   }
 }
 
-export function fetchAppo(appo_id) {
-  return function (dispatch) {
-    let data = {
-      method: 'GET',
-      credentials: 'same-origin',
-      headers: {
-         'X-CSRFToken': cookie.load('csrftoken')
-      }
-    } 
-  
-  return dispatch => {
-    return fetch('/appointments/get_appos', data)
-           .then(response => response.json())
-           .then(json => dispatch(receiveAppos(json)))
-   }
-  }
-}
 function removeAppo(appo_id) {
   let data = {
       method: 'GET',

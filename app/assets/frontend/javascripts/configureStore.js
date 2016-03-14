@@ -4,10 +4,10 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from './reducers/index';
-// import DevTools from './containers/DevTools';
+
 import { routerReducer } from 'react-router-redux';
 export default function configureStore(initialState) {
-//  const routemiddleware = routerMiddleware(browserHistory);
+
   const store = createStore(
       combineReducers({
         rootReducer,
