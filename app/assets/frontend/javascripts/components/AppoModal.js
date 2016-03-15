@@ -2,6 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { Link, browserHistory } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
@@ -9,8 +10,9 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: true };
+    this.state = { showModal: true, owner: 'State owner initial' };
     console.log('MO222#####33333 222222E!!!!!!!' + JSON.stringify(this.props));
+    console.log('In ApposActionCreators::::>>' + JSON.stringify(ApposActionCreators));
   }
   
   /**
@@ -20,8 +22,12 @@ class AppoModal extends Component {
     console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props.routeParams.id));
     let action = ApposActionCreators.fetchAppos(this.props.routeParams.id);
     this.props.dispatch(action);
+    //setTimeout(this.props.dispatch(action), 2000);
+    this.setState({owner: 'kkjkjkjkl'});
+    this.forceUpdate();
   }
 
+  
 /**
   * Send data to new appointment
   **/
@@ -91,7 +97,7 @@ class AppoModal extends Component {
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="for_owner">Eigentümer:</label>
-              <input className="form-control" id="for_owner" name="owner" defaultValue={this.props.owner} />
+              <input className="form-control" id="for_owner" name="owner" defaultValue={this.state.owner} />
               <label htmlFor="for_petname">Kosename (haustier):</label>
               <input className="form-control" id="for_petname" defaultValue={this.state.petname} />
               <label htmlFor="for_petname">Doc:</label>
@@ -116,7 +122,7 @@ class AppoModal extends Component {
 };
 
 AppoModal.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    // dispatch: PropTypes.func.isRequired,
     owner: PropTypes.string.isRequired
 };
 
@@ -130,11 +136,11 @@ AppoModal.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    console.log('In mapStateToProps::::>>' + JSON.stringify(state));
-    console.log('In mapStateToProps OWNER::::>>' + state.rootReducer.appointments_rdcer.owner);
+    // console.log('In mapStateToProps::::>>' + JSON.stringify(state));
+    // console.log('In mapStateToProps OWNER::::>>' + state.rootReducer.appointments_rdcer.owner);
   return {
-      owner:     state.rootReducer.appointments_rdcer.owner
-    // date:      state.rootReducer.appointments_rdcer.date,
+     owner:     state.owner,
+    date:      state.rootReducer.appointments_rdcer.date,
     // petname:   state.rootReducer.appointments_rdcer.petname,
     // reason:    state.rootReducer.appointments_rdcer.reason,
     // docname:   state.rootReducer.appointments_rdcer.docname,
@@ -143,4 +149,5 @@ function mapStateToProps(state) {
 }
 
 // binding React-Redux
-export default connect(mapStateToProps)(AppoModal)
+export default connect(mapStateToProps)(AppoModal);
+

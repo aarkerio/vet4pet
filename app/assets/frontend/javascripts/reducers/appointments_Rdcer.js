@@ -16,7 +16,7 @@ const appointments_rdcer = (state = initialState, action) => {
     case RECEIVE_ONE_APPO:
       console.log('RECEIVE_ONE_APPO reducer >>>' + JSON.stringify(action.appoArrayProp.owner));
       return Object.assign({}, state, {
-        owner:  action.appoArrayProp.owner
+        owner:  'redicer owner'
         //date:    action.appoArrayProp.date,
         // petname: action.appoArrayProp.petname,
         // reason:  action.appoArrayProp.reason,

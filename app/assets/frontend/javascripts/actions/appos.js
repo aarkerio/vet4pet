@@ -3,6 +3,7 @@ import cookie from 'react-cookie';
 
 export const RECEIVE_APPOS    = 'RECEIVE_APPOS';
 export const RECEIVE_ONE_APPO = 'RECEIVE_ONE_APPO';
+export const REMOVE_APPO      = 'REMOVE_APPO';
 
 export function fetchAppos(appo_id=0) {
   return function (dispatch) {
@@ -24,15 +25,15 @@ export function fetchAppos(appo_id=0) {
           .then(response => response.json())  // promise
           .then(json => appo_id==0 ? dispatch(receiveAppos(json)) : dispatch(receiveAppo(json)) )
   }
-}
+};
 
-function receiveAppos(apposArrayProp) {
+export function receiveAppos(apposArrayProp) {
   // console.log(' receiveAppos Action JJJ>>>>>' + JSON.stringify(apposArrayProp))
   return {
     type:  RECEIVE_APPOS,
     apposArrayProp
   }
-}
+};
 
 function receiveAppo(appoArrayProp) {
   // console.log(' receiveAppos Action JJJ>>>>>' + JSON.stringify(apposArrayProp))
@@ -40,9 +41,9 @@ function receiveAppo(appoArrayProp) {
     type:  RECEIVE_ONE_APPO,
     appoArrayProp: appoArrayProp.shift()
   }
-}
+};
 
-function removeAppo(appo_id) {
+export function removeAppo(appo_id) {
   let data = {
       method: 'GET',
       appoid: appo_id,
@@ -57,5 +58,5 @@ function removeAppo(appo_id) {
            .then(response => response.json())
            .then(json => dispatch(receiveAppos(json)))
   }
-}
+};
 
