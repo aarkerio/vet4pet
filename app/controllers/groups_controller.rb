@@ -1,5 +1,15 @@
+# Chipotle Software (c) 2015-2016   MIT License
+
 class GroupsController < ApplicationController
+
+  skip_before_action :set_group, only: [:start]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  
+
+  # GET /start
+  # GET /start
+  def start
+  end
 
   # GET /groups
   # GET /groups.json

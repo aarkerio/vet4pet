@@ -10,27 +10,22 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: true, owner: 'State owner initial' };
-    console.log('MO222#####33333 222222E!!!!!!!' + JSON.stringify(this.props));
-    console.log('In ApposActionCreators::::>>' + JSON.stringify(ApposActionCreators));
+    this.state = { showModal: true,  isFetching: true,  didInvalidate: false, fetchedPageCount: 0};
+    console.log('AppoModal constructor !!!' + JSON.stringify(this.props));
   }
-  
-  /**
-   * Load default appointment
-   **/
-  componentDidMount() {  
-    console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props.routeParams.id));
-    let action = ApposActionCreators.fetchAppos(this.props.routeParams.id);
-    this.props.dispatch(action);
-    //setTimeout(this.props.dispatch(action), 2000);
-    this.setState({owner: 'kkjkjkjkl'});
-    this.forceUpdate();
-  }
-
   
 /**
-  * Send data to new appointment
+  * Load default appointment
   **/
+  componentDidMount() {
+    let action = ApposActionCreators.fetchAppo(this.props.routeParams.id);
+    this.props.dispatch(action);
+    console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props));
+  }
+  
+/**
+ * Send data to new appointment
+ **/
   handleSubmit(e) {
     e.preventDefault();
     let action = ApposActionCreators.sendAppo(this.props.routeParams.id);
@@ -93,21 +88,20 @@ class AppoModal extends Component {
           <Modal.Header>
              <Modal.Title>Modal Überschrift Rot</Modal.Title>
           </Modal.Header>
-
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="for_owner">Eigentümer:</label>
-              <input className="form-control" id="for_owner" name="owner" defaultValue={this.state.owner} />
+              <input className="form-control" id="for_owner" name="owner" defaultValue={this.props.owner} />
               <label htmlFor="for_petname">Kosename (haustier):</label>
-              <input className="form-control" id="for_petname" defaultValue={this.state.petname} />
+              <input className="form-control" id="for_petname" defaultValue={this.props.petname} />
               <label htmlFor="for_petname">Doc:</label>
-              <input className="form-control" id="for_petname" defaultValue={this.state.docname} />
+              <input className="form-control" id="for_petname" defaultValue={this.props.docname} />
               <label htmlFor="for_petname">Vernunft:</label>
-              <input className="form-control" id="for_petname" defaultValue={this.state.reason} />
+              <input className="form-control" id="for_petname" defaultValue={this.props.reason} />
               <label htmlFor="for_date">Datum:</label>
-              <input className="form-control" id="for_date" name="date" defaultValue={this.state.date} />
+              <input className="form-control" id="for_date" name="date" defaultValue={this.props.date} />
               <label htmlFor="for_reminder">Erinner:</label>
-              <input type="checkbox" name="reminder" checked={this.state.reminder} />
+              <input type="checkbox" name="reminder" checked={this.props.reminder} />
             </form>
           </Modal.Body>
 
@@ -122,8 +116,8 @@ class AppoModal extends Component {
 };
 
 AppoModal.propTypes = {
-    // dispatch: PropTypes.func.isRequired,
-    owner: PropTypes.string.isRequired
+    dispatch: PropTypes.func.isRequired,
+    owner: PropTypes.string
 };
 
 AppoModal.defaultProps = {
@@ -136,11 +130,11 @@ AppoModal.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    // console.log('In mapStateToProps::::>>' + JSON.stringify(state));
+    console.log('In mapStateToProps::::>>' + JSON.stringify(state));
     // console.log('In mapStateToProps OWNER::::>>' + state.rootReducer.appointments_rdcer.owner);
   return {
-     owner:     state.owner,
-    date:      state.rootReducer.appointments_rdcer.date,
+     owner:     state.rootReducer.appointments_rdcer.owner
+     // date:      state.rootReducer.appointments_rdcer.date
     // petname:   state.rootReducer.appointments_rdcer.petname,
     // reason:    state.rootReducer.appointments_rdcer.reason,
     // docname:   state.rootReducer.appointments_rdcer.docname,

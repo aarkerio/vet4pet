@@ -23,7 +23,7 @@ render(
     <div>
       { /* Tell the Router to use our enhanced history */ }
       <Router history={history}>
-        <Route name="app" path="/" component={App} />
+        <Route name="app" path="/groups/start" component={App} />
         <Route path="/appointments" component={ApposComponent}>
           <Route path="/appointment/:id" component={AppoModal} />
         </Route>
