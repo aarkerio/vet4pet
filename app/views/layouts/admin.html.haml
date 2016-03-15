@@ -13,14 +13,15 @@
     %div{id: 'wrap'}
       %div{id: 'header'}
         %h1 Vet Clinic Rails
-      %div{id: 'nav'}
-        %ul
+      %div
+        %ul{id: 'nav'}
           %li= link_to 'Einleitung', '/groups/start'
-          %li= link_to 'Pets', 'fsddsfdsf'
-          %li= link_to 'Customers', 'fsddsfdsf'
-          %li= link_to 'Archives', 'fsddsfdsf'
-          %li= link_to 'Profile', destroy_user_session_path
-          %li= link_to 'Log out', edit_user_password_path
+          %li= link_to 'Haustiere', '/pets/'
+          %li= link_to 'Treffen', '/appointments/'
+          %li= link_to 'Kundschaft', '/users/customers'
+          %li= link_to 'Lieferanten', 'fsddsfdsf'
+          %li= link_to 'Ausloggen', destroy_user_session_path
+          %li= link_to 'Mein Konto', edit_user_password_path
       %div{id: 'main'}
         =yield
       %div{id: 'sidebar'}

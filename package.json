@@ -86,6 +86,7 @@
     "jest": "^0.1.40",
     "jest-webpack": "^0.2.1",
     "jshint": "^2.9.1",
+    "mocha": "^2.4.5",
     "moment": "^2.11.1",
     "react": "^0.14.7",
     "react-addons-css-transition-group": "^0.14.7",
