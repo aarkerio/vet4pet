@@ -10,7 +10,6 @@ const initialState = {
 };
 
 const appointments_rdcer = (state = initialState, action) => {
-  console.log('RECEIVE_APPOS REDUCER >>>' + JSON.stringify(state));
   switch (action.type) {
     case RECEIVE_APPOS:
       return Object.assign({}, state, {
@@ -25,15 +24,10 @@ const appointments_rdcer = (state = initialState, action) => {
       });
     
     case RECEIVE_ONE_APPO:
-      console.log('RECEIVE_ONE_APPO reducer >>>' + JSON.stringify(action.appoArrayProp.owner));
       return Object.assign({}, state, {
           owner:  action.appoArrayProp.owner,
           isFetching: true,
           didInvalidate: false
-        //date:    action.appoArrayProp.date,
-        // petname: action.appoArrayProp.petname,
-        // reason:  action.appoArrayProp.reason,
-        // docname: action.appoArrayProp.docname
       });
 
     default:
