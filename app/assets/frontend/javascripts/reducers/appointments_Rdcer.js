@@ -3,13 +3,10 @@
 import { REQUEST_POSTS, RECEIVE_APPOS, RECEIVE_ONE_APPO } from '../actions/appos';
 
 const initialState = {
-    apposArrayProp: [],
-    owner:          '',
-    isFetching:     false,
-    didInvalidate:  false
+    owner: 'initial'
 };
 
-const appointments_rdcer = (state = initialState, action) => {
+const appointments_rdcer = (state = initialState, action) => { 
   switch (action.type) {
     case RECEIVE_APPOS:
       return Object.assign({}, state, {
@@ -25,9 +22,7 @@ const appointments_rdcer = (state = initialState, action) => {
     
     case RECEIVE_ONE_APPO:
       return Object.assign({}, state, {
-          owner:  action.appoArrayProp.owner,
-          isFetching: true,
-          didInvalidate: false
+          owner: action.appoArrayProp.owner
       });
 
     default:

@@ -10,7 +10,7 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: true,  isFetching: true,  didInvalidate: false, fetchedPageCount: 0};
+    this.state = { showModal: true };
     console.log('AppoModal constructor !!!' + JSON.stringify(this.props));
   }
   
@@ -117,7 +117,7 @@ class AppoModal extends Component {
 
 AppoModal.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    owner: PropTypes.string
+    owner: PropTypes.string.isRequired
 };
 
 AppoModal.defaultProps = {
@@ -130,10 +130,8 @@ AppoModal.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    console.log('In mapStateToProps::::>>' + JSON.stringify(state));
-    // console.log('In mapStateToProps OWNER::::>>' + state.rootReducer.appointments_rdcer.owner);
   return {
-     owner:     state.rootReducer.appointments_rdcer.owner
+     owner:      state.rootReducer.appointments_rdcer.owner
      // date:      state.rootReducer.appointments_rdcer.date
     // petname:   state.rootReducer.appointments_rdcer.petname,
     // reason:    state.rootReducer.appointments_rdcer.reason,
