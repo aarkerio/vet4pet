@@ -20,9 +20,9 @@ class AppoModal extends Component {
   componentDidMount() {
     let action = ApposActionCreators.fetchAppo(this.props.routeParams.id);
     this.props.dispatch(action);
-    console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props));
+    console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props.inhaber));
   }
-  
+
 /**
  * Send data to new appointment
  **/
@@ -91,7 +91,7 @@ class AppoModal extends Component {
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="for_owner">Eigentümer:</label>
-              <input className="form-control" id="for_owner" name="owner" defaultValue={this.props.owner} />
+              <input className="form-control" id="for_owner" name="owner" defaultValue={this.props.inhaber} />
               <label htmlFor="for_petname">Kosename (haustier):</label>
               <input className="form-control" id="for_petname" defaultValue={this.props.petname} />
               <label htmlFor="for_petname">Doc:</label>
@@ -117,11 +117,11 @@ class AppoModal extends Component {
 
 AppoModal.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    owner: PropTypes.string.isRequired
+    inhaber: PropTypes.string.isRequired
 };
 
 AppoModal.defaultProps = {
-  owner:   'incorrect starting props owner',
+  inhaber: 'incorrect starting props inhaber',
   date:    'props date no real',
   petname: 'props petname no real',
   reason:  'props reason no real',
@@ -131,14 +131,14 @@ AppoModal.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-     owner:      state.rootReducer.appointments_rdcer.owner
+     inhaber:      state.rootReducer.appointments_rdcer.owner
      // date:      state.rootReducer.appointments_rdcer.date
     // petname:   state.rootReducer.appointments_rdcer.petname,
     // reason:    state.rootReducer.appointments_rdcer.reason,
     // docname:   state.rootReducer.appointments_rdcer.docname,
     // reminder:  state.rootReducer.appointments_rdcer.reminder
   }
-}
+};
 
 // binding React-Redux
 export default connect(mapStateToProps)(AppoModal);
