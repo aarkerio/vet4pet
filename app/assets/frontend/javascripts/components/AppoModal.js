@@ -10,19 +10,25 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: true };
-    console.log('AppoModal constructor !!!' + JSON.stringify(this.props));
+    this.state = { showModal: true,
+                   ffowner: '',
+                   ffdate:    'props date no real',
+                   ffpetname: 'props petname no real',
+                   ffreason:  'props reason no real',
+                   ffdocname: 'props docname no real',
+                   ffreminder: false
+                   };
   }
   
 /**
   * Load default appointment
   **/
   componentDidMount() {
-    let action = ApposActionCreators.fetchAppo(this.props.routeParams.id);
+    let action = ApposActionCreators.getAppo(this.props.routeParams.id);
     this.props.dispatch(action);
     console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props.inhaber));
   }
-
+    
 /**
  * Send data to new appointment
  **/
@@ -78,6 +84,11 @@ class AppoModal extends Component {
         padding: 20
       };
     };
+    this.props.appoArrayProp.forEach(function(appo) {
+      state = {
+            ffid: appo.id, ffowner: appo.owner,ffdate: appo.date, ffpetname: appo.petname,
+            ffreason:  appo.reason, ffdocname: appo.docname, ffreminder: appo.reminder}
+      });
     return (
         <div id="responsive" className="modal hide fade" tabIndex="-1" >
           <Modal aria-labelledby='modal-label'
@@ -88,23 +99,22 @@ class AppoModal extends Component {
           <Modal.Header>
              <Modal.Title>Modal Überschrift Rot</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <form onSubmit={this.handleSubmit}>
+            <Modal.Body>
+              <form onSubmit={this.handleSubmit}>
               <label htmlFor="for_owner">Eigentümer:</label>
-              <input className="form-control" id="for_owner" name="owner" defaultValue={this.props.inhaber} />
+              <input className="form-control" id="for_owner" name="owner" defaultValue={this.state.ffowner} />
               <label htmlFor="for_petname">Kosename (haustier):</label>
-              <input className="form-control" id="for_petname" defaultValue={this.props.petname} />
+              <input className="form-control" id="for_petname" defaultValue={this.state.ffpetname} />
               <label htmlFor="for_petname">Doc:</label>
-              <input className="form-control" id="for_petname" defaultValue={this.props.docname} />
+              <input className="form-control" id="for_petname" defaultValue={this.state.ffdocname} />
               <label htmlFor="for_petname">Vernunft:</label>
-              <input className="form-control" id="for_petname" defaultValue={this.props.reason} />
+              <input className="form-control" id="for_petname" defaultValue={this.state.ffreason} />
               <label htmlFor="for_date">Datum:</label>
-              <input className="form-control" id="for_date" name="date" defaultValue={this.props.date} />
+              <input className="form-control" id="for_date" name="date" defaultValue={this.state.ffdate} />
               <label htmlFor="for_reminder">Erinner:</label>
-              <input type="checkbox" name="reminder" checked={this.props.reminder} />
+              <input type="checkbox" name="reminder" checked={this.state.ffreminder} />
             </form>
           </Modal.Body>
-
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
              <Button bsStyle="primary">Änderungen speichern</Button>
@@ -116,27 +126,18 @@ class AppoModal extends Component {
 };
 
 AppoModal.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    inhaber: PropTypes.string.isRequired
+    appoArrayProp: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired
 };
 
 AppoModal.defaultProps = {
-  inhaber: 'incorrect starting props inhaber',
-  date:    'props date no real',
-  petname: 'props petname no real',
-  reason:  'props reason no real',
-  docname: 'props docname no real',
-  reminder: false
+    appoArrayProp:  []
 };
 
 function mapStateToProps(state) {
+  // console.log('state.rootReducer.appointments_rdcer.inhaber >>' +  state.rootReducer.appointments_rdcer.inhaber);
   return {
-     inhaber:      state.rootReducer.appointments_rdcer.owner
-     // date:      state.rootReducer.appointments_rdcer.date
-    // petname:   state.rootReducer.appointments_rdcer.petname,
-    // reason:    state.rootReducer.appointments_rdcer.reason,
-    // docname:   state.rootReducer.appointments_rdcer.docname,
-    // reminder:  state.rootReducer.appointments_rdcer.reminder
+      appoArrayProp: state.rootReducer.appointments_rdcer.appoArrayProp
   }
 };
 

@@ -11,14 +11,12 @@ import AppoModal from '../components/AppoModal';
 class ApposComponent extends Component {
   constructor(props) {
       super(props);
-      console.log(' In ApposComponent constructor ####################');
   }
     
   /**
    * Load default appointment
    **/
   componentDidMount() {
-    console.log(' In componentDidMount ApposComponent' + JSON.stringify(this.props));
     let action = ApposActionCreators.fetchAppos();
     this.props.dispatch(action);
   }
