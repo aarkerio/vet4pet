@@ -10,25 +10,37 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: true,
-                   ffowner: '',
-                   ffdate:    'props date no real',
-                   ffpetname: 'props petname no real',
-                   ffreason:  'props reason no real',
-                   ffdocname: 'props docname no real',
-                   ffreminder: false
-                   };
+    this.state   = { showModal: true,
+                     ffid:      '',  
+                     ffowner:   'initial',
+                     ffdate:    'state date no real',
+                     ffpetname: 'state petname no real',
+                     ffreason:  'state reason no real',
+                     ffdocname: 'state docname no real',
+                     ffreminder: false
+                 };
   }
   
 /**
   * Load default appointment
   **/
-  componentDidMount() {
+  componentWillMount() {
     let action = ApposActionCreators.getAppo(this.props.routeParams.id);
     this.props.dispatch(action);
-    console.log(' In componentDidMount ApposModal this.props.routeParams.id' + JSON.stringify(this.props.inhaber));
+    this.setState({ffowner: this.props.owner});
   }
-    
+  
+  componentWillReceiveProps(nextProps) {
+   console.log('WWWW  nextProps WWW>>' + JSON.stringify(nextProps.appoArrayProp.owner));
+    if (this.state.ffowner !== nextProps.appoArrayProp.owner) {
+      let appo = nextProps.appoArrayProp;
+      console.log('WWWW  NOT THE SAME nextProps  owner >>' + appo.owner);
+      this.setState({ffowner: 'new static stuff'})
+      console.log('appo.owner :  ' + appo.owner + '   After update: ' +  this.state.ffowner);
+    }
+   this.forceUpdate;
+  }
+
 /**
  * Send data to new appointment
  **/
@@ -50,7 +62,7 @@ class AppoModal extends Component {
       return 'error';
     }
   }
-    
+
   render() {
     let rand = ()=> (Math.floor(Math.random() * 20) - 10);
 
@@ -84,11 +96,7 @@ class AppoModal extends Component {
         padding: 20
       };
     };
-    this.props.appoArrayProp.forEach(function(appo) {
-      state = {
-            ffid: appo.id, ffowner: appo.owner,ffdate: appo.date, ffpetname: appo.petname,
-            ffreason:  appo.reason, ffdocname: appo.docname, ffreminder: appo.reminder}
-      });
+  
     return (
         <div id="responsive" className="modal hide fade" tabIndex="-1" >
           <Modal aria-labelledby='modal-label'
@@ -114,6 +122,7 @@ class AppoModal extends Component {
               <label htmlFor="for_reminder">Erinner:</label>
               <input type="checkbox" name="reminder" checked={this.state.ffreminder} />
             </form>
+             {this.props.loque}
           </Modal.Body>
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
@@ -126,12 +135,14 @@ class AppoModal extends Component {
 };
 
 AppoModal.propTypes = {
-    appoArrayProp: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired
+    appoArrayProp: PropTypes.any.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    loque: PropTypes.string.isRequired
 };
 
 AppoModal.defaultProps = {
-    appoArrayProp:  []
+    appoArrayProp:  {},
+   loque: 'loquestaticd'
 };
 
 function mapStateToProps(state) {

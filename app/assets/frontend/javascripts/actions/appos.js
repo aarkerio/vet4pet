@@ -70,7 +70,7 @@ function receiveAppo(appoArrayProp) {
   console.log(' receiveSingleAppo Action in appos.js >>>>>' + JSON.stringify(appoArrayProp))
   return {
     type:  RECEIVE_ONE_APPO,
-    appoArrayProp
+    appoArrayProp: appoArrayProp.shift()
   }
 };
 

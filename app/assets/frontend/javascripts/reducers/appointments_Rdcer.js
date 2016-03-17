@@ -3,7 +3,8 @@
 import { REQUEST_POSTS, RECEIVE_APPOS, RECEIVE_ONE_APPO } from '../actions/appos';
 
 const initialState = {
-    appoArrayProp: []
+    appoArrayProp:  [],
+    apposArrayProp: [],
 };
 
 const appointments_rdcer = (state = initialState, action) => { 
@@ -16,7 +17,6 @@ const appointments_rdcer = (state = initialState, action) => {
     case REQUEST_POSTS:
       return Object.assign({}, state, {
         isFetching: true,
-        inhaber: 'POSTS',  
         didInvalidate: false
       });
   
