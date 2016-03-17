@@ -1,9 +1,8 @@
 'use strict';
 
-import { REQUEST_POSTS, RECEIVE_APPOS, RECEIVE_ONE_APPO } from '../actions/appos';
+import { REQUEST_POSTS, RECEIVE_APPOS } from '../actions/appos';
 
 const initialState = {
-    appoArrayProp:  [],
     apposArrayProp: [],
 };
 
@@ -19,13 +18,7 @@ const appointments_rdcer = (state = initialState, action) => {
         isFetching: true,
         didInvalidate: false
       });
-  
-    case RECEIVE_ONE_APPO:
-      return Object.assign({}, state, {
-          appoArrayProp: action.appoArrayProp
-      });
-   
-      
+     
     default:
       return state;
   }

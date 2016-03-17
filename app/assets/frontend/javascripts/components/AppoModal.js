@@ -10,35 +10,27 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModal extends Component {
   constructor(props) {
     super(props);
-    this.state   = { showModal: true,
-                     ffid:      '',  
-                     ffowner:   'initial',
-                     ffdate:    'state date no real',
-                     ffpetname: 'state petname no real',
-                     ffreason:  'state reason no real',
-                     ffdocname: 'state docname no real',
-                     ffreminder: false
-                 };
+    this.state   = { showModal: true };
   }
   
 /**
-  * Load default appointment
+  * Loads default data
   **/
-  componentWillMount() {
+  componentDidMount() {
     let action = ApposActionCreators.getAppo(this.props.routeParams.id);
     this.props.dispatch(action);
-    this.setState({ffowner: this.props.owner});
+    console.log('DidMount  appoArray>>' + JSON.stringify(this.props.eigentumer));
   }
   
-  componentWillReceiveProps(nextProps) {
-   console.log('WWWW  nextProps WWW>>' + JSON.stringify(nextProps.appoArrayProp.owner));
-    if (this.state.ffowner !== nextProps.appoArrayProp.owner) {
-      let appo = nextProps.appoArrayProp;
-      console.log('WWWW  NOT THE SAME nextProps  owner >>' + appo.owner);
-      this.setState({ffowner: 'new static stuff'})
-      console.log('appo.owner :  ' + appo.owner + '   After update: ' +  this.state.ffowner);
+ componentWillReceiveProps(nextProps) {
+    if ( nextProps.eigentumer  !==  this.props.eigentumer ) {
+      console.log('WWWW  NOT THE SAME nextProps  >>' + JSON.stringify(nextProps.eigentumer));
+      console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.eigentumer));
+      let action = ApposActionCreators.getAppo(this.props.routeParams.id);
+      this.props.dispatch(action);  // thunk middleware dispatch
+    } else {
+      console.log('ARE THE SAME props.eigentumer  >>' + JSON.stringify(this.props.eigentumer));
     }
-   this.forceUpdate;
   }
 
 /**
@@ -96,9 +88,10 @@ class AppoModal extends Component {
         padding: 20
       };
     };
-  
+
     return (
         <div id="responsive" className="modal hide fade" tabIndex="-1" >
+          {this.props.appoObjProp.owner}
           <Modal aria-labelledby='modal-label'
             style={modalStyle}
             backdropStyle={backdropStyle}
@@ -109,20 +102,9 @@ class AppoModal extends Component {
           </Modal.Header>
             <Modal.Body>
               <form onSubmit={this.handleSubmit}>
-              <label htmlFor="for_owner">Eigentümer:</label>
-              <input className="form-control" id="for_owner" name="owner" defaultValue={this.state.ffowner} />
-              <label htmlFor="for_petname">Kosename (haustier):</label>
-              <input className="form-control" id="for_petname" defaultValue={this.state.ffpetname} />
-              <label htmlFor="for_petname">Doc:</label>
-              <input className="form-control" id="for_petname" defaultValue={this.state.ffdocname} />
-              <label htmlFor="for_petname">Vernunft:</label>
-              <input className="form-control" id="for_petname" defaultValue={this.state.ffreason} />
-              <label htmlFor="for_date">Datum:</label>
-              <input className="form-control" id="for_date" name="date" defaultValue={this.state.ffdate} />
-              <label htmlFor="for_reminder">Erinner:</label>
-              <input type="checkbox" name="reminder" checked={this.state.ffreminder} />
+                <label htmlFor="for_owner">Eigentümer:</label>
+                <input className="form-control" id="for_owner" name="owner" defaultValue={this.props.eigentumer} />
             </form>
-             {this.props.loque}
           </Modal.Body>
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
@@ -135,20 +117,18 @@ class AppoModal extends Component {
 };
 
 AppoModal.propTypes = {
-    appoArrayProp: PropTypes.any.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    loque: PropTypes.string.isRequired
+    eigentumer: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired
 };
 
 AppoModal.defaultProps = {
-    appoArrayProp:  {},
-   loque: 'loquestaticd'
+    eigentumer: 'default'
 };
 
 function mapStateToProps(state) {
   // console.log('state.rootReducer.appointments_rdcer.inhaber >>' +  state.rootReducer.appointments_rdcer.inhaber);
   return {
-      appoArrayProp: state.rootReducer.appointments_rdcer.appoArrayProp
+      eigentumer: state.rootReducer.appo_rdcer.eigentumer
   }
 };
 

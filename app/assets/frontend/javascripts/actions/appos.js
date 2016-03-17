@@ -53,9 +53,11 @@ export function getAppo(appo_id=0) {
           'X-CSRFToken':  cookie.load('csrftoken')
         }
       }
-      return fetch('/appointments/get_appos', data)
+      setTimeout(() => {
+        return fetch('/appointments/get_appos', data)
           .then(response => response.json())  // promise
-          .then(json => dispatch(receiveAppo(json)))
+          .then(json => dispatch(receiveAppo(json)));
+      }, 1000);
   }
 };
  
@@ -66,11 +68,10 @@ export function receiveAppos(apposArrayProp) {
   }
 };
 
-function receiveAppo(appoArrayProp) {
-  console.log(' receiveSingleAppo Action in appos.js >>>>>' + JSON.stringify(appoArrayProp))
+function receiveAppo(appoObjProp) {
   return {
     type:  RECEIVE_ONE_APPO,
-    appoArrayProp: appoArrayProp.shift()
+    eigentumer: appoObjProp.owner
   }
 };
 

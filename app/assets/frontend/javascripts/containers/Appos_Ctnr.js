@@ -51,21 +51,21 @@ class ApposComponent extends Component {
       </div>
     )
   }
-}
+};
 
 ApposComponent.propTypes = {
   apposArrayProp: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
-}
+};
 
  ApposComponent.defaultProps = {
       apposArrayProp:  []
- }
+ };
 
 const mapStateToProps = (state) => {
   return {
     apposArrayProp: state.rootReducer.appointments_rdcer.apposArrayProp
   }
-}
+};
 
-export default connect(mapStateToProps)(ApposComponent)
+export default connect(mapStateToProps)(ApposComponent);
