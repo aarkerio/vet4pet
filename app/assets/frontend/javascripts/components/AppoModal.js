@@ -56,7 +56,8 @@ class AppoModal extends Component {
   }
 
   handleClick(event) {
-    this.setState({ffreminder: event.target.checked});
+    let newvalue = this.state.ffreminder == true ? false : true;
+    this.setState({ffreminder: newvalue});
   }
 
   validationTest() {
@@ -128,7 +129,7 @@ class AppoModal extends Component {
                 <label htmlFor="date">Datum:</label>
                 <input className="form-control" id="date" name="date" value={this.state.ffdate} onChange={this.handleChange.bind(this, 'ffdate')} />
                 <label htmlFor="reminder">Erinner:</label>
-                <input type="checkbox" name="reminder" checked={this.state.ffreminder} onClick={this.handleClick} />
+                <input type="checkbox" name="reminder" checked={this.state.ffreminder} onClick={this.handleClick.bind(this, 'ffreminder')} />
             </form>
           </Modal.Body>
           <Modal.Footer>
