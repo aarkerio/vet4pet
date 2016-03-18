@@ -18,6 +18,7 @@ class AppoModal extends Component {
                      ffreason:  'state reason no real',
                      ffdocname: 'state docname no real',
                      ffreminder: false };
+   console.log(JSON.stringify(this.props.routeParams));
   }
   
 /**
@@ -44,7 +45,7 @@ class AppoModal extends Component {
  **/
   handleSubmit(e) {
     e.preventDefault();
-    let action = ApposActionCreators.sendAppo(this.props.routeParams.id);
+    let action = ApposActionCreators.createAppo(this.state);
     this.props.dispatch(action);
     browserHistory.push('/appointments');
   }

@@ -73,6 +73,25 @@ function receiveAppo(appoObjProp) {
   }
 };
 
+
+export function createAppo(all) {
+
+  let data = {
+      method: 'GET',
+      appoid: appo_id,
+      credentials: 'same-origin',
+      headers: {
+         'X-CSRFToken': Cookies.get('csrftoken')
+      }
+  };
+
+  return dispatch => {
+    return fetch('/appointments/delete_appo', data)
+           .then(response => response.json())
+           .then(json => dispatch(receiveAppos(json)))
+  }
+};
+
 export function removeAppo(appo_id) {
   let data = {
       method: 'GET',
