@@ -53,11 +53,9 @@ export function getAppo(appo_id=0) {
           'X-CSRFToken':  cookie.load('csrftoken')
         }
       }
-      setTimeout(() => {
-        return fetch('/appointments/get_appos', data)
+      return fetch('/appointments/get_appos', data)
           .then(response => response.json())  // promise
           .then(json => dispatch(receiveAppo(json)));
-      }, 1000);
   }
 };
  
@@ -71,7 +69,7 @@ export function receiveAppos(apposArrayProp) {
 function receiveAppo(appoObjProp) {
   return {
     type:  RECEIVE_ONE_APPO,
-    eigentumer: appoObjProp.owner
+    oneAppo: appoObjProp.shift()
   }
 };
 
