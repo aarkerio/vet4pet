@@ -10,7 +10,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import App from './containers/App';
-import ApposComponent from './containers/Appos_Ctnr';
+import ApposContainer from './containers/ApposContainer';
 import AppoModal from './components/AppoModal';
 
 import configureStore from './configureStore';
