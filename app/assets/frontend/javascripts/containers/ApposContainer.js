@@ -5,9 +5,9 @@ import { render } from 'react-dom';
 import * as ApposActionCreators from '../actions/appos';
 import React, { Component, PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
-import AppoForm  from '../components/AppoForm';
-import AppoRow   from '../components/AppoRow';
-import AppoModal from '../components/AppoModal';
+import AppoFormComponent  from '../components/AppoFormComponent';
+import AppoRowComponent   from '../components/AppoRowComponent';
+import AppoModalComponent from '../components/AppoModalComponent';
 
 class ApposContainer extends Component {
   constructor(props) {

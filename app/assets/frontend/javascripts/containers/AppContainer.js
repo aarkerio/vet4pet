@@ -6,7 +6,7 @@ import { Link, browserHistory } from 'react-router';
 require('bootstrap');
 require('bootstrap-webpack');
 
-class App extends Component {
+class AppContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -26,4 +26,4 @@ class App extends Component {
       )
   }
 }
-export default App;
+export default AppContainer;

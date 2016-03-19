@@ -9,9 +9,9 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import App from './containers/App';
+import AppContainer from './containers/AppContainer';
 import ApposContainer from './containers/ApposContainer';
-import AppoModal from './components/AppoModal';
+import AppoModalComponent from './components/AppoModalComponent';
 
 import configureStore from './configureStore';
 
@@ -21,11 +21,12 @@ const history  = syncHistoryWithStore(browserHistory, my_store);
 render(
     <Provider store={my_store}>
     <div>
+      <AppContainer />
       { /* Tell the Router to use our enhanced history */ }
       <Router history={history}>
-        <Route name="app" path="/groups/start" component={App} />
-        <Route path="/appointments" component={ApposComponent}>
-          <Route path="/appointment/:id" component={AppoModal} />
+        <Route name="app" path="/groups/start" component={AppContainer} />
+        <Route path="/appointments" component={ApposContainer}>
+          <Route path="/appointment/:id" component={AppoModalComponent} />
         </Route>
       </Router>
     </div>

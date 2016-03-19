@@ -1,23 +1,25 @@
+'use strict';
+
+import React, { PropTypes, Component } from 'react';
 
 // var DateTimePicker = ReactWidgets.DateTimePicker;
-//var DateTimePicker = require('react-widgets/lib/DateTimePicker');
+// var DateTimePicker = require('react-widgets/lib/DateTimePicker');
 
-import DateTimePicker from 'DateTimePicker';
+//import DateTimePicker from 'ReactWidgets.DateTimePicker';
 
 class AppoFormComponent extends Component {
 
   constructor(props) {
     super(props);
     this.state = { showModal: true,
-                   date: '',  // form input element
-                  pet: '',
-      owner: '',
-      doctor: '',
-      reason: '',
-      reminder: '',
-      url: '/appointments'
-    };
-  },
+                   ffid: this.props.routeParams.id,
+                   ffowner:   '',
+                   ffdate:    '',
+                   ffpetname: '',
+                   ffreason:  '',
+                   ffdocname: '',
+                   ffreminder: false };
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -29,14 +31,26 @@ class AppoFormComponent extends Component {
     creason   = this.state.reason;
     data_r    = { date: cdate, reminder: creminder, owner: cowner, pet: cpet, doctor: cdoctor, reason: creason };
 
-    this.props.dispatch();
+    // this.props.dispatch(createAppo);
     console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
-   
   }
 
-  render() {
+  handleChange(name, event) {
+    let change = {};
+    change[name] = event.target.value;
+    this.setState(change);
+  }
+
+  handleClick(event) {
+    let newvalue = this.state.ffreminder == true ? false : true;
+    this.setState({ffreminder: newvalue});
+  }
+
+
+  render () {
+    return (
            <form onSubmit={this.handleSubmit}>
-             <MyList ref="fieldDate" />,
+             //<DataListComponent ref="fieldDate" />,
              // <DateTimePicker onChange={this.handleDateChange} />
              <label htmlFor="owner">Eigentümer:  </label>
              <input className="form-control" placeholder="Owner" name="owner" value={this.state.ffowner} onChange={this.handleChange.bind(this, 'ffowner')} />
@@ -53,6 +67,25 @@ class AppoFormComponent extends Component {
             </form>
       )
   }
-}
+};
+
+AppoFormComponent.propTypes = {
+    oneAppo: PropTypes.any.isRequired,
+    dispatch: PropTypes.func.isRequired
+};
+
+AppoFormComponent.defaultProps = {
+    oneAppo: {}
+};
+
+function mapStateToProps(state) {
+  // console.log('state.rootReducer.appointments_rdcer.inhaber >>' +  state.rootReducer.appointments_rdcer.inhaber);
+  return {
+      oneAppo: state.rootReducer.appo_rdcer.oneAppo
+  }
+};
+
+// binding React-Redux
+export default connect(mapStateToProps)(AppoFormComponent);
 
 

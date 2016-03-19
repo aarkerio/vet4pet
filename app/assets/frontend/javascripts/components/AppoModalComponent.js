@@ -7,16 +7,18 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
-class AppoModal extends Component {
+import AppoFormComponent from './AppoFormComponent';
+
+class AppoModalComponent extends Component {
   constructor(props) {
     super(props);
     this.state   = { showModal: true,
                      ffid: this.props.routeParams.id,
                      ffowner:   '',
-                     ffdate:    'state date no real',
-                     ffpetname: 'state petname no real',
-                     ffreason:  'state reason no real',
-                     ffdocname: 'state docname no real',
+                     ffdate:    '',
+                     ffpetname: '',
+                     ffreason:  '',
+                     ffdocname: '',
                      ffreminder: false };
    console.log(JSON.stringify(this.props.routeParams));
   }
@@ -48,17 +50,6 @@ class AppoModal extends Component {
     let action = ApposActionCreators.createAppo(this.state);
     this.props.dispatch(action);
     browserHistory.push('/appointments');
-  }
-
-  handleChange(name, event) {
-    let change = {};
-    change[name] = event.target.value;
-    this.setState(change);
-  }
-
-  handleClick(event) {
-    let newvalue = this.state.ffreminder == true ? false : true;
-    this.setState({ffreminder: newvalue});
   }
 
   render() {
@@ -106,7 +97,7 @@ class AppoModal extends Component {
              <Modal.Title>Modal Überschrift  </Modal.Title>
           </Modal.Header>
             <Modal.Body>
-              <AppForm oneAppo={oneAppo}>
+              <AppFormComponent oneAppo={oneAppo} />
             </Modal.Body>
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
@@ -118,12 +109,12 @@ class AppoModal extends Component {
   }
 };
 
-AppoModal.propTypes = {
+AppoModalComponent.propTypes = {
     oneAppo: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
 };
 
-AppoModal.defaultProps = {
+AppoModalComponent.defaultProps = {
     oneAppo: {}
 };
 
@@ -135,5 +126,5 @@ function mapStateToProps(state) {
 };
 
 // binding React-Redux
-export default connect(mapStateToProps)(AppoModal);
+export default connect(mapStateToProps)(AppoModalComponent);
 
