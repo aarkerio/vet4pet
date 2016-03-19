@@ -55,12 +55,12 @@ class ApposContainer extends Component {
   }
 };
 
-ApposComponent.propTypes = {
+ApposContainer.propTypes = {
   apposArrayProp: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 
- ApposComponent.defaultProps = {
+ ApposContainer.defaultProps = {
       apposArrayProp:  []
  };
 
@@ -70,4 +70,5 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(ApposComponent);
+export default connect(mapStateToProps)(ApposContainer);
+

@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 
 // var DateTimePicker = ReactWidgets.DateTimePicker;
 // var DateTimePicker = require('react-widgets/lib/DateTimePicker');
