@@ -12,14 +12,15 @@ class AppoFormComponent extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showModal: true,
-                   ffid: this.props.routeParams.id,
-                   ffowner:   '',
-                   ffdate:    '',
-                   ffpetname: '',
-                   ffreason:  '',
-                   ffdocname: '',
-                   ffreminder: false };
+    this.state = {
+                   ffid:       this.props.oneAppo.id,
+                   ffowner:    this.props.oneAppo.id,
+                   ffdate:     this.props.oneAppo.id,
+                   ffpetname:  this.props.oneAppo.id,
+                   ffreason:   this.props.oneAppo.id,
+                   ffdocname:  this.props.oneAppo.id,
+                   ffreminder: this.props.oneAppo.id 
+                 };
   }
 
   handleSubmit(e) {
