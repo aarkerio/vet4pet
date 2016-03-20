@@ -2,6 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { Link, browserHistory } from 'react-router';
+import HeaderComponent from '../components/HeaderComponent';
 
 require('bootstrap');
 require('bootstrap-webpack');
@@ -14,6 +15,7 @@ class AppContainer extends Component {
   render() {
     return (
       <div>
+       <HeaderComponent />
        <h1>Anwendung</h1>
        <p><Link to="/">Zuhause.</Link></p>
        <p><Link to="/appointments">Edit Ernennungs.</Link></p>

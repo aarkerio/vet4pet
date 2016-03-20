@@ -97,7 +97,7 @@ class AppoModalComponent extends Component {
              <Modal.Title>Modal Überschrift  </Modal.Title>
           </Modal.Header>
             <Modal.Body>
-              <AppFormComponent oneAppo={oneAppo} />
+              <AppoFormComponent oneAppo={this.props.oneAppo} />
             </Modal.Body>
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
@@ -110,7 +110,7 @@ class AppoModalComponent extends Component {
 };
 
 AppoModalComponent.propTypes = {
-    oneAppo: PropTypes.any.isRequired,
+    oneAppo: PropTypes.any,
     dispatch: PropTypes.func.isRequired
 };
 
