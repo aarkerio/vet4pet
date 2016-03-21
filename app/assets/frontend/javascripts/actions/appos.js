@@ -6,6 +6,7 @@ export const RECEIVE_APPOS    = 'RECEIVE_APPOS';
 export const RECEIVE_ONE_APPO = 'RECEIVE_ONE_APPO';
 export const REMOVE_APPO      = 'REMOVE_APPO';
 export const REQUEST_POSTS    = 'REQUEST_POSTS';
+export const CREATE_APPO      = 'CREATE_APPO';
 
 function requestAppo(appo_id) {
   return {
@@ -74,19 +75,19 @@ function receiveAppo(appoObjProp) {
 };
 
 
-export function createAppo(all) {
+export function createAppo(fields) {
 
   let data = {
-      method: 'GET',
-      appoid: appo_id,
+      method: 'POST',
+      fields: JSON.stringify(fields),
       credentials: 'same-origin',
       headers: {
-         'X-CSRFToken': Cookies.get('csrftoken')
+         'X-CSRFToken': cookie.load('csrftoken')
       }
   };
-
+  console.log('Fields create action: ' + JSON.stringify(fields));
   return dispatch => {
-    return fetch('/appointments/delete_appo', data)
+    return fetch('/appointments/create', data)
            .then(response => response.json())
            .then(json => dispatch(receiveAppos(json)))
   }
@@ -98,7 +99,7 @@ export function removeAppo(appo_id) {
       appoid: appo_id,
       credentials: 'same-origin',
       headers: {
-         'X-CSRFToken': Cookies.get('csrftoken')
+          'X-CSRFToken': cookie.load('csrftoken')
       }
   };
 

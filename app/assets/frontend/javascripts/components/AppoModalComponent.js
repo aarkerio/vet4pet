@@ -25,12 +25,12 @@ class AppoModalComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    if ( nextProps.oneAppo.owner  !=  this.state.localAppo.owner ) {
+    if ( nextProps.oneAppo.owner  !=  this.state.ffowner ) {
       console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps.oneAppo));
       console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.oneAppo));
       let action = ApposActionCreators.getAppo(this.props.routeParams.id);
       this.props.dispatch(action);  // thunk middleware dispatch
-      this.setState = {
+      this.setState({
                    ffid:       this.props.oneAppo.id,
                    ffowner:    this.props.oneAppo.owner,
                    ffdate:     this.props.oneAppo.date,
@@ -38,7 +38,7 @@ class AppoModalComponent extends Component {
                    ffreason:   this.props.oneAppo.reason,
                    ffdocname:  this.props.oneAppo.docname,
                    ffreminder: this.props.oneAppo.reminder 
-                 };
+                 });
     }
   }
 /**
@@ -46,20 +46,20 @@ class AppoModalComponent extends Component {
  **/
   handleSubmit(e) {
     e.preventDefault();
-    cid        = this.state.ffid;
-    cdate      = this.state.ffdate;
-    cpetname   = this.state.ffpetname;
-    cowner     = this.state.ffowner;
-    cdocname   = this.state.ffdoname;
-    creminder  = this.state.ffreminder;
-    creason    = this.state.ffreason;
-    data_r    = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
-    let action = ApposActionCreators.getAppo(this.props.routeParams.id);
+    let cid        = this.state.ffid;
+    let cdate      = this.state.ffdate;
+    let cpetname   = this.state.ffpetname;
+    let cowner     = this.state.ffowner;
+    let cdocname   = this.state.ffdoname;
+    let creminder  = this.state.ffreminder;
+    let creason    = this.state.ffreason;
+    let fields     = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
+    let action = ApposActionCreators.createAppo(fields);
     this.props.dispatch(action);  // thunk middlew
-    this.props.dispatch();
 
+    browserHistory.push('/appointments')
     // this.props.dispatch(createAppo);
-    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
+    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(fields));
   }
 
   handleChange(name, event) {
@@ -118,7 +118,7 @@ class AppoModalComponent extends Component {
              <Modal.Title>Modal Überschrift  </Modal.Title>
           </Modal.Header>
             <Modal.Body>
-           <form onSubmit={this.handleSubmit}>        
+           <form>        
              <label htmlFor="owner">Eigentümer:  </label>
              <input className="form-control" placeholder="Owner" name="owner" value={this.state.ffowner} onChange={this.handleChange.bind(this, 'ffowner')} />
              <label htmlFor="petname">Kosename (haustier):</label>
@@ -135,7 +135,7 @@ class AppoModalComponent extends Component {
             </Modal.Body>
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
-             <Button bsStyle="primary">Änderungen speichern</Button>
+             <Button bsStyle="primary" onClick={this.handleSubmit.bind(this)}>Änderungen speichern</Button>
           </Modal.Footer>
         </Modal>
       </div>
