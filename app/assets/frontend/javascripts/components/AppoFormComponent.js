@@ -14,27 +14,31 @@ class AppoFormComponent extends Component {
     super(props);
     this.state = {
                    ffid:       this.props.oneAppo.id,
-                   ffowner:    this.props.oneAppo.id,
-                   ffdate:     this.props.oneAppo.id,
-                   ffpetname:  this.props.oneAppo.id,
-                   ffreason:   this.props.oneAppo.id,
-                   ffdocname:  this.props.oneAppo.id,
-                   ffreminder: this.props.oneAppo.id 
+                   ffowner:    this.props.oneAppo.owner,
+                   ffdate:     this.props.oneAppo.date,
+                   ffpetname:  this.props.oneAppo.petname,
+                   ffreason:   this.props.oneAppo.reason,
+                   ffdocname:  this.props.oneAppo.docname,
+                   ffreminder: this.props.oneAppo.reminder 
                  };
-  }
+   }
 
-  handleSubmit(e) {
+   handleSubmit(e) {
     e.preventDefault();
-    cdate     = this.state.date;
-    cpet      = this.state.pet;
-    cowner    = this.refs.fieldDate.state.owner;
-    cdoctor   = this.state.doctor;
-    creminder = this.state.reminder;
-    creason   = this.state.reason;
-    data_r    = { date: cdate, reminder: creminder, owner: cowner, pet: cpet, doctor: cdoctor, reason: creason };
+    cid        = this.state.ffid;
+    cdate      = this.state.ffdate;
+    cpetname   = this.state.ffpetname;
+    cowner     = this.state.ffowner;
+    cdocname   = this.state.ffdoname;
+    creminder  = this.state.ffreminder;
+    creason    = this.state.ffreason;
+    data_r    = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
+    let action = ApposActionCreators.getAppo(this.props.routeParams.id);
+    this.props.dispatch(action);  // thunk middlew
+    this.props.dispatch();
 
     // this.props.dispatch(createAppo);
-    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
+    // console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
   }
 
   handleChange(name, event) {
@@ -48,12 +52,11 @@ class AppoFormComponent extends Component {
     this.setState({ffreminder: newvalue});
   }
 
-
   render () {
+      // <DataListComponent ref="fieldDate" />,
+      // <DateTimePicker onChange={this.handleDateChange} />
     return (
-           <form onSubmit={this.handleSubmit}>
-             //<DataListComponent ref="fieldDate" />,
-             // <DateTimePicker onChange={this.handleDateChange} />
+           <form onSubmit={this.handleSubmit}>        
              <label htmlFor="owner">Eigentümer:  </label>
              <input className="form-control" placeholder="Owner" name="owner" value={this.state.ffowner} onChange={this.handleChange.bind(this, 'ffowner')} />
              <label htmlFor="petname">Kosename (haustier):</label>
@@ -65,7 +68,7 @@ class AppoFormComponent extends Component {
                 <label htmlFor="date">Datum:</label>
                 <input className="form-control" id="date" name="date" value={this.state.ffdate} onChange={this.handleChange.bind(this, 'ffdate')} />
                 <label htmlFor="reminder">Erinner:</label>
-                <input type="checkbox" name="reminder" checked={this.state.ffreminder} onClick={this.handleClick.bind(this, 'ffreminder')} />
+                <input type="checkbox" name="reminder" checked={this.state.ffreminder} onChange={this.handleClick.bind(this, 'ffreminder')} />
             </form>
       )
   }
@@ -76,18 +79,5 @@ AppoFormComponent.propTypes = {
     dispatch: PropTypes.func.isRequired
 };
 
-AppoFormComponent.defaultProps = {
-    oneAppo: {}
-};
-
-function mapStateToProps(state) {
-  // console.log('state.rootReducer.appointments_rdcer.inhaber >>' +  state.rootReducer.appointments_rdcer.inhaber);
-  return {
-      oneAppo: state.rootReducer.appo_rdcer.oneAppo
-  }
-};
-
-// binding React-Redux
-export default connect(mapStateToProps)(AppoFormComponent);
-
+export default connect()(AppoFormComponent);
 

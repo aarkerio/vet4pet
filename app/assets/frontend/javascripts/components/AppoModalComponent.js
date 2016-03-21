@@ -7,20 +7,13 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
-import AppoFormComponent from './AppoFormComponent';
-
 class AppoModalComponent extends Component {
   constructor(props) {
     super(props);
-    this.state   = { showModal: true,
-                     ffid: this.props.routeParams.id,
-                     ffowner:   '',
-                     ffdate:    '',
-                     ffpetname: '',
-                     ffreason:  '',
-                     ffdocname: '',
-                     ffreminder: false };
-   console.log(JSON.stringify(this.props.routeParams));
+    this.state = { showModal: true, ffid: '', ffowner:    '',
+                   ffdate:     '',  ffpetname:  '',
+                   ffreason:   '',   ffdocname:  '',
+                   ffreminder: '' };
   }
   
 /**
@@ -32,24 +25,52 @@ class AppoModalComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    if ( nextProps.oneAppo.owner  !=  this.state.ffowner ) {
-      // console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps.oneAppo));
-      // console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.oneAppo));
+    if ( nextProps.oneAppo.owner  !=  this.state.localAppo.owner ) {
+      console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps.oneAppo));
+      console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.oneAppo));
       let action = ApposActionCreators.getAppo(this.props.routeParams.id);
       this.props.dispatch(action);  // thunk middleware dispatch
-      let appo = this.props.oneAppo;
-      this.setState({ffowner: appo.owner,ffdate: appo.date,ffpetname: appo.petname,ffreason: appo.reason,ffreminder: appo.reminder,ffdocname: appo.docname});
+      this.setState = {
+                   ffid:       this.props.oneAppo.id,
+                   ffowner:    this.props.oneAppo.owner,
+                   ffdate:     this.props.oneAppo.date,
+                   ffpetname:  this.props.oneAppo.petname,
+                   ffreason:   this.props.oneAppo.reason,
+                   ffdocname:  this.props.oneAppo.docname,
+                   ffreminder: this.props.oneAppo.reminder 
+                 };
     }
   }
-
 /**
  * Send data to new appointment
  **/
   handleSubmit(e) {
     e.preventDefault();
-    let action = ApposActionCreators.createAppo(this.state);
-    this.props.dispatch(action);
-    browserHistory.push('/appointments');
+    cid        = this.state.ffid;
+    cdate      = this.state.ffdate;
+    cpetname   = this.state.ffpetname;
+    cowner     = this.state.ffowner;
+    cdocname   = this.state.ffdoname;
+    creminder  = this.state.ffreminder;
+    creason    = this.state.ffreason;
+    data_r    = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
+    let action = ApposActionCreators.getAppo(this.props.routeParams.id);
+    this.props.dispatch(action);  // thunk middlew
+    this.props.dispatch();
+
+    // this.props.dispatch(createAppo);
+    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
+  }
+
+  handleChange(name, event) {
+    let change = {};
+    change[name] = event.target.value;
+    this.setState(change);
+  }
+
+  handleClick(event) {
+    let newvalue = this.state.ffreminder == true ? false : true;
+    this.setState({ffreminder: newvalue});
   }
 
   render() {
@@ -97,7 +118,20 @@ class AppoModalComponent extends Component {
              <Modal.Title>Modal Überschrift  </Modal.Title>
           </Modal.Header>
             <Modal.Body>
-              <AppoFormComponent oneAppo={this.props.oneAppo} />
+           <form onSubmit={this.handleSubmit}>        
+             <label htmlFor="owner">Eigentümer:  </label>
+             <input className="form-control" placeholder="Owner" name="owner" value={this.state.ffowner} onChange={this.handleChange.bind(this, 'ffowner')} />
+             <label htmlFor="petname">Kosename (haustier):</label>
+                <input className="form-control" name="petname" value={this.state.ffpetname} onChange={this.handleChange.bind(this, 'ffpetname')} />
+                <label htmlFor="docname">Doc:</label>
+                <input className="form-control" name="docname" value={this.state.ffdocname} onChange={this.handleChange.bind(this, 'ffdocname')} />
+                <label htmlFor="reason">Vernunft:</label>
+                <input className="form-control" name="reason" value={this.state.ffreason} onChange={this.handleChange.bind(this, 'ffreason')} />
+                <label htmlFor="date">Datum:</label>
+                <input className="form-control" id="date" name="date" value={this.state.ffdate} onChange={this.handleChange.bind(this, 'ffdate')} />
+                <label htmlFor="reminder">Erinner:</label>
+                <input type="checkbox" name="reminder" checked={this.state.ffreminder} onChange={this.handleClick.bind(this, 'ffreminder')} />
+            </form>
             </Modal.Body>
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
