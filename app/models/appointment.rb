@@ -9,6 +9,8 @@ class Appointment < ActiveRecord::Base
   validates :doctor, presence: true
   validates :pet, presence: true
   validates :reason, presence: true
+  
+  scope :with_owners, lambda { |value| where('user_id = (?)', value) if value }
 
   def date_cannot_be_in_the_past
     if date.present? && date < DateTime.now
