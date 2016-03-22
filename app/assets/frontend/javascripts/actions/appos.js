@@ -100,10 +100,9 @@ export function createAppo(fields) {
 
 
 export function updateAppo(fields) {
-
   let data = {
       method: 'PATCH',
-      fields: JSON.stringify(fields),
+      body:  {appointment: JSON.stringify(fields)},
       credentials: 'same-origin',
       mode: 'same-origin',
       headers: {
@@ -112,7 +111,9 @@ export function updateAppo(fields) {
           'X-CSRFToken':  cookie.load('csrftoken')
       }
   };
+
   console.log('Fields update PATCH action: ' + JSON.stringify(fields));
+
   return dispatch => {
     return fetch('/appointments/'+fields['id'], data)
            .then(response => response.json())
@@ -120,7 +121,9 @@ export function updateAppo(fields) {
   }
 };
 
-export function updatedAppo(appoArrayProp) {
+function updatedAppo(apposArrayProp) {
+  console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
+  
   return {
     type:  UPDATED_APPO,
     apposArrayProp

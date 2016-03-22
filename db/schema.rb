@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150708225237) do
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.datetime "scheduled_time"
+    t.datetime "date"
     t.integer  "pet_id"
     t.boolean  "reminder"
     t.string   "reason_for_visit"

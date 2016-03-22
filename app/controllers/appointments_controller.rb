@@ -1,7 +1,7 @@
 # Chipotle Software (c) 2015-2016 MIT License
 class AppointmentsController < ApplicationController
 
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  #before_action :set_appointment, only: [:show, :edit, :update, :destroy]
 
   # GET /appointments
   def index
@@ -30,26 +30,6 @@ class AppointmentsController < ApplicationController
     return render json: users.to_json
   end
 
-  # GET /appointments/1
-  # GET /appointments/1.json
-  def show
-  end
-
-  # GET /appointments/new
-  def new
-    @appointment = Appointment.new
-  end
-
-  # GET /appointments/1/edit
-  def edit
-  end
-
-  # GET /appointments/appo_delete/1
-  def appo_delete
-    appos = Appointment.to_react
-    return render json: appos
-  end
-
   # POST /appointments
   def create
     logger.debug "### Data in create#appointments #####################>>>> #{params.to_json} "
@@ -58,22 +38,29 @@ class AppointmentsController < ApplicationController
     result = appointment.save_appointment(params)
     if result
       appos = Appointment.to_react
-      return render json: appos.to_json
+      return render :json, appos.to_json
     else
-      return render json: appointment.errors.to_json
+      return render :json, appointment.errors.to_json
     end
   end
 
   # PATCH/PUT /appointments/1
-  # PATCH/PUT /appointments/1.json
   def update
       logger.debug "### Data in PATCH create#appointments #####################>>>> #{params.to_json} "
-      if @appointment.update(appointment_params)
-        render json: status: :ok, message: 'Appointed updated' 
+      # {"id":"9","date":"2016-03-17 07-00-00","reminder":true,"owner":"Grimms","petname":"Babby","reason":"Vaccines","controller":"appointments","action":"update","appointment":{"id":9,"reminder":true}} 
+
+      return render json: params
+      if @appointment.update(params)
+        render json: {status: :ok, message: 'Appointed updated', code: 00} 
       else
-        render json: @appointment.errors, status: :unprocessable_entity 
+        render json: {status: :failed, errors: @appointment.errors, message: :unprocessable_entity, code: 044} 
       end
-    end
+  end
+
+  # GET /appointments/appo_delete/1
+  def appo_delete
+    appos = Appointment.to_react
+    return render json: appos
   end
 
   # DELETE /appointments/1
@@ -94,6 +81,7 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:scheduled_time, :pet_id, :owner_id, :reminder, :reason_for_visit, :doctor_id, :appoid)
+      return 
+      params.require(:appointment).permit(:scheduled_time, :pet_id, :owner_id, :reminder, :reason_for_visit, :doctor_id, :active, :appoid)
     end
 end

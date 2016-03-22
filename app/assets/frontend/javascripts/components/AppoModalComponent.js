@@ -10,10 +10,15 @@ import { Button, Modal } from 'react-bootstrap';
 class AppoModalComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: true, ffid: '', ffowner:    '',
-                   ffdate:     '',  ffpetname:  '',
-                   ffreason:   '',   ffdocname:  '',
-                   ffreminder: '' };
+    this.state = { showModal: true, 
+                   appoid: 0,
+                   scheduled_time: '', 
+                   pet_id: 0, 
+                   owner_id: 0, 
+                   reminder: false,
+                   reason_for_visit: '', 
+                   doctor_id: 0
+                   active: true  
   }
   
 /**
@@ -31,13 +36,17 @@ class AppoModalComponent extends Component {
       let action = ApposActionCreators.getAppo(this.props.routeParams.id);
       this.props.dispatch(action);  // thunk middleware dispatch
       this.setState({
-                   ffid:       this.props.oneAppo.id,
-                   ffowner:    this.props.oneAppo.owner,
-                   ffdate:     this.props.oneAppo.date,
-                   ffpetname:  this.props.oneAppo.petname,
-                   ffreason:   this.props.oneAppo.reason,
-                   ffdocname:  this.props.oneAppo.docname,
-                   ffreminder: this.props.oneAppo.reminder 
+                   appoid:         this.props.oneAppo.id,
+                   scheduled_time: this.props.oneAppo.scheduled_time, 
+                   pet_id:         this.props.oneAppo.pet_id, 
+                   owner_id:       this.props.oneAppo.owner_id, 
+                   reminder:       this.props.oneAppo.reminder,
+                   reason_for_visit: this.props.oneAppo.reason_for_visit, 
+                   doctor_id: this.props.oneAppo.doctor_id
+                   active: this.props.oneAppo.active 
+                   owner_name:    this.props.oneAppo.owner_name,
+                   pet_name:  this.props.oneAppo.pet_name,
+                   doc_name:  this.props.oneAppo.doc_name,
                  });
     }
   }
