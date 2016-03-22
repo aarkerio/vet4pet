@@ -45,17 +45,17 @@ export function receiveAppos(apposArrayProp) {
   }
 };
     
-export function getAppo(id=0) {
+export function getAppo(id) {
     return function (dispatch) {
       // dispatch(requestAppo(appo_id));
       console.log('fecthAppo Action appo_id >>>>>' + id);
       let data = {
-        method: 'POST',
+        method:      'POST',
         credentials: 'same-origin',
-        mode: 'same-origin',
-        body: JSON.stringify({
-          id: id
-        }),
+        mode:        'same-origin',
+        body:        JSON.stringify({
+                       id: id
+                     }),
         headers: {
           'Accept':       'application/json',
           'Content-Type': 'application/json',
@@ -70,6 +70,7 @@ export function getAppo(id=0) {
 
 
 function receiveAppo(appoObjProp) {
+ console.log('appoObjProp ONE >>> ' + JSON.stringify(appoObjProp)); 
   return {
     type:  RECEIVE_ONE_APPO,
     oneAppo: appoObjProp.shift()

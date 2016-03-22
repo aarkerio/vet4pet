@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
+import ReactDatalist from 'react-datalist';
+
 class AppoModalComponent extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class AppoModalComponent extends Component {
                    id:         0,
                    date:       '', 
                    pet_id:     0, 
-                   owner_id:   0, 
+                   owner_id:   0,
                    reminder:   false,
                    reason:     '', 
                    doctor_id:  0,
@@ -33,7 +35,7 @@ class AppoModalComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    if ( nextProps.oneAppo.owner  !=  this.state.ffowner ) {
+    if ( nextProps.oneAppo.owner_id  !=  this.state.owner_id ) {
       console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps.oneAppo));
       console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.oneAppo));
       let action = ApposActionCreators.getAppo(this.props.routeParams.id);
