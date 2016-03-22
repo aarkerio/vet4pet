@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
-import ReactDatalist from 'react-datalist';
+import Select from 'react-select';
+
+require('react-select/less/default.less');
 
 class AppoModalComponent extends Component {
   constructor(props) {
@@ -23,7 +25,8 @@ class AppoModalComponent extends Component {
                    active:     true,
                    owner_name: '',
                    pet_name:   '',
-                   doc_name:   ''
+                   doc_name:   '',
+                   owner_options: [ { value: 'one', label: 'One' },  { value: 'two', label: 'Two' }]  
              }
   }
 /**
@@ -134,7 +137,7 @@ class AppoModalComponent extends Component {
             <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <input className="form-control" name="owner_name" value={this.state.owner_name} onChange={this.handleChange.bind(this, 'owner_name')} />
+             <Select name="owners" value="one" options={this.state.owner_options} onChange={console.log('owner_id')} />
              <label htmlFor="pet_name">Kosename (haustier):</label>
              <input className="form-control" name="pet_name" value={this.state.pet_name} onChange={this.handleChange.bind(this, 'pet_name')} />
              <label htmlFor="doc_name">Doc:</label>
