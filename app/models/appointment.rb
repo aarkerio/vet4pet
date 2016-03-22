@@ -70,7 +70,7 @@ class Appointment < ActiveRecord::Base
   #
   # Returns hash object or nil.
   def self.to_react(appo_id)
-    logger.debug "### appo_id ##############>>>> #{appo_id} "
+    logger.debug "### Appo id ##############>>>> #{appo_id} "
     conditions = {active: true}
     
     conditions[:id] = appo_id  unless appo_id == 0
@@ -80,6 +80,15 @@ class Appointment < ActiveRecord::Base
     react = appos.map do |appo|
       react_order(appo)
     end
+    
+    if appo_id == 0
+      return react
+    else
+      docs_options   = User.where({'group_id'.to_sym => 3, 'active' => 'true'}).to_json 
+      react['pets_options']   = Pet.where(owner_id: appos.first.user_id, active: true).select(:id, :name).to_json
+      react['owners_options'] = User.where(group_id: 2, active: true).to_json
+    end
+    react
   end
 
   # Private: Reorder to send the JSON to React.js view.

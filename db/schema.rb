@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150708225237) do
     t.boolean  "interned"
     t.datetime "created"
     t.string   "tags"
+    t.boolean  "active"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

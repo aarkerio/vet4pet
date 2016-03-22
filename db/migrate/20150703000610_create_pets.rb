@@ -8,6 +8,7 @@ class CreatePets < ActiveRecord::Migration
       t.boolean :interned
       t.timestamp :created
       t.string :tags
+      t.boolean  :active
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false
