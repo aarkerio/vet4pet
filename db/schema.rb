@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 20150708225237) do
     t.datetime "date"
     t.integer  "pet_id"
     t.boolean  "reminder"
-    t.string   "reason_for_visit"
+    t.string   "reason"
     t.integer  "doctor_id"
     t.integer  "owner_id"
     t.boolean  "active"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "appointments", ["pet_id"], name: "index_appointments_on_pet_id", using: :btree

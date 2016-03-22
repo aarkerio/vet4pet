@@ -132,17 +132,17 @@ class AppoModalComponent extends Component {
             <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <input className="form-control" placeholder="Owner" name="owner" value={this.state.ffowner} onChange={this.handleChange.bind(this, 'ffowner')} />
-             <label htmlFor="petname">Kosename (haustier):</label>
-                <input className="form-control" name="petname" value={this.state.ffpetname} onChange={this.handleChange.bind(this, 'ffpetname')} />
-                <label htmlFor="docname">Doc:</label>
-                <input className="form-control" name="docname" value={this.state.ffdocname} onChange={this.handleChange.bind(this, 'ffdocname')} />
-                <label htmlFor="reason">Vernunft:</label>
-                <input className="form-control" name="reason" value={this.state.ffreason} onChange={this.handleChange.bind(this, 'ffreason')} />
-                <label htmlFor="date">Datum:</label>
-                <input className="form-control" id="date" name="date" value={this.state.ffdate} onChange={this.handleChange.bind(this, 'ffdate')} />
-                <label htmlFor="reminder">Erinner:</label>
-                <input type="checkbox" name="reminder" checked={this.state.ffreminder} onChange={this.handleClick.bind(this, 'ffreminder')} />
+             <input className="form-control" name="owner_name" value={this.state.owner_name} onChange={this.handleChange.bind(this, 'owner_name')} />
+             <label htmlFor="pet_name">Kosename (haustier):</label>
+             <input className="form-control" name="pet_name" value={this.state.pet_name} onChange={this.handleChange.bind(this, 'pet_name')} />
+             <label htmlFor="doc_name">Doc:</label>
+             <input className="form-control" name="doc_name" value={this.state.doc_name} onChange={this.handleChange.bind(this, 'doc_name')} />
+             <label htmlFor="reason">Vernunft:</label>
+             <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
+             <label htmlFor="date">Datum:</label>
+             <input className="form-control" id="date" name="date" value={this.state.date} onChange={this.handleChange.bind(this, 'date')} />
+             <label htmlFor="reminder">Erinner:</label>
+             <input type="checkbox" name="reminder" checked={this.state.reminder} onChange={this.handleClick.bind(this, 'reminder')} />
             </form>
             </Modal.Body>
           <Modal.Footer>

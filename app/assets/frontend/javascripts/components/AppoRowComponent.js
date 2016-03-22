@@ -38,11 +38,11 @@ class AppoRow extends Component {
     return (
       <tr key={key}>
         <td style={{width: '35px', padding:0}}> <Link to={"/appointment/"+appointment.id+"/"}>Edit</Link></td>
-        <td style={{width: '35px', padding:0}}> {appointment.owner}   </td>
+        <td style={{width: '35px', padding:0}}> {appointment.owner_name}   </td>
         <td style={{width: '35px', padding:0}}> {appointment.date}    </td>
-        <td style={{width: '35px', padding:0}}> {appointment.petname} </td>
+        <td style={{width: '35px', padding:0}}> {appointment.pet_name} </td>
         <td style={{width: '35px', padding:0}}> {appointment.reason}  </td>
-        <td style={{width: '35px', padding:0}}> {appointment.docname} </td>
+        <td style={{width: '35px', padding:0}}> {appointment.doc_name} </td>
         <td style={{width: '35px', padding:0}}> <a href="#" onClick={this.deleteAppointment.bind(this, appointment.id)}>Delete</a></td>
       </tr>  
     )
