@@ -7,6 +7,8 @@ export const RECEIVE_ONE_APPO = 'RECEIVE_ONE_APPO';
 export const REMOVE_APPO      = 'REMOVE_APPO';
 export const REQUEST_POSTS    = 'REQUEST_POSTS';
 export const CREATE_APPO      = 'CREATE_APPO';
+export const UPDATED_APPO     = 'UPDATED_APPO';
+
 
 function requestAppo(appo_id) {
   return {
@@ -81,15 +83,47 @@ export function createAppo(fields) {
       method: 'POST',
       fields: JSON.stringify(fields),
       credentials: 'same-origin',
+      mode: 'same-origin',
       headers: {
-         'X-CSRFToken': cookie.load('csrftoken')
+        'Accept':       'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': cookie.load('csrftoken')
       }
   };
   console.log('Fields create action: ' + JSON.stringify(fields));
   return dispatch => {
-    return fetch('/appointments/create', data)
+    return fetch('/appointments', data)
            .then(response => response.json())
            .then(json => dispatch(receiveAppos(json)))
+  }
+};
+
+
+export function updateAppo(fields) {
+
+  let data = {
+      method: 'PATCH',
+      fields: JSON.stringify(fields),
+      credentials: 'same-origin',
+      mode: 'same-origin',
+      headers: {
+          'Accept':       'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken':  cookie.load('csrftoken')
+      }
+  };
+  console.log('Fields update PATCH action: ' + JSON.stringify(fields));
+  return dispatch => {
+    return fetch('/appointments/'+fields['id'], data)
+           .then(response => response.json())
+           .then(json => dispatch(updatedAppo(json)))
+  }
+};
+
+export function updatedAppo(appoArrayProp) {
+  return {
+    type:  UPDATED_APPO,
+    apposArrayProp
   }
 };
 

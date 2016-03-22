@@ -54,7 +54,7 @@ class AppoModalComponent extends Component {
     let creminder  = this.state.ffreminder;
     let creason    = this.state.ffreason;
     let fields     = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
-    let action = ApposActionCreators.createAppo(fields);
+    let action = ApposActionCreators.updateAppo(fields);
     this.props.dispatch(action);  // thunk middlew
 
     browserHistory.push('/appointments')

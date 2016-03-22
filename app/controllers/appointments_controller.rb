@@ -51,10 +51,9 @@ class AppointmentsController < ApplicationController
   end
 
   # POST /appointments
-  # POST /appointments.json
   def create
     logger.debug "### Data in create#appointments #####################>>>> #{params.to_json} "
-    #return render json: {name: 'Goooddd'}.to_json
+   
     appointment = Appointment.new
     result = appointment.save_appointment(params)
     if result
@@ -68,13 +67,11 @@ class AppointmentsController < ApplicationController
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update
-    respond_to do |format|
+      logger.debug "### Data in PATCH create#appointments #####################>>>> #{params.to_json} "
       if @appointment.update(appointment_params)
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @appointment }
+        render json: status: :ok, message: 'Appointed updated' 
       else
-        format.html { render :edit }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+        render json: @appointment.errors, status: :unprocessable_entity 
       end
     end
   end
