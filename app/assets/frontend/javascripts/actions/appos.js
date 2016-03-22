@@ -18,37 +18,43 @@ function requestAppo(appo_id) {
 }
 
 export function fetchAppos() {
-    return function (dispatch) {
+  return function (dispatch) {
     let data = {
       method: 'POST',
       credentials: 'same-origin',
       mode: 'same-origin',
       body: JSON.stringify({
-        appoid: 0  // get all
+        id: 0  // get all
       }),
       headers: {
         'Accept':       'application/json',
         'Content-Type': 'application/json',
         'X-CSRFToken':  cookie.load('csrftoken')
       }
-    }
+    };
     return fetch('/appointments/get_appos', data)
           .then(response => response.json())  // promise
           .then(json => dispatch(receiveAppos(json)))
   }
 };
 
+export function receiveAppos(apposArrayProp) {
+  return {
+    type:  RECEIVE_APPOS,
+    apposArrayProp
+  }
+};
     
-export function getAppo(appo_id=0) {
+export function getAppo(id=0) {
     return function (dispatch) {
       // dispatch(requestAppo(appo_id));
-      console.log('fecthAppo Action appo_id >>>>>' + appo_id);
+      console.log('fecthAppo Action appo_id >>>>>' + id);
       let data = {
         method: 'POST',
         credentials: 'same-origin',
         mode: 'same-origin',
         body: JSON.stringify({
-          appoid: appo_id
+          id: id
         }),
         headers: {
           'Accept':       'application/json',
@@ -61,13 +67,7 @@ export function getAppo(appo_id=0) {
           .then(json => dispatch(receiveAppo(json)));
   }
 };
- 
-export function receiveAppos(apposArrayProp) {
-  return {
-    type:  RECEIVE_APPOS,
-    apposArrayProp
-  }
-};
+
 
 function receiveAppo(appoObjProp) {
   return {

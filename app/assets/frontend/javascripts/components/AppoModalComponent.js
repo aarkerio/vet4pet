@@ -11,19 +11,19 @@ class AppoModalComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { showModal: true, 
-                   id: 0,
-                   scheduled_time: '', 
-                   pet_id: 0, 
-                   owner_id: 0, 
-                   reminder: false,
-                   reason_for_visit: '', 
-                   doctor_id: 0
-                   active: true,
+                   id:         0,
+                   date:       '', 
+                   pet_id:     0, 
+                   owner_id:   0, 
+                   reminder:   false,
+                   reason:     '', 
+                   doctor_id:  0,
+                   active:     true,
                    owner_name: '',
-                   pet_name:  '',
-                   doc_name:  ''
+                   pet_name:   '',
+                   doc_name:   ''
+             }
   }
-  
 /**
   * Loads default data
   **/
@@ -45,8 +45,8 @@ class AppoModalComponent extends Component {
                    owner_id:  this.props.oneAppo.owner_id, 
                    reminder:  this.props.oneAppo.reminder,
                    reason:    this.props.oneAppo.reason, 
-                   doctor_id: this.props.oneAppo.doctor_id
-                   active:    this.props.oneAppo.active 
+                   doctor_id: this.props.oneAppo.doctor_id,
+                   active:    this.props.oneAppo.active,
                    owner_name:this.props.oneAppo.owner_name,
                    pet_name:  this.props.oneAppo.pet_name,
                    doc_name:  this.props.oneAppo.doc_name
@@ -58,14 +58,14 @@ class AppoModalComponent extends Component {
  **/
   handleSubmit(e) {
     e.preventDefault();
-    let cid        = this.state.ffid;
-    let cdate      = this.state.ffdate;
-    let cpetname   = this.state.ffpetname;
-    let cowner     = this.state.ffowner;
-    let cdocname   = this.state.ffdoname;
-    let creminder  = this.state.ffreminder;
-    let creason    = this.state.ffreason;
-    let fields     = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
+    let fields = { id:        this.state.id,
+                   date:      this.state.date, 
+                   pet_id:    this.state.pet_id, 
+                   owner_id:  this.state.owner_id, 
+                   reminder:  this.state.reminder,
+                   reason:    this.state.reason, 
+                   doctor_id: this.state.doctor_id,
+                   active:    this.state.active };
     let action = ApposActionCreators.updateAppo(fields);
     this.props.dispatch(action);  // thunk middlew
 

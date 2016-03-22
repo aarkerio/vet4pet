@@ -36,11 +36,11 @@ pet_4  = Pet.create! name: 'Sally', age: 3, kind_id: kind.id, interned: false,  
 pet_4  = Pet.create! name: 'Wacky', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_3.id
 
 appo1 = {
-  scheduled_time: 2.days.from_now.change(hour: 7),
+  date: 2.days.from_now.change(hour: 7),
   pet_id: pet_1.id,
   reminder:  true,
   active:  true,
-  reason_for_visit: 'Vaccines',
+  reason: 'pain in leg',
   doctor_id: doctor.id,
   owner_id: owner_1.id
 }
@@ -48,11 +48,11 @@ appo1 = {
 u1 = Appointment.create! appo1
 
 appo2 = {
-  scheduled_time: 10.days.from_now.change(hour: 7),
+  date: 10.days.from_now.change(hour: 7),
   pet_id: pet_2.id,
   reminder:  true,
   active:  true,
-  reason_for_visit: 'Vaccines',
+  reason: 'Allergic itchy',
   doctor_id: doctor.id,
   owner_id: owner_1.id
 }
@@ -60,11 +60,11 @@ appo2 = {
 u2 = Appointment.create! appo2
 
 appo3 = {
-  scheduled_time: 9.days.from_now.change(hour: 7),
+  date: 9.days.from_now.change(hour: 7),
   pet_id: pet_2.id,
   reminder:  true,
   active:  true,
-  reason_for_visit: 'Vaccines',
+  reason: 'Vaccines',
   doctor_id: doctor.id,
   owner_id: owner_3.id
 }

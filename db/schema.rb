@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150708225237) do
     t.datetime "date"
     t.integer  "pet_id"
     t.boolean  "reminder"
-    t.string   "reason"
+    t.string   "reason_for_visit"
     t.integer  "doctor_id"
     t.integer  "owner_id"
     t.boolean  "active"

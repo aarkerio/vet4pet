@@ -4,15 +4,15 @@ class Appointment < ActiveRecord::Base
   belongs_to :doctor, class_name:  User
   belongs_to :owner, class_name:  User
 
-  validates :scheduled_time, presence: true
-  validate  :scheduled_time_cannot_be_in_the_past
+  validates :date, presence: true
+  validate  :date_cannot_be_in_the_past
   validates :doctor, presence: true
   validates :pet, presence: true
-  validates :reason_for_visit, presence: true
+  validates :reason, presence: true
 
-  def scheduled_time_cannot_be_in_the_past
-    if scheduled_time.present? && scheduled_time < DateTime.now
-      errors.add(:scheduled_time, "cannot be in the past.")
+  def date_cannot_be_in_the_past
+    if date.present? && date < DateTime.now
+      errors.add(:date, "cannot be in the past.")
     end
   end
 
@@ -32,10 +32,10 @@ class Appointment < ActiveRecord::Base
       pet = get_user(params[:name], owner.id.to_s)
     end
 
-    new_appo = {scheduled_time: params[:date],
+    new_appo = {date: params[:date],
                 pet_id: pet.id,
                 reminder: params[:reminder],
-                reason_for_visit: params[:reason],
+                reason: params[:reason],
                 doctor_id: doctor.id,
                 owner_id: owner.id,
                 active: true
@@ -54,6 +54,7 @@ class Appointment < ActiveRecord::Base
     words = name.split(" ")
     User.where('LOWER(fname) ILIKE ? AND LOWER(lname) ILIKE ?', "#{words[0]}%", "#{words[1]}%").first
   end
+
   # Private: Returns all appointments.
   #
   # appo_id - The Integer number of appointemnt id.
@@ -74,7 +75,7 @@ class Appointment < ActiveRecord::Base
     
     conditions[:id] = appo_id  unless appo_id == 0
     
-    appos = self.where(conditions).order('scheduled_time ASC').limit(20)
+    appos = self.where(conditions).order('date ASC').limit(20)
 
     react = appos.map do |appo|
       react_order(appo)

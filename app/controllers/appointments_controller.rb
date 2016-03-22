@@ -7,6 +7,7 @@ class AppointmentsController < ApplicationController
   def index
   end
   
+  #GET ActionCable
   def broadcast
     appos = Appointment.to_react
     ActionCable.server.broadcast 'snippets', appos: appos
@@ -14,7 +15,7 @@ class AppointmentsController < ApplicationController
   
   # POST /appointments/get_appos
   def get_appos
-    appos = Appointment.to_react(params['appoid'])
+    appos = Appointment.to_react(params['id'])
     logger.debug "### get_appos in appointments ##################>>>> #{params.to_json} "
     return render json: appos
   end
@@ -82,6 +83,6 @@ class AppointmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
       return 
-      params.require(:appointment).permit(:scheduled_time, :pet_id, :owner_id, :reminder, :reason_for_visit, :doctor_id, :active, :appoid)
+      params.require(:appointment).permit(:scheduled_time, :pet_id, :owner_id, :reminder, :reason_for_visit, :doctor_id, :active, :id)
     end
 end
