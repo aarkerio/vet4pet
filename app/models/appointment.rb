@@ -87,6 +87,6 @@ class Appointment < ActiveRecord::Base
   #
   # Returns hash.
   def self.react_order(appo)
-    {id: appo.id, petname: appo.pet.name, owner: appo.owner.lname, docname: appo.doctor.lname, date: appo.scheduled_time.strftime('%Y-%m-%d %H-%M-%S'), reason: appo.reason_for_visit, reminder: appo.reminder }
+    {id: appo.id, pet_id: appo.pet_id, owner_id: appo.owner_id, doctor_id: appo.doctor_id, pet_name: appo.pet.name, owner_name: appo.owner.lname, doc_name: appo.doctor.lname, date: appo.date.strftime('%Y-%m-%d %H-%M-%S'), reason: appo.reason, reminder: appo.reminder, active: appo.active }
   end
 end

@@ -11,14 +11,17 @@ class AppoModalComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { showModal: true, 
-                   appoid: 0,
+                   id: 0,
                    scheduled_time: '', 
                    pet_id: 0, 
                    owner_id: 0, 
                    reminder: false,
                    reason_for_visit: '', 
                    doctor_id: 0
-                   active: true  
+                   active: true,
+                   owner_name: '',
+                   pet_name:  '',
+                   doc_name:  ''
   }
   
 /**
@@ -36,17 +39,17 @@ class AppoModalComponent extends Component {
       let action = ApposActionCreators.getAppo(this.props.routeParams.id);
       this.props.dispatch(action);  // thunk middleware dispatch
       this.setState({
-                   appoid:         this.props.oneAppo.id,
-                   scheduled_time: this.props.oneAppo.scheduled_time, 
-                   pet_id:         this.props.oneAppo.pet_id, 
-                   owner_id:       this.props.oneAppo.owner_id, 
-                   reminder:       this.props.oneAppo.reminder,
-                   reason_for_visit: this.props.oneAppo.reason_for_visit, 
+                   id:        this.props.oneAppo.id,
+                   date:      this.props.oneAppo.date, 
+                   pet_id:    this.props.oneAppo.pet_id, 
+                   owner_id:  this.props.oneAppo.owner_id, 
+                   reminder:  this.props.oneAppo.reminder,
+                   reason:    this.props.oneAppo.reason, 
                    doctor_id: this.props.oneAppo.doctor_id
-                   active: this.props.oneAppo.active 
-                   owner_name:    this.props.oneAppo.owner_name,
+                   active:    this.props.oneAppo.active 
+                   owner_name:this.props.oneAppo.owner_name,
                    pet_name:  this.props.oneAppo.pet_name,
-                   doc_name:  this.props.oneAppo.doc_name,
+                   doc_name:  this.props.oneAppo.doc_name
                  });
     }
   }

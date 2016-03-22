@@ -4,7 +4,7 @@ class CreateAppointments < ActiveRecord::Migration
       t.datetime :date
       t.references :pet, index: true, foreign_key: true
       t.boolean :reminder
-      t.string :reason_for_visit
+      t.string :reason
       t.integer :doctor_id
       t.integer :owner_id
       t.boolean :active
