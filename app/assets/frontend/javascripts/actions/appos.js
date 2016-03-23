@@ -70,7 +70,7 @@ export function getAppo(id) {
 
 
 function receiveAppo(appoObjProp) {
- console.log('appoObjProp ONE >>> ' + JSON.stringify(appoObjProp)); 
+ console.log('appoObjProp ONE after rails >>> ' + JSON.stringify(appoObjProp)); 
   return {
     type:  RECEIVE_ONE_APPO,
     oneAppo: appoObjProp.shift()

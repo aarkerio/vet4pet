@@ -15,7 +15,7 @@ class AppointmentsController < ApplicationController
   
   # POST /appointments/get_one_appo
   def get_one_appo
-    #logger.debug "### PARAMS in get_appos in appointments ##################>>>> #{params.to_json}"
+    # logger.debug "### PARAMS in get_appos in appointments ##################>>>> #{params[:id]}"
     # return render json: params
     appo = Appointment.get_one(params[:id])
     return render json: appo

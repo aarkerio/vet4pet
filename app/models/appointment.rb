@@ -89,7 +89,7 @@ class Appointment < ActiveRecord::Base
     logger.debug "### id in Model get_one ##############>>>> #{id} "
     appo = self.find(id)
 
-    appo.first.react_order(appo)
+    react_order(appo)
   end
   # Private: Reorder to send the JSON to React.js view.
   #
