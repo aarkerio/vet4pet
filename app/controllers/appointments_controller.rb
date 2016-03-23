@@ -13,10 +13,19 @@ class AppointmentsController < ApplicationController
     ActionCable.server.broadcast 'snippets', appos: appos
   end
   
+  # POST /appointments/get_one_appo
+  def get_one_appo
+    #logger.debug "### PARAMS in get_appos in appointments ##################>>>> #{params.to_json}"
+    # return render json: params
+    appo = Appointment.get_one(params[:id])
+    return render json: appo
+  end
+
   # POST /appointments/get_appos
   def get_appos
-    appos = Appointment.to_getall(params['active'])
-    logger.debug "### get_appos in appointments ##################>>>> #{params.to_json} "
+    #logger.debug "### PARAMS in get_appos in appointments ##################>>>> #{params.to_json}"
+    # return render json: params
+    appos = Appointment.get_all(params[:active])
     return render json: appos
   end
 

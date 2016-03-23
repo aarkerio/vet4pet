@@ -17,14 +17,14 @@ function requestAppo(appo_id) {
   }
 }
 
-export function fetchAppos() {
+export function fetchAppos(active=true) {
   return function (dispatch) {
     let data = {
       method: 'POST',
       credentials: 'same-origin',
       mode: 'same-origin',
       body: JSON.stringify({
-        id: 0  // get all
+        active: active // get all
       }),
       headers: {
         'Accept':       'application/json',
@@ -62,7 +62,7 @@ export function getAppo(id) {
           'X-CSRFToken':  cookie.load('csrftoken')
         }
       }
-      return fetch('/appointments/get_appos', data)
+      return fetch('/appointments/get_one_appo', data)
           .then(response => response.json())  // promise
           .then(json => dispatch(receiveAppo(json)));
   }

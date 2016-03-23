@@ -68,9 +68,9 @@ class Appointment < ActiveRecord::Base
 
   # Private: Returns all appointments.
   #
-  # appo_id - The Integer number of appointemnt id.
+  # active - boolean, active or inactive appointments.
   #
-  # Returns hash object or nil.
+  # Returns array object or nil.
   def self.get_all(active)
     logger.debug "### Appo id ##############>>>> #{active} "
     appos = self.where({active: active}).order('date ASC').limit(20)
@@ -80,6 +80,17 @@ class Appointment < ActiveRecord::Base
     end
   end
 
+  # Private: Returns aone appointment.
+  #
+  # appo_id - The Integer number of appointemnt id.
+  #
+  # Returns hash object or nil.
+  def self.get_one(id)
+    logger.debug "### id in Model get_one ##############>>>> #{id} "
+    appo = self.find(id)
+
+    appo.first.react_order(appo)
+  end
   # Private: Reorder to send the JSON to React.js view.
   #
   # appo - Active record object.
