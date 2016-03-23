@@ -9,6 +9,8 @@ export const REQUEST_POSTS    = 'REQUEST_POSTS';
 export const CREATE_APPO      = 'CREATE_APPO';
 export const UPDATED_APPO     = 'UPDATED_APPO';
 
+export const RECEIVE_OWNERS   = 'RECEIVE_OWNERS';
+export const RECEIVE_DOCTORS  = 'RECEIVE_DOCTORS';
 
 function requestAppo(appo_id) {
   return {
@@ -77,7 +79,6 @@ function receiveAppo(appoObjProp) {
   }
 };
 
-
 export function createAppo(fields) {
 
   let data = {
@@ -122,6 +123,15 @@ export function updateAppo(fields) {
   }
 };
 
+export function updateForm(id){
+  dispatch(getAppo(id));
+  dispatch(getUsersbyGroup(2));  // owners
+  // dispatch(getUsersbyGroup(3));  // doctors
+  return {
+    type:  UPDATED_FORM
+  }
+};
+
 function updatedAppo(apposArrayProp) {
   console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
   
@@ -148,7 +158,6 @@ export function removeAppo(appo_id) {
   }
 };
 
-
 /** 
  * admin=1, owners =2,  doctors=3, staff=4 
  * owners by default
@@ -168,6 +177,33 @@ export function getUsersbyGroup(group_id=1) {
       }
       return fetch('/users/get_bygroup', data)
           .then(response => response.json())  // promise
-          .then(json => dispatch(receiveAppo(json)));
+          .then(json => dispatch(setOwners(json, group_id)));
   }
 };
+
+function setUsers(usersArrayProp, group_id) {
+  console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
+  let group =  : 'owners_options' ? 'doctors_options'
+  if group_id == 2 {
+    return {
+      type:  RECEIVE_OWNERS,
+      owners_options: usersArrayProp
+    };
+   } else {
+    return {
+      type:  RECEIVE_DOCTORS,
+      doctors_options: usersArrayProp
+    };
+   }
+};
+
+function setDoctors(usersArrayProp) {
+  // console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
+  
+  return {
+    type:  RECEIVE_DOCTORS,
+    doctors_options: apposArrayProp
+  }
+};
+
+

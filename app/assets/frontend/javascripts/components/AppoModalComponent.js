@@ -13,21 +13,21 @@ require('react-select/less/default.less');
 class AppoModalComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: true, 
-                   id:         0,
-                   date:       '', 
-                   pet_id:     0, 
-                   owner_id:   0,
-                   reminder:   false,
-                   reason:     '', 
-                   doctor_id:  0,
-                   active:     true,
-                   owner_name: '',
-                   pet_name:   '',
-                   doc_name:   '',
-                   owner_options: [],
-                   pet_options: [],
-                   doc_options: []
+    this.state = { showModal:      true, 
+                   id:             0,
+                   date:           '', 
+                   pet_id:         0, 
+                   owner_id:       0,
+                   reminder:       false,
+                   reason:         '', 
+                   doctor_id:      0,
+                   active:         true,
+                   owner_name:     '',
+                   pet_name:       '',
+                   doc_name:       '',
+                   owners_options: [],
+                   pets_options:   [],
+                   docs_options:   []
              }
   }
 
@@ -35,7 +35,7 @@ class AppoModalComponent extends Component {
   * Loads default data
   **/
   componentDidMount() {
-    let action = ApposActionCreators.getAppo(this.props.routeParams.id);
+    let action = ApposActionCreators.updateForm(this.props.routeParams.id);
     this.props.dispatch(action);
   }
   
