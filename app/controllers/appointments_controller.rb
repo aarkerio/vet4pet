@@ -15,12 +15,13 @@ class AppointmentsController < ApplicationController
   
   # POST /appointments/get_appos
   def get_appos
-    appos = Appointment.to_react(params['id'])
+    appos = Appointment.to_getall(params['active'])
     logger.debug "### get_appos in appointments ##################>>>> #{params.to_json} "
     return render json: appos
   end
 
   # POST /appointments/get_data
+  # Owners array to populate dinamically owners data list 
   def get_data
     owner = params[:ovalue]
     results = User.where("(fname ~ '#{owner}' OR lname ~ '#{owner}') AND group_id=2").select(:id, :fname, :lname)

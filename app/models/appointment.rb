@@ -71,26 +71,13 @@ class Appointment < ActiveRecord::Base
   # appo_id - The Integer number of appointemnt id.
   #
   # Returns hash object or nil.
-  def self.to_react(appo_id)
-    logger.debug "### Appo id ##############>>>> #{appo_id} "
-    conditions = {active: true}
-    
-    conditions[:id] = appo_id  unless appo_id == 0
-    
-    appos = self.where(conditions).order('date ASC').limit(20)
+  def self.get_all(active)
+    logger.debug "### Appo id ##############>>>> #{active} "
+    appos = self.where({active: active}).order('date ASC').limit(20)
 
-    react = appos.map do |appo|
+    appos.map do |appo|
       react_order(appo)
     end
-    
-    if appo_id == 0
-      return react
-    else
-      docs_options   = User.where({'group_id'.to_sym => 3, 'active' => 'true'}).to_json 
-      react['pets_options']   = Pet.where(owner_id: appos.first.user_id, active: true).select(:id, :name).to_json
-      react['owners_options'] = User.where(group_id: 2, active: true).to_json
-    end
-    react
   end
 
   # Private: Reorder to send the JSON to React.js view.
