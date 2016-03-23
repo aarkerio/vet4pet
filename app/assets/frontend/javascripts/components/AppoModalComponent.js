@@ -25,9 +25,9 @@ class AppoModalComponent extends Component {
                    owner_name: '',
                    pet_name:   '',
                    doc_name:   '',
-                   owner_options: [ { value: 'one', label: 'One' },  { value: 'two', label: 'Two' }, { value: 'three', label: 'Three' } ],
+                   owner_options: [],
                    pet_options: [],
-                   doc_options: [ { value: 'one', label: 'One' },  { value: 'two', label: 'Two' }, { value: 'three', label: 'Three' } ]
+                   doc_options: []
              }
   }
 

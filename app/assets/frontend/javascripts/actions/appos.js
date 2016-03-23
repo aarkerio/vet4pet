@@ -73,7 +73,7 @@ function receiveAppo(appoObjProp) {
  console.log('appoObjProp ONE after rails >>> ' + JSON.stringify(appoObjProp)); 
   return {
     type:  RECEIVE_ONE_APPO,
-    oneAppo: appoObjProp.shift()
+    oneAppo: appoObjProp
   }
 };
 
@@ -116,7 +116,7 @@ export function updateAppo(fields) {
   console.log('Fields update PATCH action: ' + JSON.stringify(fields));
 
   return dispatch => {
-    return fetch('/appointments/'+fields['id'], data)
+    return fetch('/appointments/', data)
            .then(response => response.json())
            .then(json => dispatch(updatedAppo(json)))
   }
@@ -148,3 +148,26 @@ export function removeAppo(appo_id) {
   }
 };
 
+
+/** 
+ * admin=1, owners =2,  doctors=3, staff=4 
+ * owners by default
+ **/
+export function getUsersbyGroup(group_id=1) {
+    return function (dispatch) {
+      let data = {
+        method:      'POST',
+        group_id:    group_id,
+        credentials: 'same-origin',
+        mode:        'same-origin',
+        headers: {
+          'Accept':       'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken':  cookie.load('csrftoken')
+        }
+      }
+      return fetch('/users/get_bygroup', data)
+          .then(response => response.json())  // promise
+          .then(json => dispatch(receiveAppo(json)));
+  }
+};

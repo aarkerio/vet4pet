@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+
+  def get_bygroup
+    User.find_by_group_id().where(active: true)
+  end
+
   # GET /users
   # GET /users.json
   def index
