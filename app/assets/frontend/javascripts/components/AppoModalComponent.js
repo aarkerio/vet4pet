@@ -174,7 +174,8 @@ AppoModalComponent.defaultProps = {
 function mapStateToProps(state) {
   // console.log('state.rootReducer.appointments_rdcer.inhaber >>' +  state.rootReducer.appointments_rdcer.inhaber);
   return {
-      oneAppo: state.rootReducer.appo_rdcer.oneAppo
+      oneAppo: state.rootReducer.appo_rdcer.oneAppo,
+      owners_options: state.rootReducer.appo_rdcer.owners_options
   }
 };
 

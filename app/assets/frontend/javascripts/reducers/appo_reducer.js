@@ -3,7 +3,9 @@
 import { RECEIVE_ONE_APPO } from '../actions/appos';
 
 const initialState = {
-   oneAppo: {}
+   oneAppo: {},
+   owners_options: [],
+   doctors_options: []      
 };
 
 const appo_rdcer = (state = initialState, action) => { 
@@ -14,6 +16,11 @@ const appo_rdcer = (state = initialState, action) => {
         oneAppo: action.oneAppo
       });
    
+     case RECEIVE_OWNERS:
+      return Object.assign({}, state, {
+        owners_options: action.owners_options
+      });
+
     default:
       return state;
   }
