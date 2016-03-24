@@ -182,8 +182,7 @@ export function getUsersbyGroup(group_id=1) {
 };
 
 function setUsers(usersArrayProp, group_id) {
-  console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
-  let group =  : 'owners_options' ? 'doctors_options'
+  console.log('PARAMS RAILS response: ' + JSON.stringify(usersArrayProp));
   if group_id == 2 {
     return {
       type:  RECEIVE_OWNERS,
