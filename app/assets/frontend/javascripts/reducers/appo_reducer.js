@@ -1,6 +1,6 @@
 'use strict';
 
-import { RECEIVE_ONE_APPO } from '../actions/appos';
+import { RECEIVE_ONE_APPO,RECEIVE_OWNERS, RECEIVE_DOCTORS } from '../actions/appos';
 
 const initialState = {
    oneAppo: {},
