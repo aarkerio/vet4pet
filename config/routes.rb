@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get 'get_bygroup'
+      post 'get_bygroup'
     end
   end
 

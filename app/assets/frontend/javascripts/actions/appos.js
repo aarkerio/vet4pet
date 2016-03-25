@@ -8,6 +8,7 @@ export const REMOVE_APPO      = 'REMOVE_APPO';
 export const REQUEST_POSTS    = 'REQUEST_POSTS';
 export const CREATE_APPO      = 'CREATE_APPO';
 export const UPDATED_APPO     = 'UPDATED_APPO';
+export const UPDATED_FORM     = 'UPDATED_FORM';
 
 export const RECEIVE_OWNERS   = 'RECEIVE_OWNERS';
 export const RECEIVE_DOCTORS  = 'RECEIVE_DOCTORS';
@@ -44,6 +45,16 @@ export function receiveAppos(apposArrayProp) {
   return {
     type:  RECEIVE_APPOS,
     apposArrayProp
+  }
+};
+export function updateForm(id){
+  return function (dispatch) {
+    dispatch(getAppo(id));
+    dispatch(getUsersbyGroup(2));  // owners
+    // dispatch(getUsersbyGroup(3));  // doctors
+    return {
+      type:  UPDATED_FORM
+    };
   }
 };
     
@@ -100,7 +111,6 @@ export function createAppo(fields) {
   }
 };
 
-
 export function updateAppo(fields) {
   let data = {
       method: 'PATCH',
@@ -123,15 +133,6 @@ export function updateAppo(fields) {
   }
 };
 
-export function updateForm(id){
-  dispatch(getAppo(id));
-  dispatch(getUsersbyGroup(2));  // owners
-  // dispatch(getUsersbyGroup(3));  // doctors
-  return {
-    type:  UPDATED_FORM
-  }
-};
-
 function updatedAppo(apposArrayProp) {
   console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
   
@@ -144,7 +145,7 @@ function updatedAppo(apposArrayProp) {
 export function removeAppo(appo_id) {
   let data = {
       method: 'GET',
-      appoid: appo_id,
+      id: aid,
       credentials: 'same-origin',
       headers: {
           'X-CSRFToken': cookie.load('csrftoken')
@@ -165,8 +166,10 @@ export function removeAppo(appo_id) {
 export function getUsersbyGroup(group_id=1) {
     return function (dispatch) {
       let data = {
-        method:      'POST',
-        group_id:    group_id,
+        method: 'POST',
+         body:  JSON.stringify({
+                       group_id: group_id
+                     }),
         credentials: 'same-origin',
         mode:        'same-origin',
         headers: {
@@ -174,15 +177,15 @@ export function getUsersbyGroup(group_id=1) {
           'Content-Type': 'application/json',
           'X-CSRFToken':  cookie.load('csrftoken')
         }
-      }
+      };
       return fetch('/users/get_bygroup', data)
           .then(response => response.json())  // promise
-          .then(json => dispatch(setOwners(json, group_id)));
+          .then(json => dispatch(setUsers(json, group_id)));
   }
 };
 
 function setUsers(usersArrayProp, group_id) {
-  console.log('PARAMS RAILS response: ' + JSON.stringify(usersArrayProp));
+  console.log('PARAMS RAILS USERS controller response: ' + JSON.stringify(usersArrayProp));
   if (group_id == 2) 
   {
     return {

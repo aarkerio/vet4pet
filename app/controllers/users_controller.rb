@@ -1,13 +1,16 @@
+# Chipotle Software (c) 2015-2016 MIT License
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-
+  # POST /users/get_bygroup 
+  # return users by group
   def get_bygroup
-    User.find_by_group_id().where(active: true)
+    return render json: params['group_id']
+    users = User.find_by_group_id(params[:get_bygroup]).where(active: true)
+    return render json: users
   end
 
   # GET /users
-  # GET /users.json
   def index
     @users = User.all
   end

@@ -1,6 +1,6 @@
 'use strict';
 
-import { RECEIVE_ONE_APPO,RECEIVE_OWNERS, RECEIVE_DOCTORS } from '../actions/appos';
+import { RECEIVE_ONE_APPO,RECEIVE_OWNERS, RECEIVE_DOCTORS, UPDATE_FORM } from '../actions/appos';
 
 const initialState = {
    oneAppo: {},
@@ -20,6 +20,9 @@ const appo_rdcer = (state = initialState, action) => {
       return Object.assign({}, state, {
         owners_options: action.owners_options
       });
+    
+     case UPDATE_FORM:
+      return Object.assign({}, state);
 
     default:
       return state;
