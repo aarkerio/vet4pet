@@ -16,12 +16,13 @@ const appo_rdcer = (state = initialState, action) => {
         oneAppo: action.oneAppo
       });
    
-     case RECEIVE_OWNERS:
+    case RECEIVE_OWNERS:
+      console.log('+++++ RECEIVE_OWNERS rdcr >> +++++++>>' + JSON.stringify(action.owners_options));
       return Object.assign({}, state, {
         owners_options: action.owners_options
       });
     
-     case UPDATE_FORM:
+    case UPDATE_FORM:
       return Object.assign({}, state);
 
     default:

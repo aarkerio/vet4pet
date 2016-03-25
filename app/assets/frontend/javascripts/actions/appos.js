@@ -47,10 +47,11 @@ export function receiveAppos(apposArrayProp) {
     apposArrayProp
   }
 };
+
 export function updateForm(id){
   return function (dispatch) {
     dispatch(getAppo(id));
-    dispatch(getUsersbyGroup(2));  // owners
+    dispatch(getUsersByGroup(2));  // owners
     // dispatch(getUsersbyGroup(3));  // doctors
     return {
       type:  UPDATED_FORM
@@ -163,11 +164,11 @@ export function removeAppo(appo_id) {
  * admin=1, owners =2,  doctors=3, staff=4 
  * owners by default
  **/
-export function getUsersbyGroup(group_id=1) {
+export function getUsersByGroup(group_id=1) {
     return function (dispatch) {
       let data = {
         method: 'POST',
-         body:  JSON.stringify({
+        body:  JSON.stringify({
                        group_id: group_id
                      }),
         credentials: 'same-origin',

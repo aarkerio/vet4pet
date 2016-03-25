@@ -41,10 +41,12 @@ class AppoModalComponent extends Component {
   
   componentWillReceiveProps(nextProps) {
     if ( nextProps.oneAppo.owner_id  !=  this.state.owner_id ) {
+      let action1 = ApposActionCreators.getAppo(this.props.routeParams.id);
+      this.props.dispatch(action1);  // thunk middleware dispatch
+
       console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps.oneAppo));
       console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.oneAppo));
-      let action = ApposActionCreators.getAppo(this.props.routeParams.id);
-      this.props.dispatch(action);  // thunk middleware dispatch
+      console.log('##### NO THE SAME NEXT owners_options  >>' + JSON.stringify(nextProps.owners_options));
       this.setState({
                    id:        this.props.oneAppo.id,
                    date:      this.props.oneAppo.date, 
@@ -56,9 +58,17 @@ class AppoModalComponent extends Component {
                    active:    this.props.oneAppo.active,
                    owner_name:this.props.oneAppo.owner_name,
                    pet_name:  this.props.oneAppo.pet_name,
-                   doc_name:  this.props.oneAppo.doc_name
+                   doc_name:  this.props.oneAppo.doc_name,
+                   owners_options: nextProps.owners_options
                  });
     }
+    // console.log('##### NO THE SAME owners_options  >>' + JSON.stringify(nextProps));
+    // if ( this.state.owners_options.length == 0 ) {
+    //   console.log('##### NO THE SAME owners_options  >>' + JSON.stringify(nextProps.owners_options));
+    //   let action2 = ApposActionCreators.updateForm(this.props.routeParams.id);
+    //   this.props.dispatch(action2);
+    //   this.setState({owners_options: this.props.owners_options});
+    // }7
   }
 /**
  * Send data to new appointment
@@ -90,6 +100,18 @@ class AppoModalComponent extends Component {
   handleClick(event) {
     let newvalue = this.state.ffreminder == true ? false : true;
     this.setState({ffreminder: newvalue});
+  }
+
+  getOptions(input, callback) {
+    let self = this;
+    setTimeout(function() {
+        callback(null, {
+            options: self.state.owners_options,
+            // CAREFUL! Only set this to true when there are no more options,
+            // or more specific queries will not be sent to the server.
+            complete: true
+        });
+    }, 5000);
   }
 
   render() {
@@ -139,7 +161,7 @@ class AppoModalComponent extends Component {
             <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <Select name="owners" value="three" options={this.state.owner_options} onChange={console.log('owner_id')} />
+             <Select.Async name="owners" loadOptions={this.getOptions.bind(this)} value={this.state.owner_id} onChange={console.log('changed state.owner_options')} />
              <label htmlFor="pet_name">Kosename (haustier):</label>
              <input className="form-control" name="pet_name" value={this.state.pet_name} onChange={this.handleChange.bind(this, 'pet_name')} />
              <label htmlFor="doc_name">Doc:</label>
@@ -163,16 +185,17 @@ class AppoModalComponent extends Component {
 };
 
 AppoModalComponent.propTypes = {
-    oneAppo: PropTypes.any,
+    oneAppo: PropTypes.any.isRequired,
+    owners_options: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired
 };
 
 AppoModalComponent.defaultProps = {
-    oneAppo: {}
+    oneAppo: {},
+    owners_options: []
 };
 
 function mapStateToProps(state) {
-  // console.log('state.rootReducer.appointments_rdcer.inhaber >>' +  state.rootReducer.appointments_rdcer.inhaber);
   return {
       oneAppo: state.rootReducer.appo_rdcer.oneAppo,
       owners_options: state.rootReducer.appo_rdcer.owners_options

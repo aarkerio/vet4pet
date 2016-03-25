@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   # POST /users/get_bygroup 
   # return users by group
   def get_bygroup
-    return render json: params['group_id']
-    users = User.find_by_group_id(params[:get_bygroup]).where(active: true)
+    users = User.all_users(params['group_id'])
     return render json: users
   end
 

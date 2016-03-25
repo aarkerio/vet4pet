@@ -16,5 +16,17 @@ class User < ActiveRecord::Base
   def role?(role_to_test)
     role == role_to_test.to_s
   end
+  
+  def self.all_users(group_id) 
+    users = User.where(active: true, group_id: group_id).select(:id, :lname, :fname)
+    users.map do |user|
+      {value: user.id, label: "#{user.lname} #{user.fname}"}
+    end
+  end
+  
+  private
 
+  def self.check_user(user)
+     return
+  end
 end
