@@ -25,15 +25,22 @@ unless User.exists?(username: 'admin')
 end
 
 doctor = User.create! username: "doctor_#{Random.rand(1000)}",email: "adoc_#{Random.rand(1000)}@exale.com",password: 'password',fname: 'Ric doctor', lname: 'Grimms', group_id: doctors.id, active: true
-owner_1  = User.create! username: "Manuel_#{Random.rand(1000)}",email: "owner_#{Random.rand(1000)}@eample.com",password: 'password',fname: 'Manuel', lname: 'Grimms', group_id: owners.id, active: true
-owner_2  = User.create! username: "Mario_#{Random.rand(1000)}",email: "owggh_#{Random.rand(1000)}@exmple.com",password: 'password',fname: 'Mario', lname: 'Soto', group_id: owners.id, active: true
-owner_3  = User.create! username: "Lon_#{Random.rand(1000)}",email: "osusan_#{Random.rand(1000)}@exnnple.com",password: 'password',fname: 'Susan', lname: 'McCarthy', group_id: owners.id, active: true
+owner_1  = User.create! username: "manuel_#{Random.rand(1000)}",email: "owner_#{Random.rand(1000)}@eample.com",password: 'password',fname: 'Manuel', lname: 'Hurtado', group_id: owners.id, active: true
+owner_2  = User.create! username: "mario_#{Random.rand(1000)}",email: "owggh_#{Random.rand(1000)}@exmyple.com",password: 'password',fname: 'Mario', lname: 'Soto', group_id: owners.id, active: true
+owner_3  = User.create! username: "lon_#{Random.rand(1000)}",email: "osusan_#{Random.rand(1000)}@exnynple.com",password: 'password',fname: 'Susan', lname: 'McCarthy', group_id: owners.id, active: true
+owner_4  = User.create! username: "robert_#{Random.rand(1000)}",email: "owner_#{Random.rand(1000)}@eattmple.com",password: 'password',fname: 'Robert', lname: 'Gonzalez', group_id: owners.id, active: true
+owner_5  = User.create! username: "marion_#{Random.rand(1000)}",email: "owggh_#{Random.rand(1000)}@exkkmple.com",password: 'password',fname: 'Mariana', lname: 'Marilian', group_id: owners.id, active: true
+owner_6  = User.create! username: "laura_#{Random.rand(1000)}",email: "osusan_#{Random.rand(1000)}@exkknnple.com",password: 'password',fname: 'Karla', lname: 'Lopez', group_id: owners.id, active: true
+owner_7  = User.create! username: "rick_#{Random.rand(1000)}",email: "owner_#{Random.rand(1000)}@eamplkke.com",password: 'password',fname: 'Sucliff', lname: 'Soho', group_id: owners.id, active: true
+owner_8  = User.create! username: "martina_#{Random.rand(1000)}",email: "owggh_#{Random.rand(1000)}@exkmple.com",password: 'password',fname: 'Luis', lname: 'Estrada', group_id: owners.id, active: true
+owner_9  = User.create! username: "lonaa_#{Random.rand(1000)}",email: "osusan_#{Random.rand(1000)}@exnhple.com",password: 'password',fname: 'Carl', lname: 'Jonas', group_id: owners.id, active: true
+
 
 pet_1  = Pet.create! name: 'Babby', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id, active: true
 pet_2  = Pet.create! name: 'Totopo', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id, active: true
 pet_3  = Pet.create! name: 'Max', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
 pet_4  = Pet.create! name: 'Sally', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
-pet_4  = Pet.create! name: 'Wacky', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_3.id, active: true
+pet_5  = Pet.create! name: 'Wacky', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_3.id, active: true
 
 appo1 = {
   date: 2.days.from_now.change(hour: 7),
@@ -61,7 +68,7 @@ u2 = Appointment.create! appo2
 
 appo3 = {
   date: 9.days.from_now.change(hour: 7),
-  pet_id: pet_2.id,
+  pet_id: pet_3.id,
   reminder:  true,
   active:  true,
   reason: 'Vaccines',
@@ -70,3 +77,26 @@ appo3 = {
 }
 
 u2 = Appointment.create! appo3
+
+appo4 = {
+  date: 4.days.from_now.change(hour: 7),
+  pet_id: pet_4.id,
+  reminder:  true,
+  active:  true,
+  reason: 'Infection',
+  doctor_id: doctor.id,
+  owner_id: owner_4.id
+}
+
+u2 = Appointment.create! appo4
+appo5 = {
+  date: 4.days.from_now.change(hour: 7),
+  pet_id: pet_5.id,
+  reminder:  true,
+  active:  true,
+  reason: 'Infection',
+  doctor_id: doctor.id,
+  owner_id: owner_6.id
+}
+
+u2 = Appointment.create! appo5

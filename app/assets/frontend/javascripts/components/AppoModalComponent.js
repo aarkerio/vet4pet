@@ -62,13 +62,6 @@ class AppoModalComponent extends Component {
                    owners_options: nextProps.owners_options
                  });
     }
-    // console.log('##### NO THE SAME owners_options  >>' + JSON.stringify(nextProps));
-    // if ( this.state.owners_options.length == 0 ) {
-    //   console.log('##### NO THE SAME owners_options  >>' + JSON.stringify(nextProps.owners_options));
-    //   let action2 = ApposActionCreators.updateForm(this.props.routeParams.id);
-    //   this.props.dispatch(action2);
-    //   this.setState({owners_options: this.props.owners_options});
-    // }7
   }
 /**
  * Send data to new appointment
@@ -91,11 +84,17 @@ class AppoModalComponent extends Component {
     console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(fields));
   }
 
-  handleChange(val) {
+  handleChange(name, event) {
     let change = {};
-    console.log(JSON.stringify(val));
     change[name] = event.target.value;
     this.setState(change);
+  }
+
+  changeOwner(value) {
+    console.log('Value >>> ' + JSON.stringify(value['value']));
+    //let change = {};
+    //change[name] = event.target.value;
+    this.setState({owner_id, value['value']});
   }
 
   handleClick(event) {
@@ -162,7 +161,7 @@ class AppoModalComponent extends Component {
             <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <Select.Async name="owners" loadOptions={this.getOptions.bind(this)} value={this.state.owner_id} onChange={this.handleChange} />
+             <Select.Async name="owners" loadOptions={this.getOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
              <label htmlFor="pet_name">Kosename (haustier):</label>
              <input className="form-control" name="pet_name" value={this.state.pet_name} onChange={this.handleChange.bind(this, 'pet_name')} />
              <label htmlFor="doc_name">Doc:</label>
