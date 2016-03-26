@@ -111,7 +111,7 @@ class AppoModalComponent extends Component {
             // or more specific queries will not be sent to the server.
             complete: true
         });
-    }, 5000);
+    }, 500);
   }
 
   render() {
