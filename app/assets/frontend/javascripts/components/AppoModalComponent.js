@@ -104,7 +104,7 @@ class AppoModalComponent extends Component {
     this.setState({reminder: newvalue});
   }
 
-  getOptions(input, callback) {
+  getOwnersOptions(input, callback) {
     let self = this;
     setTimeout(function() {
         callback(null, {
@@ -114,6 +114,18 @@ class AppoModalComponent extends Component {
             complete: true
         });
     }, 500);
+  }
+
+  getPetsOptions(input, callback) {
+    let self = this;
+    setTimeout(function() {
+        callback(null, {
+            options: self.state.pets_options,
+            // CAREFUL! Only set this to true when there are no more options,
+            // or more specific queries will not be sent to the server.
+            complete: true
+        });
+    }, 1000);
   }
 
   render() {
@@ -163,9 +175,9 @@ class AppoModalComponent extends Component {
             <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <Select.Async name="owners" loadOptions={this.getOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
+             <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
              <label htmlFor="pet_name">Kosename (haustier):</label>
-             <input className="form-control" name="pet_name" value={this.state.pet_name} onChange={this.handleChange.bind(this, 'pet_name')} />
+             <Select.Async name="owners" loadOptions={this.getOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="doc_name">Doc:</label>
              <input className="form-control" name="doc_name" value={this.state.doc_name} onChange={this.handleChange.bind(this, 'doc_name')} />
              <label htmlFor="reason">Vernunft:</label>
@@ -200,7 +212,8 @@ AppoModalComponent.defaultProps = {
 function mapStateToProps(state) {
   return {
       oneAppo: state.rootReducer.appo_rdcer.oneAppo,
-      owners_options: state.rootReducer.appo_rdcer.owners_options
+      owners_options: state.rootReducer.appo_rdcer.owners_options,
+      pets_options: state.rootReducer.appo_rdcer.pets_options,
   }
 };
 
