@@ -94,12 +94,14 @@ class AppoModalComponent extends Component {
     console.log('Value >>> ' + JSON.stringify(value['value']));
     //let change = {};
     //change[name] = event.target.value;
-    this.setState({owner_id, value['value']});
+    this.setState({owner_id: value['value']});
+    let action = ApposActionCreators.getPets(value['value']);
+    this.props.dispatch(action);
   }
 
   handleClick(event) {
     let newvalue = this.state.ffreminder == true ? false : true;
-    this.setState({ffreminder: newvalue});
+    this.setState({reminder: newvalue});
   }
 
   getOptions(input, callback) {

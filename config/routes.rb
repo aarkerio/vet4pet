@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :pets
+ 
   resources :kinds
   resources :images
+  resources :pets do
+    collection do
+      post 'get_pets'
+    end
+  end
+
   resources :appointments do
     collection do
       patch 'update'

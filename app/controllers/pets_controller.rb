@@ -1,7 +1,16 @@
+# Chipotle Software (c) 2015-2016 MIT License
+
 class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
 
-  before_action :check_admin, except: [:index, :welcome]
+  before_action :check_admin, except: [:index, :welcome, :get_pets]
+
+  # POST /get_pets
+  def get_pets
+    #return render json: params
+    pets = Pet.where(active:true, user_id: params['owner_id'])
+    return render json: pets
+  end
 
   # GET /pets
   # GET /pets.json

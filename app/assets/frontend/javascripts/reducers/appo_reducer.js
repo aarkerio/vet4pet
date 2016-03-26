@@ -1,11 +1,12 @@
 'use strict';
 
-import { RECEIVE_ONE_APPO,RECEIVE_OWNERS, RECEIVE_DOCTORS, UPDATE_FORM } from '../actions/appos';
+import { RECEIVE_ONE_APPO,RECEIVE_OWNERS, RECEIVE_DOCTORS, UPDATE_FORM, SET_PETS } from '../actions/appos';
 
 const initialState = {
    oneAppo: {},
    owners_options: [],
-   doctors_options: []      
+   doctors_options: [], 
+   pets_options: []
 };
 
 const appo_rdcer = (state = initialState, action) => { 
@@ -17,9 +18,15 @@ const appo_rdcer = (state = initialState, action) => {
       });
    
     case RECEIVE_OWNERS:
-      console.log('+++++ RECEIVE_OWNERS rdcr >> +++++++>>' + JSON.stringify(action.owners_options));
+      // console.log('+++++ RECEIVE_OWNERS rdcr >> +++++++>>' + JSON.stringify(action.owners_options));
       return Object.assign({}, state, {
         owners_options: action.owners_options
+      });
+
+    case SET_PETS:
+      // console.log('+++++ RECEIVE_OWNERS rdcr >> +++++++>>' + JSON.stringify(action.owners_options));
+      return Object.assign({}, state, {
+        pets_options: action.pets_options
       });
     
     case UPDATE_FORM:

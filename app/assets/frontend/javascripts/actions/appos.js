@@ -12,6 +12,7 @@ export const UPDATED_FORM     = 'UPDATED_FORM';
 
 export const RECEIVE_OWNERS   = 'RECEIVE_OWNERS';
 export const RECEIVE_DOCTORS  = 'RECEIVE_DOCTORS';
+export const SET_PETS         = 'SET_PETS';
 
 function requestAppo(appo_id) {
   return {
@@ -88,6 +89,35 @@ function receiveAppo(appoObjProp) {
   return {
     type:  RECEIVE_ONE_APPO,
     oneAppo: appoObjProp
+  }
+};
+
+export function getPets(owner_id) {
+    return function (dispatch) {
+      let data = {
+        method:      'POST',
+        credentials: 'same-origin',
+        mode:        'same-origin',
+        body:        JSON.stringify({
+                       owner_id: owner_id
+                     }),
+        headers: {
+          'Accept':       'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken':  cookie.load('csrftoken')
+        }
+      }
+      return fetch('/pets/get_pets', data)
+          .then(response => response.json())  // promise
+          .then(json => dispatch(setPets(json)));
+  }
+};
+
+function setPets(pet_options) {
+  console.log('setPets(pet_options) >>> ' + JSON.stringify(pet_options)); 
+  return {
+    type:  SET_PETS,
+    pet_options
   }
 };
 
