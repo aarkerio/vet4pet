@@ -44,6 +44,7 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
+  gem 'capybara-webkit'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
   gem 'mutant-rspec'

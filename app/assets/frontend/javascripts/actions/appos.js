@@ -38,7 +38,7 @@ export function fetchAppos(active=true) {
     };
     return fetch('/appointments/get_appos', data)
           .then(response => response.json())  // promise
-          .then(json => dispatch(receiveAppos(json)))
+          .then(json => dispatch(receiveAppos(json)));
   }
 };
 
@@ -52,11 +52,9 @@ export function receiveAppos(apposArrayProp) {
 export function updateForm(id){
   return function (dispatch) {
     dispatch(getAppo(id));
-    dispatch(getUsersByGroup(2));  // owners
+    dispatch(getUsersByGroup(2));    // owners
     // dispatch(getUsersbyGroup(3));  // doctors
-    return {
-      type:  UPDATED_FORM
-    };
+    dispatch(getPets(id,false));
   }
 };
     
@@ -76,30 +74,31 @@ export function getAppo(id) {
           'Content-Type': 'application/json',
           'X-CSRFToken':  cookie.load('csrftoken')
         }
-      }
+      };
       return fetch('/appointments/get_one_appo', data)
           .then(response => response.json())  // promise
           .then(json => dispatch(receiveAppo(json)));
-  }
+  };
 };
 
 
 function receiveAppo(appoObjProp) {
- console.log('appoObjProp ONE after rails >>> ' + JSON.stringify(appoObjProp)); 
+  console.log('appoObjProp ONE after rails >>> ' + JSON.stringify(appoObjProp)); 
   return {
     type:  RECEIVE_ONE_APPO,
     oneAppo: appoObjProp
   }
 };
 
-export function getPets(owner_id) {
+export function getPets(id, owner=true) {
     return function (dispatch) {
       let data = {
         method:      'POST',
         credentials: 'same-origin',
         mode:        'same-origin',
         body:        JSON.stringify({
-                       owner_id: owner_id
+                       id: id,
+                       owner: owner
                      }),
         headers: {
           'Accept':       'application/json',
@@ -113,16 +112,15 @@ export function getPets(owner_id) {
   }
 };
 
-function setPets(pet_options) {
-  console.log('setPets(pet_options) >>> ' + JSON.stringify(pet_options)); 
+export function setPets(pets_options) {
+  console.log('setPets(pet_options) >>> ' + JSON.stringify(pets_options)); 
   return {
     type:  SET_PETS,
-    pet_options
+    pets_options
   }
 };
 
 export function createAppo(fields) {
-
   let data = {
       method: 'POST',
       fields: JSON.stringify(fields),

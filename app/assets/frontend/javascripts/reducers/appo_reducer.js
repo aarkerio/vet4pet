@@ -24,7 +24,7 @@ const appo_rdcer = (state = initialState, action) => {
       });
 
     case SET_PETS:
-      // console.log('+++++ RECEIVE_OWNERS rdcr >> +++++++>>' + JSON.stringify(action.owners_options));
+      console.log('+++++ SET_PETS rdcr >> +++++++>>' + JSON.stringify(action.pets_options));
       return Object.assign({}, state, {
         pets_options: action.pets_options
       });

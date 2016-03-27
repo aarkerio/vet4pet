@@ -8,7 +8,13 @@ class PetsController < ApplicationController
   # POST /get_pets
   def get_pets
     #return render json: params
-    pets = Pet.where(active:true, user_id: params['owner_id'])
+    #logger.debug "PARAMS in get_pets   #{params}"
+    if params['owner']
+      pets = Pet.where(active:true, user_id: params['id'])
+    else
+      appo = Appointment.find(params['id'])
+      pets = Pet.where(active:true, user_id: appo.owner_id)
+    end
     return render json: pets
   end
 

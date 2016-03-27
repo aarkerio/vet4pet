@@ -90,15 +90,6 @@ class AppoModalComponent extends Component {
     this.setState(change);
   }
 
-  changeOwner(value) {
-    console.log('Value >>> ' + JSON.stringify(value['value']));
-    //let change = {};
-    //change[name] = event.target.value;
-    this.setState({owner_id: value['value']});
-    let action = ApposActionCreators.getPets(value['value']);
-    this.props.dispatch(action);
-  }
-
   handleClick(event) {
     let newvalue = this.state.ffreminder == true ? false : true;
     this.setState({reminder: newvalue});
@@ -116,6 +107,12 @@ class AppoModalComponent extends Component {
     }, 500);
   }
 
+  changeOwner(value) {
+    this.setState({owner_id: value['value']});
+    let action = ApposActionCreators.getPets(value['value']);
+    this.props.dispatch(action);
+  }
+
   getPetsOptions(input, callback) {
     let self = this;
     setTimeout(function() {
@@ -126,6 +123,10 @@ class AppoModalComponent extends Component {
             complete: true
         });
     }, 1000);
+  }
+
+  changePet(value) {
+    this.setState({pet_id: value['value']});
   }
 
   render() {
@@ -177,7 +178,7 @@ class AppoModalComponent extends Component {
              <label htmlFor="owner">Eigentümer:  </label>
              <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
              <label htmlFor="pet_name">Kosename (haustier):</label>
-             <Select.Async name="owners" loadOptions={this.getOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
+             <Select.Async name="owners" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="doc_name">Doc:</label>
              <input className="form-control" name="doc_name" value={this.state.doc_name} onChange={this.handleChange.bind(this, 'doc_name')} />
              <label htmlFor="reason">Vernunft:</label>

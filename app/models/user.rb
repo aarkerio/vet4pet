@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
   
   def self.all_users(group_id) 
-    users = User.where(active: true, group_id: group_id).select(:id, :lname, :fname)
+    users = User.where(active: true, group_id: group_id).select(:id, :lname, :fname).order(:lname)
     users.map do |user|
       {value: user.id, label: "#{user.lname} #{user.fname}"}
     end
