@@ -35,12 +35,18 @@ owner_7  = User.create! username: "rick_#{Random.rand(1000)}",email: "owner_#{Ra
 owner_8  = User.create! username: "martina_#{Random.rand(1000)}",email: "owggh_#{Random.rand(1000)}@exkmple.com",password: 'password',fname: 'Luis', lname: 'Estrada', group_id: owners.id, active: true
 owner_9  = User.create! username: "lonaa_#{Random.rand(1000)}",email: "osusan_#{Random.rand(1000)}@exnhple.com",password: 'password',fname: 'Carl', lname: 'Jonas', group_id: owners.id, active: true
 
-
 pet_1  = Pet.create! name: 'Babby', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id, active: true
 pet_2  = Pet.create! name: 'Totopo', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id, active: true
 pet_3  = Pet.create! name: 'Max', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
 pet_4  = Pet.create! name: 'Sally', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
-pet_5  = Pet.create! name: 'Wacky', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_3.id, active: true
+pet_5  = Pet.create! name: 'Wacky', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_3.id, active: true
+pet_6  = Pet.create! name: 'Omar', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_4.id, active: true
+pet_7  = Pet.create! name: 'Lukas', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_5.id, active: true
+pet_8  = Pet.create! name: 'Willy', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_6.id, active: true
+pet_9  = Pet.create! name: 'Calcio', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_7.id, active: true
+pet_10  = Pet.create! name: 'Queso', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_8.id, active: true
+pet_11  = Pet.create! name: 'Tama', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_8.id, active: true
+pet_12  = Pet.create! name: 'Lana', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_9.id, active: true
 
 appo1 = {
   date: 2.days.from_now.change(hour: 7),
