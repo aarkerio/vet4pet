@@ -43,7 +43,6 @@ class AppoModalComponent extends Component {
     if ( nextProps.oneAppo.owner_id  !=  this.state.owner_id ) {
       let action1 = ApposActionCreators.getAppo(this.props.routeParams.id);
       this.props.dispatch(action1);  // thunk middleware dispatch
-
       console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps.oneAppo));
       console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.oneAppo));
       console.log('##### NO THE SAME NEXT owners_options  >>' + JSON.stringify(nextProps.owners_options));
@@ -59,8 +58,14 @@ class AppoModalComponent extends Component {
                    owner_name:this.props.oneAppo.owner_name,
                    pet_name:  this.props.oneAppo.pet_name,
                    doc_name:  this.props.oneAppo.doc_name,
-                   owners_options: nextProps.owners_options
+                   owners_options: nextProps.owners_options,
+                   pets_options: nextProps.pets_options
                  });
+    }
+
+    if ( nextProps.pets_options  !=  this.state.pets_options ) {
+      let action = ApposActionCreators.getPets(this.state.owner_id);
+      this.props.dispatch(action);
     }
   }
 /**
@@ -122,7 +127,7 @@ class AppoModalComponent extends Component {
             // or more specific queries will not be sent to the server.
             complete: true
         });
-    }, 1000);
+    }, 300);
   }
 
   changePet(value) {
@@ -178,7 +183,7 @@ class AppoModalComponent extends Component {
              <label htmlFor="owner">Eigentümer:  </label>
              <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
              <label htmlFor="pet_name">Kosename (haustier):</label>
-             <Select.Async name="owners" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
+             <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="doc_name">Doc:</label>
              <input className="form-control" name="doc_name" value={this.state.doc_name} onChange={this.handleChange.bind(this, 'doc_name')} />
              <label htmlFor="reason">Vernunft:</label>
@@ -202,19 +207,21 @@ class AppoModalComponent extends Component {
 AppoModalComponent.propTypes = {
     oneAppo: PropTypes.any.isRequired,
     owners_options: PropTypes.array.isRequired,
+    pets_options: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired
 };
 
 AppoModalComponent.defaultProps = {
     oneAppo: {},
-    owners_options: []
+    owners_options: [],
+    pets_options: []
 };
 
 function mapStateToProps(state) {
   return {
       oneAppo: state.rootReducer.appo_rdcer.oneAppo,
       owners_options: state.rootReducer.appo_rdcer.owners_options,
-      pets_options: state.rootReducer.appo_rdcer.pets_options,
+      pets_options: state.rootReducer.appo_rdcer.pets_options
   }
 };
 

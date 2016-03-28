@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
       {value: user.id, label: "#{user.lname} #{user.fname}"}
     end
   end
-  
+
   private
 
   def self.check_user(user)
