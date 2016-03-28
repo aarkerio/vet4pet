@@ -58,14 +58,16 @@ class AppoModalComponent extends Component {
                    owner_name:this.props.oneAppo.owner_name,
                    pet_name:  this.props.oneAppo.pet_name,
                    doc_name:  this.props.oneAppo.doc_name,
-                   owners_options: nextProps.owners_options,
-                   pets_options: nextProps.pets_options
+                   owners_options: nextProps.owners_options
                  });
     }
 
-    if ( nextProps.pets_options  !=  this.state.pets_options ) {
+    if ( JSON.stringify(nextProps.pets_options)  !=  JSON.stringify(this.state.pets_options) ) {
       let action = ApposActionCreators.getPets(this.state.owner_id);
       this.props.dispatch(action);
+      this.setState({pets_options: nextProps.pets_options});
+      console.log('WWWW  NOT THE SAME nextPros.pets_options  >>' + JSON.stringify(nextProps.pets_options));
+      console.log('WWWW  NOT THE SAME this.state.pets_options  >>' + JSON.stringify(this.state.pets_options));
     }
   }
 /**
@@ -120,6 +122,8 @@ class AppoModalComponent extends Component {
 
   getPetsOptions(input, callback) {
     let self = this;
+    let action = ApposActionCreators.getPets(this.state.owner_id);
+    this.props.dispatch(action);
     setTimeout(function() {
         callback(null, {
             options: self.state.pets_options,

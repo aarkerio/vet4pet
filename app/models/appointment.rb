@@ -80,7 +80,7 @@ class Appointment < ActiveRecord::Base
     end
   end
 
-  # Private: Returns aone appointment.
+  # Public: Returns aone appointment.
   #
   # appo_id - The Integer number of appointemnt id.
   #
@@ -91,6 +91,9 @@ class Appointment < ActiveRecord::Base
 
     react_order(appo)
   end
+
+  private 
+
   # Private: Reorder to send the JSON to React.js view.
   #
   # appo - Active record object.
