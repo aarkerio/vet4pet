@@ -12,9 +12,9 @@ class Pet < ActiveRecord::Base
   # Returns hash object or nil.
   def self.get_pets(id, owner)
     if owner
-      pets = where(active:true, user_id: params['id']).select(:id, :name)
+      pets = where(active:true, user_id: id).select(:id, :name)
     else
-      appo = Appointment.find(params['id'])
+      appo = Appointment.find(id)
       pets = where(active:true, user_id: appo.owner_id).select(:id, :name)
     end
     pets.map do |p|
