@@ -36,18 +36,6 @@ owner_8  = User.create! username: "martina_#{Random.rand(1000)}",email: "owggh_#
 owner_9  = User.create! username: "lonaa_#{Random.rand(1000)}",email: "osusan_#{Random.rand(1000)}@exnhple.com",password: 'password',fname: 'Carl', lname: 'Jonas', group_id: owners.id, active: true
 
 pet_1  = Pet.create! name: 'Babby', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id, active: true
-pet_2  = Pet.create! name: 'Totopo', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id, active: true
-pet_3  = Pet.create! name: 'Max', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
-pet_4  = Pet.create! name: 'Sally', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
-pet_5  = Pet.create! name: 'Wacky', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_3.id, active: true
-pet_6  = Pet.create! name: 'Omar', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_4.id, active: true
-pet_7  = Pet.create! name: 'Lukas', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_5.id, active: true
-pet_8  = Pet.create! name: 'Willy', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_6.id, active: true
-pet_9  = Pet.create! name: 'Calcio', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_7.id, active: true
-pet_10  = Pet.create! name: 'Queso', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_8.id, active: true
-pet_11  = Pet.create! name: 'Tama', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_8.id, active: true
-pet_12  = Pet.create! name: 'Lana', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_9.id, active: true
-
 appo1 = {
   date: 2.days.from_now.change(hour: 7),
   pet_id: pet_1.id,
@@ -57,8 +45,9 @@ appo1 = {
   doctor_id: doctor.id,
   owner_id: owner_1.id
 }
-
 u1 = Appointment.create! appo1
+
+pet_2  = Pet.create! name: 'Totopo', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_1.id, active: true
 
 appo2 = {
   date: 10.days.from_now.change(hour: 7),
@@ -69,9 +58,9 @@ appo2 = {
   doctor_id: doctor.id,
   owner_id: owner_1.id
 }
-
 u2 = Appointment.create! appo2
 
+pet_3  = Pet.create! name: 'Max', age: 4, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
 appo3 = {
   date: 9.days.from_now.change(hour: 7),
   pet_id: pet_3.id,
@@ -79,11 +68,11 @@ appo3 = {
   active:  true,
   reason: 'Vaccines',
   doctor_id: doctor.id,
-  owner_id: owner_3.id
+  owner_id: owner_2.id
 }
+u3 = Appointment.create! appo3
 
-u2 = Appointment.create! appo3
-
+pet_4  = Pet.create! name: 'Sally', age: 3, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_2.id, active: true
 appo4 = {
   date: 4.days.from_now.change(hour: 7),
   pet_id: pet_4.id,
@@ -91,10 +80,11 @@ appo4 = {
   active:  true,
   reason: 'Infection',
   doctor_id: doctor.id,
-  owner_id: owner_4.id
+  owner_id: owner_2.id
 }
+u4 = Appointment.create! appo4
 
-u2 = Appointment.create! appo4
+pet_5  = Pet.create! name: 'Wacky', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_3.id, active: true
 appo5 = {
   date: 4.days.from_now.change(hour: 7),
   pet_id: pet_5.id,
@@ -102,7 +92,48 @@ appo5 = {
   active:  true,
   reason: 'Infection',
   doctor_id: doctor.id,
+  owner_id: owner_3.id
+}
+u5 = Appointment.create! appo5
+
+pet_6  = Pet.create! name: 'Omar', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_4.id, active: true
+appo6 = {
+  date: 4.days.from_now.change(hour: 7),
+  pet_id: pet_6.id,
+  reminder:  true,
+  active:  true,
+  reason: 'Infection',
+  doctor_id: doctor.id,
+  owner_id: owner_4.id
+}
+u6 = Appointment.create! appo6
+
+pet_7  = Pet.create! name: 'Lukas', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_5.id, active: true
+appo7 = {
+  date: 4.days.from_now.change(hour: 7),
+  pet_id: pet_7.id,
+  reminder:  true,
+  active:  true,
+  reason: 'Infection',
+  doctor_id: doctor.id,
   owner_id: owner_6.id
 }
+u7 = Appointment.create! appo7
 
-u2 = Appointment.create! appo5
+pet_8  = Pet.create! name: 'Willy', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_6.id, active: true
+pet_9  = Pet.create! name: 'Calcio', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_7.id, active: true
+pet_10  = Pet.create! name: 'Queso', age: 8, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_8.id, active: true
+
+pet_11  = Pet.create! name: 'Tama', age: 1, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_8.id, active: true
+appo11 = {
+  date: 4.days.from_now.change(hour: 7),
+  pet_id: pet_11.id,
+  reminder:  true,
+  active:  true,
+  reason: 'Infection',
+  doctor_id: doctor.id,
+  owner_id: owner_8.id
+}
+u11 = Appointment.create! appo11
+
+pet_12  = Pet.create! name: 'Lana', age: 2, kind_id: kind.id, interned: false,  created: Time.now, user_id: owner_9.id, active: true

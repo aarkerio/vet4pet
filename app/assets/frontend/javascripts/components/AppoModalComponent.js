@@ -63,7 +63,7 @@ class AppoModalComponent extends Component {
     }
 
     if ( JSON.stringify(nextProps.pets_options)  !=  JSON.stringify(this.state.pets_options) ) {
-      let action = ApposActionCreators.getPets(this.state.owner_id);
+      let action = ApposActionCreators.getPets(this.state.owner_id, false);
       this.props.dispatch(action);
       this.setState({pets_options: nextProps.pets_options});
       console.log('WWWW  NOT THE SAME nextPros.pets_options  >>' + JSON.stringify(nextProps.pets_options));
@@ -122,7 +122,7 @@ class AppoModalComponent extends Component {
 
   getPetsOptions(input, callback) {
     let self = this;
-    let action = ApposActionCreators.getPets(this.state.owner_id);
+    let action = ApposActionCreators.getPets(this.state.owner_id, true);
     this.props.dispatch(action);
     setTimeout(function() {
         callback(null, {
@@ -186,7 +186,7 @@ class AppoModalComponent extends Component {
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
              <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
-             <label htmlFor="pet_name">Kosename (haustier):</label>
+             <label htmlFor="pet">Kosename (haustier):</label>
              <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="doc_name">Doc:</label>
              <input className="form-control" name="doc_name" value={this.state.doc_name} onChange={this.handleChange.bind(this, 'doc_name')} />
