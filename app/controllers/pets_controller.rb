@@ -7,8 +7,8 @@ class PetsController < ApplicationController
 
   # POST /get_pets
   def get_pets
-    #return render json: params
-    #logger.debug "PARAMS in get_pets   #{params}"
+    # return render json: params
+    logger.debug "PARAMS in get_pets   #{params.to_json}"
     pets = Pet.get_pets(params['id'], params['owner'])
     return render json: pets
   end

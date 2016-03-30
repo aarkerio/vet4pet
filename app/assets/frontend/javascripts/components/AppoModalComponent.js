@@ -28,7 +28,7 @@ class AppoModalComponent extends Component {
                    owners_options: [],
                    pets_options:   [],
                    docs_options:   []
-             }
+             };
   }
 
 /**
@@ -40,34 +40,26 @@ class AppoModalComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    if ( nextProps.oneAppo.owner_id  !=  this.state.owner_id ) {
-      let action1 = ApposActionCreators.getAppo(this.props.routeParams.id);
-      this.props.dispatch(action1);  // thunk middleware dispatch
-      console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps.oneAppo));
-      console.log('WWWW  NOT THE SAME thisProps  >>' + JSON.stringify(this.props.oneAppo));
-      console.log('##### NO THE SAME NEXT owners_options  >>' + JSON.stringify(nextProps.owners_options));
-      this.setState({
-                   id:        this.props.oneAppo.id,
-                   date:      this.props.oneAppo.date, 
-                   pet_id:    this.props.oneAppo.pet_id, 
-                   owner_id:  this.props.oneAppo.owner_id, 
-                   reminder:  this.props.oneAppo.reminder,
-                   reason:    this.props.oneAppo.reason, 
-                   doctor_id: this.props.oneAppo.doctor_id,
-                   active:    this.props.oneAppo.active,
-                   owner_name:this.props.oneAppo.owner_name,
-                   pet_name:  this.props.oneAppo.pet_name,
-                   doc_name:  this.props.oneAppo.doc_name,
-                   owners_options: nextProps.owners_options
-                 });
-    }
-
-    if ( JSON.stringify(nextProps.pets_options)  !=  JSON.stringify(this.state.pets_options) ) {
-      let action = ApposActionCreators.getPets(this.state.owner_id, false);
+    if ( nextProps.oneAppo.appo.owner_id  !=  this.state.owner_id ) {
+      let action = ApposActionCreators.updateForm(this.props.routeParams.id);
       this.props.dispatch(action);
-      this.setState({pets_options: nextProps.pets_options});
-      console.log('WWWW  NOT THE SAME nextPros.pets_options  >>' + JSON.stringify(nextProps.pets_options));
-      console.log('WWWW  NOT THE SAME this.state.pets_options  >>' + JSON.stringify(this.state.pets_options));
+      console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps));
+      this.setState({
+                   id:        nextProps.oneAppo.appo.id,
+                   date:      nextProps.oneAppo.appo.date, 
+                   pet_id:    nextProps.oneAppo.appo.pet_id, 
+                   owner_id:  nextProps.oneAppo.appo.owner_id, 
+                   reminder:  nextProps.oneAppo.appo.reminder,
+                   reason:    nextProps.oneAppo.appo.reason, 
+                   doctor_id: nextProps.oneAppo.appo.doctor_id,
+                   active:    nextProps.oneAppo.appo.active,
+                   owner_name:nextProps.oneAppo.appo.owner_name,
+                   pet_name:  nextProps.oneAppo.appo.pet_name,
+                   doc_name:  nextProps.oneAppo.appo.doc_name,
+                   owners_options: nextProps.oneAppo.owners,
+                   pets_options: nextProps.oneAppo.pets,
+                   docs_options: nextProps.oneAppo.docs
+                 });
     }
   }
 /**
@@ -116,7 +108,7 @@ class AppoModalComponent extends Component {
 
   changeOwner(value) {
     this.setState({owner_id: value['value']});
-    let action = ApposActionCreators.getPets(value['value']);
+    let action = ApposActionCreators.getPets(value['value'], true);
     this.props.dispatch(action);
   }
 
@@ -189,7 +181,7 @@ class AppoModalComponent extends Component {
              <label htmlFor="pet">Kosename (haustier):</label>
              <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="doc_name">Doc:</label>
-             <input className="form-control" name="doc_name" value={this.state.doc_name} onChange={this.handleChange.bind(this, 'doc_name')} />
+             <Select.Async name="docs" loadOptions={this.getDocsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="reason">Vernunft:</label>
              <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
              <label htmlFor="date">Datum:</label>

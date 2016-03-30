@@ -30,7 +30,9 @@ const appo_rdcer = (state = initialState, action) => {
       });
     
     case UPDATE_FORM:
-      return Object.assign({}, state);
+      return Object.assign({}, state, { 
+                     oneAppo: action.oneAppo
+      });
 
     default:
       return state;

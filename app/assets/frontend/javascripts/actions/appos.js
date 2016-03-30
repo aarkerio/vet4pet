@@ -8,7 +8,7 @@ export const REMOVE_APPO      = 'REMOVE_APPO';
 export const REQUEST_POSTS    = 'REQUEST_POSTS';
 export const CREATE_APPO      = 'CREATE_APPO';
 export const UPDATED_APPO     = 'UPDATED_APPO';
-export const UPDATED_FORM     = 'UPDATED_FORM';
+export const UPDATE_FORM      = 'UPDATE_FORM';
 
 export const RECEIVE_OWNERS   = 'RECEIVE_OWNERS';
 export const RECEIVE_DOCTORS  = 'RECEIVE_DOCTORS';
@@ -48,17 +48,8 @@ export function receiveAppos(apposArrayProp) {
     apposArrayProp
   }
 };
-
-export function updateForm(id){
-  return function (dispatch) {
-    dispatch(getAppo(id));
-    dispatch(getUsersByGroup(2));    // owners
-    // dispatch(getUsersbyGroup(3));  // doctors
-    dispatch(getPets(id,false));
-  }
-};
     
-export function getAppo(id) {
+export function updateForm(id) {
     return function (dispatch) {
       // dispatch(requestAppo(appo_id));
       console.log('fecthAppo Action appo_id >>>>>' + id);
@@ -82,12 +73,12 @@ export function getAppo(id) {
 };
 
 
-function receiveAppo(appoObjProp) {
-  console.log('appoObjProp ONE after rails >>> ' + JSON.stringify(appoObjProp)); 
+function receiveAppo(update_form) {
+  console.log('update_form ONE after rails >>> ' + JSON.stringify(update_form)); 
   return {
-    type:  RECEIVE_ONE_APPO,
-    oneAppo: appoObjProp
-  }
+    type:  UPDATE_FORM,
+    oneAppo: update_form
+  };
 };
 
 export function getPets(id, owner=true) {

@@ -17,10 +17,14 @@ class AppointmentsController < ApplicationController
   def get_one_appo
     # logger.debug "### PARAMS in get_appos in appointments ##################>>>> #{params[:id]}"
     # return render json: params
-    appo = Appointment.get_one(params[:id])
-    return render json: appo
+    response = Hash.new
+    response[:appo]   = Appointment.get_one(params[:id])
+    response[:owners] = User.all_users(2)
+    response[:docs]   = User.all_users(3)
+    response[:pets]   = Pet.get_pets(params[:id], false)
+    return render json: response
   end
-
+  
   # POST /appointments/get_appos
   def get_appos
     #logger.debug "### PARAMS in get_appos in appointments ##################>>>> #{params.to_json}"
