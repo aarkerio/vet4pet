@@ -40,6 +40,8 @@ class AppoModalComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
+    let owner  = typeof nextProps.oneAppo.appo !== typeof undefined ? true : false;
+    if (owner == false)  { return; }   
     if ( nextProps.oneAppo.appo.owner_id  !=  this.state.owner_id ) {
       let action = ApposActionCreators.updateForm(this.props.routeParams.id);
       this.props.dispatch(action);
@@ -119,8 +121,6 @@ class AppoModalComponent extends Component {
     setTimeout(function() {
         callback(null, {
             options: self.state.pets_options,
-            // CAREFUL! Only set this to true when there are no more options,
-            // or more specific queries will not be sent to the server.
             complete: true
         });
     }, 300);
@@ -130,6 +130,21 @@ class AppoModalComponent extends Component {
     this.setState({pet_id: value['value']});
   }
 
+  getDocsOptions(input, callback) {
+    let self = this;
+    let action = ApposActionCreators.getPets(this.state.doctor_id, true);
+    this.props.dispatch(action);
+    setTimeout(function() {
+        callback(null, {
+            options: self.state.docs_options,
+            complete: true
+        });
+    }, 300);
+  }
+
+  changeDoc(value) {
+    this.setState({doctor_id: value['value']});
+  }
   render() {
     let rand = ()=> (Math.floor(Math.random() * 20) - 10);
 
@@ -181,7 +196,7 @@ class AppoModalComponent extends Component {
              <label htmlFor="pet">Kosename (haustier):</label>
              <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="doc_name">Doc:</label>
-             <Select.Async name="docs" loadOptions={this.getDocsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
+             <Select.Async name="docs" loadOptions={this.getDocsOptions.bind(this)} value={this.state.doctor_id} onChange={this.changeDoc.bind(this)} />
              <label htmlFor="reason">Vernunft:</label>
              <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
              <label htmlFor="date">Datum:</label>

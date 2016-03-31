@@ -24,7 +24,10 @@ unless User.exists?(username: 'admin')
   admin  = User.create! username: "admin", email: "admin@example.com", password: 'password', fname: 'admin', lname: 'admin', group_id: admin.id, active: true
 end
 
-doctor = User.create! username: "doctor_#{Random.rand(1000)}",email: "adoc_#{Random.rand(1000)}@exale.com",password: 'password',fname: 'Ric doctor', lname: 'Grimms', group_id: doctors.id, active: true
+doctor_1 = User.create! username: "doctor_#{Random.rand(1000)}",email: "adoc_#{Random.rand(1000)}@exale.com",password: 'password',fname: 'Ric doctor', lname: 'Mayer', group_id: doctors.id, active: true
+doctor_2 = User.create! username: "doc_#{Random.rand(1000)}",email: "adogc_#{Random.rand(1000)}@exahle.com",password: 'password',fname: 'Luis', lname: 'Salgado', group_id: doctors.id, active: true
+doctor_3 = User.create! username: "doctora_#{Random.rand(1000)}",email: "aoc_#{Random.rand(1000)}@ehxale.com",password: 'password',fname: 'Andrea', lname: 'Mayer', group_id: doctors.id, active: true
+doctor_4 = User.create! username: "alo_#{Random.rand(1000)}",email: "lao_#{Random.rand(1000)}@hxale.com",password: 'password',fname: 'Lalo', lname: 'Herrera', group_id: doctors.id, active: true
 owner_1  = User.create! username: "manuel_#{Random.rand(1000)}",email: "owner_#{Random.rand(1000)}@eample.com",password: 'password',fname: 'Manuel', lname: 'Hurtado', group_id: owners.id, active: true
 owner_2  = User.create! username: "mario_#{Random.rand(1000)}",email: "owggh_#{Random.rand(1000)}@exmyple.com",password: 'password',fname: 'Mario', lname: 'Soto', group_id: owners.id, active: true
 owner_3  = User.create! username: "lon_#{Random.rand(1000)}",email: "osusan_#{Random.rand(1000)}@exnynple.com",password: 'password',fname: 'Susan', lname: 'McCarthy', group_id: owners.id, active: true
@@ -42,7 +45,7 @@ appo1 = {
   reminder:  true,
   active:  true,
   reason: 'pain in leg',
-  doctor_id: doctor.id,
+  doctor_id: doctor_1.id,
   owner_id: owner_1.id
 }
 u1 = Appointment.create! appo1
@@ -55,7 +58,7 @@ appo2 = {
   reminder:  true,
   active:  true,
   reason: 'Allergic itchy',
-  doctor_id: doctor.id,
+  doctor_id: doctor_2.id,
   owner_id: owner_2.id
 }
 u2 = Appointment.create! appo2
@@ -67,7 +70,7 @@ appo3 = {
   reminder:  true,
   active:  true,
   reason: 'Vaccines',
-  doctor_id: doctor.id,
+  doctor_id: doctor_1.id,
   owner_id: owner_3.id
 }
 u3 = Appointment.create! appo3
@@ -79,7 +82,7 @@ appo4 = {
   reminder:  true,
   active:  true,
   reason: 'Infection',
-  doctor_id: doctor.id,
+  doctor_id: doctor_1.id,
   owner_id: owner_4.id
 }
 u4 = Appointment.create! appo4
@@ -91,7 +94,7 @@ appo5 = {
   reminder:  true,
   active:  true,
   reason: 'Infection',
-  doctor_id: doctor.id,
+  doctor_id: doctor_1.id,
   owner_id: owner_5.id
 }
 u5 = Appointment.create! appo5
@@ -103,7 +106,7 @@ appo6 = {
   reminder:  true,
   active:  true,
   reason: 'Infection',
-  doctor_id: doctor.id,
+  doctor_id: doctor_1.id,
   owner_id: owner_6.id
 }
 u6 = Appointment.create! appo6
@@ -115,7 +118,7 @@ appo7 = {
   reminder:  true,
   active:  true,
   reason: 'Infection',
-  doctor_id: doctor.id,
+  doctor_id: doctor_1.id,
   owner_id: owner_7.id
 }
 u7 = Appointment.create! appo7
@@ -127,7 +130,7 @@ appo8 = {
   reminder:  true,
   active:  true,
   reason: 'Infection',
-  doctor_id: doctor.id,
+  doctor_id: doctor_2.id,
   owner_id: owner_8.id
 }
 
@@ -141,7 +144,7 @@ appo11 = {
   reminder:  true,
   active:  true,
   reason: 'Infection',
-  doctor_id: doctor.id,
+  doctor_id: doctor_1.id,
   owner_id: owner_8.id
 }
 
