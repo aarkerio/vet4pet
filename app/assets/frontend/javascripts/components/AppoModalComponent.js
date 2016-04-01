@@ -6,8 +6,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
-import moment from 'moment';
 
+var ReactGlobalize = require("react-globalize");
+var Globalize = require('globalize');
+
+// var globalizeLocalizer = require('react-widgets/lib/localizers/globalize');
+// Globalize.load( require( "cldr-data" ).entireMainFor("en"));
+Globalize.locale('en');
+// globalizeLocalizer(Globalize);
+
+import Moment    from 'moment';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
 import Select from 'react-select';
