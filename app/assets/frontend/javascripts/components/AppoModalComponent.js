@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
-var ReactGlobalize = require("react-globalize");
 var Globalize = require('globalize');
 
 // var globalizeLocalizer = require('react-widgets/lib/localizers/globalize');
