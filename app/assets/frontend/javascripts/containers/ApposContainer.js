@@ -34,7 +34,8 @@ class ApposContainer extends Component {
     
     return (
       <div>
-      <HeaderComponent />      
+      <HeaderComponent />
+      <AppoFormComponent />
       <table className="MyClassName">
         <thead>
           <tr>

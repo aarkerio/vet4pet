@@ -2,24 +2,24 @@
 
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-
+import * as ApposActionCreators from '../actions/appos';
 // var DateTimePicker = ReactWidgets.DateTimePicker;
-// var DateTimePicker = require('react-widgets/lib/DateTimePicker');
+// var DateTimePicker = require();
 
-//import DateTimePicker from 'ReactWidgets.DateTimePicker';
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
 class AppoFormComponent extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-                   ffid:       this.props.oneAppo.id,
-                   ffowner:    this.props.oneAppo.owner,
-                   ffdate:     this.props.oneAppo.date,
-                   ffpetname:  this.props.oneAppo.petname,
-                   ffreason:   this.props.oneAppo.reason,
-                   ffdocname:  this.props.oneAppo.docname,
-                   ffreminder: this.props.oneAppo.reminder 
+                   ffid:       0,
+                   ffowner_id: 0,
+                   ffdate:     '',
+                   ffpet_id:   '',
+                   ffreason:   '',
+                   ffdoc_id:   0,
+                   ffreminder: false 
                  };
    }
 
@@ -33,10 +33,8 @@ class AppoFormComponent extends Component {
     creminder  = this.state.ffreminder;
     creason    = this.state.ffreason;
     data_r    = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
-    let action = ApposActionCreators.getAppo(this.props.routeParams.id);
+    //let action = ApposActionCreators.sendAppo(data_r);
     this.props.dispatch(action);  // thunk middlew
-    this.props.dispatch();
-
     // this.props.dispatch(createAppo);
     // console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
   }
@@ -75,9 +73,14 @@ class AppoFormComponent extends Component {
 };
 
 AppoFormComponent.propTypes = {
-    oneAppo: PropTypes.any.isRequired,
+    onEhash: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
 };
+
+AppoFormComponent.defaultProps = {
+    onEhash: {}
+};
+
 
 export default connect()(AppoFormComponent);
 
