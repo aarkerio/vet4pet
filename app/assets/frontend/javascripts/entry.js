@@ -12,6 +12,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import AppContainer       from './containers/AppContainer';
 import ApposContainer     from './containers/ApposContainer';
 import AppoModalComponent from './components/AppoModalComponent';
+import AppoFormComponent  from './components/AppoFormComponent';
 
 import configureStore from './configureStore';
 
@@ -26,6 +27,7 @@ render(
         <Route name="app" path="/groups/start" component={AppContainer} />
         <Route path="/appointments" component={ApposContainer}>
           <Route path="/appointment/:id" component={AppoModalComponent} />
+          <Route path="/appointment/new" component={AppoFormComponent} />
         </Route>
       </Router>
     </div>

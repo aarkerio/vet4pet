@@ -6,8 +6,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
+import moment from 'moment';
 
-// import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
 import Select from 'react-select';
 require('react-select/less/default.less');
@@ -17,7 +18,7 @@ class AppoModalComponent extends Component {
     super(props);
     this.state = { showModal:      true, 
                    id:             0,
-                   date:           '', 
+                   date:           moment(), 
                    pet_id:         0, 
                    owner_id:       0,
                    reminder:       false,
@@ -50,7 +51,7 @@ class AppoModalComponent extends Component {
       console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps));
       this.setState({
                    id:        nextProps.oneAppo.appo.id,
-                   date:      nextProps.oneAppo.appo.date, 
+                   date:      moment(nextProps.oneAppo.appo.date), 
                    pet_id:    nextProps.oneAppo.appo.pet_id, 
                    owner_id:  nextProps.oneAppo.appo.owner_id, 
                    reminder:  nextProps.oneAppo.appo.reminder,
@@ -202,7 +203,7 @@ class AppoModalComponent extends Component {
              <label htmlFor="reason">Vernunft:</label>
              <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
              <label htmlFor="date">Datum:</label>
-             <input className="form-control" id="date" name="date" value={this.state.date} onChange={this.handleChange.bind(this, 'date')} />
+             <DateTimePicker value={new Date(this.state.date)} onChange={this.handleChange.bind(this, 'date')} />
              <label htmlFor="reminder">Erinner:</label>
              <input type="checkbox" name="reminder" checked={this.state.reminder} onChange={this.handleClick.bind(this, 'reminder')} />
             </form>
