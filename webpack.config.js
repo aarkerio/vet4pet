@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var GlobalizePlugin = require( "globalize-webpack-plugin" );
 
 module.exports = {
   name: 'vets4pets',
@@ -69,7 +70,16 @@ module.exports = {
         new webpack.ProvidePlugin({
             '$': "jquery",
             'jQuery': "jquery"
-        }) //,
+        }),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en|es)$/),
+        new GlobalizePlugin({
+			    production: false,
+			    developmentLocale: "en",
+			    supportedLocales: ["en"],
+			    // messages: "messages/[locale].json",
+			    output: "i18n/[locale].[hash].js"
+		    })
         // new ExtractTextPlugin("styles.css", {
         //     allChunks: true
         // })

@@ -35,3 +35,5 @@ app/assets/frontend/javascripts/built/*.woff
 
 # emacs temp files
 \#*#
+.tmp-globalize-webpack/
+
