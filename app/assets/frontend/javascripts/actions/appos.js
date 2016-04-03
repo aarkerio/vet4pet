@@ -9,6 +9,7 @@ export const REQUEST_POSTS    = 'REQUEST_POSTS';
 export const CREATE_APPO      = 'CREATE_APPO';
 export const UPDATED_APPO     = 'UPDATED_APPO';
 export const UPDATE_FORM      = 'UPDATE_FORM';
+export const FULFILL_FORM     = 'FULFILL_FORM';
 
 export const RECEIVE_OWNERS   = 'RECEIVE_OWNERS';
 export const RECEIVE_DOCTORS  = 'RECEIVE_DOCTORS';
@@ -47,6 +48,24 @@ export function receiveAppos(apposArrayProp) {
     type:  RECEIVE_APPOS,
     apposArrayProp
   }
+};
+
+export function fulFillForm() {
+    return function (dispatch) {
+      let data = {
+        method:      'GET',
+        credentials: 'same-origin',
+        mode:        'same-origin',
+        headers: {
+          'Accept':       'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken':  cookie.load('csrftoken')
+        }
+      };
+      return fetch('/appointments/fulfill_form', data)
+          .then(response => response.json())  // promise
+          .then(json => dispatch(receiveAppo(json)));
+  };
 };
     
 export function updateForm(id) {

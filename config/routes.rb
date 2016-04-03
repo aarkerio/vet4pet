@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post  'get_appos' 
       post  'get_one_appo'
       get   'appo_delete'
+      get   'fulfill_form'
     end
   end
 

@@ -52,7 +52,7 @@ class AppoFormComponent extends Component {
   * Loads default data
   **/
   componentDidMount() {
-    let action = ApposActionCreators.updateForm(this.props.routeParams.id);
+    let action = ApposActionCreators.fulFillForm();
     this.props.dispatch(action);
   }
   
