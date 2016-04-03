@@ -11,8 +11,8 @@ var moment = require('moment');
 var Globalize = require('globalize');
 
 Globalize.load( 
-   require("cldr-data/main/en/ca-gregorian"),
-   require("cldr-data/main/en/numbers")
+   require("cldr-data/main/en/ca-gregorian.json"),
+   require("cldr-data/main/en/numbers.json")
 );
 
 Globalize.locale('en');
@@ -25,6 +25,7 @@ import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
 import Select from 'react-select';
 require('react-select/less/default.less');
+require('react-widgets/dist/css/react-widgets.css');
 
 class AppoModalComponent extends Component {
   constructor(props) {

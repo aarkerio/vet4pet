@@ -30,7 +30,7 @@ module.exports = {
     root: path.resolve('./app/assets/frontend/'),
     // tell webpack which extensions to auto search when it resolves modules. With this,
     // you'll be able to do `require('./utils')` instead of `require('./utils.js')`
-    extensions: ['', '.js', '.jsx', '.less',  '.css', '.scss'],
+    extensions: ['', '.js', '.jsx', '.less', '.css', '.scss', '.json'],
     // by default, webpack will search in `web_modules` and `node_modules`. Because we're using
   },
   module: {
@@ -41,13 +41,17 @@ module.exports = {
                                 }, include: path.app
                 },
                 { test: /\.css$/, loader: 'style-loader!css-loader'},
-                { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-                { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
-                { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
+                // { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
+                // { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
+                // { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
                 { test: /\.js$/, loader: 'babel', exclude: /node_modules/},
                 { test: /\.less$/, loader: 'style!css!less' },
                 { test: /\.scss$/, loader: 'style!css!sass' },
-                { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" }
+                // { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
+                { test: /\.json$/, loader: "json-loader" },
+                { test: /\.woff(2)?(\?v=[0-9].[0-9].[0-9])?$/, loader: "url-loader?mimetype=application/font-woff" },
+                { test: /\.(ttf|eot|svg)(\?v=[0-9].[0-9].[0-9])?$/, loader: "file-loader?name=[name].[ext]" },
+                { test: /\.gif$/, loader: "url-loader?mimetype=image/png" }
               ]
   },
   exports: {

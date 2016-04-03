@@ -34,6 +34,11 @@ class ApposContainer extends Component {
     return (
       <div>
       <HeaderComponent />
+      <div><Link to="/appointment/new">
+            <button type="button" className="btn btn-default btn-sm">
+              <span className="glyphicon glyphicon-plus"></span>
+            </button>
+         </Link></div>
       <table className="MyClassName">
         <thead>
           <tr>

@@ -1,42 +1,94 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
+import { Link, browserHistory } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
-// var DateTimePicker = ReactWidgets.DateTimePicker;
-// var DateTimePicker = require();
+import { Button, Modal } from 'react-bootstrap';
 
+var moment = require('moment');
+var Globalize = require('globalize');
+
+Globalize.load( 
+   require("cldr-data/main/en/ca-gregorian.json"),
+   require("cldr-data/main/en/numbers.json")
+);
+
+Globalize.locale('en');
+
+var globalizeLocalizer = require('react-widgets/lib/localizers/globalize');
+globalizeLocalizer(Globalize);
+
+// import Moment from 'moment';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
-class AppoFormComponent extends Component {
+import Select from 'react-select';
+require('react-select/less/default.less');
+require('react-widgets/dist/css/react-widgets.css');
 
+class AppoFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-                   ffid:       0,
-                   ffowner_id: 0,
-                   ffdate:     '',
-                   ffpet_id:   '',
-                   ffreason:   '',
-                   ffdoc_id:   0,
-                   ffreminder: false 
-                 };
-   }
+    this.state = { showModal:      true, 
+                   id:             0,
+                   date:           moment(), 
+                   pet_id:         0, 
+                   owner_id:       0,
+                   reminder:       false,
+                   reason:         '', 
+                   doctor_id:      0,
+                   active:         true,
+                   owner_name:     '',
+                   pet_name:       '',
+                   doc_name:       '',
+                   owners_options: [],
+                   pets_options:   [],
+                   docs_options:   []
+             };
+  }
 
-   handleSubmit(e) {
+/**
+  * Loads default data
+  **/
+  componentDidMount() {
+    let action = ApposActionCreators.updateForm(this.props.routeParams.id);
+    this.props.dispatch(action);
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    let owner  = typeof nextProps.oneAppo.appo !== typeof undefined ? true : false;
+    if (owner == false)  { return; }   
+    if ( nextProps.oneAppo.appo.owner_id  !=  this.state.owner_id ) {
+      let action = ApposActionCreators.updateForm(this.props.routeParams.id);
+      this.props.dispatch(action);
+      console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps));
+      this.setState({
+                   owners_options: nextProps.oneAppo.owners,
+                   pets_options: nextProps.oneAppo.pets,
+                   docs_options: nextProps.oneAppo.docs
+                 });
+    }
+  }
+/**
+ * Send data to new appointment
+ **/
+  handleSubmit(e) {
     e.preventDefault();
-    cid        = this.state.ffid;
-    cdate      = this.state.ffdate;
-    cpetname   = this.state.ffpetname;
-    cowner     = this.state.ffowner;
-    cdocname   = this.state.ffdoname;
-    creminder  = this.state.ffreminder;
-    creason    = this.state.ffreason;
-    data_r    = { id: cid, date: cdate, reminder: creminder, owner: cowner, petname: cpetname, docname: cdocname, reason: creason };
-    //let action = ApposActionCreators.sendAppo(data_r);
+    let fields = { id:        this.state.id,
+                   date:      this.state.date, 
+                   pet_id:    this.state.pet_id, 
+                   owner_id:  this.state.owner_id, 
+                   reminder:  this.state.reminder,
+                   reason:    this.state.reason, 
+                   doctor_id: this.state.doctor_id,
+                   active:    this.state.active };
+    let action = ApposActionCreators.updateAppo(fields);
     this.props.dispatch(action);  // thunk middlew
+
+    browserHistory.push('/appointments')
     // this.props.dispatch(createAppo);
-    // console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(data_r));
+    console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(fields));
   }
 
   handleChange(name, event) {
@@ -47,40 +99,143 @@ class AppoFormComponent extends Component {
 
   handleClick(event) {
     let newvalue = this.state.ffreminder == true ? false : true;
-    this.setState({ffreminder: newvalue});
+    this.setState({reminder: newvalue});
   }
 
-  render () {
-      // <DataListComponent ref="fieldDate" />,
-      // <DateTimePicker onChange={this.handleDateChange} />
+  getOwnersOptions(input, callback) {
+    let self = this;
+    setTimeout(function() {
+        callback(null, {
+            options: self.state.owners_options,
+            // CAREFUL! Only set this to true when there are no more options,
+            // or more specific queries will not be sent to the server.
+            complete: true
+        });
+    }, 500);
+  }
+
+  changeOwner(value) {
+    this.setState({owner_id: value['value']});
+    let action = ApposActionCreators.getPets(value['value'], true);
+    this.props.dispatch(action);
+  }
+
+  getPetsOptions(input, callback) {
+    let self = this;
+    let action = ApposActionCreators.getPets(this.state.owner_id, true);
+    this.props.dispatch(action);
+    setTimeout(function() {
+        callback(null, {
+            options: self.state.pets_options,
+            complete: true
+        });
+    }, 300);
+  }
+
+  changePet(value) {
+    this.setState({pet_id: value['value']});
+  }
+
+  getDocsOptions(input, callback) {
+    let self = this;
+    let action = ApposActionCreators.getPets(this.state.doctor_id, true);
+    this.props.dispatch(action);
+    setTimeout(function() {
+        callback(null, {
+            options: self.state.docs_options,
+            complete: true
+        });
+    }, 300);
+  }
+
+  changeDoc(value) {
+    this.setState({doctor_id: value['value']});
+  }
+  render() {
+    let rand = ()=> (Math.floor(Math.random() * 20) - 10);
+
+    const modalStyle = {
+      position: 'fixed',
+      zIndex: 1040,
+      top: 0, bottom: 0, left: 0, right: 0
+    };
+
+    const backdropStyle = {
+      ...modalStyle,
+      zIndex: 'auto',
+      backgroundColor: '#000',
+      opacity: 0.5
+    };
+
+    const dialogStyle = function() {
+      // we use some psuedo random coords so modals
+      // don't sit right on top of each other.
+      let top = 50 + rand();
+      let left = 50 + rand();
+
+      return {
+        position: 'absolute',
+        width: 400,
+        top: top + '%', left: left + '%',
+        transform: `translate(-${top}%, -${left}%)`,
+        border: '1px solid #e5e5e5',
+        backgroundColor: 'white',
+        boxShadow: '0 5px 15px rgba(0,0,0,.5)',
+        padding: 20
+      };
+    };
+
     return (
-           <form onSubmit={this.handleSubmit}>        
+        <div id="responsive" className="modal hide fade" tabIndex="-1" >
+          <Modal aria-labelledby='modal-label'
+            style={modalStyle}
+            backdropStyle={backdropStyle}
+            show={this.state.showModal}
+          >
+          <Modal.Header>
+             <Modal.Title>Modal Überschrift  </Modal.Title>
+          </Modal.Header>
+            <Modal.Body>
+           <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <input className="form-control" placeholder="Owner" name="owner" value={this.state.ffowner} onChange={this.handleChange.bind(this, 'ffowner')} />
-             <label htmlFor="petname">Kosename (haustier):</label>
-                <input className="form-control" name="petname" value={this.state.ffpetname} onChange={this.handleChange.bind(this, 'ffpetname')} />
-                <label htmlFor="docname">Doc:</label>
-                <input className="form-control" name="docname" value={this.state.ffdocname} onChange={this.handleChange.bind(this, 'ffdocname')} />
-                <label htmlFor="reason">Vernunft:</label>
-                <input className="form-control" name="reason" value={this.state.ffreason} onChange={this.handleChange.bind(this, 'ffreason')} />
-                <label htmlFor="date">Datum:</label>
-                <input className="form-control" id="date" name="date" value={this.state.ffdate} onChange={this.handleChange.bind(this, 'ffdate')} />
-                <label htmlFor="reminder">Erinner:</label>
-                <input type="checkbox" name="reminder" checked={this.state.ffreminder} onChange={this.handleClick.bind(this, 'ffreminder')} />
+             <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
+             <label htmlFor="pet">Kosename (haustier):</label>
+             <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
+             <label htmlFor="doc_name">Doc:</label>
+             <Select.Async name="docs" loadOptions={this.getDocsOptions.bind(this)} value={this.state.doctor_id} onChange={this.changeDoc.bind(this)} />
+             <label htmlFor="reason">Vernunft:</label>
+             <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
+             <label htmlFor="date">Datum:</label>
+             <DateTimePicker value={new Date(this.state.date)} onChange={this.handleChange.bind(this, 'date')} />
+             <label htmlFor="reminder">Erinner:</label>
+             <input type="checkbox" name="reminder" checked={this.state.reminder} onChange={this.handleClick.bind(this, 'reminder')} />
             </form>
-      )
+            </Modal.Body>
+          <Modal.Footer>
+             <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
+             <Button bsStyle="primary" onClick={this.handleSubmit.bind(this)}>Änderungen speichern</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+      );
   }
 };
 
 AppoFormComponent.propTypes = {
-    onEhash: PropTypes.any.isRequired,
+    oneAppo: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
 };
 
 AppoFormComponent.defaultProps = {
-    onEhash: {}
+    oneAppo: {}
 };
 
+function mapStateToProps(state) {
+  return {
+      oneAppo: state.rootReducer.appo_rdcer.oneAppo
+  }
+};
 
-export default connect()(AppoFormComponent);
+// binding React-Redux
+export default connect(mapStateToProps)(AppoFormComponent);
 
