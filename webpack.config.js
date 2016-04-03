@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
-var GlobalizePlugin = require( "globalize-webpack-plugin" );
+// var fs = require('fs');
+var GlobalizePlugin = require('globalize-webpack-plugin');
 
 module.exports = {
   name: 'vets4pets',
@@ -22,7 +23,8 @@ module.exports = {
     // if the webpack code-splitting feature is enabled, this is the path it'll use to download bundles
     publicPath: '/app/assets',
     devtoolModuleFilenameTemplate: '[resourcePath]',
-    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]',
+    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
+    // libraryTarget: 'umd'
   },
   resolve: {
     root: path.resolve('./app/assets/frontend/'),
@@ -57,7 +59,7 @@ module.exports = {
     }
   },
   node: {
-    fs: "empty"
+     fs: "empty"
   },
   //externals: {
         //don't bundle the 'react' npm package with our bundle.js
@@ -71,8 +73,9 @@ module.exports = {
             '$': "jquery",
             'jQuery': "jquery"
         }),
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en|es)$/),
+        new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+        // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        // new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en|es)$/),
         new GlobalizePlugin({
 			    production: false,
 			    developmentLocale: "en",
