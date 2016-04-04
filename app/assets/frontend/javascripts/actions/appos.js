@@ -64,10 +64,18 @@ export function fulFillForm() {
       };
       return fetch('/appointments/fulfill_form', data)
           .then(response => response.json())  // promise
-          .then(json => dispatch(receiveAppo(json)));
+          .then(json => dispatch(setAppoForm(json)));
   };
 };
-    
+  
+function setAppoForm(appo_arrays) {
+  console.log('setAppoForm ONE after rails >>> ' + JSON.stringify(appo_arrays)); 
+  return {
+    type:  FULFILL_FORM,
+    appo_arrays: appo_arrays
+  };
+};
+
 export function updateForm(id) {
     return function (dispatch) {
       // dispatch(requestAppo(appo_id));
@@ -90,7 +98,6 @@ export function updateForm(id) {
           .then(json => dispatch(receiveAppo(json)));
   };
 };
-
 
 function receiveAppo(update_form) {
   console.log('update_form ONE after rails >>> ' + JSON.stringify(update_form)); 

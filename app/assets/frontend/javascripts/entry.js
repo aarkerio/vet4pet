@@ -27,7 +27,7 @@ render(
         <Route name="app" path="/groups/start" component={AppContainer} />
         <Route path="/appointments" component={ApposContainer}>
           <Route path="/appointment/:id" component={AppoModalComponent} />
-          <Route path="/appointment/new" component={AppoFormComponent} />
+          <Route path="/appointmentnew" component={AppoFormComponent} />
         </Route>
       </Router>
     </div>

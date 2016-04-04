@@ -34,7 +34,7 @@ class ApposContainer extends Component {
     return (
       <div>
       <HeaderComponent />
-      <div><Link to="/appointment/new">
+      <div><Link to="/appointmentnew">
             <button type="button" className="btn btn-default btn-sm">
               <span className="glyphicon glyphicon-plus"></span>
             </button>

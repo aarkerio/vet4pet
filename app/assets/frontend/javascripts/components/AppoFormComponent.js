@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
-var moment = require('moment');
+// var moment = require('moment');
+import Moment from 'moment';
 var Globalize = require('globalize');
 
 Globalize.load( 
@@ -20,7 +21,6 @@ Globalize.locale('en');
 var globalizeLocalizer = require('react-widgets/lib/localizers/globalize');
 globalizeLocalizer(Globalize);
 
-// import Moment from 'moment';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 
 import Select from 'react-select';
@@ -30,14 +30,14 @@ require('react-widgets/dist/css/react-widgets.css');
 class AppoFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { showModal:      true, 
-                   id:             0,
-                   date:           moment(), 
-                   pet_id:         0, 
-                   owner_id:       0,
+    let date =  new Date;
+    this.state = { showModal:      true,
+                   date:           date, 
+                   pet_id:         1, 
+                   owner_id:       1,
                    reminder:       false,
                    reason:         '', 
-                   doctor_id:      0,
+                   doctor_id:      1,
                    active:         true,
                    owner_name:     '',
                    pet_name:       '',
@@ -57,19 +57,18 @@ class AppoFormComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    let owner  = typeof nextProps.oneAppo.appo !== typeof undefined ? true : false;
-    if (owner == false)  { return; }   
-    if ( nextProps.oneAppo.appo.owner_id  !=  this.state.owner_id ) {
-      let action = ApposActionCreators.updateForm(this.props.routeParams.id);
+    // let owners  = typeof nextProps.appo_arrays.owners_options !== typeof undefined ? true : false;
+    // if (owners == false)  { return; }   
+    if ( JSON.stringify(nextProps.appo_arrays.owners)  !=  JSON.stringify(this.state.owners_options) ) {
+      let action = ApposActionCreators.fulFillForm();
       this.props.dispatch(action);
-      console.log('WWWW  NOT THE SAME nextPros  >>' + JSON.stringify(nextProps));
       this.setState({
-                   owners_options: nextProps.oneAppo.owners,
-                   pets_options: nextProps.oneAppo.pets,
-                   docs_options: nextProps.oneAppo.docs
+                   owners_options: nextProps.appo_arrays.owners,
+                   docs_options: nextProps.appo_arrays.docs
                  });
     }
   }
+
 /**
  * Send data to new appointment
  **/
@@ -83,12 +82,10 @@ class AppoFormComponent extends Component {
                    reason:    this.state.reason, 
                    doctor_id: this.state.doctor_id,
                    active:    this.state.active };
-    let action = ApposActionCreators.updateAppo(fields);
+    let action = ApposActionCreators.createAppo(fields);
     this.props.dispatch(action);  // thunk middlew
-
-    browserHistory.push('/appointments')
-    // this.props.dispatch(createAppo);
     console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(fields));
+    browserHistory.push('/appointments');
   }
 
   handleChange(name, event) {
@@ -151,6 +148,12 @@ class AppoFormComponent extends Component {
   changeDoc(value) {
     this.setState({doctor_id: value['value']});
   }
+
+  changeDate(value) {
+    console.log('>>>date value'  + value);
+    let newDate = new Date(value); 
+    this.setState({date: newDate});
+  }
   render() {
     let rand = ()=> (Math.floor(Math.random() * 20) - 10);
 
@@ -198,7 +201,7 @@ class AppoFormComponent extends Component {
             <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
+             <Select name="owners" options={this.state.owners_options} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
              <label htmlFor="pet">Kosename (haustier):</label>
              <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
              <label htmlFor="doc_name">Doc:</label>
@@ -206,7 +209,7 @@ class AppoFormComponent extends Component {
              <label htmlFor="reason">Vernunft:</label>
              <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
              <label htmlFor="date">Datum:</label>
-             <DateTimePicker value={new Date(this.state.date)} onChange={this.handleChange.bind(this, 'date')} />
+             <DateTimePicker value={this.state.date} onChange={this.changeDate.bind(this)} />
              <label htmlFor="reminder">Erinner:</label>
              <input type="checkbox" name="reminder" checked={this.state.reminder} onChange={this.handleClick.bind(this, 'reminder')} />
             </form>
@@ -222,17 +225,17 @@ class AppoFormComponent extends Component {
 };
 
 AppoFormComponent.propTypes = {
-    oneAppo: PropTypes.any.isRequired,
+    appo_arrays: PropTypes.any.isRequired,
     dispatch: PropTypes.func.isRequired
 };
 
 AppoFormComponent.defaultProps = {
-    oneAppo: {}
+    appo_arrays: {}
 };
 
 function mapStateToProps(state) {
   return {
-      oneAppo: state.rootReducer.appo_rdcer.oneAppo
+      appo_arrays: state.rootReducer.appo_rdcer.appo_arrays
   }
 };
 

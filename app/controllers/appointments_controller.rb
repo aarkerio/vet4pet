@@ -6,6 +6,14 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   def index
   end
+
+  #GET fulfill_form
+  def fulfill_form
+    response = Hash.new
+    response[:owners] = User.all_users(2)
+    response[:docs]   = User.all_users(3)
+    return render json: response
+  end
   
   #GET ActionCable
   def broadcast
