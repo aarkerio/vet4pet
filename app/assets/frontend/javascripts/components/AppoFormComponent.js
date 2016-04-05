@@ -99,50 +99,18 @@ class AppoFormComponent extends Component {
     this.setState({reminder: newvalue});
   }
 
-  getOwnersOptions(input, callback) {
-    let self = this;
-    setTimeout(function() {
-        callback(null, {
-            options: self.state.owners_options,
-            // CAREFUL! Only set this to true when there are no more options,
-            // or more specific queries will not be sent to the server.
-            complete: true
-        });
-    }, 500);
-  }
-
   changeOwner(value) {
     this.setState({owner_id: value['value']});
     let action = ApposActionCreators.getPets(value['value'], true);
     this.props.dispatch(action);
-  }
-
-  getPetsOptions(input, callback) {
     let self = this;
-    let action = ApposActionCreators.getPets(this.state.owner_id, true);
-    this.props.dispatch(action);
-    setTimeout(function() {
-        callback(null, {
-            options: self.state.pets_options,
-            complete: true
-        });
-    }, 300);
+    setTimeout(function () {
+          self.setState({pets_options: self.props.pets_options}), 
+          300});
   }
 
   changePet(value) {
     this.setState({pet_id: value['value']});
-  }
-
-  getDocsOptions(input, callback) {
-    let self = this;
-    let action = ApposActionCreators.getPets(this.state.doctor_id, true);
-    this.props.dispatch(action);
-    setTimeout(function() {
-        callback(null, {
-            options: self.state.docs_options,
-            complete: true
-        });
-    }, 300);
   }
 
   changeDoc(value) {
@@ -150,10 +118,10 @@ class AppoFormComponent extends Component {
   }
 
   changeDate(value) {
-    console.log('>>>date value'  + value);
     let newDate = new Date(value); 
     this.setState({date: newDate});
   }
+
   render() {
     let rand = ()=> (Math.floor(Math.random() * 20) - 10);
 
@@ -202,14 +170,19 @@ class AppoFormComponent extends Component {
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
              <Select name="owners" options={this.state.owners_options} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
+
              <label htmlFor="pet">Kosename (haustier):</label>
-             <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
+				     <Select ref="petSelect" autofocus options={this.state.pets_options} name="selected-pet" value={this.state.pet_id} onChange={this.changePet.bind(this)} searchable={true} />
+
              <label htmlFor="doc_name">Doc:</label>
-             <Select.Async name="docs" loadOptions={this.getDocsOptions.bind(this)} value={this.state.doctor_id} onChange={this.changeDoc.bind(this)} />
+             <Select name="docs" options={this.state.docs_options} value={this.state.doctor_id} onChange={this.changeDoc.bind(this)} />
+
              <label htmlFor="reason">Vernunft:</label>
              <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
+
              <label htmlFor="date">Datum:</label>
              <DateTimePicker value={this.state.date} onChange={this.changeDate.bind(this)} />
+
              <label htmlFor="reminder">Erinner:</label>
              <input type="checkbox" name="reminder" checked={this.state.reminder} onChange={this.handleClick.bind(this, 'reminder')} />
             </form>
@@ -235,7 +208,8 @@ AppoFormComponent.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-      appo_arrays: state.rootReducer.appo_rdcer.appo_arrays
+      appo_arrays: state.rootReducer.appo_rdcer.appo_arrays,
+      pets_options: state.rootReducer.appo_rdcer.pets_options
   }
 };
 
