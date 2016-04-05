@@ -55,15 +55,14 @@ class AppointmentsController < ApplicationController
 
   # POST /appointments
   def create
-    logger.debug "### Data in create#appointments #####################>>>> #{params.to_json} "
+    # return render json: params
    
-    appointment = Appointment.new
-    result = appointment.save_appointment(params)
+    new_params = Appointment.order_appointment(params)
+    result     = Appointment.create(new_params)  
     if result
-      appos = Appointment.to_react
-      return render :json, appos.to_json
+      return render json: {status: 'ok', code: 202}
     else
-      return render :json, appointment.errors.to_json
+      return render json: {status: 'error', code: 502}
     end
   end
 

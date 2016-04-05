@@ -5,7 +5,7 @@ class Appointment < ActiveRecord::Base
   belongs_to :owner, class_name:  User
 
   validates :date, presence: true
-  validate  :date_cannot_be_in_the_past
+  # validate  :date_cannot_be_in_the_past
   validates :doctor, presence: true
   validates :pet, presence: true
   validates :reason, presence: true
@@ -23,26 +23,15 @@ class Appointment < ActiveRecord::Base
   # appo_id - The Integer number of appointemnt id.
   #
   # Returns hash object or nil.
-  def save_appointment(params)
-    owner    = get_user(params[:owner])
-    doctor   = get_user(params[:doctor])
-    if owner.nil? || doctor.nil?
-      self.errors.add(:base, "Owner or Doctor no valid")
-      #self.errors[:base] << "Owner or Doctor no valid"
-      return false
-    else
-      pet = get_user(params[:name], owner.id.to_s)
-    end
-
-    new_appo = {date: params[:date],
-                pet_id: pet.id,
-                reminder: params[:reminder],
-                reason: params[:reason],
-                doctor_id: doctor.id,
-                owner_id: owner.id,
-                active: true
-                }
-    create!(new_appo)
+  def self.order_appointment(params)
+    {date:      params[:date],
+     pet_id:    params['pet_id'],
+     reminder:  params[:reminder],
+     reason:    params[:reason],
+     doctor_id: params['doctor_id'],
+     owner_id:  params['owner_id'],
+     active:    true
+    }
   end
 
   private

@@ -140,7 +140,7 @@ export function setPets(pets_options) {
 export function createAppo(fields) {
   let data = {
       method: 'POST',
-      fields: JSON.stringify(fields),
+      body: JSON.stringify(fields),
       credentials: 'same-origin',
       mode: 'same-origin',
       headers: {
@@ -153,7 +153,7 @@ export function createAppo(fields) {
   return dispatch => {
     return fetch('/appointments', data)
            .then(response => response.json())
-           .then(json => dispatch(receiveAppos(json)))
+           .then(json => console.log(JSON.stringify(json)))
   }
 };
 
@@ -181,12 +181,11 @@ export function updateAppo(fields) {
 
 function updatedAppo(apposArrayProp) {
   console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
-  
   return {
     type:  UPDATED_APPO,
     apposArrayProp
-  }
-};
+  };
+}
 
 export function removeAppo(appo_id) {
   let data = {

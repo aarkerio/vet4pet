@@ -74,18 +74,18 @@ class AppoFormComponent extends Component {
  **/
   handleSubmit(e) {
     e.preventDefault();
-    let fields = { id:        this.state.id,
-                   date:      this.state.date, 
+    let fields = { date:      this.state.date, 
                    pet_id:    this.state.pet_id, 
                    owner_id:  this.state.owner_id, 
                    reminder:  this.state.reminder,
                    reason:    this.state.reason, 
-                   doctor_id: this.state.doctor_id,
-                   active:    this.state.active };
+                   doctor_id: this.state.doctor_id
+                  };
     let action = ApposActionCreators.createAppo(fields);
     this.props.dispatch(action);  // thunk middlew
     console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(fields));
-    browserHistory.push('/appointments');
+    // browserHistory.push('/appointments');
+    window.location='/appointments';
   }
 
   handleChange(name, event) {
@@ -106,7 +106,7 @@ class AppoFormComponent extends Component {
     let self = this;
     setTimeout(function () {
           self.setState({pets_options: self.props.pets_options}), 
-          300});
+          100});
   }
 
   changePet(value) {
