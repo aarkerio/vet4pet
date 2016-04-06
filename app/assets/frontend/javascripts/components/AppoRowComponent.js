@@ -23,8 +23,9 @@ class AppoRow extends Component {
   */
   deleteAppointment(appo_id) {
     let action = ApposActionCreators.deleteAppo(appo_id);
-    this.props.dispatch(action);  // thunk middlew
+    this.props.dispatch(action);
     console.log(' to delete appo_id: >>>>' + appo_id);
+    // browserHistory.push('/some/path');
     window.location='/appointments';
   }
 
