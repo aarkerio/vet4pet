@@ -247,9 +247,6 @@ export function deleteAppo(id){
      return function (dispatch) {
       let data = {
         method: 'DELETE',
-        body:  JSON.stringify({
-                       id: id
-                     }),
         credentials: 'same-origin',
         mode:        'same-origin',
         headers: {
@@ -260,7 +257,7 @@ export function deleteAppo(id){
       };
       return fetch('/appointments/'+id, data)
           .then(response => response.json())
-          .then(json => console.log('Deleted id:  ' + appo_id));
+          .then(json => console.log('Deleted id:  ' + id));
   };
 };
 

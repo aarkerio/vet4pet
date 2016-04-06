@@ -15,16 +15,6 @@ class AppoRow extends Component {
       isExecuting: false,
       textValues: ["Delete", "Are you sure?", "Deleting..."]
     }
-    this.editAppointment = this.editAppointment.bind(this);
-  }
-
- /*
-  *  Add appointment
-  *  Private
-  */
-  editAppointment(e, appo) {
-    e.preventDefault();
-    return appo;
   }
 
 /**
@@ -32,10 +22,10 @@ class AppoRow extends Component {
   *  Private
   */
   deleteAppointment(appo_id) {
-    // let action = ApposActionCreators.deleteAppo(appo_id);
-    // this.props.dispatch(action);  // thunk middlew
+    let action = ApposActionCreators.deleteAppo(appo_id);
+    this.props.dispatch(action);  // thunk middlew
     console.log(' to delete appo_id: >>>>' + appo_id);
-    // window.location='/appointments';
+    window.location='/appointments';
   }
 
   render() {
@@ -49,7 +39,7 @@ class AppoRow extends Component {
         <td style={{width: '35px', padding:0}}> {appointment.reason}  </td>
         <td style={{width: '35px', padding:0}}> {appointment.doc_name} </td>
         <td style={{width: '35px', padding:0, textAlign:'center'}}>
-          <a href="#" onClick={() => {if(confirm('Delete the item?')) {this.deleteAppointment.bind(this, appointment.id)};}} className="removable"><i className="glyphicon glyphicon-trash"></i></a>
+          <a href="#" onClick={() => {if(confirm('Delete the item?')) {this.deleteAppointment(appointment.id)};}} className="removable"><i className="glyphicon glyphicon-trash"></i></a>
         </td>
       </tr>  
     )

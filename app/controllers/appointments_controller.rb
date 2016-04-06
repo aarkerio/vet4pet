@@ -1,7 +1,7 @@
 # Chipotle Software (c) 2015-2016 MIT License
 class AppointmentsController < ApplicationController
 
-  #before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
 
   # GET /appointments
   def index
@@ -100,7 +100,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      return 
-      params.require(:appointment).permit(:scheduled_time, :pet_id, :owner_id, :reminder, :reason_for_visit, :doctor_id, :active, :id)
+      params.require(:appointment).permit(:scheduled_time, :pet_id, :owner_id, :reminder, :reason, :doctor_id, :active, :id)
     end
 end
