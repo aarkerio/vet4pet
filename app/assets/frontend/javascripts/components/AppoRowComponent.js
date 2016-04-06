@@ -2,6 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { Router, Route, Link } from 'react-router';
+import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 //import InlineConfirmButton from "react-inline-confirm"
 //import { Button } from 'react-bootstrap';
@@ -26,13 +27,13 @@ class AppoRow extends Component {
     return appo;
   }
 
- /*
+/**
   *  Add appointment
   *  Private
   */
   deleteAppointment(appo_id) {
-    let action = ApposActionCreators.deleteAppo(appo_id);
-    this.props.dispatch(action);  // thunk middlew
+    // let action = ApposActionCreators.deleteAppo(appo_id);
+    // this.props.dispatch(action);  // thunk middlew
     console.log(' to delete appo_id: >>>>' + appo_id);
     // window.location='/appointments';
   }
@@ -58,7 +59,8 @@ class AppoRow extends Component {
 AppoRow.propTypes = {
   appointment: PropTypes.object.isRequired,
   keyRow: PropTypes.number.isRequired,
-  onClick: PropTypes.func
+  dispatch: PropTypes.func.isRequired
 }
 
-export default AppoRow
+export default connect()(AppoRow);
+

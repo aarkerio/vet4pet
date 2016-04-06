@@ -253,6 +253,5 @@ function mapStateToProps(state) {
   }
 };
 
-// binding React-Redux
 export default connect(mapStateToProps)(AppoModalComponent);
 

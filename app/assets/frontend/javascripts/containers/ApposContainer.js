@@ -25,6 +25,7 @@ class ApposContainer extends Component {
   orderList(field, order) {
     return field;
   }
+
   render() {
     let rows = [];
     this.props.apposArrayProp.forEach(function(appo) {
