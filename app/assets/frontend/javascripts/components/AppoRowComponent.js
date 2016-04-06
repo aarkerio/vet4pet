@@ -2,6 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { Router, Route, Link } from 'react-router';
+import * as ApposActionCreators from '../actions/appos';
 //import InlineConfirmButton from "react-inline-confirm"
 //import { Button } from 'react-bootstrap';
 
@@ -30,20 +31,25 @@ class AppoRow extends Component {
   *  Private
   */
   deleteAppointment(appo_id) {
-    return appo_id;
+    let action = ApposActionCreators.deleteAppo(appo_id);
+    this.props.dispatch(action);  // thunk middlew
+    console.log(' to delete appo_id: >>>>' + appo_id);
+    // window.location='/appointments';
   }
 
   render() {
     const { appointment, key } = this.props;
     return (
       <tr key={key}>
-        <td style={{width: '35px', padding:0}}> <Link to={"/appointment/"+appointment.id+"/"}>Edit</Link></td>
+        <td style={{width: '35px', padding:0, textAlign: 'center'}}> <Link to={"/appointment/"+appointment.id+"/"}><i className="glyphicon glyphicon-pencil"></i></Link></td>
         <td style={{width: '35px', padding:0}}> {appointment.owner_name}   </td>
         <td style={{width: '35px', padding:0}}> {appointment.date}    </td>
         <td style={{width: '35px', padding:0}}> {appointment.pet_name} </td>
         <td style={{width: '35px', padding:0}}> {appointment.reason}  </td>
         <td style={{width: '35px', padding:0}}> {appointment.doc_name} </td>
-        <td style={{width: '35px', padding:0}}> <a href="#" onClick={this.deleteAppointment.bind(this, appointment.id)}>Delete</a></td>
+        <td style={{width: '35px', padding:0, textAlign:'center'}}>
+          <a href="#" onClick={() => {if(confirm('Delete the item?')) {this.deleteAppointment.bind(this, appointment.id)};}} className="removable"><i className="glyphicon glyphicon-trash"></i></a>
+        </td>
       </tr>  
     )
   }

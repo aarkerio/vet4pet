@@ -38,7 +38,7 @@ export function fetchAppos(active=true) {
       }
     };
     return fetch('/appointments/get_appos', data)
-          .then(response => response.json())  // promise
+          .then(response => response.json())
           .then(json => dispatch(receiveAppos(json)));
   }
 };
@@ -63,13 +63,12 @@ export function fulFillForm() {
         }
       };
       return fetch('/appointments/fulfill_form', data)
-          .then(response => response.json())  // promise
+          .then(response => response.json())
           .then(json => dispatch(setAppoForm(json)));
   };
 };
   
 function setAppoForm(appo_arrays) {
-  console.log('setAppoForm ONE after rails >>> ' + JSON.stringify(appo_arrays)); 
   return {
     type:  FULFILL_FORM,
     appo_arrays: appo_arrays
@@ -78,8 +77,6 @@ function setAppoForm(appo_arrays) {
 
 export function updateForm(id) {
     return function (dispatch) {
-      // dispatch(requestAppo(appo_id));
-      console.log('fecthAppo Action appo_id >>>>>' + id);
       let data = {
         method:      'POST',
         credentials: 'same-origin',
@@ -100,7 +97,6 @@ export function updateForm(id) {
 };
 
 function receiveAppo(update_form) {
-  console.log('update_form ONE after rails >>> ' + JSON.stringify(update_form)); 
   return {
     type:  UPDATE_FORM,
     oneAppo: update_form
@@ -124,13 +120,12 @@ export function getPets(id, owner=true) {
         }
       }
       return fetch('/pets/get_pets', data)
-          .then(response => response.json())  // promise
+          .then(response => response.json())
           .then(json => dispatch(setPets(json)));
   }
 };
 
 export function setPets(pets_options) {
-  console.log('setPets(pet_options) >>> ' + JSON.stringify(pets_options)); 
   return {
     type:  SET_PETS,
     pets_options
@@ -169,14 +164,11 @@ export function updateAppo(fields) {
           'X-CSRFToken':  cookie.load('csrftoken')
       }
   };
-
-  console.log('Fields update PATCH action: ' + JSON.stringify(fields));
-
   return dispatch => {
     return fetch('/appointments/', data)
            .then(response => response.json())
            .then(json => dispatch(updatedAppo(json)))
-  }
+  };
 };
 
 function updatedAppo(apposArrayProp) {
@@ -201,7 +193,7 @@ export function removeAppo(appo_id) {
     return fetch('/appointments/delete_appo', data)
            .then(response => response.json())
            .then(json => dispatch(receiveAppos(json)))
-  }
+  };
 };
 
 /** 
@@ -224,34 +216,55 @@ export function getUsersByGroup(group_id=1) {
         }
       };
       return fetch('/users/get_bygroup', data)
-          .then(response => response.json())  // promise
+          .then(response => response.json())
           .then(json => dispatch(setUsers(json, group_id)));
   }
 };
 
 function setUsers(usersArrayProp, group_id) {
-  console.log('PARAMS RAILS USERS controller response: ' + JSON.stringify(usersArrayProp));
   if (group_id == 2) 
   {
     return {
       type:  RECEIVE_OWNERS,
       owners_options: usersArrayProp
     };
-   } else {
-     return {
+  } else {
+    return {
        type:  RECEIVE_DOCTORS,
        doctors_options: usersArrayProp
-     };
-   }
+    };
+  }
 };
 
 function setDoctors(usersArrayProp) {
-  // console.log('PARAMS RAILS response: ' + JSON.stringify(apposArrayProp));
-  
   return {
     type:  RECEIVE_DOCTORS,
     doctors_options: apposArrayProp
   }
 };
+
+export function deleteAppo(id){
+     return function (dispatch) {
+      let data = {
+        method: 'DELETE',
+        body:  JSON.stringify({
+                       id: id
+                     }),
+        credentials: 'same-origin',
+        mode:        'same-origin',
+        headers: {
+          'Accept':       'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken':  cookie.load('csrftoken')
+        }
+      };
+      return fetch('/appointments/'+id, data)
+          .then(response => response.json())
+          .then(json => console.log('Deleted id:  ' + appo_id));
+  };
+};
+
+
+
 
 

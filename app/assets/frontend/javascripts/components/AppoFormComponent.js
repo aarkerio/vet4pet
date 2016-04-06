@@ -103,10 +103,7 @@ class AppoFormComponent extends Component {
     this.setState({owner_id: value['value']});
     let action = ApposActionCreators.getPets(value['value'], true);
     this.props.dispatch(action);
-    let self = this;
-    setTimeout(function () {
-          self.setState({pets_options: self.props.pets_options}), 
-          100});
+    this.setState({pets_options: this.props.pets_options});
   }
 
   changePet(value) {
