@@ -1,14 +1,16 @@
 
-// file: test/component/todo-item.js
-var React = require('react/addons'),
-    assert = require('assert'),
-    TodoItem = require('../../common/components/todo-item'),
-    TestUtils = React.addons.TestUtils;
+// file: __test__/components/appoModalComponent.js
 
-describe('Todo-item component', function(){
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import * as TestUtils from "react-addons-test-utils";
+
+import AppoModalComponent from "../../components/AppoModalComponent";
+
+describe('appoModalComponent', function() {
   before('render and locate element', function() {
     var renderedComponent = TestUtils.renderIntoDocument(
-      <TodoItem done={false} name="Write Tutorial"/>
+      <AppoRow done={false} name="Write Tutorial"/>
     );
 
     // Searching for <input> tag within rendered React component
