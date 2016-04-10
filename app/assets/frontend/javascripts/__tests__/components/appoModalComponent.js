@@ -1,16 +1,18 @@
 
-// file: __test__/components/appoModalComponent.js
+// file: __tests__/components/appoModalComponent.js
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
+
+var expect = require('chai').expect;
 
 import AppoModalComponent from "../../components/AppoModalComponent";
 
 describe('appoModalComponent', function() {
   before('render and locate element', function() {
     var renderedComponent = TestUtils.renderIntoDocument(
-      <AppoRow done={false} name="Write Tutorial"/>
+      <AppoModalComponent />
     );
 
     // Searching for <input> tag within rendered React component
