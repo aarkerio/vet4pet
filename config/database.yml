@@ -13,7 +13,7 @@ default: &default
 
 development:
   <<: *default
-  database: vet4pet_development
+  database: vets4pets_development
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -23,7 +23,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: vet4pet_test
+  database: vets4pets_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -46,6 +46,6 @@ test:
 #
 production:
   <<: *default
-  database: vet4pet_production
-  username: vet4pet
+  database: vet4spets_production
+  username: vets4pets
   password: <%= ENV['VET4PET_DATABASE_PASSWORD'] %>
