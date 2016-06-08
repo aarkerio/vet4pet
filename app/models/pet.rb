@@ -1,5 +1,5 @@
-
-class Pet < ActiveRecord::Base
+# Chipotle Software (c) MIT 2015-2016
+class Pet < ApplicationRecord
   belongs_to :image
   belongs_to :kind
   belongs_to :user

@@ -1,5 +1,5 @@
-#Chipotle Software (c) 2015-2016
-class Appointment < ActiveRecord::Base
+# Chipotle Software (c) MIT 2015-2016
+class Appointment < ApplicationRecord 
   belongs_to :pet
   belongs_to :doctor, class_name:  User
   belongs_to :owner, class_name:  User
