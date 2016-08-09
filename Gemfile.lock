@@ -55,6 +55,8 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.5)
     capistrano (3.5.0)
@@ -323,6 +325,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  binding_of_caller
   capistrano-rails
   devise
   factory_girl
@@ -334,7 +337,7 @@ DEPENDENCIES
   mutant-rspec
   pg
   pry-byebug
-  rails (= 5.0.0.rc1)
+  rails
   rspec
   rspec-rails
   sass-rails

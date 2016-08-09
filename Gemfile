@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0.rc1'
+gem 'rails'
 # Use pg as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 gem 'capistrano-rails'
-
+gem 'binding_of_caller'
 # gem 'newrelic_rpm'
 
 group :development, :test do

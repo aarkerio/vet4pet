@@ -2,7 +2,7 @@
 
 class GroupsController < ApplicationController
 
-  skip_before_action :set_group, only: [:start]
+  #skip_before_action :set_group, only: [:start]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   
 

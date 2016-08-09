@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708225237) do
+ActiveRecord::Schema.define(version: 20160608194122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,8 @@ ActiveRecord::Schema.define(version: 20150708225237) do
     t.boolean  "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pet_id"], name: "index_appointments_on_pet_id", using: :btree
   end
-
-  add_index "appointments", ["pet_id"], name: "index_appointments_on_pet_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -63,11 +62,18 @@ ActiveRecord::Schema.define(version: 20150708225237) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_pets_on_image_id", using: :btree
+    t.index ["kind_id"], name: "index_pets_on_kind_id", using: :btree
+    t.index ["user_id"], name: "index_pets_on_user_id", using: :btree
   end
 
-  add_index "pets", ["image_id"], name: "index_pets_on_image_id", using: :btree
-  add_index "pets", ["kind_id"], name: "index_pets_on_kind_id", using: :btree
-  add_index "pets", ["user_id"], name: "index_pets_on_user_id", using: :btree
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.date     "published"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "fname"
@@ -88,11 +94,10 @@ ActiveRecord::Schema.define(version: 20150708225237) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["group_id"], name: "index_users_on_group_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "appointments", "pets"
   add_foreign_key "images", "users"
