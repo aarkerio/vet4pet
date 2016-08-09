@@ -4,7 +4,7 @@ import React, { PropTypes, Component } from 'react';
 import { Router, Route, Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
-//import InlineConfirmButton from "react-inline-confirm"
+//import InlineConfirmButton from 'react-inline-confirm';
 //import { Button } from 'react-bootstrap';
 
 class AppoRow extends Component {
