@@ -38,9 +38,3 @@ render(
   document.getElementById('reactroot')
 );
 
- //    { /* <Route path="manage" component={Manage} onEnter={requireLogin}>
- //         <IndexRoute component={ManageIndex} />
- //         <Route path="changepassword" component={ManageChangePassword} />
- //         <Route path="logins" component={ManageLogins} />
- //       </Route>
- //        Catch all route */ }

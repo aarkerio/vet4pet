@@ -239,12 +239,6 @@ AppoModalComponent.propTypes = {
     dispatch: PropTypes.func
 };
 
-AppoModalComponent.defaultProps = {
-    oneAppo: {},
-    owners_options: [],
-    pets_options: []
-};
-
 function mapStateToProps(state) {
   return {
       oneAppo: state.rootReducer.appo_rdcer.oneAppo,
