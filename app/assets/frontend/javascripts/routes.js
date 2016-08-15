@@ -21,7 +21,4 @@ const routeConfig = [
   }
 ];
 
-
-//render(<Router routes={routeConfig} history={hashHistory} />, document.getElementById('reactroot'))
-
 export default routeConfig;

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 //import InlineConfirmButton from 'react-inline-confirm';
 //import { Button } from 'react-bootstrap';
-
+ 
 class AppoRow extends Component {
   constructor(props) {
     super(props)
@@ -30,9 +30,9 @@ class AppoRow extends Component {
   }
 
   render() {
-    const { appointment, key } = this.props;
+    const { appointment, keyRow } = this.props;
     return (
-      <tr key={key}>
+      <tr key={keyRow}>
         <td style={{width: '35px', padding:0, textAlign: 'center'}}> <Link to={"/appointment/"+appointment.id+"/"}><i className="glyphicon glyphicon-pencil"></i></Link></td>
         <td style={{width: '35px', padding:0}}> {appointment.owner_name}   </td>
         <td style={{width: '35px', padding:0}}> {appointment.date}    </td>
@@ -48,9 +48,9 @@ class AppoRow extends Component {
 }
 
 AppoRow.propTypes = {
-  appointment: PropTypes.object.isRequired,
-  keyRow: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired
+  appointment: PropTypes.object,
+  keyRow:      PropTypes.number,
+  dispatch:    PropTypes.func
 }
 
 export default connect()(AppoRow);

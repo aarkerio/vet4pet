@@ -233,10 +233,10 @@ class AppoModalComponent extends Component {
 };
 
 AppoModalComponent.propTypes = {
-    oneAppo: PropTypes.any.isRequired,
-    owners_options: PropTypes.array.isRequired,
-    pets_options: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired
+    oneAppo: PropTypes.any,
+    owners_options: PropTypes.array,
+    pets_options: PropTypes.array,
+    dispatch: PropTypes.func
 };
 
 AppoModalComponent.defaultProps = {

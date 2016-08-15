@@ -195,8 +195,8 @@ class AppoFormComponent extends Component {
 };
 
 AppoFormComponent.propTypes = {
-    appo_arrays: PropTypes.any.isRequired,
-    dispatch: PropTypes.func.isRequired
+    appo_arrays: PropTypes.any,
+    dispatch: PropTypes.func
 };
 
 AppoFormComponent.defaultProps = {

@@ -34,7 +34,7 @@
     "mocha": "^2.4.5",
     "modal": "^1.2.0",
     "moment": "^2.12.0",
-    "react": "^15.0.1",
+    "react": "^15.3.0",
     "react-bootstrap": "^0.28.5",
     "react-cookie": "^0.4.5",
     "react-dom": "^15.0.0",
