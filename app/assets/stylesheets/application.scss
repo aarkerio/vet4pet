@@ -33,3 +33,64 @@
 // @import 'post-bootstrap';
 //  import "react-widgets/dist/css/react-widgets.css";
 
+body,
+	html {
+		margin:0;
+		padding:0;
+		color:#000;
+		background:#fff;
+	}
+	#wrap {
+		width:850px;
+		margin:0 auto;
+		background:#fff;
+	}
+	#header {
+    padding:5px 10px;
+		background:#fff;
+	}
+	h1 {
+	    margin:0;
+    }
+	#nav {
+		padding:5px 10px;
+		background:#e0e0e0;
+	}
+	#nav ul {
+		margin:0;
+		padding:0;
+		list-style:none;
+	}
+	#nav li {
+		display:inline;
+		margin:0;
+		padding:0;
+	}
+	#main {
+		float:left;
+		width:480px;
+		padding:10px;
+		background:#fff;
+    border-right: 1px dotted gray;
+	}
+	h2 {
+		margin:0 0 1em;
+	}
+	#sidebar {
+		float:right;
+		width:230px;
+		padding:10px;
+		background:#e0e0e0;
+	}
+	#footer {
+		clear:both;
+		padding:5px 10px;
+		background:#e0e0e0;
+	}
+	#footer p {
+		margin:0;
+    }
+	* html #footer {
+		height:1px;
+	}
+

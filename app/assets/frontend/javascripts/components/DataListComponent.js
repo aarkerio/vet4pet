@@ -1,4 +1,4 @@
-
+// Chipotle Software (c) 2016  MIT License
 
 class DataList extends Component {
   constructor(props) {
