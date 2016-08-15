@@ -57,8 +57,6 @@ class AppoFormComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    // let owners  = typeof nextProps.appo_arrays.owners_options !== typeof undefined ? true : false;
-    // if (owners == false)  { return; }   
     if ( JSON.stringify(nextProps.appo_arrays.owners)  !=  JSON.stringify(this.state.owners_options) ) {
       let action = ApposActionCreators.fulFillForm();
       this.props.dispatch(action);

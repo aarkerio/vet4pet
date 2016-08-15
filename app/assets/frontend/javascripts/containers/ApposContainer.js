@@ -63,8 +63,8 @@ class ApposContainer extends Component {
 };
 
 ApposContainer.propTypes = {
-  apposArrayProp: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  apposArrayProp: PropTypes.array,
+  dispatch: PropTypes.func
 };
 
  ApposContainer.defaultProps = {

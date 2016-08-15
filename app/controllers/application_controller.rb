@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery except: [:index, :get_appos]
   #before_action :authenticate_user!, except: [:welcome]
 
-  before_filter :layout_by_action
+  before_action :layout_by_action
 
-  before_filter :check_admin
+  before_action :check_admin
 
   @@actions = %w(new edit create destroy update index start show angular neu)
 
