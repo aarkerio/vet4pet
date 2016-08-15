@@ -27,7 +27,7 @@ import Select from 'react-select';
 require('react-select/less/default.less');
 require('react-widgets/dist/css/react-widgets.css');
 
-class AppoModalComponent extends Component {
+class AppoModalEditComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { showModal:      true, 
@@ -232,7 +232,7 @@ class AppoModalComponent extends Component {
   }
 };
 
-AppoModalComponent.propTypes = {
+AppoModalEditComponent.propTypes = {
     oneAppo: PropTypes.any,
     owners_options: PropTypes.array,
     pets_options: PropTypes.array,
@@ -247,5 +247,5 @@ function mapStateToProps(state) {
   }
 };
 
-export default connect(mapStateToProps)(AppoModalComponent);
+export default connect(mapStateToProps)(AppoModalEditComponent);
 

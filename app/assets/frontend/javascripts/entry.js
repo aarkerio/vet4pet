@@ -11,8 +11,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import AppContainer       from './containers/AppContainer';
 import ApposContainer     from './containers/ApposContainer';
-import AppoModalComponent from './components/AppoModalComponent';
-import AppoFormComponent  from './components/AppoFormComponent';
+import AppoModalEditComponent from './components/AppoModalEditComponent';
+import AppoModalNewComponent  from './components/AppoModalNewComponent';
 import NotFound           from './components/NotFound';
 
 import configureStore from './configureStore';
@@ -27,8 +27,8 @@ render(
       <Router history={history}>
         <Route name="app" path="/groups/start" component={AppContainer} />
         <Route path="/appointments" component={ApposContainer}>
-          <Route path="/appointment/:id" component={AppoModalComponent} />
-          <Route path="/appointmentnew" component={AppoFormComponent} />
+          <Route path="/appointment/:id" component={AppoModalEditComponent} />
+          <Route path="/appointmentnew" component={AppoModalNewComponent} />
         </Route>
 
         <Route path="*" component={NotFound} status={404} />

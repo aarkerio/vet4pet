@@ -27,7 +27,7 @@ import Select from 'react-select';
 require('react-select/less/default.less');
 require('react-widgets/dist/css/react-widgets.css');
 
-class AppoFormComponent extends Component {
+class AppoModalNewComponent extends Component {
   constructor(props) {
     super(props);
     let date =  new Date;
@@ -153,15 +153,14 @@ class AppoFormComponent extends Component {
 
     return (
         <div id="responsive" className="modal hide fade" tabIndex="-1" >
-          <Modal aria-labelledby='modal-label'
-            style={modalStyle}
-            backdropStyle={backdropStyle}
-            show={this.state.showModal}
-          >
+        <Modal
+          aria-labelledby='modal-label'
+          show={this.state.showModal}
+        >
           <Modal.Header>
              <Modal.Title>Modal Überschrift  </Modal.Title>
           </Modal.Header>
-            <Modal.Body>
+          <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
              <Select name="owners" options={this.state.owners_options} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
@@ -192,12 +191,13 @@ class AppoFormComponent extends Component {
   }
 };
 
-AppoFormComponent.propTypes = {
+AppoModalNewComponent.propTypes = {
     appo_arrays: PropTypes.any,
+    backdropStyle: PropTypes.string,
     dispatch: PropTypes.func
 };
 
-AppoFormComponent.defaultProps = {
+AppoModalNewComponent.defaultProps = {
     appo_arrays: {}
 };
 
@@ -209,5 +209,5 @@ function mapStateToProps(state) {
 };
 
 // binding React-Redux
-export default connect(mapStateToProps)(AppoFormComponent);
+export default connect(mapStateToProps)(AppoModalNewComponent);
 
