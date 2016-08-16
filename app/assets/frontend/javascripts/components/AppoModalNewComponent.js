@@ -58,6 +58,7 @@ class AppoModalNewComponent extends Component {
   componentWillReceiveProps(nextProps) {
     // if ( JSON.stringify(nextProps.appo_arrays.owners)  !=  JSON.stringify(this.state.owners_options) ) {
     if ( ! this.state.owners_options.length ) {
+      console.log('At componentWillReceiveProps ' );
       let action = ApposActionCreators.fulFillForm();
       this.props.dispatch(action);
       this.setState({
@@ -68,7 +69,7 @@ class AppoModalNewComponent extends Component {
   }
 
 /**
- * Send data to new appointment
+ * Sends the data to create a new appointment
  **/
   handleSubmit(e) {
     e.preventDefault();
@@ -97,11 +98,10 @@ class AppoModalNewComponent extends Component {
   }
 
   changeOwner(value) {
-    this.setState({owner_id: value['value']}); // change owner
+    this.setState({owner_id: value['value']});    // set owner
     let action = ApposActionCreators.getPets(value['value'], true);
     this.props.dispatch(action);
-    setTimeout(function(){ console.log(">> #># setTimeout 6000"); }, 6000);
-    this.setState({pets_options: this.props.pets_options});
+    // this.setState({pets_options: this.props.pets_options});
   }
 
   changePet(value) {
@@ -167,7 +167,7 @@ class AppoModalNewComponent extends Component {
              <Select name="owners" options={this.state.owners_options} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
 
              <label htmlFor="pet">Kosename (haustier):</label>
-				     <Select ref="petSelect" autofocus options={this.state.pets_options} name="selected-pet" value={this.state.pet_id} onChange={this.changePet.bind(this)} searchable={true} />
+				     <Select ref="petSelect" autofocus options={this.props.pets_options} name="selected-pet" value={this.state.pet_id} onChange={this.changePet.bind(this)} searchable={true} />
 
              <label htmlFor="doc_name">Doc:</label>
              <Select name="docs" options={this.state.docs_options} value={this.state.doctor_id} onChange={this.changeDoc.bind(this)} />
@@ -194,12 +194,14 @@ class AppoModalNewComponent extends Component {
 
 AppoModalNewComponent.propTypes = {
     appo_arrays: PropTypes.any,
+    pets_options: PropTypes.array,
     backdropStyle: PropTypes.string,
     dispatch: PropTypes.func
 };
 
 AppoModalNewComponent.defaultProps = {
-    appo_arrays: {}
+    appo_arrays: {},
+    pets_options: []
 };
 
 function mapStateToProps(state) {
