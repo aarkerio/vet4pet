@@ -7,7 +7,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
 import HeaderComponent    from '../components/HeaderComponent';
 import AppoRowComponent   from '../components/AppoRowComponent';
-import AppoModalComponent from '../components/AppoModalComponent';
+import AppoModalNewComponent from '../components/AppoModalNewComponent';
 
 class ApposContainer extends Component {
   constructor(props) {
