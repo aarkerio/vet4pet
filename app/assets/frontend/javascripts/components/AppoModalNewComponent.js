@@ -56,7 +56,8 @@ class AppoModalNewComponent extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    if ( JSON.stringify(nextProps.appo_arrays.owners)  !=  JSON.stringify(this.state.owners_options) ) {
+    // if ( JSON.stringify(nextProps.appo_arrays.owners)  !=  JSON.stringify(this.state.owners_options) ) {
+    if ( ! this.state.owners_options.length ) {
       let action = ApposActionCreators.fulFillForm();
       this.props.dispatch(action);
       this.setState({
@@ -81,7 +82,6 @@ class AppoModalNewComponent extends Component {
     let action = ApposActionCreators.createAppo(fields);
     this.props.dispatch(action);  // thunk middlew
     console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(fields));
-    // browserHistory.push('/appointments');
     window.location='/appointments';
   }
 
@@ -97,9 +97,10 @@ class AppoModalNewComponent extends Component {
   }
 
   changeOwner(value) {
-    this.setState({owner_id: value['value']});
+    this.setState({owner_id: value['value']}); // change owner
     let action = ApposActionCreators.getPets(value['value'], true);
     this.props.dispatch(action);
+    setTimeout(function(){ console.log(">> #># setTimeout 6000"); }, 6000);
     this.setState({pets_options: this.props.pets_options});
   }
 
@@ -161,7 +162,7 @@ class AppoModalNewComponent extends Component {
              <Modal.Title>Modal Überschrift  </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-           <form>        
+           <form>
              <label htmlFor="owner">Eigentümer:  </label>
              <Select name="owners" options={this.state.owners_options} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
 

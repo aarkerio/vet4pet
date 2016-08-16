@@ -8,6 +8,7 @@
     "url": "https://github.com/aarkerio/rails4vet.git"
   },
   "dependencies": {
+    "ansi-regex": "^2.0.0",
     "babel-polyfill": "^6.5.0",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",

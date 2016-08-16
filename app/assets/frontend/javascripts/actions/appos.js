@@ -67,7 +67,8 @@ export function fulFillForm() {
           .then(json => dispatch(setAppoForm(json)));
   };
 };
-  
+
+/*  Auxiliar Method */  
 function setAppoForm(appo_arrays) {
   return {
     type:  FULFILL_FORM,
@@ -103,7 +104,12 @@ function receiveAppo(update_form) {
   };
 };
 
+/* 
+  Load pets owned for a customer 
+  owner defines if it gets the pets (:id, :name) for owner or for appointment model 
+*/
 export function getPets(id, owner=true) {
+    console.log('#############  In action getPets!!!');
     return function (dispatch) {
       let data = {
         method:      'POST',
@@ -126,6 +132,7 @@ export function getPets(id, owner=true) {
 };
 
 export function setPets(pets_options) {
+  console.log('>>>>>>>>>>>>> Fields in setPets: ' + JSON.stringify(pets_options));
   return {
     type:  SET_PETS,
     pets_options

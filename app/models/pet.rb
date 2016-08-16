@@ -4,10 +4,10 @@ class Pet < ApplicationRecord
   belongs_to :kind
   belongs_to :user
 
-
   # Public: Returns pets
   #
-  # appo_id - The Integer number of appointemnt id.
+  # id    - integer number.
+  # owner - get pet(s) for owner or for appointment  
   #
   # Returns hash object or nil.
   def self.get_pets(id, owner)
