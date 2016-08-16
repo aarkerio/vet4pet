@@ -12,7 +12,6 @@ export default function configureStore(initialState) {
       combineReducers({
         rootReducer,
         routing: routerReducer
-        //appointments_rdcer
      }),
     initialState,
     compose(
@@ -31,3 +30,4 @@ export default function configureStore(initialState) {
 
   return store;
 }
+
