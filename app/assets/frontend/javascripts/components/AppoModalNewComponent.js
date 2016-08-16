@@ -7,11 +7,10 @@ import { connect } from 'react-redux';
 import * as ApposActionCreators from '../actions/appos';
 import { Button, Modal } from 'react-bootstrap';
 
-// var moment = require('moment');
 import Moment from 'moment';
 var Globalize = require('globalize');
 
-Globalize.load( 
+Globalize.load(
    require("cldr-data/main/en/ca-gregorian.json"),
    require("cldr-data/main/en/numbers.json")
 );
@@ -155,6 +154,7 @@ class AppoModalNewComponent extends Component {
         <div id="responsive" className="modal hide fade" tabIndex="-1" >
         <Modal
           aria-labelledby='modal-label'
+          backdropStyle={backdropStyle}
           show={this.state.showModal}
         >
           <Modal.Header>
@@ -183,7 +183,7 @@ class AppoModalNewComponent extends Component {
             </Modal.Body>
           <Modal.Footer>
              <Button onClick={() => browserHistory.push('/appointments')}>Close</Button>
-             <Button bsStyle="primary" onClick={this.handleSubmit.bind(this)}>Änderungen speichern</Button>
+             <Button onClick={this.handleSubmit.bind(this)}>Änderungen speichern</Button>
           </Modal.Footer>
         </Modal>
       </div>
