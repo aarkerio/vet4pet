@@ -124,7 +124,10 @@ class AppoModalEditComponent extends Component {
         });
     }, 500);
   }
-
+  
+ /*
+  * Load pets 
+  */
   changeOwner(value) {
     this.setState({owner_id: value['value']});
     let action = ApposActionCreators.getPets(value['value'], true);
@@ -209,10 +212,11 @@ class AppoModalEditComponent extends Component {
             <Modal.Body>
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
-             <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
-
+             <Select name="owners" options={this.state.owners_options} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
+            
              <label htmlFor="pet">Kosename (haustier):</label>
-             <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
+				     <Select ref="petSelect" autofocus options={this.props.pets_options} name="selected-pet" value={this.state.pet_id} onChange={this.changePet.bind(this)} searchable={true} />
+
 
              <label htmlFor="doc_name">Doc:</label>
              <Select.Async name="docs" loadOptions={this.getDocsOptions.bind(this)} value={this.state.doctor_id} onChange={this.changeDoc.bind(this)} />
