@@ -32,11 +32,11 @@ class AppoModalNewComponent extends Component {
     let date =  new Date;
     this.state = { showModal:      true,
                    date:           date, 
-                   pet_id:         1, 
-                   owner_id:       1,
+                   pet_id:         0, // not valid values 
+                   owner_id:       0,
+                   doctor_id:      0,
                    reminder:       false,
                    reason:         '', 
-                   doctor_id:      1,
                    active:         true,
                    owner_name:     '',
                    pet_name:       '',
@@ -73,6 +73,7 @@ class AppoModalNewComponent extends Component {
  **/
   handleSubmit(e) {
     e.preventDefault();
+
     let fields = { date:      this.state.date, 
                    pet_id:    this.state.pet_id, 
                    owner_id:  this.state.owner_id, 
@@ -80,10 +81,41 @@ class AppoModalNewComponent extends Component {
                    reason:    this.state.reason, 
                    doctor_id: this.state.doctor_id
                   };
+    let isValid = this.validatesForm(fields);
+
+    if ( !isValid['pass'] ) {
+      console.log('Field not valid: ' + isValid['message']);
+    }
     let action = ApposActionCreators.createAppo(fields);
-    this.props.dispatch(action);  // thunk middlew
+    this.props.dispatch(action);  // thunk middleware
     console.log( ">>>>>> Sending data >>>>>>> " + JSON.stringify(fields));
     window.location='/appointments';
+  }
+
+  /* Validates form*/
+  validatesForm(fields){
+    let valid = {pass: true, message: 'Not message yet'};
+    //console.log(JSON.stringify(fields));
+    if ( fields['pet_id'] == 0 ) {
+      valid['pass']    = false;
+      valid['message'] = 'Pet not valid';
+    }
+
+    if ( fields['owner_id'] == 0 ) {
+      valid['pass']    = false;
+      valid['message'] = 'Owner not valid';
+    }
+
+    if ( fields['doctor_id'] == 0 ) {
+      valid['pass']    = false;
+      valid['message'] = 'Doctor not valid';
+    }
+
+    if ( fields['reason'].length < 4 ) {
+      valid['pass']    = false;
+      valid['message'] = 'There must be a reason';
+    }
+    return valid;    
   }
 
   handleChange(name, event) {
@@ -101,7 +133,6 @@ class AppoModalNewComponent extends Component {
     this.setState({owner_id: value['value']});    // set owner
     let action = ApposActionCreators.getPets(value['value'], true);
     this.props.dispatch(action);
-    // this.setState({pets_options: this.props.pets_options});
   }
 
   changePet(value) {

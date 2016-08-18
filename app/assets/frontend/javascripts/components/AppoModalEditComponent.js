@@ -210,14 +210,19 @@ class AppoModalEditComponent extends Component {
            <form>        
              <label htmlFor="owner">Eigentümer:  </label>
              <Select.Async name="owners" loadOptions={this.getOwnersOptions.bind(this)} value={this.state.owner_id} onChange={this.changeOwner.bind(this)} />
+
              <label htmlFor="pet">Kosename (haustier):</label>
              <Select.Async name="pets" loadOptions={this.getPetsOptions.bind(this)} value={this.state.pet_id} onChange={this.changePet.bind(this)} />
+
              <label htmlFor="doc_name">Doc:</label>
              <Select.Async name="docs" loadOptions={this.getDocsOptions.bind(this)} value={this.state.doctor_id} onChange={this.changeDoc.bind(this)} />
+
              <label htmlFor="reason">Vernunft:</label>
              <input className="form-control" name="reason" value={this.state.reason} onChange={this.handleChange.bind(this, 'reason')} />
+
              <label htmlFor="date">Datum:</label>
              <DateTimePicker value={new Date(this.state.date)} onChange={this.handleChange.bind(this, 'date')} />
+
              <label htmlFor="reminder">Erinner:</label>
              <input type="checkbox" name="reminder" checked={this.state.reminder} onChange={this.handleClick.bind(this, 'reminder')} />
             </form>
