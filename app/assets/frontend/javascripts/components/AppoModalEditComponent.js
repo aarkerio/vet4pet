@@ -81,8 +81,9 @@ class AppoModalEditComponent extends Component {
                  });
     }
   }
+
 /**
- * Send data to new appointment
+  * Send data to update appointment
  **/
   handleSubmit(e) {
     e.preventDefault();

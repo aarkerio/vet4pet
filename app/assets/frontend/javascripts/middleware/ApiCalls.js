@@ -1,12 +1,12 @@
-import { Schema, arrayOf, normalize } from 'normalizr'
-import { camelizeKeys } from 'humps'
-import 'isomorphic-fetch'
+import { Schema, arrayOf, normalize } from 'normalizr';
+import { camelizeKeys } from 'humps';
+import 'isomorphic-fetch';
 
 // Extracts the next page URL from Github API response.
 function getNextPageUrl(response) {
   const link = response.headers.get('link')
   if (!link) {
-    return null
+    return null;
   }
 
   const nextLink = link.split(',').find(s => s.indexOf('rel="next"') > -1)
@@ -52,15 +52,15 @@ function callApi(endpoint, schema) {
 
 const userSchema = new Schema('users', {
   idAttribute: 'login'
-})
+});
 
 const repoSchema = new Schema('repos', {
   idAttribute: 'fullName'
-})
+});
 
 repoSchema.define({
   owner: userSchema
-})
+});
 
 // Schemas for Github API responses.
 export const Schemas = {
@@ -68,10 +68,10 @@ export const Schemas = {
   USER_ARRAY: arrayOf(userSchema),
   REPO: repoSchema,
   REPO_ARRAY: arrayOf(repoSchema)
-}
+};
 
 // Action key that carries API call info interpreted by this Redux middleware.
-export const CALL_API = Symbol('Call API')
+export const CALL_API = Symbol('Call API');
 
 // A Redux middleware that interprets actions with CALL_API info specified.
 // Performs the call and promises when such actions are dispatched.
@@ -81,8 +81,8 @@ export default store => next => action => {
     return next(action)
   }
 
-  let { endpoint } = callAPI
-  const { schema, types } = callAPI
+  let { endpoint } = callAPI;
+  const { schema, types } = callAPI;
 
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState())

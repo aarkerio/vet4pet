@@ -1,10 +1,11 @@
 /* Chipotle Software (c) 2015-2016 MIT License*/
+
 /*
  * action types
  */
 import * as types from '../constants/ActionTypes';
 
-/*
+/**
  * action creators
  */
 

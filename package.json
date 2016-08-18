@@ -52,8 +52,8 @@
     "webpack": "^1.12.14"
   },
   "scripts": {
-     "test": "mocha --compilers js:babel-register --recursive",
-     "test:watch": "npm test -- --watch"
+    "test": "mocha --compilers js:babel-register --recursive",
+    "test:watch": "npm test -- --watch"
   },
   "jest": {
     "rootDir": "./app/assets/frontend/javascripts/",
@@ -85,6 +85,7 @@
     "babel-register": "^6.11.6",
     "babelify": "^7.2.0",
     "chai": "^3.5.0",
+    "enzyme": "^2.4.1",
     "eslint": "^2.0.0-rc.1",
     "eslint-config-standard": "^5.1.0",
     "eslint-plugin-promise": "^1.0.8",

@@ -4,10 +4,24 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as TestUtils from "react-addons-test-utils";
+import { shallow } from 'enzyme';
 
 var expect = require('chai').expect;
 
-import AppoModalComponent from "../../components/AppoModalComponent";
+import AppoModalComponent from "../../components/AppoModalEditComponent";
+
+function setup() {
+  const props = {
+    addTodo: expect.createSpy()
+  }
+
+  const enzymeWrapper = shallow(<Header {...props} />)
+
+  return {
+    props,
+    enzymeWrapper
+  }
+}
 
 describe('appoModalComponent', function() {
   before('render and locate element', function() {
